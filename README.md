@@ -10,6 +10,6 @@
 # Installation
 
 ```bash
-bash <(curl -L http://bit.ly/2pbpz5R)
+bash <(curl -L http://bit.ly/e0d1n-dotfiles)
 ```
 
