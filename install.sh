@@ -53,9 +53,15 @@ function clone(){
     FROM=$1
     WHERE=$2
 
-    ERROR=$(git clone $FROM $WHERE 2>&1 >/dev/null)
-    ret=$?
-    action "$WHERE" "$ERROR"
+    if [ ! -e "$WHERE" ]; then
+        mkdir -p "$WHERE"
+        ERROR=$(git clone "$FROM" "$WHERE" 2>&1 > /dev/null)
+        ret=$?
+        action "$WHERE" "$ERROR"
+    else
+        ERROR=$(cd "$WHERE" && git pull origin 2>&1 > /dev/null)
+        action "$WHERE" "$ERROR"
+    fi
 
 }
 
