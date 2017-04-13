@@ -69,7 +69,7 @@ backup() {
     msg "Attempting to back up your original configuration."
     today=`date +%Y%m%d_%s`
     for i in "$@"; do
-        [ -e "$i" ] && [ ! -L "$i" ] && mv -v "$i" "$i.$today";
+        [ -e "$i" ] && [ ! -L "$i" ] && mv -v "$i" "$i.$today" > /dev/null 2>&1;
     done
     ret="$?"
     action "Your original configuration has been backed up."
