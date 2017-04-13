@@ -111,7 +111,7 @@ function box(){
             *[^a-zA-Z0-9_.-]* ) echo "Name not ok : special character not allowed, only [a-zA-Z0-9_.-] got $box_name"
             echo -e "Usage: $0 name [-r][-v path]."
             return
-            ;; 
+            ;;
         esac
 
         # start docker env
@@ -164,7 +164,7 @@ function box(){
                 e0d1n/pwnbox
 
             # Create a workdir for this box
-            # docker exec ${box_name} mkdir /root/work
+            docker exec ${box_name} mkdir /root/files
 
             # Get a shell
             echo -e "${GREEN}                         ______               ${RESET}"
