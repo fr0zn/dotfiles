@@ -148,7 +148,7 @@ function box(){
             SHARE_CMD=""
             if [[ ! -z $SHARE_PATH ]]; then
                 echo -e "${BLUE}Sharing path: $SHARE_PATH${RESET}"
-                SHARE_CMD=$(echo -e "-v$SHARE_PATH:/root")
+                SHARE_CMD=$(echo -e "-v$SHARE_PATH:/root/files")
             fi
             if [[ ! -z $RM ]]; then
                 echo -e "${RED}Docker will be removed after exiting${RESET}"
