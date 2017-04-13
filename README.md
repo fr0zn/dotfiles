@@ -9,5 +9,7 @@
 
 # Installation
 
+```bash
 bash <(curl -L http://bit.ly/2pbpz5R)
+```
 
