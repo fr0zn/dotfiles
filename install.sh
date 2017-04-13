@@ -1,5 +1,5 @@
-$DOTFILE_REPO=https://github.com/e0d1n/dotfiles.git
-$DOTFILE_DESTINATION=$HOME/e0d1n-dotfiles
+DOTFILE_REPO="https://github.com/e0d1n/dotfiles.git"
+DOTFILE_DESTINATION="$HOME/e0d1n-dotfiles"
 
 msg() {
     printf '%b\n' "$1" >&2
@@ -41,11 +41,12 @@ program_must_exist() {
     # throw error on non-zero return value
     if [ "$ret" -ne 0 ]; then
         action "Not Found" "You must have '$1' installed to continue."
+        exit 1
     fi
 }
 
 function symlink(){
-    lnif $DOTFILE_DESTINATION $1
+    lnif $DOTFILE_DESTINATION/$1 $2
 }
 
 function clone(){
@@ -94,6 +95,6 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-symlink "$HOME/.vimrc"
-symlink "$HOME/.tmux.conf"
-symlink "$HOME/.zshrc"
+symlink "vimrc" "$HOME/.vimrc"
+symlink "tmux.conf" "$HOME/.tmux.conf"
+symlink "zshrc" "$HOME/.zshrc"
