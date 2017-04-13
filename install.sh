@@ -1,3 +1,5 @@
+#!/bin/bash
+
 DOTFILE_REPO="https://github.com/e0d1n/dotfiles.git"
 DOTFILE_DESTINATION="$HOME/e0d1n-dotfiles"
 
