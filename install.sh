@@ -73,7 +73,7 @@ backup() {
     for i in "$@"; do
         [ -e "$i" ] && [ ! -L "$i" ] && mv -v "$i" "$i.$today" > /dev/null 2>&1;
     done
-    ret="$?"
+    ret="0"
     action "Your original configuration has been backed up."
 }
 
