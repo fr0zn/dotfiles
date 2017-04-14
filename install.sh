@@ -82,16 +82,21 @@ program_must_exist "tmux"
 program_must_exist "python"
 program_must_exist "zsh"
 program_must_exist "curl"
+program_must_exist "make"
 
-# backup old configurations
+# Backup old configurations
 backup "$HOME/.vimrc" \
        "$HOME/.vim"
        "$HOME/.tmux.conf" \
        "$HOME/.zshrc" \
 
-
+# Clone dotfile repo
 clone $DOTFILE_REPO $DOTFILE_DESTINATION
+# Install tmux themes
 clone https://github.com/jimeh/tmux-themepack.git $HOME/.tmux-themepack
+# Install FZF
+clone https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install --all
 
 # Set zsh default
 chsh -s /bin/zsh
