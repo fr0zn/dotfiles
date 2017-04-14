@@ -124,5 +124,3 @@ curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
 # Post Install vim plugins
 vim +PlugInstall +qall
 
-source $HOME/.zshrc
-
