@@ -25,6 +25,8 @@
     Plug 'honza/vim-snippets'               " Snippets catalog
 
     Plug 'ctrlpvim/ctrlp.vim'               " File fuzzy finding
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
 
     call plug#end()
 
@@ -331,6 +333,14 @@
     "}
 
     " Surround {
-            let g:surround_indent = 1
+        let g:surround_indent = 1
+    " }
+
+    " Ctrl-p {
+        nnoremap <silent> <leader>b :CtrlPBuffer<cr>
+    " }
+
+    " FZF {
+        nnoremap <silent> <leader>f :FZF -m<cr>
     " }
 " }
