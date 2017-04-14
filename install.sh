@@ -83,34 +83,46 @@ program_must_exist "python"
 program_must_exist "zsh"
 program_must_exist "curl"
 program_must_exist "make"
+program_must_exist "ctags"
 
 # Backup old configurations
 backup "$HOME/.vimrc" \
-       "$HOME/.vim"
+       "$HOME/.vim" \
        "$HOME/.tmux.conf" \
-       "$HOME/.zshrc" \
+       "$HOME/.zshrc"
 
 # Clone dotfile repo
 clone $DOTFILE_REPO $DOTFILE_DESTINATION
-# Install tmux themes
-clone https://github.com/jimeh/tmux-themepack.git $HOME/.tmux-themepack
-# Install FZF
-clone https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install --all
-
-# Set zsh default
-chsh -s /bin/zsh
-
-# Install Oh my zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
-# Install vim-plug
-curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 symlink "vimrc" "$HOME/.vimrc"
 symlink "tmux.conf" "$HOME/.tmux.conf"
 symlink "zshrc" "$HOME/.zshrc"
 
+# Set zsh default
+msg "Changing the default shell to /bin/zsh (Enter password): "
+chsh -s /bin/zsh
+
+#--------------------#
+# Install extensions #
+#--------------------#
+
+# Install tmux themes
+clone https://github.com/jimeh/tmux-themepack.git $HOME/.tmux-themepack
+
+# Install FZF
+clone https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install --all > /dev/null 2>&1
+
+# Install Oh my zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+touch $HOME/.z
+
+# Install vim-plug
+curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 # Post Install vim plugins
 vim +PlugInstall +qall
+
+source $HOME/.zshrc
+
