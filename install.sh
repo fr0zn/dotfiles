@@ -106,3 +106,6 @@ curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
 symlink "vimrc" "$HOME/.vimrc"
 symlink "tmux.conf" "$HOME/.tmux.conf"
 symlink "zshrc" "$HOME/.zshrc"
+
+# Post Install vim plugins
+vim +PlugInstall +qall
