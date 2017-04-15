@@ -273,7 +273,6 @@
         let delimitMate_jump_expansion = 1
         let delimitMate_nesting_quotes = ['"','`']
         let delimitMate_expand_space = 1
-        let delimitMate_expand_inside_quotes = 1
 
     " }
 
