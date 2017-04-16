@@ -23,11 +23,11 @@ export LANG=en_US.UTF-8
 
 alias c="clear"
 alias flaix="mplayer http://flaixbacmob.streaming-pro.com:8006/ 2> /dev/null"
-alias services="brew services"
 
 unamestr=`uname`
 if [[ "$unamestr" == "Darwin" ]]; then
     alias rm="trash"
+    alias service="brew services"
 else
     alias rm="rm -i"
 fi
