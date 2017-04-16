@@ -29,7 +29,7 @@ unamestr=`uname`
 if [[ "$unamestr" == "Darwin" ]]; then
     alias rm="trash"
 else
-    alias rm="rm -f"
+    alias rm="rm -i"
 fi
 
 alias mount="diskutil mount"
