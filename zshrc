@@ -32,6 +32,11 @@ else
     alias rm="rm -i"
 fi
 
+# Set docker hostname to distinguish between host and container
+if [ -f /.dockerenv ]; then
+    PROMPT='%{$fg_bold[green]%}%M: %{$reset_color%}%{$PROMPT_SUCCESS_COLOR%}%~%{$reset_color%}%{$GIT_PROMPT_INFO%}$(git_prompt_info)$(virtualenv_prompt_info)%{$GIT_DIRTY_COLOR%}$(git_prompt_status) %{$reset_color%}%{$PROMPT_PROMPT%}ᐅ%{$reset_color%} '
+fi
+
 alias mount="diskutil mount"
 alias umount="diskutil umountDisk"
 
