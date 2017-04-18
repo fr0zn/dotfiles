@@ -94,14 +94,6 @@ backup "$HOME/.vimrc" \
 # Clone dotfile repo
 clone $DOTFILE_REPO $DOTFILE_DESTINATION
 
-symlink "vimrc" "$HOME/.vimrc"
-symlink "tmux.conf" "$HOME/.tmux.conf"
-symlink "zshrc" "$HOME/.zshrc"
-
-# Set zsh default
-msg "Changing the default shell to /bin/zsh (Enter password): "
-chsh -s /bin/zsh
-
 #--------------------#
 # Install extensions #
 #--------------------#
@@ -124,3 +116,14 @@ curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
 # Post Install vim plugins
 vim +PlugInstall +qall
 
+#-----------------------#
+# Symlink configuration #
+#-----------------------#
+
+symlink "vimrc" "$HOME/.vimrc"
+symlink "tmux.conf" "$HOME/.tmux.conf"
+symlink "zshrc" "$HOME/.zshrc"
+
+# Set zsh default
+msg "Changing the default shell to /bin/zsh (Enter password): "
+chsh -s /bin/zsh
