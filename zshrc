@@ -28,6 +28,8 @@ unamestr=`uname`
 if [[ "$unamestr" == "Darwin" ]]; then
     alias rm="trash"
     alias service="brew services"
+    alias mount="diskutil mount"
+    alias umount="diskutil umountDisk"
 else
     alias rm="rm -i"
 fi
@@ -36,9 +38,6 @@ fi
 if [ -f /.dockerenv ]; then
     PROMPT='%{$fg_bold[green]%}%M: %{$reset_color%}%{$PROMPT_SUCCESS_COLOR%}%~%{$reset_color%}%{$GIT_PROMPT_INFO%}$(git_prompt_info)$(virtualenv_prompt_info)%{$GIT_DIRTY_COLOR%}$(git_prompt_status) %{$reset_color%}%{$PROMPT_PROMPT%}ᐅ%{$reset_color%} '
 fi
-
-alias mount="diskutil mount"
-alias umount="diskutil umountDisk"
 
 function mkctf(){
     mkdir exploiting
