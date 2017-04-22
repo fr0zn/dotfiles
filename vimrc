@@ -14,6 +14,7 @@
     Plug 'Raimondi/delimitMate'             " Auto-completion for quotes, parens, brackets, etc
     Plug 'scrooloose/nerdcommenter'         " Comment functions so powerful—no comment necessary.
     Plug 'tpope/vim-surround'               " Easy mapping to change brakets, parentheses, etc.
+    Plug 'junegunn/vim-easy-align'          " A simple, easy-to-use Vim alignment plugin.
 
     Plug 'tpope/vim-fugitive'               " Git wrapper so awesome, it should be illegal
     Plug 'airblade/vim-gitgutter'           " Git diff on left sidebar
@@ -27,6 +28,8 @@
     Plug 'ctrlpvim/ctrlp.vim'               " File fuzzy finding
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
+
+    Plug 'vim-scripts/DrawIt'               " Vim draw draw lines left, right, up, down, boxes, etc
 
     call plug#end()
 
@@ -272,7 +275,6 @@
         let delimitMate_expand_cr = 2
         let delimitMate_jump_expansion = 1
         let delimitMate_nesting_quotes = ['"','`']
-        let delimitMate_expand_space = 1
 
     " }
 
@@ -344,5 +346,13 @@
 
     " FZF {
         nnoremap <silent> <leader>f :FZF -m<cr>
+    " }
+
+    " vim-easy-align {
+        " Start interactive EasyAlign in visual mode (e.g. vipga)
+        xmap ga <Plug>(EasyAlign)
+
+        " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+        nmap ga <Plug>(EasyAlign)
     " }
 " }
