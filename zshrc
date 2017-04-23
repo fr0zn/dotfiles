@@ -10,14 +10,7 @@ source $ZSH/oh-my-zsh.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='gvim'
-fi
-
 export COPYFILE_DISABLE=true
-export EDITOR='vim'
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
@@ -30,8 +23,10 @@ if [[ "$unamestr" == "Darwin" ]]; then
     alias service="brew services"
     alias mount="diskutil mount"
     alias umount="diskutil umountDisk"
+    export EDITOR='gvim'
 else
     alias rm="rm -i"
+    export EDITOR='vim'
 fi
 
 # Set docker hostname to distinguish between host and container
