@@ -10,8 +10,7 @@
     Plug 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits
     Plug 'terryma/vim-multiple-cursors'     " True Sublime Text style multiple selections for Vim
 
-    Plug 'ConradIrwin/vim-bracketed-paste'  " Automatic :set paste for supported 'bracketed paste mode' terminals
-    Plug 'Raimondi/delimitMate'             " Auto-completion for quotes, parens, brackets, etc
+    Plug 'jiangmiao/auto-pairs'             " Auto-completion for quotes, parens, brackets, etc
     Plug 'scrooloose/nerdcommenter'         " Comment functions so powerful—no comment necessary.
     Plug 'tpope/vim-surround'               " Easy mapping to change brakets, parentheses, etc.
     Plug 'junegunn/vim-easy-align'          " A simple, easy-to-use Vim alignment plugin.
@@ -79,6 +78,8 @@
     set undolevels=1000                 " Maximum number of changes that can be undone
     set undoreload=10000                " Maximum number lines to save for undo on a buffer reload
 
+    set ttyfast                         " Increase vim speed on a tty screen
+    set lazyredraw                      " Buffer screen update, speedup scrolling and macro usage
 " }
 
 " Vim UI {
@@ -137,6 +138,13 @@
 
 " Formatting {
 
+    if has("autocmd")
+      " Highlight TODO, FIXME, NOTE, etc.
+      if v:version > 701
+        autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\)')
+        autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\)')
+      endif
+    endif
 
     " Strip whitespace {
         " http://stackoverflow.com/questions/356126/how-can-you-automatically-remove-trailing-whitespace-in-vim
@@ -270,11 +278,10 @@
         " let g:nerdtree_tabs_open_on_gui_startup=0
     " }
 
-    " delimitMate {
+    " auto-pairs {
 
-        let delimitMate_expand_cr = 2
-        let delimitMate_jump_expansion = 1
-        let delimitMate_nesting_quotes = ['"','`']
+        " Shortcut to jump out of the pair
+        let g:AutoPairsShortcutJump = '<S-Tab>'
 
     " }
 
@@ -316,6 +323,9 @@
         let g:NERDSpaceDelims = 1
         " Enable trimming of trailing whitespace when uncommenting
         let g:NERDTrimTrailingWhitespace = 1
+        " Align line-wise comment delimiters flush left instead of following
+        " code indentation
+        let g:NERDDefaultAlign = 'left'
 
     " }
 
