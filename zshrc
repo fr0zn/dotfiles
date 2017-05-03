@@ -4,7 +4,7 @@ export ZSH=$HOME/.oh-my-zsh
 export ANDROID_HOME=/usr/local/opt/android-sdk
 
 ZSH_THEME="muse"
-plugins=(git colored-man z)
+plugins=(git colored-man-pages z)
 source $ZSH/oh-my-zsh.sh
 
 
