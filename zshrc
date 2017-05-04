@@ -85,7 +85,7 @@ function docker-stop(){
 
 #Create a new directory and enter it
 function mk() {
-    mkdir -p "$@" && cd "$@"
+    mkdir -p "$1" && cd "$1"
 }
 # Open man page as PDF
 function manpdf() {
