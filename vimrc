@@ -23,6 +23,7 @@
 
     Plug 'SirVer/ultisnips'                 " Snippets engine
     Plug 'honza/vim-snippets'               " Snippets catalog
+    Plug 'ervandew/supertab'                " Tab completion
 
     Plug 'ctrlpvim/ctrlp.vim'               " File fuzzy finding
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -360,9 +361,9 @@
 
     " vim-easy-align {
         " Start interactive EasyAlign in visual mode (e.g. vipga)
-        xmap ga <Plug>(EasyAlign)
+        xmap <Leader>a <Plug>(EasyAlign)
 
         " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-        nmap ga <Plug>(EasyAlign)
+        nmap <Leader>a <Plug>(EasyAlign)
     " }
 " }
