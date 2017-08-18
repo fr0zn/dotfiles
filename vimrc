@@ -30,6 +30,10 @@
     Plug 'junegunn/fzf.vim'
 
     Plug 'vim-scripts/DrawIt'               " Vim draw draw lines left, right, up, down, boxes, etc
+    Plug 'ayu-theme/ayu-vim'
+    Plug 'e0d1n/markersyntax'
+    Plug 'w0rp/ale'
+    Plug 'tomlion/vim-solidity'
 
     call plug#end()
 
@@ -38,7 +42,7 @@
 " General {
 
     set background=dark                 " Assume a dark background
-    set t_Co=256                       " Set terminal 256 color
+    set t_Co=256                        " Set terminal 256 color
     filetype plugin indent on           " Automatically detect file types.
     syntax on                           " Syntax highlighting
     set mousehide                       " Hide the mouse cursor while typing
@@ -75,6 +79,7 @@
     set iskeyword-=-                    " '-' is an end of word designator
 
     set backup                          " Backups are nice ...
+    set backupdir=~/.vimtmp             " Backups dir
     set undofile                        " So is persistent undo ...
     set undolevels=1000                 " Maximum number of changes that can be undone
     set undoreload=10000                " Maximum number lines to save for undo on a buffer reload
@@ -85,10 +90,13 @@
 
 " Vim UI {
 
-    if filereadable(expand("~/.vim/plugged/gruvbox/colors/gruvbox.vim"))
-        colorscheme gruvbox             " Theme set
-	let g:gruvbox_contrast_dark="hard"
-    endif
+    set termguicolors                   " Enable true color support
+    " if filereadable(expand("~/.vim/plugged/gruvbox/colors/gruvbox.vim"))
+    "     let g:gruvbox_contrast_dark="hard"
+    "     colorscheme gruvbox             " Theme set
+    " endif
+    let ayucolor="mirage"
+    colorscheme ayu
 
     set tabpagemax=15                   " Only show 15 tabs
     set showmode                        " Display the current mode
@@ -139,13 +147,13 @@
 
 " Formatting {
 
-    if has("autocmd")
-      " Highlight TODO, FIXME, NOTE, etc.
-      if v:version > 701
-        autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\)')
-        autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\)')
-      endif
-    endif
+    " if has("autocmd")
+    "   " Highlight TODO, FIXME, NOTE, etc.
+    "   if v:version > 701
+    "     autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\)')
+    "     autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\)')
+    "   endif
+    " endif
 
     " Strip whitespace {
         " http://stackoverflow.com/questions/356126/how-can-you-automatically-remove-trailing-whitespace-in-vim
@@ -365,5 +373,12 @@
 
         " Start interactive EasyAlign for a motion/text object (e.g. gaip)
         nmap <Leader>a <Plug>(EasyAlign)
+    " }
+
+    " ALE {
+        " Run on save
+        let g:ale_lint_on_text_changed = 'never'
+        " if you don't want linters to run on opening a file
+        let g:ale_lint_on_enter = 0
     " }
 " }
