@@ -1,9 +1,12 @@
 # Path to oh-my-zsh installation.
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/opt/metasploit-framework/bin"
+# Android sdk and ndk
+export PATH=$PATH:/Users/fr0zn/sdk/platform-tools:/Users/fr0zn/sdk/ndk-bundle:/Users/fr0zn/sdk/tools:/Users/fr0zn/sdk/tools/bin
+
 export ZSH=$HOME/.oh-my-zsh
 export ANDROID_HOME=/usr/local/opt/android-sdk
 
-ZSH_THEME="muse"
+ZSH_THEME="afowler"
 plugins=(git colored-man-pages z)
 source $ZSH/oh-my-zsh.sh
 
@@ -36,6 +39,15 @@ fi
 
 # https://unix.stackexchange.com/questions/1045/getting-256-colors-to-work-in-tmux
 alias tmux='tmux -2'
+
+alias gs='git status '
+alias ga='git add '
+alias gb='git branch '
+alias gc='git commit'
+alias gd='git diff'
+# alias go='git checkout '
+alias gk='gitk --all&'
+alias gx='gitx --all'
 
 function mkctf(){
     mkdir exploiting
@@ -180,3 +192,7 @@ function box(){
         docker attach ${box_name}
     fi
 }
+export XML_CATALOG_FILES="/usr/local/etc/xml/catalog"
+
+alias save='/usr/local/Cellar/pipes-sh/1.2.0/bin/pipes.sh'
+alias ninja='/Applications/Binary\ Ninja.app/Contents/MacOS/binaryninja'
