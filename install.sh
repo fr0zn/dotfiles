@@ -113,9 +113,6 @@ touch $HOME/.z
 curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-# Post Install vim plugins
-vim +PlugInstall +qall
-
 #-----------------------#
 # Symlink configuration #
 #-----------------------#
@@ -123,6 +120,9 @@ vim +PlugInstall +qall
 symlink "vimrc" "$HOME/.vimrc"
 symlink "tmux.conf" "$HOME/.tmux.conf"
 symlink "zshrc" "$HOME/.zshrc"
+
+# Post Install vim plugins
+vim +PlugInstall +qall
 
 # Set zsh default
 msg "Changing the default shell to /bin/zsh (Enter password): "
