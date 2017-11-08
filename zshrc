@@ -1,33 +1,49 @@
 # Path to oh-my-zsh installation.
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/opt/metasploit-framework/bin"
-# Android sdk and ndk
-export PATH=$PATH:/Users/fr0zn/sdk/platform-tools:/Users/fr0zn/sdk/ndk-bundle:/Users/fr0zn/sdk/tools:/Users/fr0zn/sdk/tools/bin
-
-export ZSH=$HOME/.oh-my-zsh
-export ANDROID_HOME=/usr/local/opt/android-sdk
 
 ZSH_THEME="afowler"
 plugins=(git colored-man-pages z)
+export ZSH=$HOME/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
-
+# FZF config file
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export COPYFILE_DISABLE=true
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+export PYTHONSTARTUP=~/.pythonrc
+
 alias c="clear"
-alias flaix="mplayer http://flaixbacmob.streaming-pro.com:8006/ 2> /dev/null"
 
 unamestr=`uname`
+# MacOS configs
 if [[ "$unamestr" == "Darwin" ]]; then
+    export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/Users/fr0zn/go/bin"
+    # Android sdk and ndk
+    export PATH=$PATH:/Users/fr0zn/sdk/platform-tools:/Users/fr0zn/sdk/ndk-bundle:/Users/fr0zn/sdk/tools:/Users/fr0zn/sdk/tools/bin
+    export ANDROID_HOME=/usr/local/opt/android-sdk
     alias rm="trash"
     alias service="brew services"
     alias mount="diskutil mount"
     alias umount="diskutil umountDisk"
-    export EDITOR='gvim'
+    export EDITOR='vim'
+    # Used for NerdCommander
+    alias open='open -R'
+    alias saver='/usr/local/Cellar/pipes-sh/1.2.0/bin/pipes.sh'
+    alias ninja='/Applications/Binary\ Ninja.app/Contents/MacOS/binaryninja'
+    #export XML_CATALOG_FILES="/usr/local/etc/xml/catalog"
+    # Open man page as PDF
+    function manpdf() {
+        man -t "${1}" | open -f -a /Applications/Preview.app/
+    }
+    alias ls='exa'
+    alias ll='exa --long -B -U'
+    alias la='exa --long -B -U -a'
+
+    alias todo='todoist --color'
 else
+# Linux configs
     alias rm="rm -i"
     export EDITOR='vim'
 fi
@@ -99,10 +115,6 @@ function docker-stop(){
 function mk() {
     mkdir -p "$1" && cd "$1"
 }
-# Open man page as PDF
-function manpdf() {
-    man -t "${1}" | open -f -a /Applications/Preview.app/
-}
 
 function box(){
     ESC="\x1B["
@@ -158,14 +170,14 @@ function box(){
               esac
             done
 
-            echo -e "${BLUE}Creating docker: $box_name${RESET}"
+            echo -e "${BLUE}Creating container: $box_name${RESET}"
             SHARE_CMD=""
             if [[ ! -z $SHARE_PATH ]]; then
                 echo -e "${BLUE}Sharing path: $SHARE_PATH${RESET}"
                 SHARE_CMD=$(echo -e "-v$SHARE_PATH:/root/files")
             fi
             if [[ ! -z $RM ]]; then
-                echo -e "${RED}Docker will be removed after exiting${RESET}"
+                echo -e "${RED}This container will be removed after exiting${RESET}"
             fi
 
             # Create docker container and run in the background
@@ -178,21 +190,19 @@ function box(){
                 e0d1n/pwnbox
 
             # Create a workdir for this box
-            docker exec ${box_name} mkdir /root/files
+            # Already created by the container
+            # docker exec ${box_name} mkdir /root/files
 
             # Get a shell
-            echo -e "${GREEN}                         ______               ${RESET}"
-            echo -e "${GREEN}___________      ___________  /___________  __${RESET}"
-            echo -e "${GREEN}___  __ \\_ | /| / /_  __ \\_  __ \\  __ \\_  |/_/${RESET}"
-            echo -e "${GREEN}__  /_/ /_ |/ |/ /_  / / /  /_/ / /_/ /_>  <  ${RESET}"
-            echo -e "${GREEN}_  .___/____/|__/ /_/ /_//_.___/\\____//_/|_|  ${RESET}"
-            echo -e "${GREEN}/_/                           by e0d1n  ${RESET}"
-            echo ""
+            # echo -e "${GREEN}                         ______               ${RESET}"
+            # echo -e "${GREEN}___________      ___________  /___________  __${RESET}"
+            # echo -e "${GREEN}___  __ \\_ | /| / /_  __ \\_  __ \\  __ \\_  |/_/${RESET}"
+            # echo -e "${GREEN}__  /_/ /_ |/ |/ /_  / / /  /_/ / /_/ /_>  <  ${RESET}"
+            # echo -e "${GREEN}_  .___/____/|__/ /_/ /_//_.___/\\____//_/|_|  ${RESET}"
+            # echo -e "${GREEN}/_/                           by e0d1n  ${RESET}"
+            # echo ""
         fi
         docker attach ${box_name}
     fi
 }
-export XML_CATALOG_FILES="/usr/local/etc/xml/catalog"
 
-alias save='/usr/local/Cellar/pipes-sh/1.2.0/bin/pipes.sh'
-alias ninja='/Applications/Binary\ Ninja.app/Contents/MacOS/binaryninja'
