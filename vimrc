@@ -11,7 +11,8 @@
     Plug 'terryma/vim-multiple-cursors'     " True Sublime Text style multiple selections for Vim
 
     Plug 'jiangmiao/auto-pairs'             " Auto-completion for quotes, parens, brackets, etc
-    Plug 'scrooloose/nerdcommenter'         " Comment functions so powerful—no comment necessary.
+    " Plug 'scrooloose/nerdcommenter'         " Comment functions so powerful—no comment necessary.
+    Plug 'tpope/vim-commentary'             " Comment functions so powerful—no comment necessary.
     Plug 'tpope/vim-surround'               " Easy mapping to change brakets, parentheses, etc.
     Plug 'junegunn/vim-easy-align'          " A simple, easy-to-use Vim alignment plugin.
 
@@ -20,6 +21,7 @@
 
     Plug 'mbbill/undotree'                  " Left bar with undo tree
     Plug 'majutsushi/tagbar'                " Displays tags in right sidebar
+    Plug 'scrooloose/nerdtree'
 
     Plug 'SirVer/ultisnips'                 " Snippets engine
     Plug 'honza/vim-snippets'               " Snippets catalog
@@ -30,9 +32,10 @@
     Plug 'junegunn/fzf.vim'
 
     Plug 'vim-scripts/DrawIt'               " Vim draw draw lines left, right, up, down, boxes, etc
-    Plug 'ayu-theme/ayu-vim'
     Plug 'e0d1n/markersyntax'
     Plug 'w0rp/ale'
+    Plug 'tomasiser/vim-code-dark'
+    Plug 'dracula/vim'
     Plug 'tomlion/vim-solidity'
 
     call plug#end()
@@ -67,6 +70,8 @@
         autocmd BufWinEnter * call ResCur()
     augroup END
 
+    autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+
     set autowrite                       " Automatically write a file when leaving a modified buffer
     set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
     set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
@@ -91,12 +96,7 @@
 " Vim UI {
 
     set termguicolors                   " Enable true color support
-    " if filereadable(expand("~/.vim/plugged/gruvbox/colors/gruvbox.vim"))
-    "     let g:gruvbox_contrast_dark="hard"
-    "     colorscheme gruvbox             " Theme set
-    " endif
-    let ayucolor="mirage"
-    colorscheme ayu
+    colorscheme dracula
 
     set tabpagemax=15                   " Only show 15 tabs
     set showmode                        " Display the current mode
@@ -275,10 +275,21 @@
     " }
 
     " NerdTree {
-        " map <silent> <leader>e :NERDTreeToggle<CR>
+        map <silent> <leader>e :NERDTreeToggle<CR>
 
         " let NERDTreeShowBookmarks=1
-        " let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$','\.DS_Store']
+        let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$','\.DS_Store']
+        " Close all open buffers on entering a window if the only
+        " buffer that's left is the NERDTree buffer
+        function! s:CloseIfOnlyNerdTreeLeft()
+          if exists("t:NERDTreeBufName")
+            if bufwinnr(t:NERDTreeBufName) != -1
+              if winnr("$") == 1
+                q
+              endif
+            endif
+          endif
+        endfunction
         " let NERDTreeChDirMode=0
         " let NERDTreeQuitOnOpen=1
         " let NERDTreeMouseMode=2
@@ -329,12 +340,12 @@
     " Nerdcommenter {
 
         " Add spaces after comment delimiters by default
-        let g:NERDSpaceDelims = 1
+        " let g:NERDSpaceDelims = 1
         " Enable trimming of trailing whitespace when uncommenting
-        let g:NERDTrimTrailingWhitespace = 1
+        " let g:NERDTrimTrailingWhitespace = 1
         " Align line-wise comment delimiters flush left instead of following
         " code indentation
-        let g:NERDDefaultAlign = 'left'
+        " let g:NERDDefaultAlign = 'left'
 
     " }
 
