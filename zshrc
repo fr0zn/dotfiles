@@ -10,8 +10,6 @@ plugins=(git colored-man-pages z)
 export ZSH=$HOME/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
-# FZF config file
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 unamestr=`uname`
 
@@ -30,3 +28,5 @@ else
     fi
 fi
 
+# FZF config file
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
