@@ -77,6 +77,7 @@ backup() {
     action "Your original configuration has been backed up."
 }
 
+program_must_exist "git"
 program_must_exist "vim"
 program_must_exist "tmux"
 program_must_exist "python"
