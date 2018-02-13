@@ -37,7 +37,7 @@
     Plug 'tomasiser/vim-code-dark'
     Plug 'dracula/vim'
     Plug 'tomlion/vim-solidity'
-    Plug 'joshdick/onedark'
+    Plug 'joshdick/onedark.vim'
 
     call plug#end()
 
