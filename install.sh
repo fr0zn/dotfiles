@@ -80,6 +80,25 @@ backup() {
     action "Your original configuration has been backed up."
 }
 
+## Pre-Install
+pre_nix() {
+    program_must_exist "git"
+    program_must_exist "vim"
+    program_must_exist "tmux"
+    program_must_exist "python"
+    program_must_exist "zsh"
+    program_must_exist "curl"
+    #program_must_exist "make"
+    #program_must_exist "ctags"
+}
+pre_macOS() {
+    return 0
+}
+pre_linux() {
+    return 0
+}
+## End Pre-Install
+
 ## Backups
 bak_nix() {
     # Backup old configurations
@@ -96,6 +115,31 @@ bak_linux() {
 }
 ## End Backups
 
+## Installation
+ins_nix() {
+    # Clone dotfile repo
+    clone $DOTFILE_REPO $DOTFILE_DESTINATION
+
+    # Install FZF
+    clone https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install --all > /dev/null 2>&1
+
+    # Install Oh my zsh
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    touch $HOME/.z
+
+    # Install vim-plug
+    curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+}
+ins_macOS() {
+    return 0
+}
+ins_linux() {
+    return 0
+}
+## End Installation
+
 ## Symlinks
 ln_nix() {
     symlink "vimrc" "$HOME/.vimrc"
@@ -110,57 +154,50 @@ ln_linux() {
 }
 ## End Symlinks
 
-program_must_exist "git"
-program_must_exist "vim"
-program_must_exist "tmux"
-program_must_exist "python"
-program_must_exist "zsh"
-program_must_exist "curl"
-#program_must_exist "make"
-#program_must_exist "ctags"
+## Post-Link
+post_nix() {
+    mkdir -p ~/.vim/backup
+    mkdir -p ~/.vim/swap
+    mkdir -p ~/.vim/undo
 
-# Clone dotfile repo
-clone $DOTFILE_REPO $DOTFILE_DESTINATION
+    # vim plugins
+    vim +PlugInstall +qall
 
-#--------------------#
-# Install extensions #
-#--------------------#
-
-# Install FZF
-clone https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install --all > /dev/null 2>&1
-
-# Install Oh my zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-touch $HOME/.z
-
-# Install vim-plug
-curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-#----------------------------------#
-# Backup and Symlink configuration #
-#----------------------------------#
+    # Set zsh default and run-it
+    msg "Changing the default shell to /bin/zsh (Enter password): "
+    chsh -s /bin/zsh
+    /bin/zsh
+}
+post_macOS() {
+    return 0
+}
+post_linux() {
+    return 0
+}
+## End Post-Link
 
 unamestr=`uname`
 
 # Backup and link shared config
+pre_nix
 bak_nix
+ins_nix
 ln_nix
+post_nix
+
 
 if [[ "$unamestr" == "Darwin" ]]; then
     # MacOS 
+    pre_macOS
     bak_macOS
+    ins_macOS
     ln_macOS
+    post_macOS
 else
     # Linux
+    pre_linux
     bak_linux
+    ins_macOS
     ln_linux
+    post_linux
 fi
-
-# Post Install vim plugins
-vim +PlugInstall +qall
-
-# Set zsh default
-msg "Changing the default shell to /bin/zsh (Enter password): "
-chsh -s /bin/zsh
