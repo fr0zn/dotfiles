@@ -1,15 +1,14 @@
-# e0d1n dotfiles
-
-![](https://cdn.pbrd.co/images/3TkxW3OKd.png)
+# fr0zn dotfiles
 
 * tmux
 * zsh (Oh my zsh!)
 * vim
 * docker (pwnbox)
+* much more ...
 
 # Installation
 
 ```bash
-bash <(curl -L http://bit.ly/e0d1n-dotfiles)
+bash <(curl -L https://bit.ly/fr0zn-dotfiles)
 ```
 
