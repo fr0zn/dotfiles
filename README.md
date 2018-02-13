@@ -9,6 +9,6 @@
 # Installation
 
 ```bash
-bash <(curl -L https://bit.ly/fr0zn-dotfiles)
+bash <(curl -L https://bit.ly/dotfiles-fr0zn)
 ```
 
