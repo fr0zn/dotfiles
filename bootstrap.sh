@@ -9,19 +9,18 @@ msg() {
     printf '%b\n' "$1" >&2
 }
 
-action() {
-    if [[ "$ret" -eq '0' ]]; then
-        msg "\33[32m[✔]\33[0m ${1}"
-    else
-        msg "\33[31m[✘]\33[0m ${1}: ${2}"
-    fi
+msg_ok() {
+    msg "\33[32m[✔]\33[0m ${1}"
+}
+
+msg_error() {
+    msg "\33[31m[✘]\33[0m ${1}: ${2}"
 }
 
 lnif() {
     if [ -e "$1" ]; then
         ln -sf "$1" "$2"
     fi
-    ret="$?"
 }
 
 program_exists() {
@@ -40,11 +39,10 @@ program_exists() {
 program_must_exist() {
 
     program_exists $1
-    ret="$?"
 
     # throw error on non-zero return value
-    if [ "$ret" -ne 0 ]; then
-        action "Not Found" "You must have '$1' installed to continue."
+    if [[ $? -ne 0 ]]; then
+        msg_error "Not Found" "You must have '$1' installed to continue."
         exit 1
     fi
 }
@@ -60,11 +58,14 @@ function clone(){
     if [ ! -e "$WHERE" ]; then
         mkdir -p "$WHERE" 2> /dev/null
         ERROR=$(git clone "$FROM" "$WHERE" 2>&1 > /dev/null)
-        ret=$?
-        action "$WHERE" "$ERROR"
+        if [[ $? -ne 0 ]]; then
+            msg_error "$WHERE" "Not cloned"
+        fi
     else
         ERROR=$(cd "$WHERE" && git pull origin 2>&1 > /dev/null)
-        action "$WHERE" "$ERROR"
+        if [[ $? -ne 0 ]]; then
+            msg_error "$WHERE" "Pull error"
+        fi
     fi
 
 }
@@ -76,8 +77,7 @@ backup() {
     for i in "$@"; do
         [ -e "$i" ] && [ ! -L "$i" ] && mv -v "$i" "$DOTFILE_BACKUP/$i.$today" > /dev/null 2>&1;
     done
-    ret="0"
-    action "Your original configuration has been backed up."
+    msg_ok "Your original configuration has been backed up."
 }
 
 install() {
@@ -96,8 +96,16 @@ pre_nix() {
     #program_must_exist "ctags"
 }
 pre_macOS() {
-    program_must_exist "exa"
-    return 0
+    if [ -d "/Applications/Xcode.app" ]; then
+        msg_error "Not Found" "You must have Xcode installed to continue."
+        exit 1
+    fi
+
+    if xcode-select --install 2>&1 | grep installed; then
+        msg_ok "Xcode CLI tools installed";
+    else
+        msg_error "Xcode CLI tools not installed" "Installing..."
+    fi
 }
 pre_linux() {
     return 0
