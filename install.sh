@@ -1,7 +1,9 @@
+# vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker :
 #!/bin/bash
 
-DOTFILE_REPO="https://github.com/e0d1n/dotfiles.git"
-DOTFILE_DESTINATION="$HOME/.e0d1n-dotfiles"
+DOTFILE_REPO="https://github.com/fr0zn/dotfiles.git"
+DOTFILE_DESTINATION="$HOME/.dotfiles"
+DOTFILE_BACKUP="$HOME/.dotfiles-backup"
 
 msg() {
     printf '%b\n' "$1" >&2
@@ -69,13 +71,44 @@ function clone(){
 
 backup() {
     msg "Attempting to back up your original configuration."
+    mkdir DOTFILE_BACKUP 
     today=`date +%Y%m%d_%s`
     for i in "$@"; do
-        [ -e "$i" ] && [ ! -L "$i" ] && mv -v "$i" "$i.$today" > /dev/null 2>&1;
+        [ -e "$i" ] && [ ! -L "$i" ] && mv -v "$i" "$DOTFILE_BACKUP/$i.$today" > /dev/null 2>&1;
     done
     ret="0"
     action "Your original configuration has been backed up."
 }
+
+## Backups
+bak_nix() {
+    # Backup old configurations
+    backup "$HOME/.vimrc" \
+           "$HOME/.vim" \
+           "$HOME/.tmux.conf" \
+           "$HOME/.zshrc"
+}
+bak_macOS() {
+
+}
+bak_linux() {
+
+}
+## End Backups
+
+## Symlinks
+ln_nix() {
+    symlink "vimrc" "$HOME/.vimrc"
+    symlink "tmux.conf" "$HOME/.tmux.conf"
+    symlink "zshrc" "$HOME/.zshrc"
+}
+ln_macOS() {
+    
+}
+ln_linux() {
+    
+}
+## End Symlinks
 
 program_must_exist "git"
 program_must_exist "vim"
@@ -83,14 +116,8 @@ program_must_exist "tmux"
 program_must_exist "python"
 program_must_exist "zsh"
 program_must_exist "curl"
-program_must_exist "make"
-program_must_exist "ctags"
-
-# Backup old configurations
-backup "$HOME/.vimrc" \
-       "$HOME/.vim" \
-       "$HOME/.tmux.conf" \
-       "$HOME/.zshrc"
+#program_must_exist "make"
+#program_must_exist "ctags"
 
 # Clone dotfile repo
 clone $DOTFILE_REPO $DOTFILE_DESTINATION
@@ -98,9 +125,6 @@ clone $DOTFILE_REPO $DOTFILE_DESTINATION
 #--------------------#
 # Install extensions #
 #--------------------#
-
-# Install tmux themes
-clone https://github.com/jimeh/tmux-themepack.git $HOME/.tmux-themepack
 
 # Install FZF
 clone https://github.com/junegunn/fzf.git ~/.fzf
@@ -114,13 +138,25 @@ touch $HOME/.z
 curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-#-----------------------#
-# Symlink configuration #
-#-----------------------#
+#----------------------------------#
+# Backup and Symlink configuration #
+#----------------------------------#
 
-symlink "vimrc" "$HOME/.vimrc"
-symlink "tmux.conf" "$HOME/.tmux.conf"
-symlink "zshrc" "$HOME/.zshrc"
+unamestr=`uname`
+
+# Backup and link shared config
+bak_nix
+ln_nix
+
+if [[ "$unamestr" == "Darwin" ]]; then
+    # MacOS 
+    bak_macOS
+    ln_macOS
+else
+    # Linux
+    bak_linux
+    ln_linux
+fi
 
 # Post Install vim plugins
 vim +PlugInstall +qall

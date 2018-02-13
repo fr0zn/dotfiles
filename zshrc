@@ -1,7 +1,7 @@
 # Path to dotfiles
-e0d1n_DOTFILE_PATH=$HOME/.e0d1n-dotfiles
-e0d1n_SCRIPTS_PATH=$e0d1n_DOTFILE_PATH/scripts
-e0d1n_CONFIG_PATH=$e0d1n_DOTFILE_PATH/config
+DOTFILE_PATH=$HOME/.dotfiles
+SCRIPTS_PATH=$DOTFILE_PATH/scripts
+ZSH_CONFIG_PATH=$DOTFILE_PATH/zsh
 
 ZSH_THEME="afowler"
 plugins=(git colored-man-pages z)
@@ -14,17 +14,17 @@ source $ZSH/oh-my-zsh.sh
 unamestr=`uname`
 
 # Load ZSHRC config
-source $e0d1n_CONFIG_PATH/all_zshrc.conf
+source $ZSH_CONFIG_PATH/all_zshrc.conf
 
 # MacOS configs
 if [[ "$unamestr" == "Darwin" ]]; then
-    source $e0d1n_CONFIG_PATH/darwin_zshrc.conf
+    source $ZSH_CONFIG_PATH/darwin_zshrc.conf
 else
 # Linux configs
-    source $e0d1n_CONFIG_PATH/linux_zshrc.conf
+    source $ZSH_CONFIG_PATH/linux_zshrc.conf
     # Docker configs
     if [ -f /.dockerenv ]; then
-        source $e0d1n_CONFIG_PATH/docker_zshrc.conf
+        source $ZSH_CONFIG_PATH/docker_zshrc.conf
     fi
 fi
 
