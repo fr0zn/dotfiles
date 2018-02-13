@@ -144,9 +144,9 @@ ins_linux() {
 
 ## Symlinks
 ln_nix() {
-    symlink "vimrc" "$HOME/.vimrc"
-    symlink "tmux.conf" "$HOME/.tmux.conf"
-    symlink "zshrc" "$HOME/.zshrc"
+    symlink "vim/vimrc" "$HOME/.vimrc"
+    symlink "tmux/tmux.conf" "$HOME/.tmux.conf"
+    symlink "zsh/zshrc" "$HOME/.zshrc"
 }
 ln_macOS() {
     return 0
@@ -178,7 +178,7 @@ post_linux() {
 }
 ## End Post-Link
 
-unamestr=`uname`
+OS_TYPE=`uname`
 
 # Backup and link shared config
 pre_nix
@@ -188,7 +188,7 @@ ln_nix
 post_nix
 
 
-if [[ "$unamestr" == "Darwin" ]]; then
+if [[ "$OS_TYPE" == "Darwin" ]]; then
     # MacOS
     pre_macOS
     bak_macOS
