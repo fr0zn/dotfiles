@@ -80,8 +80,8 @@ backup() {
     action "Your original configuration has been backed up."
 }
 
-run() {
-    ./$1
+install() {
+    . $DOTFILE_DESTINATION/$1/install.sh
 }
 
 ## Pre-Install
@@ -125,9 +125,9 @@ ins_nix() {
     # Clone dotfile repo
     clone $DOTFILE_REPO $DOTFILE_DESTINATION
 
-    run $DOTFILE_DESTINATION/antigen/install.sh
-    run $DOTFILE_DESTINATION/fzf/install.sh
-    run $DOTFILE_DESTINATION/vim/install.sh
+    install antigen
+    install fzf
+    install vim
 }
 ins_macOS() {
     return 0
