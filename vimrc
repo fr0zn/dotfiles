@@ -37,6 +37,7 @@
     Plug 'tomasiser/vim-code-dark'
     Plug 'dracula/vim'
     Plug 'tomlion/vim-solidity'
+    Plug 'joshdick/onedark'
 
     call plug#end()
 
@@ -84,7 +85,9 @@
     set iskeyword-=-                    " '-' is an end of word designator
 
     set backup                          " Backups are nice ...
-    set backupdir=~/.vimtmp             " Backups dir
+    set backupdir=~/.vim/backup          " Backups dir
+    set directory=~/.vim/swap            " Swap dir
+    set undodir=~/.vim/undo              " Undo dir
     set undofile                        " So is persistent undo ...
     set undolevels=1000                 " Maximum number of changes that can be undone
     set undoreload=10000                " Maximum number lines to save for undo on a buffer reload
@@ -95,8 +98,10 @@
 
 " Vim UI {
 
-    set termguicolors                   " Enable true color support
-    colorscheme dracula
+    " set termguicolors                   " Enable true color support
+    if filereadable(expand("$HOME/.vim/plugged/onedark.vim/autoload/onedark.vim"))
+        colorscheme onedark
+    endif
 
     set tabpagemax=15                   " Only show 15 tabs
     set showmode                        " Display the current mode
