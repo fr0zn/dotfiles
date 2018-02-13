@@ -9,12 +9,16 @@ msg() {
     printf '%b\n' "$1" >&2
 }
 
+msg_info() {
+    msg "\33[34m[*]\33[0m ${1}"
+}
+
 msg_ok() {
-    msg "\33[32m[✔]\33[0m ${1}"
+    msg "\33[32m[+]\33[0m ${1}"
 }
 
 msg_error() {
-    msg "\33[31m[✘]\33[0m ${1}: ${2}"
+    msg "\33[31m[-]\33[0m ${1}: ${2}"
 }
 
 lnif() {
@@ -75,7 +79,7 @@ function clone(){
 }
 
 backup() {
-    msg "Attempting to back up your original configuration."
+    msg_info "Attempting to back up your original configuration."
     mkdir $DOTFILE_BACKUP 2> /dev/null
     today=`date +%Y%m%d_%s`
     for i in "$@"; do
@@ -174,7 +178,7 @@ post_nix() {
     vim +PlugInstall +qall
 
     # Set zsh default and run-it
-    msg "Changing the default shell to /bin/zsh (Enter password): "
+    msg_info "Changing the default shell to /bin/zsh (Enter password): "
     chsh -s /bin/zsh
     /bin/zsh
 }
