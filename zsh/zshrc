@@ -3,12 +3,11 @@ DOTFILE_PATH=$HOME/.dotfiles
 SCRIPTS_PATH=$DOTFILE_PATH/scripts
 ZSH_CONFIG_PATH=$DOTFILE_PATH/zsh
 
-ZSH_THEME="afowler"
-plugins=(git colored-man-pages z)
-
-# Path to oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
-source $ZSH/oh-my-zsh.sh
+# Antigen
+source ~/.antigen/antigen.zsh
+antigen use oh-my-zsh
+antigen theme fr0zn/simplezsh
+antigen apply
 
 
 unamestr=`uname`
