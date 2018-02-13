@@ -58,7 +58,7 @@ function clone(){
     WHERE=$2
 
     if [ ! -e "$WHERE" ]; then
-        mkdir -p "$WHERE"
+        mkdir -p "$WHERE" 2> /dev/null
         ERROR=$(git clone "$FROM" "$WHERE" 2>&1 > /dev/null)
         ret=$?
         action "$WHERE" "$ERROR"
@@ -71,7 +71,7 @@ function clone(){
 
 backup() {
     msg "Attempting to back up your original configuration."
-    mkdir $DOTFILE_BACKUP
+    mkdir $DOTFILE_BACKUP 2> /dev/null
     today=`date +%Y%m%d_%s`
     for i in "$@"; do
         [ -e "$i" ] && [ ! -L "$i" ] && mv -v "$i" "$DOTFILE_BACKUP/$i.$today" > /dev/null 2>&1;
@@ -158,9 +158,9 @@ ln_linux() {
 
 ## Post-Link
 post_nix() {
-    mkdir -p ~/.vim/backup
-    mkdir -p ~/.vim/swap
-    mkdir -p ~/.vim/undo
+    mkdir -p ~/.vim/backup 2> /dev/null
+    mkdir -p ~/.vim/swap 2> /dev/null
+    mkdir -p ~/.vim/undo 2> /dev/null
 
     # vim plugins
     vim +PlugInstall +qall
