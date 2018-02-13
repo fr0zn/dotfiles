@@ -215,3 +215,5 @@ else
     ln_linux
     post_linux
 fi
+
+msg_ok "Done!"
