@@ -60,11 +60,15 @@ function clone(){
         ERROR=$(git clone "$FROM" "$WHERE" 2>&1 > /dev/null)
         if [[ $? -ne 0 ]]; then
             msg_error "$WHERE" "Not cloned"
+        else
+            msg_ok "$WHERE"
         fi
     else
         ERROR=$(cd "$WHERE" && git pull origin 2>&1 > /dev/null)
         if [[ $? -ne 0 ]]; then
             msg_error "$WHERE" "Pull error"
+        else
+            msg_ok "$WHERE"
         fi
     fi
 
