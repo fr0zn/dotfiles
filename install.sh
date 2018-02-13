@@ -89,10 +89,10 @@ bak_nix() {
            "$HOME/.zshrc"
 }
 bak_macOS() {
-
+    return 0
 }
 bak_linux() {
-
+    return 0
 }
 ## End Backups
 
@@ -103,10 +103,10 @@ ln_nix() {
     symlink "zshrc" "$HOME/.zshrc"
 }
 ln_macOS() {
-    
+    return 0
 }
 ln_linux() {
-    
+    return 0
 }
 ## End Symlinks
 
