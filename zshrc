@@ -27,6 +27,3 @@ else
         source $ZSH_CONFIG_PATH/docker_zshrc.conf
     fi
 fi
-
-# FZF config file
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
