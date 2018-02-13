@@ -126,6 +126,7 @@ ins_nix() {
     ~/.fzf/install --all > /dev/null 2>&1
 
     # Install Oh my zsh
+    SHELL='/bin/zsh' # Fake zsh usage, so oh-my-zsh don't try to change to it
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
     touch $HOME/.z
 
