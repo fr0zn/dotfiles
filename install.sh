@@ -71,7 +71,7 @@ function clone(){
 
 backup() {
     msg "Attempting to back up your original configuration."
-    mkdir DOTFILE_BACKUP 
+    mkdir $DOTFILE_BACKUP
     today=`date +%Y%m%d_%s`
     for i in "$@"; do
         [ -e "$i" ] && [ ! -L "$i" ] && mv -v "$i" "$DOTFILE_BACKUP/$i.$today" > /dev/null 2>&1;
@@ -92,6 +92,7 @@ pre_nix() {
     #program_must_exist "ctags"
 }
 pre_macOS() {
+    program_must_exist "exa"
     return 0
 }
 pre_linux() {
@@ -187,7 +188,7 @@ post_nix
 
 
 if [[ "$unamestr" == "Darwin" ]]; then
-    # MacOS 
+    # MacOS
     pre_macOS
     bak_macOS
     ins_macOS
