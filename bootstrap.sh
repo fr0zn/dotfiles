@@ -80,6 +80,10 @@ backup() {
     action "Your original configuration has been backed up."
 }
 
+run() {
+    ./$1
+}
+
 ## Pre-Install
 pre_nix() {
     program_must_exist "git"
@@ -121,18 +125,9 @@ ins_nix() {
     # Clone dotfile repo
     clone $DOTFILE_REPO $DOTFILE_DESTINATION
 
-    # Install FZF
-    clone https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install --all > /dev/null 2>&1
-
-    # Install Oh my zsh
-    SHELL='/bin/zsh' # Fake zsh usage, so oh-my-zsh don't try to change to it
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-    touch $HOME/.z
-
-    # Install vim-plug
-    curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    run $DOTFILE_DESTINATION/antigen/install.sh
+    run $DOTFILE_DESTINATION/fzf/install.sh
+    run $DOTFILE_DESTINATION/vim/install.sh
 }
 ins_macOS() {
     return 0
@@ -158,6 +153,7 @@ ln_linux() {
 
 ## Post-Link
 post_nix() {
+    touch $HOME/.z
     mkdir -p ~/.vim/backup 2> /dev/null
     mkdir -p ~/.vim/swap 2> /dev/null
     mkdir -p ~/.vim/undo 2> /dev/null
