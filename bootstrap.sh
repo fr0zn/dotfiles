@@ -99,7 +99,7 @@ run_level() {
     list=$(find $DOTFILE_DESTINATION/install -maxdepth 1 -name "${1}*")
     for element in $list; do
         if [[ $element == *"${OS_TYPE}.sh" || $element == *"all.sh" ]]; then
-            msg_info "Installing `basename $element`"
+            msg_info "Running `basename $element`"
             . $element
         fi
     done
