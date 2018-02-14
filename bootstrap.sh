@@ -95,7 +95,7 @@ install() {
 run_level() {
     list=$(find $DOTFILE_DESTINATION/install -maxdepth 1 -name "${1}*")
     for element in $list; do
-        if [[ $element == *"$OS_TYPE"* || $element == *"all"* ]]
+        if [[ $element == *"$OS_TYPE"* || $element == *"all"* ]]; then
             . $element
         fi
         echo msg_info "Installed `basename $element`"
@@ -139,6 +139,7 @@ elif [[ "$uname_out" == "Linux" ]]; then
     // Check distro
 fi
 
+clone $DOTFILE_REPO $DOTFILE_DESTINATION
 
 pre_run
 bak_run
