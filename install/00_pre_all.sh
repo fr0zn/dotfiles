@@ -1,0 +1,8 @@
+program_must_exist "git"
+program_must_exist "vim"
+program_must_exist "tmux"
+program_must_exist "python"
+program_must_exist "zsh"
+program_must_exist "curl"
+#program_must_exist "make"
+#program_must_exist "ctags"

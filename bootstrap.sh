@@ -92,128 +92,61 @@ install() {
     . $DOTFILE_DESTINATION/$1/install.sh
 }
 
-## Pre-Install
-pre_nix() {
-    program_must_exist "git"
-    program_must_exist "vim"
-    program_must_exist "tmux"
-    program_must_exist "python"
-    program_must_exist "zsh"
-    program_must_exist "curl"
-    #program_must_exist "make"
-    #program_must_exist "ctags"
+run_level() {
+    list=$(find $DOTFILE_DESTINATION/install -maxdepth 1 -name "${1}*")
+    for element in $list; do
+        if [[ $element == *"$OS_TYPE"* || $element == *"all"* ]]
+            . $element
+        fi
+        echo msg_info "Installed `basename $element`"
+    done
 }
-pre_macOS() {
-    if [ -d "/Applications/Xcode.app" ]; then
-        msg_error "Not Found" "You must have Xcode installed to continue."
-        exit 1
-    fi
 
-    if xcode-select --install 2>&1 | grep installed; then
-        msg_ok "Xcode CLI tools installed";
-    else
-        msg_error "Xcode CLI tools not installed" "Installing..."
-    fi
+## 0 - Pre-Install
+pre_run() {
+    run_level "0"
 }
-pre_linux() {
-    return 0
-}
-## End Pre-Install
-
-## Backups
-bak_nix() {
-    # Backup old configurations
-    backup "$HOME/.vimrc" \
-           "$HOME/.vim" \
-           "$HOME/.tmux.conf" \
-           "$HOME/.zshrc"
-}
-bak_macOS() {
-    return 0
-}
-bak_linux() {
-    return 0
-}
-## End Backups
-
-## Installation
-ins_nix() {
-    # Clone dotfile repo
-    clone $DOTFILE_REPO $DOTFILE_DESTINATION
-
-    install antigen
-    install fzf
-    install vim
-}
-ins_macOS() {
-    return 0
-}
-ins_linux() {
-    return 0
-}
-## End Installation
-
-## Symlinks
-ln_nix() {
-    symlink "vim/vimrc" "$HOME/.vimrc"
-    symlink "tmux/tmux.conf" "$HOME/.tmux.conf"
-    symlink "zsh/zshrc" "$HOME/.zshrc"
-}
-ln_macOS() {
-    return 0
-}
-ln_linux() {
-    return 0
-}
-## End Symlinks
-
-## Post-Link
-post_nix() {
-    touch $HOME/.z
-    mkdir -p ~/.vim/backup 2> /dev/null
-    mkdir -p ~/.vim/swap 2> /dev/null
-    mkdir -p ~/.vim/undo 2> /dev/null
-
-    # vim plugins
-    vim +PlugInstall +qall
-
-    # Set zsh default and run-it
-    msg_info "Changing the default shell to /bin/zsh (Enter password): "
-    chsh -s /bin/zsh
-    /bin/zsh
-}
-post_macOS() {
-    return 0
-}
-post_linux() {
-    return 0
-}
-## End Post-Link
-
-OS_TYPE=`uname`
-
-# Backup and link shared config
-pre_nix
-bak_nix
-ins_nix
-ln_nix
-post_nix
 
 
-if [[ "$OS_TYPE" == "Darwin" ]]; then
-    # MacOS
-    pre_macOS
-    bak_macOS
-    ins_macOS
-    ln_macOS
-    post_macOS
-else
-    # Linux
-    pre_linux
-    bak_linux
-    ins_macOS
-    ln_linux
-    post_linux
+## 1 - Backups
+bak_run() {
+    run_level "1"
+}
+
+## 2 - Installation
+ins_run() {
+    run_level "2"
+}
+
+## 3 - Symlinks
+sym_run() {
+    run_level "3"
+}
+
+## 4 - Post-Link/Installation
+pos_run() {
+    run_level "4"
+}
+
+uname_out=`uname`
+
+OS_TYPE=""
+
+if [[ "$uname_out" == "Darwin" ]]; then
+    $OS_TYPE="mac"
+elif [[ "$uname_out" == "Linux" ]]; then
+    $OS_TYPE="linux"
+    // Check distro
 fi
 
+
+pre_run
+bak_run
+ins_run
+sym_run
+pos_run
+
 msg_ok "Done!"
+
+# Get the new shell
+/bin/zsh
