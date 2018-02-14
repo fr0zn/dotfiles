@@ -26,16 +26,17 @@ lnif() {
     fi
 }
 
-check_sudo(){
+run_sudo(){
     if [[ "$UID" == "0" ]]; then
-        return 0
+        ${@}
     fi
     program_exists "sudo"
     if [[ $? -ne 0 ]]; then
         msg_error "Command 'sudo' not found" "Install sudo and give this user permissions to install packages"
-        return 1
+        exit 1
+    else
+        sudo -S ${@}
     fi
-    return 0
 }
 
 install_package() {
@@ -45,12 +46,10 @@ install_package() {
             brew install "${@}"
             ;;
         "ubuntu" | "debian")
-            check_sudo || exit 1
-            sudo -S apt -y install "${@}"
+            run_sudo apt -y install "${@}"
             ;;
         "arch")
-            check_sudo || exit 1
-            sudo -S pacman -S --noconfirm "${@}"
+            run_sudo pacman -S --noconfirm "${@}"
             ;;
         *)
             msg_error "Auto-Installation not supported" "${OS_TYPE}"
