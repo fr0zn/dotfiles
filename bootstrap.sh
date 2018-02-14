@@ -27,7 +27,7 @@ lnif() {
     fi
 }
 
-install_manager() {
+install_package() {
     msg_info "Installing ${@} (${OS_TYPE})"
     case "${OS_TYPE}" in
         "mac")
@@ -44,7 +44,7 @@ install_manager() {
             return 1
     esac
     if [[ $? -ne 0 ]];then
-        msg_error "Installing" "${@}"
+        msg_error "Auto-Installing" "${@} (maybe no permissions)"
         return 1
     fi
     return 0
@@ -70,7 +70,9 @@ program_must_exist() {
     # throw error on non-zero return value
     if [[ $? -ne 0 ]]; then
         # Try to install
-        install_manager $1
+        install_package $1
+        # Check if installed now
+        program_exists $1
         if [[ $? -ne 0 ]]; then
             msg_error "Not Found" "You must have '$1' installed to continue."
             exit 1
