@@ -33,10 +33,10 @@ install_package() {
             brew install "${@}"
             ;;
         "ubuntu" | "debian")
-            apt -y install "${@}"
+            sudo -S apt -y install "${@}"
             ;;
         "arch")
-            pacman -S --noconfirm "${@}"
+            sudo -S pacman -S --noconfirm "${@}"
             ;;
         *)
             msg_error "Auto-Installation not supported" "${OS_TYPE}"
@@ -147,6 +147,7 @@ pre_check_run() {
         fi
     fi
 
+    program_must_exist "sudo"
     program_must_exist "git"
 }
 
@@ -188,6 +189,10 @@ elif [[ "$uname_out" == "Linux" ]]; then
             OS_TYPE="debian"
         else
             OS_TYPE="linux"
+        fi
+    elif
+        if [ -f "/etc/arch-release" ]; then
+            OS_TYPE="arch"
         fi
     fi
 fi
