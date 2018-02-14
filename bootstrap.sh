@@ -136,7 +136,7 @@ if [[ "$uname_out" == "Darwin" ]]; then
     $OS_TYPE="mac"
 elif [[ "$uname_out" == "Linux" ]]; then
     $OS_TYPE="linux"
-    // Check distro
+    # Check distro
 fi
 
 clone $DOTFILE_REPO $DOTFILE_DESTINATION
