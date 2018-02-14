@@ -26,21 +26,30 @@ lnif() {
     fi
 }
 
-install_package() {
+check_sudo(){
+    if [[ "$UID" == "0" ]]; then
+        return 0
+    fi
     program_exists "sudo"
     if [[ $? -ne 0 ]]; then
-        msg_error "sudo not found" "Install sudo and give this user permissions to install packages"
-        exit 1
+        msg_error "Command 'sudo' not found" "Install sudo and give this user permissions to install packages"
+        return 1
     fi
+    return 0
+}
+
+install_package() {
     msg_info "Installing ${@} (${OS_TYPE})"
     case "${OS_TYPE}" in
         "mac")
             brew install "${@}"
             ;;
         "ubuntu" | "debian")
+            check_sudo || exit 1
             sudo -S apt -y install "${@}"
             ;;
         "arch")
+            check_sudo || exit 1
             sudo -S pacman -S --noconfirm "${@}"
             ;;
         *)
@@ -48,7 +57,7 @@ install_package() {
             return 1
     esac
     if [[ $? -ne 0 ]];then
-        msg_error "Auto-Installing" "${@} (maybe no permissions)"
+        msg_error "Error auto-installing" "${@} (maybe no permissions, or wrong package)"
         return 1
     fi
     return 0
