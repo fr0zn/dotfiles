@@ -183,17 +183,14 @@ OS_TYPE=""
 if [[ "$uname_out" == "Darwin" ]]; then
     OS_TYPE="macos"
 elif [[ "$uname_out" == "Linux" ]]; then
+    OS_TYPE="linux"
     if type lsb_release >/dev/null 2>&1 ; then
         distro=$(lsb_release -i -s)
         if [[ "$distro" == "Debian" || "$distro" == "Ubuntu" ]]; then
             OS_TYPE="debian"
-        else
-            OS_TYPE="linux"
         fi
-    elif
-        if [ -f "/etc/arch-release" ]; then
-            OS_TYPE="arch"
-        fi
+    elif [ -f "/etc/arch-release" ]; then
+        OS_TYPE="arch"
     fi
 fi
 
