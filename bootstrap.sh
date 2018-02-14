@@ -64,6 +64,7 @@ function clone(){
         ERROR=$(git clone "$FROM" "$WHERE" 2>&1 > /dev/null)
         if [[ $? -ne 0 ]]; then
             msg_error "$WHERE" "Not cloned"
+            exit 1
         else
             msg_ok "$WHERE"
         fi
@@ -71,10 +72,12 @@ function clone(){
         ERROR=$(cd "$WHERE" && git pull origin 2>&1 > /dev/null)
         if [[ $? -ne 0 ]]; then
             msg_error "$WHERE" "Pull error"
+            exit 1
         else
             msg_ok "$WHERE"
         fi
     fi
+    return
 
 }
 
@@ -102,11 +105,27 @@ run_level() {
     done
 }
 
+pre_check_run() {
+    if [[ $OS_TYPE -eq "mac" ]]; then
+        if [ -d "/Applications/Xcode.app" ]; then
+          msg_error "Not Found" "You must have Xcode installed to continue."
+          exit 1
+        fi
+
+        if xcode-select --install 2>&1 | grep installed; then
+          msg_ok "Xcode CLI tools installed";
+        else
+          msg_error "Xcode CLI tools not installed" "Installing..."
+        fi
+    fi
+
+    program_must_exist "git"
+}
+
 ## 0 - Pre-Install
 pre_run() {
     run_level "0"
 }
-
 
 ## 1 - Backups
 bak_run() {
@@ -133,11 +152,12 @@ uname_out=`uname`
 OS_TYPE=""
 
 if [[ "$uname_out" == "Darwin" ]]; then
-    $OS_TYPE="mac"
+    OS_TYPE="mac"
 elif [[ "$uname_out" == "Linux" ]]; then
-    $OS_TYPE="linux"
-    # Check distro
+    OS_TYPE="linux"
 fi
+
+pre_check_run
 
 clone $DOTFILE_REPO $DOTFILE_DESTINATION
 

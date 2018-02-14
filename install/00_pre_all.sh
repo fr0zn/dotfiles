@@ -1,4 +1,3 @@
-program_must_exist "git"
 program_must_exist "vim"
 program_must_exist "tmux"
 program_must_exist "python"
