@@ -31,11 +31,9 @@ install_manager() {
     msg_info "Installing ${@} (${OS_TYPE})"
     case "${OS_TYPE}" in
         "mac")
-            brew update
             brew install "${@}"
             ;;
         "ubuntu" | "debian")
-            apt update
             apt -y install "${@}"
             ;;
         "arch")
