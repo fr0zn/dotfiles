@@ -98,7 +98,7 @@ install() {
 run_level() {
     list=$(find $DOTFILE_DESTINATION/install -maxdepth 1 -name "${1}*")
     for element in $list; do
-        if [[ $element == *"$OS_TYPE"* || $element == *"all"* ]]; then
+        if [[ $element == *"${OS_TYPE}.sh" || $element == *"all.sh" ]]; then
             . $element
             msg_info "Installed `basename $element`"
         fi
