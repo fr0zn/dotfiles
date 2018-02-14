@@ -100,8 +100,8 @@ run_level() {
     for element in $list; do
         if [[ $element == *"$OS_TYPE"* || $element == *"all"* ]]; then
             . $element
+            msg_info "Installed `basename $element`"
         fi
-        echo msg_info "Installed `basename $element`"
     done
 }
 
