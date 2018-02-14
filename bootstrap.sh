@@ -1,4 +1,3 @@
-# vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker :
 #!/bin/bash
 
 DOTFILE_REPO="https://github.com/fr0zn/dotfiles.git"
@@ -209,3 +208,5 @@ msg_ok "Done!"
 
 # Get the new shell
 /bin/zsh
+
+# vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker :
