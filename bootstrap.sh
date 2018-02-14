@@ -27,6 +27,31 @@ lnif() {
     fi
 }
 
+install_manager() {
+    msg_info "Installing ${@} (${OS_TYPE})"
+    case "${OS_TYPE}" in
+        "mac")
+            brew update
+            brew install "${@}"
+            ;;
+        "ubuntu" | "debian")
+            apt update
+            apt -y install "${@}"
+            ;;
+        "arch")
+            pacman -S --noconfirm "${@}"
+            ;;
+        *)
+            msg_error "Auto-Installation not supported" "${OS_TYPE}"
+            return 1
+    esac
+    if [[ $? -ne 0 ]];then
+        msg_error "Installing" "${@}"
+        return 1
+    fi
+    return 0
+}
+
 program_exists() {
 
     local ret='0'
@@ -46,8 +71,12 @@ program_must_exist() {
 
     # throw error on non-zero return value
     if [[ $? -ne 0 ]]; then
-        msg_error "Not Found" "You must have '$1' installed to continue."
-        exit 1
+        # Try to install
+        install_manager $1
+        if [[ $? -ne 0 ]]; then
+            msg_error "Not Found" "You must have '$1' installed to continue."
+            exit 1
+        fi
     fi
 }
 
@@ -103,15 +132,6 @@ run_level() {
             . $element
         fi
     done
-}
-
-program_must_exist_install() {
-
-    program_exists $1
-
-    if [[ $? -ne 0 ]]; then
-        #Install manager
-    fi
 }
 
 pre_check_run() {
