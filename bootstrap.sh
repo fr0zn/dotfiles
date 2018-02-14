@@ -105,6 +105,15 @@ run_level() {
     done
 }
 
+program_must_exist_install() {
+
+    program_exists $1
+
+    if [[ $? -ne 0 ]]; then
+        #Install manager
+    fi
+}
+
 pre_check_run() {
     if [[ "$OS_TYPE" == "macos" ]]; then
         if [ ! -d "/Applications/Xcode.app" ]; then
@@ -154,8 +163,17 @@ OS_TYPE=""
 if [[ "$uname_out" == "Darwin" ]]; then
     OS_TYPE="macos"
 elif [[ "$uname_out" == "Linux" ]]; then
-    OS_TYPE="linux"
+    if type lsb_release >/dev/null 2>&1 ; then
+        distro=$(lsb_release -i -s)
+        if [[ "$distro" == "Debian" || "$distro" == "Ubuntu" ]]; then
+            OS_TYPE="debian"
+        else
+            OS_TYPE="linux"
+        fi
+    fi
 fi
+
+msg_info "Running installation for OS: ${OS_TYPE}"
 
 pre_check_run
 
