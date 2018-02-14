@@ -1,2 +1,2 @@
-brew services start chunkwm
-brew services start skhd
+brew services restart chunkwm
+brew services restart skhd
