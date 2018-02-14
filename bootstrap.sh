@@ -63,18 +63,18 @@ function clone(){
         mkdir -p "$WHERE" 2> /dev/null
         ERROR=$(git clone "$FROM" "$WHERE" 2>&1 > /dev/null)
         if [[ $? -ne 0 ]]; then
-            msg_error "$WHERE" "Not cloned"
+            msg_error "Error on clone" "$WHERE"
             exit 1
         else
-            msg_ok "$WHERE"
+            msg_ok "Cloned $WHERE"
         fi
     else
         ERROR=$(cd "$WHERE" && git pull origin 2>&1 > /dev/null)
         if [[ $? -ne 0 ]]; then
-            msg_error "$WHERE" "Pull error"
+            msg_error "Pull error" "$WHERE"
             exit 1
         else
-            msg_ok "$WHERE"
+            msg_ok "Pulled $WHERE"
         fi
     fi
     return
@@ -88,7 +88,7 @@ backup() {
     for i in "$@"; do
         [ -e "$i" ] && [ ! -L "$i" ] && mv -v "$i" "$DOTFILE_BACKUP/$i.$today" > /dev/null 2>&1;
     done
-    msg_ok "Your original configuration has been backed up."
+    msg_ok "Your original configuration has been backed up on $DOTFILE_BACKUP"
 }
 
 install() {
@@ -99,8 +99,8 @@ run_level() {
     list=$(find $DOTFILE_DESTINATION/install -maxdepth 1 -name "${1}*")
     for element in $list; do
         if [[ $element == *"${OS_TYPE}.sh" || $element == *"all.sh" ]]; then
+            msg_info "Installing `basename $element`"
             . $element
-            msg_info "Installed `basename $element`"
         fi
     done
 }
