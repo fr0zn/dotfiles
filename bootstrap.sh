@@ -29,8 +29,7 @@ lnif() {
 install_package() {
     program_exists "sudo"
     if [[ $? -ne 0 ]]; then
-        msg_error "sudo not found" "Install sudo and give this user
-        permissions to install packages"
+        msg_error "sudo not found" "Install sudo and give this user permissions to install packages"
     fi
     msg_info "Installing ${@} (${OS_TYPE})"
     case "${OS_TYPE}" in
