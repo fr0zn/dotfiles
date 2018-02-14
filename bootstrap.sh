@@ -106,7 +106,7 @@ run_level() {
 }
 
 pre_check_run() {
-    if [[ "$OS_TYPE" == "mac" ]]; then
+    if [[ "$OS_TYPE" == "macos" ]]; then
         if [ -d "/Applications/Xcode.app" ]; then
           msg_error "Not Found" "You must have Xcode installed to continue."
           exit 1
@@ -152,7 +152,7 @@ uname_out=`uname`
 OS_TYPE=""
 
 if [[ "$uname_out" == "Darwin" ]]; then
-    OS_TYPE="mac"
+    OS_TYPE="macos"
 elif [[ "$uname_out" == "Linux" ]]; then
     OS_TYPE="linux"
 fi
