@@ -29,6 +29,7 @@ lnif() {
 run_sudo(){
     if [[ "$UID" == "0" ]]; then
         ${@}
+        return $?
     fi
     program_exists "sudo"
     if [[ $? -ne 0 ]]; then
@@ -36,6 +37,7 @@ run_sudo(){
         exit 1
     else
         sudo -S ${@}
+        return $?
     fi
 }
 
