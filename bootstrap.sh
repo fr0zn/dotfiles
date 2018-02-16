@@ -3,6 +3,7 @@
 DOTFILE_REPO="https://github.com/fr0zn/dotfiles.git"
 DOTFILE_DESTINATION="$HOME/.dotfiles"
 DOTFILE_BACKUP="$HOME/.dotfiles-backup"
+DB_SYNC=0
 
 msg() {
     printf '%b\n' "$1" >&2
@@ -63,8 +64,31 @@ sudo_run(){
     fi
 }
 
+sync_database() {
+    if [[ "$DB_SYNC" == "0"  ]]; then
+        case "${OS_TYPE}" in
+            "macos")
+                brew update
+                ;;
+            "ubuntu" | "debian")
+                sudo_run "apt update"
+                ;;
+            "arch")
+                sudo_run "pacman -Syy"
+                ;;
+        esac
+        if [[ "$?" == "0" ]]; then
+            msg_ok "Database synced"
+            DB_SYNC=1
+        fi
+    fi
+}
+
 install_package() {
+
+    sync_database
     msg_info "Installing ${@} (${OS_TYPE})"
+
     case "${OS_TYPE}" in
         "macos")
             brew install "${@}"
