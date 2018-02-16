@@ -52,11 +52,11 @@ sudo_run(){
             ;;
         has_sudo__needs_pass)
             echo "Please supply your user password for the following command: \"${@}\""
-            sudo -S ${@}
+            sudo -S "${@}"
             ;;
         *)
             echo "Please supply root password for the following command: \"${@}\""
-            su -c "$cmd"
+            su -c "${@}"
             ;;
         esac
         return $?
