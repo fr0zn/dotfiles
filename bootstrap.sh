@@ -100,15 +100,11 @@ program_exists() {
 }
 
 program_must_exist() {
-
-    program_exists ${1}
+    install_package ${1}
+    program_exists $1
     if [[ $? -ne 0 ]]; then
-        install_package ${1}
-        program_exists $1
-        if [[ $? -ne 0 ]]; then
-            msg_error "Not Found" "You must have '$1' installed to continue."
-            exit 1
-        fi
+        msg_error "Not Found" "You must have '$1' installed to continue."
+        exit 1
     fi
 }
 
