@@ -26,17 +26,39 @@ lnif() {
     fi
 }
 
-run_sudo(){
+has_sudo() {
+    local prompt
+
+    prompt=$(sudo -nv 2>&1)
+    if [ $? -eq 0 ]; then
+    echo "has_sudo__pass_set"
+    elif echo $prompt | grep -q '^sudo:'; then
+    echo "has_sudo__needs_pass"
+    else
+    echo "no_sudo"
+    fi
+}
+
+sudo_run(){
     if [[ "$UID" == "0" ]]; then
         ${@}
         return $?
-    fi
-    program_exists "sudo"
-    if [[ $? -ne 0 ]]; then
-        msg_error "Command 'sudo' not found" "Install sudo and give this user permissions to install packages"
-        exit 1
     else
-        sudo -S ${@}
+        HAS_SUDO=$(has_sudo)
+
+        case "$HAS_SUDO" in
+        has_sudo__pass_set)
+            sudo -S ${@}
+            ;;
+        has_sudo__needs_pass)
+            echo "Please supply your user password for the following command: \"${@}\""
+            sudo -S ${@}
+            ;;
+        *)
+            echo "Please supply root password for the following command: \"${@}\""
+            su -c "$cmd"
+            ;;
+        esac
         return $?
     fi
 }
@@ -48,10 +70,10 @@ install_package() {
             brew install "${@}"
             ;;
         "ubuntu" | "debian")
-            run_sudo apt -y install "${@}"
+            sudo_run apt -y install "${@}"
             ;;
         "arch")
-            run_sudo pacman -S --noconfirm "${@}"
+            sudo_run pacman -S --noconfirm "${@}"
             ;;
         *)
             msg_error "Auto-Installation not supported" "${OS_TYPE}"
