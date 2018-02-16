@@ -1,1 +1,1 @@
-brew install koekeishiya/formulae/skhd
+install_package koekeishiya/formulae/skhd

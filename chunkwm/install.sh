@@ -1,2 +1,2 @@
 brew tap crisidev/homebrew-chunkwm
-brew install chunkwm
+install_package chunkwm
