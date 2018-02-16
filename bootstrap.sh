@@ -101,13 +101,9 @@ program_exists() {
 
 program_must_exist() {
 
-    program_exists $1
-
-    # throw error on non-zero return value
+    program_exists ${1}
     if [[ $? -ne 0 ]]; then
-        # Try to install
-        install_package $1
-        # Check if installed now
+        install_package ${1}
         program_exists $1
         if [[ $? -ne 0 ]]; then
             msg_error "Not Found" "You must have '$1' installed to continue."

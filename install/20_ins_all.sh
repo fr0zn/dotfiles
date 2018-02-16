@@ -1,3 +1,7 @@
+install vim
+install zsh
+install tmux
 install antigen
 install fzf
-install vim
+
+install_package curl
