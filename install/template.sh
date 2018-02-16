@@ -42,3 +42,18 @@
 #         # Do whatever
 #     fi
 #     ```
+
+# --- msg_ok ---
+
+# Shows message as green
+# ex: msg_ok "Installed!"
+
+# --- msg_info ---
+
+# Shows message as blue
+# ex: msg_info "Installing ..."
+
+# --- msg_error ---
+
+# Shows message as red
+# ex: msg_error "Reson" "Description"
