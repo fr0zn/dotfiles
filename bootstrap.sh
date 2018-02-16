@@ -51,11 +51,11 @@ sudo_run(){
             sudo -S ${@}
             ;;
         has_sudo__needs_pass)
-            echo "Please supply your user password for the following command: \"${@}\""
+            msg_info "Please supply your user password for the following command: \"${@}\""
             sudo -S "${@}"
             ;;
         *)
-            echo "Please supply root password for the following command: \"${@}\""
+            msg_info "Please supply root password for the following command: \"${@}\""
             su -c "${@}"
             ;;
         esac
@@ -70,10 +70,10 @@ install_package() {
             brew install "${@}"
             ;;
         "ubuntu" | "debian")
-            sudo_run apt -y install "${@}"
+            sudo_run "apt -y install ${@}"
             ;;
         "arch")
-            sudo_run pacman -S --noconfirm "${@}"
+            sudo_run "pacman -S --noconfirm ${@}"
             ;;
         *)
             msg_error "Auto-Installation not supported" "${OS_TYPE}"
