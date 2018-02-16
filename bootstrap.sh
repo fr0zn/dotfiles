@@ -4,6 +4,7 @@ DOTFILE_REPO="https://github.com/fr0zn/dotfiles.git"
 DOTFILE_DESTINATION="$HOME/.dotfiles"
 DOTFILE_BACKUP="$HOME/.dotfiles-backup"
 DB_SYNC=0
+OS_TYPE=""
 
 msg() {
     printf '%b\n' "$1" >&2
@@ -203,8 +204,29 @@ pre_check_run() {
     program_must_exist "git"
 }
 
+get_os(){
+    uname_out=`uname`
+
+    if [[ "$uname_out" == "Darwin" ]]; then
+        OS_TYPE="macos"
+    elif [[ "$uname_out" == "Linux" ]]; then
+        OS_TYPE="linux"
+        if type lsb_release >/dev/null 2>&1 ; then
+            distro=$(lsb_release -i -s)
+            if [[ "$distro" == "Debian" || "$distro" == "Ubuntu" ]]; then
+                OS_TYPE="debian"
+            fi
+        elif [ -f "/etc/arch-release" ]; then
+            OS_TYPE="arch"
+        fi
+    fi
+
+    msg_info "Running installation for OS: ${OS_TYPE}"
+}
+
 ## 0 - Pre-Install
 pre_run() {
+    clone $DOTFILE_REPO $DOTFILE_DESTINATION
     run_level "0"
 }
 
@@ -226,41 +248,20 @@ sym_run() {
 ## 4 - Post-Link/Installation
 pos_run() {
     run_level "4"
+    msg_ok "Done!"
+    # Get the new shell
+    /bin/zsh
 }
 
-uname_out=`uname`
 
-OS_TYPE=""
-
-if [[ "$uname_out" == "Darwin" ]]; then
-    OS_TYPE="macos"
-elif [[ "$uname_out" == "Linux" ]]; then
-    OS_TYPE="linux"
-    if type lsb_release >/dev/null 2>&1 ; then
-        distro=$(lsb_release -i -s)
-        if [[ "$distro" == "Debian" || "$distro" == "Ubuntu" ]]; then
-            OS_TYPE="debian"
-        fi
-    elif [ -f "/etc/arch-release" ]; then
-        OS_TYPE="arch"
-    fi
-fi
-
-msg_info "Running installation for OS: ${OS_TYPE}"
+get_os
 
 pre_check_run
-
-clone $DOTFILE_REPO $DOTFILE_DESTINATION
 
 pre_run
 bak_run
 ins_run
 sym_run
 pos_run
-
-msg_ok "Done!"
-
-# Get the new shell
-/bin/zsh
 
 # vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker :
