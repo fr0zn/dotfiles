@@ -199,9 +199,9 @@ pre_check_run() {
         else
           msg_error "Xcode CLI tools not installed" "Installing..."
         fi
+    else
+        program_must_exist "git"
     fi
-
-    program_must_exist "git"
 }
 
 get_os(){
