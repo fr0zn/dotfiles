@@ -17,7 +17,7 @@ source $ZSH_CONFIG_PATH/all_zshrc.conf
 
 # MacOS configs
 if [[ "$unamestr" == "Darwin" ]]; then
-    source $ZSH_CONFIG_PATH/darwin_zshrc.conf
+    source $ZSH_CONFIG_PATH/macos.conf
 else
 # Linux configs
     source $ZSH_CONFIG_PATH/linux_zshrc.conf
