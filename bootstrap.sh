@@ -66,7 +66,7 @@ sudo_run(){
 install_package() {
     msg_info "Installing ${@} (${OS_TYPE})"
     case "${OS_TYPE}" in
-        "mac")
+        "macos")
             brew install "${@}"
             ;;
         "ubuntu" | "debian")
