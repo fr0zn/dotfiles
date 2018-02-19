@@ -1,4 +1,4 @@
-install_brew(){
+install_brew_macos(){
     program_exists "brew"
     if [[ $? -ne 0 ]]; then
         msg_info "Brew not found, installing ..."

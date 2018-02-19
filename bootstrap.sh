@@ -5,6 +5,7 @@ DOTFILE_DESTINATION="$HOME/.dotfiles"
 DOTFILE_BACKUP="$HOME/.dotfiles-backup"
 DB_SYNC=0
 OS_TYPE=""
+DEBUG=1
 
 msg() {
     printf '%b\n' "$1" >&2
@@ -12,6 +13,12 @@ msg() {
 
 msg_info() {
     msg "\33[34m[*]\33[0m ${1}"
+}
+
+msg_debug() {
+    if [[ "$DEBUG" == "1" ]]; then
+        msg "\33[36m[d]\33[0m ${1}"
+    fi
 }
 
 msg_ok() {
@@ -136,7 +143,6 @@ program_exists() {
 }
 
 program_must_exist() {
-    install_package ${1}
     program_exists $1
     if [[ $? -ne 0 ]]; then
         msg_error "Not Found" "You must have '$1' installed to continue."
@@ -146,6 +152,7 @@ program_must_exist() {
 
 symlink_file(){
     lnif "$DOTFILE_DESTINATION/$1" "$2"
+    return 0
 }
 
 function clone(){
@@ -185,6 +192,7 @@ backup_file() {
     for i in "$@"; do
         [ -e "$i" ] && [ ! -L "$i" ] && mv -v "$i" "$DOTFILE_BACKUP/$i.$today" > /dev/null 2>&1;
     done
+    return 0
 }
 
 # Loads all install.sh script from the dotfiles folder
@@ -195,78 +203,35 @@ _load() {
     done
 }
 
-_pre() {
-    if _function_exists "pre_${1}_$OS_TYPE"; then
-        msg_info "Pre-Install ${1} for ($OS_TYPE)"
-        $"pre_${1}_$OS_TYPE"
-    elif _function_exists "pre_${1}"; then
-        msg_info "Pre-Install ${1} (generic)"
-        $"pre_${1}"
+_template() {
+    if _function_exists "${1}_${2}_$OS_TYPE"; then
+        msg_debug "${1} ${2} for ($OS_TYPE)"
+        $"${1}_${2}_$OS_TYPE"
+    elif _function_exists "${1}_${2}"; then
+        msg_debug "${1} ${2} (generic)"
+        $"${1}_${2}"
     else
-        msg_error "Tried to run pre function for ${1}, but it doesn't exist, make sure it is loaded and created"
+        msg_debug "${2}: Tried to run ${1}_${2}, but it doesn't exist"
     fi
-}
-
-_backup() {
-    if _function_exists "backup_${1}_$OS_TYPE"; then
-        msg_info "Backup ${1} for ($OS_TYPE)"
-        $"backup_${1}_$OS_TYPE"
-    elif _function_exists "backup_${1}"; then
-        msg_info "Backup ${1} (generic)"
-        $"backup_${1}"
-    else
-        msg_error "Tried to run backup function for ${1}, but it doesn't exist, make sure it is loaded and created"
-    fi
-}
-
-_symlink() {
-    if _function_exists "symlink_${1}_$OS_TYPE"; then
-        msg_info "Symlink ${1} for ($OS_TYPE)"
-        $"symlink_${1}_$OS_TYPE"
-    elif _function_exists "symlink_${1}"; then
-        msg_info "Symlink ${1} (generic)"
-        $"symlink_${1}"
-    else
-        msg_error "Tried to run symlink function for ${1}, but it doesn't exist, make sure it is loaded and created"
-    fi
+    return $?
 }
 
 install() {
-    _pre $1
-    _backup $1
-    _symlink $1
-    _install $1
-    _post $1
-}
-
-_install() {
-    if _function_exists "install_${1}_$OS_TYPE"; then
-        msg_info "Install ${1} for ($OS_TYPE)"
-        $"install_${1}_$OS_TYPE"
-    elif _function_exists "install_${1}"; then
-        msg_info "Install ${1} (generic)"
-        $"install_${1}"
-    else
-        msg_error "Tried to run install function for ${1}, but it doesn't exist, make sure it is loaded and created"
-    fi
-}
-
-_post() {
-    if _function_exists "post_${1}_$OS_TYPE"; then
-        msg_info "Post-Install ${1} for ($OS_TYPE)"
-        $"post_${1}_$OS_TYPE"
-    elif _function_exists "post_${1}"; then
-        msg_info "Post-Install ${1} (generic)"
-        $"post_${1}"
-    else
-        msg_error "Tried to run post function for ${1}, but it doesn't exist, make sure it is loaded and created"
-    fi
+    for step in "pre" "backup" "symlink" "install" "post"; do
+        _template "$step" "$1"
+        if [[ $? -ne 0 ]]; then
+            msg_error "Installing $1" "In step $step"
+            return 1
+        fi
+    done
+    msg_ok "$1: Done installing"
+    return 0
 }
 
 run_level() {
     list=$(find $DOTFILE_DESTINATION/install -maxdepth 1 -name "${1}*")
     for element in $list; do
-        msg_info "Running `basename $element`"
+        msg_debug "Running `basename $element`"
         . $element
     done
 }
@@ -284,7 +249,11 @@ pre_check_run() {
           msg_error "Xcode CLI tools not installed" "Installing..."
         fi
     else
-        program_must_exist "git"
+        program_exists "git"
+        if [[ $? -ne 0 ]]; then
+            install_package "git"
+            program_must_exist "git"
+        fi
     fi
 }
 
@@ -319,6 +288,11 @@ _binaries_run() {
     run_level "1"
 }
 
+## 2 - Apps
+_apps_run() {
+    run_level "2"
+}
+
 _load # Load all installation files
 get_os
 
@@ -326,5 +300,6 @@ get_os
 
 _packages_run
 _binaries_run
+_apps_run
 
 # vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker :
