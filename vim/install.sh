@@ -7,6 +7,3 @@ curl -fsLo $HOME/.vim/autoload/plug.vim --create-dirs \
 mkdir -p ~/.vim/backup 2> /dev/null
 mkdir -p ~/.vim/swap 2> /dev/null
 mkdir -p ~/.vim/undo 2> /dev/null
-
-# vim plugins
-vim +PlugInstall +qall
