@@ -43,6 +43,11 @@
 #     fi
 #     ```
 
+# --- is_app_installed --- (macOS only)
+
+# Returns 0 if app exists, 1 if not.
+# ex: ```if ! if_app_installed; then .... ```
+
 # --- msg_ok ---
 
 # Shows message as green

@@ -111,6 +111,17 @@ install_package() {
     return 0
 }
 
+is_app_installed() {
+    if [[ "$OS_TYPE" == "macos" ]]; then
+        if [ -d "/Applications/${1}.app" ]; then
+            return 0
+        fi
+        return 1
+    else
+        msg_info "Not a macOS, can't check if .app is installed"
+    fi
+}
+
 program_exists() {
 
     local ret='0'
@@ -189,7 +200,7 @@ run_level() {
 
 pre_check_run() {
     if [[ "$OS_TYPE" == "macos" ]]; then
-        if [ ! -d "/Applications/Xcode.app" ]; then
+        if ! is_app_installed "Xcode"; then
           msg_error "Not Found" "You must have Xcode installed to continue."
           exit 1
         fi
