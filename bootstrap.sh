@@ -270,7 +270,7 @@ _pre_run() {
           exit 1
         fi
 
-        if xcode-select --install 2>&1 | grep installed; then
+        if xcode-select --install 2>&1 | grep installed > /dev/null; then
           msg_ok "Xcode CLI tools installed";
         else
           msg_error "Xcode CLI tools not installed" "Installing..."
