@@ -1,0 +1,44 @@
+{
+    "general": {
+        "theme": "Dark",
+        "notifications": {}
+    },
+    "filePanel": {
+        "general": {},
+        "presentation": {},
+        "quickSearch": {},
+        "spotlight": {},
+        "operations": {},
+        "layout": {}
+    },
+    "viewer": {
+        "modern": {},
+        "classic": {}
+    },
+    "terminal": {},
+    "externalTools": {
+        "tools_v1": [
+            {
+                "title": "Open System Terminal Here",
+                "path": "/Applications/Utilities/Terminal.app",
+                "parameters": "%r",
+                "shortcut": "",
+                "startup": 0
+            },
+            {
+                "title": "XCode Merge",
+                "path": "/Applications/Xcode.app/Contents/Developer/usr/bin/opendiff",
+                "parameters": "%p %-p",
+                "shortcut": "",
+                "startup": 0
+            }
+        ]
+    },
+    "externalEditors": {},
+    "themes": {},
+    "hotkeyOverrides_v1": {
+        "menu.edit.move_here": "⇧⌘v",
+        "menu.command.file_attributes": "⌘i",
+        "menu.command.rename_in_place": "^r"
+    }
+}
