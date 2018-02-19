@@ -74,6 +74,7 @@ sudo_run(){
 
 sync_database() {
     if [[ "$DB_SYNC" == "0"  ]]; then
+        msg_info "Updating database packages"
         case "${OS_TYPE}" in
             "macos")
                 brew update
@@ -88,6 +89,9 @@ sync_database() {
         if [[ "$?" == "0" ]]; then
             msg_ok "Database synced"
             DB_SYNC=1
+        else
+            msg_error "Error syncing and updating packages"
+            exit 1
         fi
     fi
 }
@@ -112,7 +116,7 @@ install_package() {
             return 1
     esac
     if [[ $? -ne 0 ]];then
-        msg_error "Error auto-installing" "${@} (maybe no permissions, or wrong package)"
+        msg_error "Error auto-installing ${@}" "no permission, wrong package, or already installed"
         return 1
     fi
     return 0
