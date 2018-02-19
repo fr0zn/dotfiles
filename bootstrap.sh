@@ -5,6 +5,9 @@ DOTFILE_DESTINATION="$HOME/.dotfiles"
 DOTFILE_BACKUP="$HOME/.dotfiles-backup"
 DB_SYNC=0
 OS_TYPE=""
+
+STEPS="pre backup symlink install post"
+
 DEBUG=1
 
 msg() {
@@ -209,10 +212,10 @@ _load() {
 
 _template() {
     if _function_exists "${1}_${2}_$OS_TYPE"; then
-        msg_debug "${1} ${2} for ($OS_TYPE)"
+        msg_debug "${2}: ${1} ($OS_TYPE)"
         $"${1}_${2}_$OS_TYPE"
     elif _function_exists "${1}_${2}"; then
-        msg_debug "${1} ${2} (generic)"
+        msg_debug "${2}: ${1} (generic)"
         $"${1}_${2}"
     else
         msg_debug "${2}: Tried to run ${1}_${2}, but it doesn't exist"
@@ -221,13 +224,25 @@ _template() {
 }
 
 install() {
-    for step in "pre" "backup" "symlink" "install" "post"; do
-        _template "$step" "$1"
-        if [[ $? -ne 0 ]]; then
-            msg_error "Installing $1" "In step $step"
-            return 1
-        fi
-    done
+    if [[ ! -z "$2" ]]; then
+        msg_info "$1: Custom steps installation, steps: ${@:2}"
+        for step in "${@:2}"; do
+            _template "$step" "$1"
+            if [[ $? -ne 0 ]]; then
+                msg_error "Installing $1" "In step $step"
+                return 1
+            fi
+        done
+    else
+        for step in $STEPS; do
+            _template "$step" "$1"
+            if [[ $? -ne 0 ]]; then
+                msg_error "Installing $1" "In step $step"
+                return 1
+            fi
+        done
+    fi
+
     msg_ok "$1: Done installing"
     return 0
 }
@@ -240,7 +255,15 @@ run_level() {
     done
 }
 
-pre_check_run() {
+install_brew_macos(){
+    program_exists "brew"
+    if [[ $? -ne 0 ]]; then
+        msg_info "Brew not found, installing ..."
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    fi
+}
+
+_pre_run() {
     if [[ "$OS_TYPE" == "macos" ]]; then
         if ! is_app_installed "Xcode"; then
           msg_error "Not Found" "You must have Xcode installed to continue."
@@ -252,16 +275,20 @@ pre_check_run() {
         else
           msg_error "Xcode CLI tools not installed" "Installing..."
         fi
-    else
-        program_exists "git"
-        if [[ $? -ne 0 ]]; then
-            install_package "git"
-            program_must_exist "git"
-        fi
+
+        install "brew"
     fi
+
+    program_exists "git"
+    if [[ $? -ne 0 ]]; then
+        install_package "git"
+        program_must_exist "git"
+    fi
+
+    clone $DOTFILE_REPO $DOTFILE_DESTINATION
 }
 
-get_os(){
+_get_os(){
     uname_out=`uname`
 
     if [[ "$uname_out" == "Darwin" ]]; then
@@ -281,29 +308,16 @@ get_os(){
     msg_info "Running installation for OS: ${OS_TYPE}"
 }
 
-## 0 - Packages
-_packages_run() {
-    #clone $DOTFILE_REPO $DOTFILE_DESTINATION
-    run_level "0"
-}
-
-## 1 - Binaries
-_binaries_run() {
-    run_level "1"
-}
-
-## 2 - Apps
-_apps_run() {
-    run_level "2"
+_run(){
+    . "$DOTFILE_DESTINATION/install/all.sh"
+    . "$DOTFILE_DESTINATION/install/$OS_TYPE.sh"
+    msg_ok "Done installing dotfiles!"
 }
 
 _load # Load all installation files
-get_os
+_get_os
 
-#pre_check_run
-
-_packages_run
-_binaries_run
-_apps_run
+_pre_run
+_run
 
 # vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker :
