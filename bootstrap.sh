@@ -269,10 +269,10 @@ get_os
 
 pre_check_run
 
-#pre_run
-#bak_run
-#ins_run
+pre_run
+bak_run
+ins_run
 sym_run
-#pos_run
+pos_run
 
 # vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker :
