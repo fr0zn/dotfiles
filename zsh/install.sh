@@ -1,3 +1,8 @@
-program_must_exist "zsh"
+install_zsh(){
+    program_must_exist "zsh"
+}
 
-touch $HOME/.z
+pos_zsh(){
+    touch $HOME/.z
+}
+

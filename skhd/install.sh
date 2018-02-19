@@ -1,1 +1,3 @@
-install_package koekeishiya/formulae/skhd
+install_skhd(){
+    install_package koekeishiya/formulae/skhd
+}

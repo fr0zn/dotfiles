@@ -144,7 +144,7 @@ program_must_exist() {
     fi
 }
 
-function symlink(){
+symlink_file(){
     lnif "$DOTFILE_DESTINATION/$1" "$2"
 }
 
@@ -174,27 +174,100 @@ function clone(){
 
 }
 
-backup() {
-    msg_info "Attempting to back up your original configuration."
-    mkdir $DOTFILE_BACKUP 2> /dev/null
+_function_exists() {
+    declare -f -F $1 > /dev/null
+    return $?
+}
+
+backup_file() {
+    mkdir -p $DOTFILE_BACKUP 2> /dev/null
     today=`date +%Y%m%d_%s`
     for i in "$@"; do
         [ -e "$i" ] && [ ! -L "$i" ] && mv -v "$i" "$DOTFILE_BACKUP/$i.$today" > /dev/null 2>&1;
     done
-    msg_ok "Your original configuration has been backed up on $DOTFILE_BACKUP"
+}
+
+# Loads all install.sh script from the dotfiles folder
+_load() {
+    list=$(find "$DOTFILE_DESTINATION" -maxdepth 2 -name install.sh)
+    for element in $list; do
+        . $element
+    done
+}
+
+_pre() {
+    if _function_exists "pre_${1}_$OS_TYPE"; then
+        msg_info "Pre-Install ${1} for ($OS_TYPE)"
+        $"pre_${1}_$OS_TYPE"
+    elif _function_exists "pre_${1}"; then
+        msg_info "Pre-Install ${1} (generic)"
+        $"pre_${1}"
+    else
+        msg_error "Tried to run pre function for ${1}, but it doesn't exist, make sure it is loaded and created"
+    fi
+}
+
+_backup() {
+    if _function_exists "backup_${1}_$OS_TYPE"; then
+        msg_info "Backup ${1} for ($OS_TYPE)"
+        $"backup_${1}_$OS_TYPE"
+    elif _function_exists "backup_${1}"; then
+        msg_info "Backup ${1} (generic)"
+        $"backup_${1}"
+    else
+        msg_error "Tried to run backup function for ${1}, but it doesn't exist, make sure it is loaded and created"
+    fi
+}
+
+_symlink() {
+    if _function_exists "symlink_${1}_$OS_TYPE"; then
+        msg_info "Symlink ${1} for ($OS_TYPE)"
+        $"symlink_${1}_$OS_TYPE"
+    elif _function_exists "symlink_${1}"; then
+        msg_info "Symlink ${1} (generic)"
+        $"symlink_${1}"
+    else
+        msg_error "Tried to run symlink function for ${1}, but it doesn't exist, make sure it is loaded and created"
+    fi
 }
 
 install() {
-    . $DOTFILE_DESTINATION/$1/install.sh
+    _pre $1
+    _backup $1
+    _symlink $1
+    _install $1
+    _post $1
+}
+
+_install() {
+    if _function_exists "install_${1}_$OS_TYPE"; then
+        msg_info "Install ${1} for ($OS_TYPE)"
+        $"install_${1}_$OS_TYPE"
+    elif _function_exists "install_${1}"; then
+        msg_info "Install ${1} (generic)"
+        $"install_${1}"
+    else
+        msg_error "Tried to run install function for ${1}, but it doesn't exist, make sure it is loaded and created"
+    fi
+}
+
+_post() {
+    if _function_exists "post_${1}_$OS_TYPE"; then
+        msg_info "Post-Install ${1} for ($OS_TYPE)"
+        $"post_${1}_$OS_TYPE"
+    elif _function_exists "post_${1}"; then
+        msg_info "Post-Install ${1} (generic)"
+        $"post_${1}"
+    else
+        msg_error "Tried to run post function for ${1}, but it doesn't exist, make sure it is loaded and created"
+    fi
 }
 
 run_level() {
     list=$(find $DOTFILE_DESTINATION/install -maxdepth 1 -name "${1}*")
     for element in $list; do
-        if [[ $element == *"${OS_TYPE}.sh" || $element == *"all.sh" ]]; then
-            msg_info "Running `basename $element`"
-            . $element
-        fi
+        msg_info "Running `basename $element`"
+        . $element
     done
 }
 
@@ -235,44 +308,23 @@ get_os(){
     msg_info "Running installation for OS: ${OS_TYPE}"
 }
 
-## 0 - Pre-Install
-pre_run() {
-    clone $DOTFILE_REPO $DOTFILE_DESTINATION
+## 0 - Packages
+_packages_run() {
+    #clone $DOTFILE_REPO $DOTFILE_DESTINATION
     run_level "0"
 }
 
-## 1 - Backups
-bak_run() {
+## 1 - Binaries
+_binaries_run() {
     run_level "1"
 }
 
-## 2 - Installation
-ins_run() {
-    run_level "2"
-}
-
-## 3 - Symlinks
-sym_run() {
-    run_level "3"
-}
-
-## 4 - Post-Link/Installation
-pos_run() {
-    run_level "4"
-    msg_ok "Done!"
-    # Get the new shell
-    /bin/zsh
-}
-
-
+_load # Load all installation files
 get_os
 
-pre_check_run
+#pre_check_run
 
-pre_run
-bak_run
-ins_run
-sym_run
-pos_run
+_packages_run
+_binaries_run
 
 # vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker :

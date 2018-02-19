@@ -1,1 +1,3 @@
-program_must_exist "tmux"
+install_tmux(){
+    program_must_exist "tmux"
+}
