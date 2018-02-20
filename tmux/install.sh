@@ -1,3 +1,7 @@
+backup_tmux(){
+    backup_file "$HOME/.tmux.conf"
+}
+
 install_tmux(){
     program_must_exist "tmux"
 }
