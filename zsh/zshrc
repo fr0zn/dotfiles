@@ -7,6 +7,8 @@ ZSH_CONFIG_PATH=$DOTFILE_PATH/zsh
 source ~/.antigen/antigen.zsh
 antigen use oh-my-zsh
 antigen theme fr0zn/simplezsh
+# Plugins
+antigen bundle z
 antigen apply
 
 
