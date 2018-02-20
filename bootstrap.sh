@@ -306,7 +306,9 @@ _get_os(){
 
 _run(){
     . "$DOTFILE_DESTINATION/install/all.sh"
-    . "$DOTFILE_DESTINATION/install/$OS_TYPE.sh"
+    if [[ -f "$DOTFILE_DESTINATION/install/$OS_TYPE.sh" ]]; then
+        . "$DOTFILE_DESTINATION/install/$OS_TYPE.sh"
+    fi
     msg_ok "Done installing dotfiles!"
 }
 
