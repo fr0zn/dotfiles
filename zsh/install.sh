@@ -1,8 +1,9 @@
 install_zsh(){
-    program_must_exist "zsh"
+    install_package "zsh"
 }
 
 pos_zsh(){
+    program_must_exist "zsh"
     touch $HOME/.z
 }
 
