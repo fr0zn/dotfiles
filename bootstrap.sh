@@ -295,8 +295,10 @@ _get_os(){
         OS_TYPE="linux"
         if type lsb_release >/dev/null 2>&1 ; then
             distro=$(lsb_release -i -s)
-            if [[ "$distro" == "Debian" || "$distro" == "Ubuntu" ]]; then
+            if [[ "$distro" == "Debian" ]]; then
                 OS_TYPE="debian"
+            elif [[ "$distro" == "Ubuntu" ]]
+                OS_TYPE="ubuntu"
             fi
         elif [ -f "/etc/arch-release" ]; then
             OS_TYPE="arch"
