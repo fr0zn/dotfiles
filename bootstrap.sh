@@ -312,10 +312,9 @@ _run(){
     msg_ok "Done installing dotfiles!"
 }
 
-_load # Load all installation files
-_get_os
-
 _pre_run
+_get_os
+_load # Load all installation files
 _run
 
 # vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker :
