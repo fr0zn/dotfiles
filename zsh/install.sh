@@ -13,5 +13,6 @@ symlink_zsh(){
 pos_zsh(){
     program_must_exist "zsh"
     touch $HOME/.z
+    chsh -s $(which zsh)
 }
 
