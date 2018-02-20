@@ -1,3 +1,7 @@
+backup_zsh(){
+    backup_file "$HOME/.zshrc"
+}
+
 install_zsh(){
     install_package "zsh"
 }
