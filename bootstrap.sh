@@ -195,9 +195,12 @@ _function_exists() {
 
 backup_file() {
     mkdir -p $DOTFILE_BACKUP 2> /dev/null
+    local file_name
     today=`date +%Y%m%d_%s`
     for i in "$@"; do
-        [ -e "$i" ] && [ ! -L "$i" ] && mv -v "$i" "$DOTFILE_BACKUP/$i.$today" > /dev/null 2>&1;
+        echo $i
+        file_name=$(basename $i)
+        [ -e "$i" ] && cp "$i" "${DOTFILE_BACKUP}/${file_name}.${today}" 2>/dev/null 2>&1;
     done
     return 0
 }
