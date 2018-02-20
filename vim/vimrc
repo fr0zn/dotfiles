@@ -28,8 +28,7 @@
     Plug 'ervandew/supertab'                " Tab completion
 
     Plug 'ctrlpvim/ctrlp.vim'               " File fuzzy finding
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-    Plug 'junegunn/fzf.vim'
+    Plug '~/.fzf'
 
     Plug 'vim-scripts/DrawIt'               " Vim draw draw lines left, right, up, down, boxes, etc
     Plug 'e0d1n/markersyntax'
