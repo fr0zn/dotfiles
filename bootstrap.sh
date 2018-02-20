@@ -312,8 +312,8 @@ _run(){
     msg_ok "Done installing dotfiles!"
 }
 
-_pre_run
 _get_os
+_pre_run
 _load # Load all installation files
 _run
 
