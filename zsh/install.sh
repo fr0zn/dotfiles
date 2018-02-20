@@ -10,7 +10,7 @@ symlink_zsh(){
     symlink_file "zsh/zshrc" "$HOME/.zshrc"
 }
 
-pos_zsh(){
+post_zsh(){
     program_must_exist "zsh"
     touch $HOME/.z
     chsh -s $(which zsh)
