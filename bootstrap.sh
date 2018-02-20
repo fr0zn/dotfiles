@@ -86,7 +86,7 @@ sync_database() {
                 sudo_run "apt update"
                 ;;
             "arch")
-                sudo_run "pacman -Syu"
+                sudo_run "pacman -Syu --noconfirm"
                 ;;
         esac
         if [[ "$?" == "0" ]]; then
@@ -198,7 +198,6 @@ backup_file() {
     local file_name
     today=`date +%Y%m%d_%s`
     for i in "$@"; do
-        echo $i
         file_name=$(basename $i)
         [ -e "$i" ] && cp "$i" "${DOTFILE_BACKUP}/${file_name}.${today}" 2>/dev/null 2>&1;
     done
