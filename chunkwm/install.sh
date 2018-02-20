@@ -7,6 +7,10 @@ install_chunkwm_macos(){
     install_package chunkwm
 }
 
+symlink_chunkwm_macos(){
+    symlink_file "chunkwm/chunkwmrc" "$HOME/.chunkwmrc"
+}
+
 post_chunkwm_macos(){
     brew services restart chunkwm
 }
