@@ -86,7 +86,7 @@ sync_database() {
                 sudo_run "apt update"
                 ;;
             "arch")
-                sudo_run "pacman -Syy"
+                sudo_run "pacman -Syu"
                 ;;
         esac
         if [[ "$?" == "0" ]]; then
