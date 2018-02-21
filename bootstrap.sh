@@ -99,6 +99,19 @@ sync_database() {
     fi
 }
 
+install_cask() {
+    sync_database
+    msg_info "Installing cask ${@} (${OS_TYPE})"
+    case "${OS_TYPE}" in
+        "macos")
+            brew cask install "${@}"
+            ;;
+        *)
+            msg_error "brew cask not supported" "${OS_TYPE}"
+            return 1
+    esac
+}
+
 install_package() {
 
     sync_database
