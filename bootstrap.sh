@@ -64,7 +64,7 @@ sudo_run(){
             ;;
         has_sudo__needs_pass)
             msg_info "Please supply your user password for the following command: \"${@}\""
-            sudo -S "${@}"
+            sudo -S ${@}
             ;;
         *)
             msg_info "Please supply root password for the following command: \"${@}\""
@@ -84,6 +84,9 @@ sync_database() {
                 ;;
             "ubuntu" | "debian")
                 sudo_run "apt update"
+                ;;
+            "rpi")
+                sudo_run  "apt-get update"
                 ;;
             "arch")
                 sudo_run "pacman -Syu --noconfirm"
@@ -123,6 +126,9 @@ install_package() {
             ;;
         "ubuntu" | "debian")
             sudo_run "apt -y install ${@}"
+            ;;
+        "rpi")
+            sudo_run "apt-get -y install ${@}"
             ;;
         "arch")
             sudo_run "pacman -S --noconfirm ${@}"
@@ -316,6 +322,8 @@ _get_os(){
                 OS_TYPE="debian"
             elif [[ "$distro" == "Ubuntu" ]]; then
                 OS_TYPE="ubuntu"
+            elif [[ "$distro" == "Raspbian" ]]; then
+                OS_TYPE="rpi"
             fi
         elif [ -f "/etc/arch-release" ]; then
             OS_TYPE="arch"
