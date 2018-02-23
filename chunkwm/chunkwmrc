@@ -69,5 +69,6 @@ chunkc core::load ffm.so
 #chunkc core::load purify.so
 
 chunkc tiling::rule --owner qemu --name qemu --state float
+chunkc tiling::rule --owner Telegram --name Telegram --state float
 
 #dock-inject
