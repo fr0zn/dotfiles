@@ -171,6 +171,10 @@ program_must_exist() {
 }
 
 symlink_file(){
+    local path=$(dirname ${2})
+    if [ ! -d "$path" ]; then
+        mkdir -p $path 2> /dev/null
+    fi
     lnif "$DOTFILE_DESTINATION/$1" "$2"
     return 0
 }
