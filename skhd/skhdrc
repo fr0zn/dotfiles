@@ -5,6 +5,9 @@ cmd - return : open -na /Applications/iTerm.app
 # enter fullscreen mode for the focused container
 alt - f : chunkc tiling::window --toggle fullscreen
 
+# enter float mode for the focused container
+shift + alt - f : chunkc tiling::window --toggle float
+
 # change focus between tiling / floating windows
 shift + alt - space : chunkc tiling::window --toggle float
 
