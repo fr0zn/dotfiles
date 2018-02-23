@@ -82,11 +82,8 @@ sync_database() {
             "macos")
                 brew update
                 ;;
-            "ubuntu" | "debian")
+            "ubuntu" | "debian" | "rpi")
                 sudo_run "apt update"
-                ;;
-            "rpi")
-                sudo_run  "apt-get update"
                 ;;
             "arch")
                 sudo_run "pacman -Syu --noconfirm"
@@ -124,11 +121,8 @@ install_package() {
         "macos")
             brew install "${@}"
             ;;
-        "ubuntu" | "debian")
+        "ubuntu" | "debian" | "rpi")
             sudo_run "apt -y install ${@}"
-            ;;
-        "rpi")
-            sudo_run "apt-get -y install ${@}"
             ;;
         "arch")
             sudo_run "pacman -S --noconfirm ${@}"
