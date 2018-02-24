@@ -274,6 +274,7 @@ _template() {
 install() {
     local steps
     steps=$STEPS
+    msg_info "$1: Installing"
     if [[ ! -z "$2" ]]; then
         msg_info "$1: Custom steps installation, steps: ${@:2}"
         steps="${@:2}"
