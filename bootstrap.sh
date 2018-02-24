@@ -136,7 +136,7 @@ install_cask() {
 install_package() {
 
     sync_database
-    msg_info "Installing ${@} (${OS_TYPE})"
+    msg_info "Installing package ${@} (${OS_TYPE})"
 
     case "${OS_TYPE}" in
         "macos")
