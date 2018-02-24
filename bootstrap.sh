@@ -91,10 +91,10 @@ sync_database() {
                 brew update
                 ;;
             "ubuntu" | "debian" | "rpi")
-                sudo_run apt update
+                sudo_run 'apt update'
                 ;;
             "arch")
-                sudo_run pacman -Syu --noconfirm
+                sudo_run 'pacman -Syu --noconfirm'
                 ;;
         esac
         if [[ "$?" == "0" ]]; then
@@ -135,10 +135,10 @@ install_package() {
             brew install "${@}"
             ;;
         "ubuntu" | "debian" | "rpi")
-            sudo_run apt -y install ${@}
+            sudo_run "apt -y install ${@}"
             ;;
         "arch")
-            sudo_run pacman -S --noconfirm ${@}
+            sudo_run "pacman -S --noconfirm ${@}"
             ;;
         *)
             msg_error "Auto-Installation not supported" "${OS_TYPE}"
