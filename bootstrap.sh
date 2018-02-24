@@ -64,11 +64,15 @@ sudo_run(){
 
         case "$HAS_SUDO" in
         has_sudo__pass_set)
-            sudo -S ${@}
+            sudo bash <<EOF
+            $@
+EOF
             ;;
         has_sudo__needs_pass)
             msg_info "Please supply your user password for the following command: \"${@}\""
-            sudo -S ${@}
+            sudo bash <<EOF
+            $@
+EOF
             ;;
         *)
             msg_info "Please supply root password for the following command: \"${@}\""
