@@ -240,10 +240,12 @@ backup_file() {
     today=`date +%Y%m%d_%s`
     for i in "$@"; do
         file_name=$(basename $i)
-        [ -e "$i" ] && cp "$i" "${DOTFILE_BACKUP}/${file_name}.${today}" 2>/dev/null 2>&1;
-        if [[ ! -f "${DOTFILE_BACKUP}/${file_name}.${today}" ]]; then
-            msg_error "Backup file ${i}"
-            exit 1
+        if [[ -e "$i" ]]; then
+            cp "$i" "${DOTFILE_BACKUP}/${file_name}.${today}" 2>/dev/null 2>&1;
+            if [[ ! -f "${DOTFILE_BACKUP}/${file_name}.${today}" ]]; then
+                msg_error "Backup file ${i}"
+                exit 1
+            fi
         fi
     done
     return 0
