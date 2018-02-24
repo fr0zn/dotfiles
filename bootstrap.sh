@@ -367,6 +367,11 @@ _run(){
 _get_os
 _pre_run
 _load # Load all installation files
-_run
+
+read -p "Run installation (y/n)? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]];then
+    _run
+fi
 
 # vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker :
