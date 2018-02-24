@@ -270,7 +270,7 @@ install() {
     for step in $steps; do
         _template "$step" "$1"
         if [[ $? -ne 0 ]]; then
-            msg_error "Installing $1" "In step $step"
+            msg_error "$1: Error installing" "In step: $step"
             return 1
         fi
     done
