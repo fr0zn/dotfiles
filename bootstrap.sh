@@ -99,7 +99,7 @@ sync_database() {
                 clean brew update
                 ;;
             "ubuntu" | "debian" | "rpi")
-                clean sudo_run 'apt update'
+                clean sudo_run 'apt-get update'
                 ;;
             "arch")
                 clean sudo_run 'pacman -Syu --noconfirm'
@@ -143,7 +143,7 @@ install_package() {
             clean brew install "${@}"
             ;;
         "ubuntu" | "debian" | "rpi")
-            clean sudo_run "apt -y install ${@}"
+            clean sudo_run "apt-get -y install ${@}"
             ;;
         "arch")
             clean sudo_run "pacman -S --noconfirm ${@}"
