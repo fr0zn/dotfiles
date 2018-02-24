@@ -35,6 +35,10 @@ msg_error() {
 lnif() {
     if [ -e "$1" ]; then
         ln -sf "$1" "$2"
+        if [[ ! -L ${2} ]]; then
+            return 1
+        fi
+        return 0
     fi
 }
 
@@ -110,6 +114,11 @@ install_cask() {
             msg_error "brew cask not supported" "${OS_TYPE}"
             return 1
     esac
+    if [[ $? -ne 0 ]];then
+        msg_error "Error auto-installing ${@}" "no permission, wrong package, or already installed"
+        return 1
+    fi
+    return 0
 }
 
 install_package() {
@@ -146,6 +155,7 @@ is_app_installed() {
         return 1
     else
         msg_info "Not a macOS, can't check if .app is installed"
+        return 1
     fi
 }
 
@@ -176,7 +186,7 @@ symlink_file(){
         mkdir -p $path 2> /dev/null
     fi
     lnif "$DOTFILE_DESTINATION/$1" "$2"
-    return 0
+    return $?
 }
 
 function clone(){
@@ -188,17 +198,19 @@ function clone(){
         ERROR=$(git clone "$FROM" "$WHERE" 2>&1 > /dev/null)
         if [[ $? -ne 0 ]]; then
             msg_error "Error on clone" "$WHERE"
-            exit 1
+            return 1
         else
             msg_ok "Cloned $WHERE"
+            return 0
         fi
     else
         ERROR=$(cd "$WHERE" && git pull origin 2>&1 > /dev/null)
         if [[ $? -ne 0 ]]; then
             msg_error "Pull error" "$WHERE"
-            exit 1
+            return 1
         else
             msg_ok "Pulled $WHERE"
+            return 0
         fi
     fi
     return
@@ -217,6 +229,10 @@ backup_file() {
     for i in "$@"; do
         file_name=$(basename $i)
         [ -e "$i" ] && cp "$i" "${DOTFILE_BACKUP}/${file_name}.${today}" 2>/dev/null 2>&1;
+        if [[ ! -f "${DOTFILE_BACKUP}/${file_name}.${today}" ]]; then
+            msg_error "Backup file ${i}"
+            exit 1
+        fi
     done
     return 0
 }
@@ -238,6 +254,7 @@ _template() {
         $"${1}_${2}"
     else
         msg_debug "${2}: Tried to run ${1}_${2}, but it doesn't exist"
+        return 0
     fi
     return $?
 }
@@ -276,6 +293,11 @@ install_brew_macos(){
         msg_info "Brew not found, installing ..."
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
+    program_exists "brew"
+    if [[ $? -ne 0 ]]; then
+        return 1
+    fi
+    return 0
 }
 
 _pre_run() {
