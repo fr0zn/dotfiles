@@ -255,6 +255,10 @@ _load() {
     for element in $list; do
         . $element
     done
+    list=$(find "$DOTFILE_DESTINATION/packages" -maxdepth 2 -name "*.sh")
+    for element in $list; do
+        . $element
+    done
 }
 
 _template() {
