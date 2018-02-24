@@ -1,0 +1,2 @@
+install_package python2
+install_package python2-pip
