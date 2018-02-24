@@ -274,7 +274,7 @@ _template() {
 install() {
     local steps
     steps=$STEPS
-    msg_info "$1: Installing"
+    msg_info "Installing: '$1'"
     if [[ ! -z "$2" ]]; then
         msg_info "$1: Custom steps installation, steps: ${@:2}"
         steps="${@:2}"
@@ -283,12 +283,12 @@ install() {
     for step in $steps; do
         _template "$step" "$1"
         if [[ $? -ne 0 ]]; then
-            msg_error "$1: Error installing" "In step: $step"
+            msg_error "Error installing '$1'" "In step: $step"
             return 1
         fi
     done
 
-    msg_ok "$1: Done installing"
+    msg_ok "Done: '$1'"
     return 0
 }
 
