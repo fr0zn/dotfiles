@@ -359,7 +359,11 @@ _run(){
     if [[ -f "$DOTFILE_DESTINATION/install/$OS_TYPE.sh" ]]; then
         . "$DOTFILE_DESTINATION/install/$OS_TYPE.sh"
     fi
-    msg_ok "Done installing dotfiles!"
+    if [[ "$?" == 0 ]]; then
+        msg_ok "Done installing dotfiles!"
+    else
+        msg_error "Finished with some errors"
+    fi
 }
 
 _get_os
