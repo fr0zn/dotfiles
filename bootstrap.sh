@@ -8,8 +8,6 @@ OS_TYPE=""
 
 STEPS="pre backup symlink install post"
 
-DEBUG=1
-
 msg() {
     printf '%b\n' "$1" >&2
 }
@@ -56,7 +54,7 @@ has_sudo() {
 }
 
 clean(){
-    if [[ "$DEBUG" == "0" ]]; then
+    if [[ "$DEBUG" != "1" ]]; then
         $@ > /dev/null
     else
         $@
