@@ -3,7 +3,16 @@ install_kitty_macos(){
 }
 
 install_kitty_arch(){
-    # RODO
+    local path="$HOME/.kitty"
+    clone https://aur.archlinux.org/kitty-git.git $path
+    cd $path
+    makepkg -si
+    cd "$HOME"
+}
+
+symlink_kitty(){
+    local kitty_path="$HOME/.config/kitty/kitty.conf"
+    symlink_file "kitty/kitty.conf" "$kitty_path"
 }
 
 symlink_kitty_macos(){
@@ -11,7 +20,3 @@ symlink_kitty_macos(){
     symlink_file "kitty/kitty.conf" "$kitty_path"
 }
 
-symlink_kitty(){
-    local kitty_path="$HOME/.config/kitty/kitty.conf"
-    symlink_file "kitty/kitty.conf" "$kitty_path"
-}
