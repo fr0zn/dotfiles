@@ -292,14 +292,6 @@ install() {
     return 0
 }
 
-run_level() {
-    list=$(find $DOTFILE_DESTINATION/install -maxdepth 1 -name "${1}*")
-    for element in $list; do
-        msg_debug "Running `basename $element`"
-        . $element
-    done
-}
-
 install_brew_macos(){
     program_exists "brew"
     if [[ $? -ne 0 ]]; then
