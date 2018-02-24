@@ -56,7 +56,7 @@ has_sudo() {
 }
 
 clean(){
-    if [[ "$DEBUG" == "1" ]]; then
+    if [[ "$DEBUG" == "0" ]]; then
         $@ > /dev/null
     else
         $@
