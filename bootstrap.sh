@@ -55,6 +55,14 @@ has_sudo() {
     fi
 }
 
+clean(){
+    if [[ "$DEBUG" == "1" ]]; then
+        $@ > /dev/null
+    else
+        $@
+    fi
+}
+
 sudo_run(){
     if [[ "$UID" == "0" ]]; then
         ${@}
@@ -88,13 +96,13 @@ sync_database() {
         msg_info "Updating database packages"
         case "${OS_TYPE}" in
             "macos")
-                brew update
+                clean brew update
                 ;;
             "ubuntu" | "debian" | "rpi")
-                sudo_run 'apt update'
+                clean sudo_run 'apt update'
                 ;;
             "arch")
-                sudo_run 'pacman -Syu --noconfirm'
+                clean sudo_run 'pacman -Syu --noconfirm'
                 ;;
         esac
         if [[ "$?" == "0" ]]; then
@@ -112,7 +120,7 @@ install_cask() {
     msg_info "Installing cask ${@} (${OS_TYPE})"
     case "${OS_TYPE}" in
         "macos")
-            brew cask install "${@}"
+            clean brew cask install "${@}"
             ;;
         *)
             msg_error "brew cask not supported" "${OS_TYPE}"
@@ -132,13 +140,13 @@ install_package() {
 
     case "${OS_TYPE}" in
         "macos")
-            brew install "${@}"
+            clean brew install "${@}"
             ;;
         "ubuntu" | "debian" | "rpi")
-            sudo_run "apt -y install ${@}"
+            clean sudo_run "apt -y install ${@}"
             ;;
         "arch")
-            sudo_run "pacman -S --noconfirm ${@}"
+            clean sudo_run "pacman -S --noconfirm ${@}"
             ;;
         *)
             msg_error "Auto-Installation not supported" "${OS_TYPE}"
