@@ -368,7 +368,7 @@ _run(){
     if [[ "$?" == 0 ]]; then
         msg_ok "Done installing dotfiles!"
     else
-        msg_error "Finished with some errors"
+        msg_error "Finished" "with some errors"
     fi
 }
 
