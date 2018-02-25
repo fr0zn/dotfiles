@@ -181,6 +181,12 @@ is_app_installed() {
     fi
 }
 
+add_line(){
+    local file="${1}"
+    local line="${2}"
+    grep -qF -- "$line" "$file" || echo "$line" >> "$file"
+}
+
 program_exists() {
 
     local ret='0'
