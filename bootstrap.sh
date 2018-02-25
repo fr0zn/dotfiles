@@ -371,11 +371,13 @@ _get_os(){
 }
 
 _run(){
-    if [[ -f "$DOTFILE_PATH/install/$OS_TYPE.sh" ]]; then
-        . "$DOTFILE_PATH/install/$OS_TYPE.sh"
+    . "$DOTFILE_PATH/install.sh"
+
+    if _function_exists "install_$OS_TYPE"; then
+        $"install_$OS_TYPE"
     fi
 
-    . "$DOTFILE_PATH/install/all.sh"
+    $"install_all"
 
     if [[ "$?" == 0 ]]; then
         msg_ok "Done installing dotfiles!"
