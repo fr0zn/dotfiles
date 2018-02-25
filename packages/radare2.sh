@@ -1,6 +1,5 @@
 install_radare2(){
-    sudo_run 'mkdir -p /usr/local/src'
-    sudo_run clone https://github.com/radare/radare2.git /usr/local/src/radare2
-    cd /usr/local/src/radare2
+    clone https://github.com/radare/radare2.git $DOTFILE_SRC/radare2
+    cd $DOTFILE_SRC/radare2
     sys/install.sh
 }
