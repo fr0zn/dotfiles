@@ -384,6 +384,8 @@ _run(){
     else
         msg_error "Finished" "with some errors"
     fi
+
+    /bin/zsh
 }
 
 _get_os
