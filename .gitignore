@@ -18,3 +18,5 @@ Thumbs.db
 *~
 # auto-generated tag files
 tags
+logs/
+*.log

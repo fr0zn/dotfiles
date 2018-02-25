@@ -1,3 +1,7 @@
+symlink_weechat(){
+    symlink_file "weechat/config" "$HOME/.weechat"
+}
+
 install_weechat_macos(){
     install_package weechat --with-perl --with-python
 }
