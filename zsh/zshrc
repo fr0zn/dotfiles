@@ -31,4 +31,5 @@ else
     fi
 fi
 
+# FZF config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
