@@ -1,4 +1,4 @@
 install_gef(){
-    program_must_exist wget
-    wget -q -O- https://github.com/hugsy/gef/raw/master/gef.sh | sh
+    clone https://github.com/hugsy/gef.git "$DOTFILE_SRC/gef"
+    echo "$DOTFILE_SRC/gef/gef.py" >> $HOME/.gdbinit
 }
