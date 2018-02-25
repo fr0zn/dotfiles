@@ -1,19 +1,19 @@
 pre_program(){
-    echo "Pre-Install program"
+    msg_debug "Pre-Install program"
 }
 
 backup_program(){
-    echo "Backup program"
+    msg_debug "Backup program"
 }
 
 symlink_program(){
-    echo "Symlink program"
+    msg_debug "Symlink program"
 }
 
 install_program(){
-    echo "Install program"
+    msg_debug "Install program"
 }
 
 post_program(){
-    echo "Post-Install program"
+    msg_debug "Post-Install program"
 }
