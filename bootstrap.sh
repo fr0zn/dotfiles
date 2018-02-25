@@ -158,6 +158,17 @@ install_package() {
     return 0
 }
 
+y_n(){
+    read -p "$1 (y/n): " -n 1 -r
+    echo    # (optional) move to a new line
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        $"$2"
+    else
+        $"$3"
+    fi
+}
+
 is_app_installed() {
     if [[ "$OS_TYPE" == "macos" ]]; then
         if [ -d "/Applications/${1}.app" ]; then
