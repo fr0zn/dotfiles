@@ -18,7 +18,8 @@ install_all(){
 
 install_macos(){
 
-    install iterm2
+    install kitty
+    # install iterm2
     install skhd
     install chunkwm
     install nimble
@@ -35,6 +36,8 @@ install_macos(){
 }
 
 install_arch(){
+
+    install kitty
 
     install_package base-devel
 
