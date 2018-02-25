@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DOTFILE_REPO="https://github.com/fr0zn/dotfiles.git"
-DOTFILE_DESTINATION="$HOME/.dotfiles"
+DOTFILE_PATH="$HOME/.dotfiles"
 DOTFILE_BACKUP="$HOME/.dotfiles-backup"
 DB_SYNC=0
 OS_TYPE=""
@@ -195,7 +195,7 @@ symlink_file(){
     if [ ! -d "$path" ]; then
         mkdir -p $path 2> /dev/null
     fi
-    lnif "$DOTFILE_DESTINATION/$1" "$2"
+    lnif "$DOTFILE_PATH/$1" "$2"
     return $?
 }
 
@@ -251,11 +251,11 @@ backup_file() {
 
 # Loads all install.sh script from the dotfiles folder
 _load() {
-    list=$(find "$DOTFILE_DESTINATION" -maxdepth 2 -name install.sh)
+    list=$(find "$DOTFILE_PATH" -maxdepth 2 -name install.sh)
     for element in $list; do
         . $element
     done
-    list=$(find "$DOTFILE_DESTINATION/packages" -maxdepth 2 -name "*.sh")
+    list=$(find "$DOTFILE_PATH/packages" -maxdepth 2 -name "*.sh")
     for element in $list; do
         . $element
     done
@@ -331,7 +331,7 @@ _pre_run() {
         program_must_exist "git"
     fi
 
-    clone $DOTFILE_REPO $DOTFILE_DESTINATION
+    clone $DOTFILE_REPO $DOTFILE_PATH
 }
 
 _get_os(){
@@ -359,11 +359,11 @@ _get_os(){
 }
 
 _run(){
-    if [[ -f "$DOTFILE_DESTINATION/install/$OS_TYPE.sh" ]]; then
-        . "$DOTFILE_DESTINATION/install/$OS_TYPE.sh"
+    if [[ -f "$DOTFILE_PATH/install/$OS_TYPE.sh" ]]; then
+        . "$DOTFILE_PATH/install/$OS_TYPE.sh"
     fi
 
-    . "$DOTFILE_DESTINATION/install/all.sh"
+    . "$DOTFILE_PATH/install/all.sh"
 
     if [[ "$?" == 0 ]]; then
         msg_ok "Done installing dotfiles!"
