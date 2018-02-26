@@ -101,7 +101,7 @@ sync_database() {
                 clean sudo_run 'apt-get update'
                 ;;
             "arch")
-                clean sudo_run 'pacman -Syu --noconfirm'
+                clean sudo_run 'pacman -Sy --noconfirm'
                 ;;
         esac
         if [[ "$?" == "0" ]]; then
