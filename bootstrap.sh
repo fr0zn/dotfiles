@@ -385,7 +385,7 @@ _run(){
 
     $"install_all"
 
-    if [[ "$?" == 0 ]]; then
+    if [[ $? -eq 0 ]]; then
         msg_ok "Done installing dotfiles!"
     else
         msg_error "Finished" "with some errors"
