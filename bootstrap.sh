@@ -14,25 +14,37 @@ msg() {
 }
 
 msg_info() {
-    msg "\33[94m==> \33[0m ${1}"
-}
-
-msg_in() {
-    msg "\33[94m  -> \33[0m ${1}"
+    if [[ "${2}" == "in" ]]; then
+        msg "\33[94m  ->\33[0m ${1}"
+    else
+        msg "\33[94m==> \33[0m ${1}"
+    fi
 }
 
 msg_debug() {
     if [[ "$DEBUG" == "1" ]]; then
-        msg "\33[96m==> \33[0m ${1}"
+        if [[ "${2}" == "in" ]]; then
+            msg "\33[96m  ->\33[0m ${1}"
+        else
+            msg "\33[96m==> \33[0m ${1}"
+        fi
     fi
 }
 
 msg_ok() {
-    msg "\33[92m==> \33[0m ${1}"
+    if [[ "${2}" == "in" ]]; then
+        msg "\33[92m  ->\33[0m ${1}"
+    else
+        msg "\33[92m==> \33[0m ${1}"
+    fi
 }
 
 msg_error() {
-    msg "\33[91m==> ERROR: \33[0m ${1}"
+    if [[ "${2}" == "in" ]]; then
+        msg "\33[91m  -> ERROR: \33[0m ${1}"
+    else
+        msg "\33[91m==> ERROR: \33[0m ${1}"
+    fi
 }
 
 die(){
