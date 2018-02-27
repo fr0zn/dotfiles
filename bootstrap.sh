@@ -131,7 +131,7 @@ install_cask() {
             return 1
     esac
     if [[ $? -ne 0 ]];then
-        msg_error "Error auto-installing ${*} no permission, wrong package, or already installed"
+        msg_error "Error auto-installing '${*}', no permission, wrong package, or already installed"
         return 1
     fi
     return 0
@@ -182,7 +182,7 @@ install_package() {
             return 1
     esac
     if [[ $? -ne 0 ]];then
-        msg_error "Error auto-installing ${to_install_str} no permission, wrong package, or already installed"
+        msg_error "Error auto-installing '${to_install_str}', no permission, wrong package, or already installed"
         return 1
     fi
     return 0
@@ -384,7 +384,7 @@ install_aur(){
             return 1
     esac
     if [[ $? -ne 0 ]];then
-        msg_error "Error auto-installing ${*} wrong package, failed build or missing dependencies"
+        msg_error "Error auto-installing '${*}', wrong package, failed build or missing dependencies"
         return 1
     fi
     return 0
