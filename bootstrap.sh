@@ -95,13 +95,13 @@ sudo_run(){
 EOF
             ;;
         has_sudo__needs_pass)
-            msg_info "Please supply your user password for the following command: \"${*}\""
+            msg_info "Please supply your user password for the following command: \"${*}\"" "in"
             sudo bash <<EOF
             $@
 EOF
             ;;
         *)
-            msg_info "Please supply root password for the following command: \"${*}\""
+            msg_info "Please supply root password for the following command: \"${*}\"" "in"
             su -c "${@}"
             ;;
         esac
@@ -123,10 +123,10 @@ sync_database() {
                 ;;
         esac
         if [[ "$?" == "0" ]]; then
-            msg_ok "Database synced"
+            msg_ok "Database synced" "in"
             DB_SYNC=1
         else
-            die "Error syncing and updating packages"
+            die "Error syncing and updating packages" "in"
         fi
     fi
 }
@@ -139,11 +139,11 @@ install_cask() {
             clean brew cask install "${@}"
             ;;
         *)
-            msg_error "brew cask not supported ${OS_TYPE}"
+            msg_error "brew cask not supported ${OS_TYPE}" "in"
             return 1
     esac
     if [[ $? -ne 0 ]];then
-        msg_error "Error auto-installing '${*}', no permission, wrong package, or already installed"
+        msg_error "Error auto-installing '${*}', no permission, wrong package, or already installed" "in"
         return 1
     fi
     return 0
@@ -156,6 +156,8 @@ install_package() {
     local already_installed=()
 
     sync_database
+
+    msg_info "Installing packages '${@}' (${OS_TYPE})"
 
     for i in "${packages[*]}"; do
         out=$(is_package_installed ${i})
@@ -177,8 +179,6 @@ install_package() {
         return 0
     fi
 
-    msg_info "Installing packages ${to_install_str} (${OS_TYPE})"
-
     case "${OS_TYPE}" in
         "macos")
             clean brew install "${to_install_str}"
@@ -190,11 +190,11 @@ install_package() {
             clean sudo_run "pacman -S --noconfirm ${to_install_str}"
             ;;
         *)
-            msg_error "Auto-Installation not supported ${OS_TYPE}"
+            msg_error "Auto-Installation not supported ${OS_TYPE}" "in"
             return 1
     esac
     if [[ $? -ne 0 ]];then
-        msg_error "Error auto-installing '${to_install_str}', no permission, wrong package, or already installed"
+        msg_error "Error auto-installing '${to_install_str}', no permission, wrong package, or already installed" "in"
         return 1
     fi
     return 0
@@ -213,6 +213,7 @@ y_n(){
 }
 
 is_package_installed(){
+    msg_debug "Checking if ${1} is installed"
     case "${OS_TYPE}" in
         "macos")
             brew ls --versions ${1} > /dev/null 2>&1
@@ -224,7 +225,7 @@ is_package_installed(){
             pacman -Qi ${1} > /dev/null 2>&1
             ;;
         *)
-            msg_error "Auto-Installation not supported ${OS_TYPE}"
+            msg_error "Check if package is installed not supported ${OS_TYPE}" "in"
             return 1
     esac
 }
@@ -232,7 +233,7 @@ is_package_installed(){
 package_must_exist(){
     is_package_installed $1
     if [[ $? -ne 0 ]]; then
-        die "Not Found" "You must have '$1' installed to continue."
+        die "Not Found You must have '${1}' installed to continue." "in"
         exit 1
     fi
 }
@@ -244,7 +245,7 @@ is_app_installed() {
         fi
         return 1
     else
-        msg_info "Not a macOS, can't check if .app is installed"
+        msg_info "Not a macOS, can't check if ${1}.app is installed" "in"
         return 1
     fi
 }
@@ -252,7 +253,11 @@ is_app_installed() {
 add_line(){
     local file="${1}"
     local line="${2}"
-    grep -qF -- "$line" "$file" || echo "$line" >> "$file"
+    if [ ! -f "$file" ]; then
+        echo "$line" >> "$file"
+    else
+        grep -qF -- "$line" "$file" || echo "$line" >> "$file"
+    fi
 }
 
 program_exists() {
@@ -271,7 +276,7 @@ program_exists() {
 program_must_exist() {
     program_exists $1
     if [[ $? -ne 0 ]]; then
-        die "Not Found" "You must have '$1' installed to continue."
+        die "Not Found You must have '$1' installed to continue." "in"
         exit 1
     fi
 }
@@ -286,6 +291,8 @@ symlink_file(){
 }
 
 function clone(){
+    msg_ok "Retrieving sources..."
+
     FROM=$1
     WHERE=$2
 
@@ -293,19 +300,19 @@ function clone(){
         mkdir -p "$WHERE" 2> /dev/null
         ERROR=$(git clone "$FROM" "$WHERE" 2>&1 > /dev/null)
         if [[ $? -ne 0 ]]; then
-            msg_error "Error on clone $WHERE"
+            msg_error "Error on clone $WHERE" "in"
             return 1
         else
-            msg_ok "Cloned $WHERE"
+            msg_ok "Cloned $WHERE" "in"
             return 0
         fi
     else
         ERROR=$(cd "$WHERE" && git pull origin 2>&1 > /dev/null)
         if [[ $? -ne 0 ]]; then
-            msg_error "Pull error: $WHERE"
+            msg_error "Pull error: $WHERE" "in"
             return 1
         else
-            msg_ok "Pulled $WHERE"
+            msg_ok "Pulled $WHERE" "in"
             return 0
         fi
     fi
@@ -319,6 +326,7 @@ _function_exists() {
 }
 
 backup_file() {
+    msg_ok "Backing up files" "in"
     mkdir -p $DOTFILE_BACKUP 2> /dev/null
     local file_name
     today=`date +%Y%m%d_%s`
@@ -327,7 +335,7 @@ backup_file() {
         if [[ -e "$i" ]]; then
             cp "$i" "${DOTFILE_BACKUP}/${file_name}.${today}" 2>/dev/null 2>&1;
             if [[ ! -f "${DOTFILE_BACKUP}/${file_name}.${today}" ]]; then
-                msg_error "Backup file ${i}"
+                msg_error "Backup file ${i}" "in"
                 exit 1
             fi
         fi
@@ -349,13 +357,13 @@ _load() {
 
 _template() {
     if _function_exists "${1}_${2}_$OS_TYPE"; then
-        msg_debug "${2}: ${1} ($OS_TYPE)"
+        msg_debug "${2}: ${1} ($OS_TYPE)" "in"
         $"${1}_${2}_$OS_TYPE"
     elif _function_exists "${1}_${2}"; then
-        msg_debug "${2}: ${1} (generic)"
+        msg_debug "${2}: ${1} (generic)" "in"
         $"${1}_${2}"
     else
-        msg_debug "${2}: Tried to run ${1}_${2}, but it doesn't exist"
+        msg_debug "${2}: Tried to run ${1}_${2}, but it doesn't exist" "in"
         return 0
     fi
     return $?
@@ -392,11 +400,11 @@ install_aur(){
             makepkg -si --noconfirm
             ;;
         *)
-            msg_error "AUR package not supported ${OS_TYPE}"
+            msg_error "AUR package not supported ${OS_TYPE}" "in"
             return 1
     esac
     if [[ $? -ne 0 ]];then
-        msg_error "Error auto-installing '${*}', wrong package, failed build or missing dependencies"
+        msg_error "Error auto-installing '${*}', wrong package, failed build or missing dependencies" "in"
         return 1
     fi
     return 0
