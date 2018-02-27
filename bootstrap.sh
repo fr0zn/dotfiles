@@ -425,6 +425,8 @@ install_brew_macos(){
 }
 
 ctrl_c() {
+    echo
+    echo
     msg_error "Aborted by user! Exiting..."
     exit 1
 }
