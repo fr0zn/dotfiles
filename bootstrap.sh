@@ -424,6 +424,10 @@ install_brew_macos(){
     return 0
 }
 
+ctrl_c() {
+    msg_error "Aborted by user! Exiting..."
+}
+
 _pre_run() {
     if [[ "$OS_TYPE" == "macos" ]]; then
         if ! is_app_installed "Xcode"; then
@@ -499,6 +503,10 @@ _edit(){
 _run_no(){
     y_n "Edit installation" _edit return
 }
+
+# trap ctrl-c and call ctrl_c()
+trap ctrl_c INT
+
 
 _get_os
 _pre_run
