@@ -157,11 +157,11 @@ install_package() {
 
     to_install_str=$(IFS=":" echo "${to_install[*]}")
     already_installed_str=$(IFS=":" echo "${already_installed[*]}")
-    if [[ ! -z "${to_install_str// }" ]]; then
-        msg_info "Already installed ${already_installed_str}"
+    if [[ ! -z "${to_install_str}" ]]; then
+        msg_in "Already installed ${already_installed_str}"
     else
         # Everything installed
-        msg_info "Already installed ${already_installed_str}, skipping"
+        msg_in "Already installed ${already_installed_str}, skipping"
         return 0
     fi
 
