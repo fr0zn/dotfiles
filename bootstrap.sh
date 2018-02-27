@@ -137,6 +137,7 @@ install_package() {
     local is_installed
     local packages=(${@})
     local to_install=()
+    local already_installed=()
 
     sync_database
 
@@ -145,10 +146,20 @@ install_package() {
         is_installed="$?"
         if [[ "$is_installed" == "1" ]]; then
             to_install+=("${packages[$i]}")
+        else
+            already_installed+=("${packages[$i]}")
         fi
     done
 
     to_install_str=$(IFS=":" echo "${to_install[*]}")
+    already_installed_str=$(IFS=":" echo "${already_installed[*]}")
+    if [[ ! -z "${to_install_str// }" ]]; then
+        msg_info "Already installed ${already_installed_str}"
+    else
+        # Everything installed
+        msg_info "Already installed ${already_installed_str}, skipping"
+        return 0
+    fi
 
     msg_info "Installing packages ${to_install_str} (${OS_TYPE})"
 
