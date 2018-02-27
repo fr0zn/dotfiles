@@ -14,21 +14,25 @@ msg() {
 }
 
 msg_info() {
-    msg "\33[34m[*]\33[0m ${1}"
+    msg "\33[94m==> \33[0m ${1}"
+}
+
+msg_in() {
+    msg "\33[94m  -> \33[0m ${1}"
 }
 
 msg_debug() {
     if [[ "$DEBUG" == "1" ]]; then
-        msg "\33[36m[d]\33[0m ${1}"
+        msg "\33[96m==> \33[0m ${1}"
     fi
 }
 
 msg_ok() {
-    msg "\33[32m[+]\33[0m ${1}"
+    msg "\33[92m==> \33[0m ${1}"
 }
 
 msg_error() {
-    msg "\33[31m[-]\33[0m ${1}: ${2}"
+    msg "\33[91m==> ERROR: \33[0m ${1}"
 }
 
 die(){
@@ -123,11 +127,11 @@ install_cask() {
             clean brew cask install "${@}"
             ;;
         *)
-            msg_error "brew cask not supported" "${OS_TYPE}"
+            msg_error "brew cask not supported ${OS_TYPE}"
             return 1
     esac
     if [[ $? -ne 0 ]];then
-        msg_error "Error auto-installing ${@}" "no permission, wrong package, or already installed"
+        msg_error "Error auto-installing ${@} no permission, wrong package, or already installed"
         return 1
     fi
     return 0
@@ -174,11 +178,11 @@ install_package() {
             clean sudo_run "pacman -S --noconfirm ${to_install_str}"
             ;;
         *)
-            msg_error "Auto-Installation not supported" "${OS_TYPE}"
+            msg_error "Auto-Installation not supported ${OS_TYPE}"
             return 1
     esac
     if [[ $? -ne 0 ]];then
-        msg_error "Error auto-installing ${to_install_str}" "no permission, wrong package, or already installed"
+        msg_error "Error auto-installing ${to_install_str} no permission, wrong package, or already installed"
         return 1
     fi
     return 0
@@ -208,7 +212,7 @@ is_package_installed(){
             pacman -Qi ${1} > /dev/null 2>&1
             ;;
         *)
-            msg_error "Auto-Installation not supported" "${OS_TYPE}"
+            msg_error "Auto-Installation not supported ${OS_TYPE}"
             return 1
     esac
 }
@@ -277,7 +281,7 @@ function clone(){
         mkdir -p "$WHERE" 2> /dev/null
         ERROR=$(git clone "$FROM" "$WHERE" 2>&1 > /dev/null)
         if [[ $? -ne 0 ]]; then
-            msg_error "Error on clone" "$WHERE"
+            msg_error "Error on clone $WHERE"
             return 1
         else
             msg_ok "Cloned $WHERE"
@@ -286,7 +290,7 @@ function clone(){
     else
         ERROR=$(cd "$WHERE" && git pull origin 2>&1 > /dev/null)
         if [[ $? -ne 0 ]]; then
-            msg_error "Pull error" "$WHERE"
+            msg_error "Pull error: $WHERE"
             return 1
         else
             msg_ok "Pulled $WHERE"
@@ -357,7 +361,7 @@ install() {
     for step in $steps; do
         _template "$step" "$1"
         if [[ $? -ne 0 ]]; then
-            msg_error "Error installing '$1'" "In step: $step"
+            msg_error "Error installing '$1' in step: $step"
             return 1
         fi
     done
@@ -376,11 +380,11 @@ install_aur(){
             makepkg -si --noconfirm
             ;;
         *)
-            msg_error "AUR package not supported" "${OS_TYPE}"
+            msg_error "AUR package not supported ${OS_TYPE}"
             return 1
     esac
     if [[ $? -ne 0 ]];then
-        msg_error "Error auto-installing ${@}" "wrong package, failed build or missing dependencies"
+        msg_error "Error auto-installing ${@} wrong package, failed build or missing dependencies"
         return 1
     fi
     return 0
@@ -403,14 +407,14 @@ install_brew_macos(){
 _pre_run() {
     if [[ "$OS_TYPE" == "macos" ]]; then
         if ! is_app_installed "Xcode"; then
-          msg_error "Not Found" "You must have Xcode installed to continue."
+          msg_error "Not Found: you must have Xcode installed to continue."
           exit 1
         fi
 
         if xcode-select --install 2>&1 | grep installed > /dev/null; then
           msg_ok "Xcode CLI tools installed";
         else
-          msg_error "Xcode CLI tools not installed" "Installing..."
+          msg_error "Xcode CLI tools not installed Installing..."
         fi
 
         install "brew"
@@ -461,7 +465,7 @@ _run(){
     if [[ $? -eq 0 ]]; then
         msg_ok "Done installing dotfiles!"
     else
-        msg_error "Finished" "with some errors"
+        msg_error "Finished with some errors"
     fi
 
     /bin/zsh
