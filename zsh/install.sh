@@ -3,8 +3,8 @@ backup_zsh(){
 }
 
 install_zsh(){
-    install "antigen"
     install_package "zsh"
+    install "antigen"
 }
 
 symlink_zsh(){
