@@ -36,7 +36,7 @@ msg_error() {
 }
 
 die(){
-    msg_error ${@}
+    msg_error ${*}
     exit 1
 }
 
@@ -83,13 +83,13 @@ sudo_run(){
 EOF
             ;;
         has_sudo__needs_pass)
-            msg_info "Please supply your user password for the following command: \"${@}\""
+            msg_info "Please supply your user password for the following command: \"${*}\""
             sudo bash <<EOF
             $@
 EOF
             ;;
         *)
-            msg_info "Please supply root password for the following command: \"${@}\""
+            msg_info "Please supply root password for the following command: \"${*}\""
             su -c "${@}"
             ;;
         esac
@@ -121,7 +121,7 @@ sync_database() {
 
 install_cask() {
     sync_database
-    msg_info "Installing cask ${@} (${OS_TYPE})"
+    msg_info "Installing cask ${*} (${OS_TYPE})"
     case "${OS_TYPE}" in
         "macos")
             clean brew cask install "${@}"
@@ -131,7 +131,7 @@ install_cask() {
             return 1
     esac
     if [[ $? -ne 0 ]];then
-        msg_error "Error auto-installing ${@} no permission, wrong package, or already installed"
+        msg_error "Error auto-installing ${*} no permission, wrong package, or already installed"
         return 1
     fi
     return 0
@@ -384,7 +384,7 @@ install_aur(){
             return 1
     esac
     if [[ $? -ne 0 ]];then
-        msg_error "Error auto-installing ${@} wrong package, failed build or missing dependencies"
+        msg_error "Error auto-installing ${*} wrong package, failed build or missing dependencies"
         return 1
     fi
     return 0
