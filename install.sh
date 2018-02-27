@@ -4,11 +4,11 @@ install_all(){
     install tmux
     install fzf
     install zsh
-    install antigen
     install weechat
 
     install_package unzip
     install_package wget
+    install_package ssh
 
     install gef
     install radare2
@@ -37,9 +37,9 @@ install_macos(){
 
 install_arch(){
 
-    install kitty
-
     install_package base-devel
+
+    install kitty
 
     install_package python3
     install_package python-pip
