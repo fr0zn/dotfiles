@@ -41,7 +41,7 @@ install_arch(){
 
     install kitty
 
-    install_package python3
+    install_package python
     install_package python-pip
 
     install_package python2
