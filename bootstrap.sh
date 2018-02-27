@@ -134,22 +134,20 @@ install_cask() {
 }
 
 install_package() {
-    local is_installed=()
+    local is_installed
     local packages=(${@})
     local to_install=()
 
     sync_database
 
-    for i in ${@}; do
+    for i in "${packages[*]}"; do
         out=$(is_package_installed ${i})
-        is_installed+=("$?")
-    done
-
-    for i in "${!is_installed[@]}"; do
-        if [[ "${is_installed[$i]}" == "1" ]]; then
-            to_install+=("${package[$i]}")
+        is_installed="$?"
+        if [[ "$is_installed" == "1" ]]; then
+            to_install+=("${packages[$i]}")
         fi
     done
+
 
     to_install_str=$(IFS=":" echo "${to_install[*]}")
 
