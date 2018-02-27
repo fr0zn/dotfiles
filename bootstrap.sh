@@ -386,7 +386,7 @@ install() {
         fi
     done
 
-    msg_ok "Done: '$1'"
+    msg_ok "Done: '$1'" "in"
     return 0
 }
 
