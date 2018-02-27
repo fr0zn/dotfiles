@@ -36,7 +36,7 @@ msg_error() {
 }
 
 die(){
-    msg_error ${*}
+    msg_error "${@}"
     exit 1
 }
 
