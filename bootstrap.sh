@@ -443,11 +443,14 @@ _edit(){
     y_n "Run installation now" _run return
 }
 
+_run_no(){
+    y_n "Edit installation" _edit return
+}
+
 _get_os
 _pre_run
 _load # Load all installation files
 
-y_n "Run installation" _run return
-y_n "Edit installation" _edit return
+y_n "Run installation" _run _run_no
 
 # vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker :
