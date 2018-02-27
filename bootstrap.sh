@@ -148,7 +148,6 @@ install_package() {
         fi
     done
 
-
     to_install_str=$(IFS=":" echo "${to_install[*]}")
 
     msg_info "Installing packages ${to_install_str} (${OS_TYPE})"
@@ -189,13 +188,13 @@ y_n(){
 is_package_installed(){
     case "${OS_TYPE}" in
         "macos")
-            brew ls --versions ${1} > /dev/null
+            brew ls --versions ${1} > /dev/null 2>&1
             ;;
         "ubuntu" | "debian" | "rpi")
-            dpkg -l | grep ${1} > /dev/null
+            dpkg -l | grep ${1} > /dev/null 2>&1
             ;;
         "arch")
-            pacman -Qi ${1} > /dev/null
+            pacman -Qi ${1} > /dev/null 2>&1
             ;;
         *)
             msg_error "Auto-Installation not supported" "${OS_TYPE}"
