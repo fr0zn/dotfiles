@@ -31,6 +31,11 @@ msg_error() {
     msg "\33[31m[-]\33[0m ${1}: ${2}"
 }
 
+die(){
+    msg_error ${@}
+    exit 1
+}
+
 lnif() {
     if [ -e "$1" ]; then
         ln -sf "$1" "$2"
@@ -65,10 +70,8 @@ clean(){
 sudo_run(){
     if [[ "$UID" == "0" ]]; then
         ${@}
-        return $?
     else
         HAS_SUDO=$(has_sudo)
-
         case "$HAS_SUDO" in
         has_sudo__pass_set)
             sudo bash <<EOF
@@ -86,7 +89,6 @@ EOF
             su -c "${@}"
             ;;
         esac
-        return $?
     fi
 }
 
@@ -108,8 +110,7 @@ sync_database() {
             msg_ok "Database synced"
             DB_SYNC=1
         else
-            msg_error "Error syncing and updating packages"
-            exit 1
+            die "Error syncing and updating packages"
         fi
     fi
 }
@@ -133,29 +134,47 @@ install_cask() {
 }
 
 install_package() {
+    local is_installed=()
+    local packages=(${@})
+    local to_install=()
 
     sync_database
-    msg_info "Installing package ${@} (${OS_TYPE})"
+
+    for i in ${@}; do
+        out=$(is_package_installed ${i})
+        is_installed+=("$?")
+    done
+
+    for i in "${!is_installed[@]}"; do
+        if [[ "${is_installed[$i]}" == "1" ]]; then
+            to_install+=("${package[$i]}")
+        fi
+    done
+
+    to_install_str=$(IFS=":" echo "${to_install[*]}")
+
+    msg_info "Installing packages ${to_install_str} (${OS_TYPE})"
 
     case "${OS_TYPE}" in
         "macos")
-            clean brew install "${@}"
+            clean brew install "${to_install_str}"
             ;;
         "ubuntu" | "debian" | "rpi")
-            clean sudo_run "apt-get -y install ${@}"
+            clean sudo_run "apt-get -y install ${to_install_str}"
             ;;
         "arch")
-            clean sudo_run "pacman -S --noconfirm ${@}"
+            clean sudo_run "pacman -S --noconfirm ${to_install_str}"
             ;;
         *)
             msg_error "Auto-Installation not supported" "${OS_TYPE}"
             return 1
     esac
     if [[ $? -ne 0 ]];then
-        msg_error "Error auto-installing ${@}" "no permission, wrong package, or already installed"
+        msg_error "Error auto-installing ${to_install_str}" "no permission, wrong package, or already installed"
         return 1
     fi
     return 0
+
 }
 
 y_n(){
@@ -166,6 +185,31 @@ y_n(){
         $"$2"
     else
         $"$3"
+    fi
+}
+
+is_package_installed(){
+    case "${OS_TYPE}" in
+        "macos")
+            brew ls --versions ${1} > /dev/null
+            ;;
+        "ubuntu" | "debian" | "rpi")
+            dpkg -l | grep ${1} > /dev/null
+            ;;
+        "arch")
+            pacman -Qi ${1} > /dev/null
+            ;;
+        *)
+            msg_error "Auto-Installation not supported" "${OS_TYPE}"
+            return 1
+    esac
+}
+
+package_must_exist(){
+    is_package_installed $1
+    if [[ $? -ne 0 ]]; then
+        die "Not Found" "You must have '$1' installed to continue."
+        exit 1
     fi
 }
 
@@ -203,7 +247,7 @@ program_exists() {
 program_must_exist() {
     program_exists $1
     if [[ $? -ne 0 ]]; then
-        msg_error "Not Found" "You must have '$1' installed to continue."
+        die "Not Found" "You must have '$1' installed to continue."
         exit 1
     fi
 }
