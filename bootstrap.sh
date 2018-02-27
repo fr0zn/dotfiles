@@ -438,10 +438,16 @@ _run(){
     /bin/zsh
 }
 
+_edit(){
+    vi "$DOTFILE_PATH/install.sh"
+    y_n "Run installation now" _run return
+}
+
 _get_os
 _pre_run
 _load # Load all installation files
 
 y_n "Run installation" _run return
+y_n "Edit installation" _edit return
 
 # vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker :
