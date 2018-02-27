@@ -3,10 +3,7 @@ install_kitty_macos(){
 }
 
 install_kitty_arch(){
-    local path="$DOTFILE_SRC/kitty"
-    clone https://aur.archlinux.org/kitty-git.git $path
-    cd $path
-    makepkg -si
+    install_aur "kitty-git"
 }
 
 symlink_kitty(){
