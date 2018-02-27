@@ -366,6 +366,27 @@ install() {
     return 0
 }
 
+install_aur(){
+    msg_info "Installing AUR package ${1} (${OS_TYPE})"
+    case "${OS_TYPE}" in
+        "arch")
+            local path="${DOTFILE_SRC}/${1}"
+            clone https://aur.archlinux.org/${1}.git $path
+            cd $path
+            makepkg -si --noconfirm
+            ;;
+        *)
+            msg_error "AUR package not supported" "${OS_TYPE}"
+            return 1
+    esac
+    if [[ $? -ne 0 ]];then
+        msg_error "Error auto-installing ${@}" "wrong package, failed build or missing dependencies"
+        return 1
+    fi
+    return 0
+
+}
+
 install_brew_macos(){
     program_exists "brew"
     if [[ $? -ne 0 ]]; then
