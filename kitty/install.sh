@@ -1,5 +1,5 @@
 install_kitty_macos(){
-    install_cask kitty
+    install_cask "kitty"
 }
 
 install_kitty_arch(){
