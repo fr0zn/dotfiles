@@ -380,6 +380,7 @@ install() {
 
     for step in $steps; do
         _template "$step" "$1"
+        cd $HOME
         if [[ $? -ne 0 ]]; then
             msg_error "Error installing '$1' in step: $step"
             return 1
