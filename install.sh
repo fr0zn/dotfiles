@@ -28,6 +28,8 @@ install_macos(){
     install_package node
     install_package gdb
 
+    install_package reattach-to-user-namespace
+
     install_cask hopper-disassembler
 
     pip2 install pync # notification_center
@@ -38,6 +40,13 @@ install_macos(){
 install_arch(){
 
     install_package base-devel
+
+    # i3
+    install_aur i3-gaps-next-git
+    install_package i3blocks i3status i3lock xterm dmenu
+    install_package xorg-server xorg-xinit xorg-apps xorg-fonts
+    install_package adobe-source-code-pro-fonts # monospaced font
+    # i3 end
 
     install kitty
 
