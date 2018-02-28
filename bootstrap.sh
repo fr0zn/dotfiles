@@ -132,8 +132,20 @@ sync_database() {
 }
 
 install_cask() {
+
     sync_database
+
     msg_info "Installing cask ${*} (${OS_TYPE})"
+
+    to_install_str="`_get_packages_not_installed "$@"`"
+
+    if [[ "$to_install_str" == "0" ]]; then
+        # All installed
+        return 0
+    fi
+
+    msg_info "Installing only casks '${to_install_str}' (${OS_TYPE})" "in"
+
     case "${OS_TYPE}" in
         "macos")
             clean brew cask install "${@}"
@@ -149,15 +161,11 @@ install_cask() {
     return 0
 }
 
-install_package() {
+_get_packages_not_installed(){
     local is_installed
     local packages=(${@})
     local to_install=()
     local already_installed=()
-
-    sync_database
-
-    msg_info "Installing packages '${@}' (${OS_TYPE})"
 
     for i in "${packages[*]}"; do
         out=$(is_package_installed ${i})
@@ -176,8 +184,26 @@ install_package() {
     else
         # Everything installed
         msg_info "Already installed ${already_installed_str}, skipping" "in"
+        echo "0"
+    fi
+
+    echo "$to_install_str"
+}
+
+install_package() {
+
+    sync_database
+
+    msg_info "Installing packages '${@}' (${OS_TYPE})"
+
+    to_install_str="`_get_packages_not_installed "$@"`"
+
+    if [[ "$to_install_str" == "0" ]]; then
+        # All installed
         return 0
     fi
+
+    msg_info "Installing only packages '${to_install_str}' (${OS_TYPE})" "in"
 
     case "${OS_TYPE}" in
         "macos")
@@ -392,7 +418,18 @@ install() {
 }
 
 install_aur(){
+
+    sync_database
+
     msg_info "Installing AUR package ${1} (${OS_TYPE})"
+
+    to_install_str="`_get_packages_not_installed "$@"`"
+
+    if [[ "$to_install_str" == "0" ]]; then
+        # All installed
+        return 0
+    fi
+
     case "${OS_TYPE}" in
         "arch")
             local path="${DOTFILE_SRC}/${1}"
@@ -482,6 +519,9 @@ _get_os(){
 }
 
 _run(){
+
+    sync_database
+
     . "$DOTFILE_PATH/install.sh"
 
     if _function_exists "install_$OS_TYPE"; then
