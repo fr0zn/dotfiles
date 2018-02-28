@@ -31,6 +31,7 @@ install_macos(){
     install_package reattach-to-user-namespace
 
     install_cask hopper-disassembler
+    install dmenu-mac
 
     pip2 install pync # notification_center
 
