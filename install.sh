@@ -24,6 +24,8 @@ install_macos(){
     install chunkwm
     install nimble
 
+    install ubersicht
+
     install_package python2
     install_package node
     install_package gdb
@@ -31,6 +33,7 @@ install_macos(){
     install_package reattach-to-user-namespace
 
     install_cask hopper-disassembler
+    install_cask font-awesome-terminal-fonts
     install dmenu-mac
 
     pip2 install pync # notification_center
