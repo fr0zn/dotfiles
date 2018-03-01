@@ -37,6 +37,7 @@ install_macos(){
 
     install ubersicht
     install dmenumac
+    install macdefaults
 
     pip2 install pync # notification_center
 
