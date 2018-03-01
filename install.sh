@@ -34,7 +34,7 @@ install_macos(){
 
     install_cask hopper-disassembler
     install_cask font-awesome-terminal-fonts
-    install dmenu-mac
+    install dmenumac
 
     pip2 install pync # notification_center
 

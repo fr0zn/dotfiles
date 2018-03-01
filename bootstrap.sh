@@ -563,11 +563,18 @@ _run_no(){
 # trap ctrl-c and call ctrl_c()
 trap ctrl_c INT
 
-
 _get_os
 _pre_run
 _load # Load all installation files
 
-y_n "Run installation" _run _run_no
+if [[ $_ == $0 ]]; then
+    y_n "Run installation" _run _run_no
+else
+    # Interactive
+    while true; do
+        read -p "cmd: " cmd
+        $"$cmd"
+    done
+fi
 
 # vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker :
