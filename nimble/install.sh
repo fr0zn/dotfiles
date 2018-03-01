@@ -1,5 +1,5 @@
 install_nimble_macos(){
-    brew cask install nimble-commander
+    install_cask nimble-commander
 }
 
 symlink_nimble_macos(){
