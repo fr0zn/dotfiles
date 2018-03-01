@@ -282,9 +282,30 @@ open_app(){
         if [ -d "/Applications/${1}.app" ]; then
             bundle=mdls -name kMDItemCFBundleIdentifier -r /Applications/${1}.app
             /usr/bin/open -b "${bundle}"
+        else
+            msg_error "Application ${1}.app does not exist" "in"
         fi
     else
         msg_info "Not a macOS, can't run app ${1}.app" "in"
+        return 1
+    fi
+}
+
+add_app_login(){
+    if [[ "$OS_TYPE" == "macos" ]]; then
+        if [ -d "/Applications/${1}.app" ]; then
+            tell="tell application \"System Events\" to make login item at end with properties {name: \"${1}\",path:\"/Applications/${1}.app\", hidden:false}"
+            /usr/bin/osascript -e "${tell}" >/dev/null
+            if [[ "$?" == "0" ]]; then
+                msg_ok "Application '${1}' set on startup" "in"
+            else
+                msg_error "Application '${1}' not set on startup" "in"
+            fi
+        else
+            msg_error "Application ${1}.app does not exist" "in"
+        fi
+    else
+        msg_info "Not a macOS, can't link app ${1}.app" "in"
         return 1
     fi
 }
