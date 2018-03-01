@@ -13,6 +13,8 @@ install_all(){
     install gef
     install radare2
 
+    install tmate
+
 # end all
 }
 
