@@ -567,13 +567,14 @@ _get_os
 _pre_run
 _load # Load all installation files
 
-if [[ $_ == $0 ]]; then
+if [[ "$1" != "SOURCED" ]]; then
     y_n "Run installation" _run _run_no
 else
     # Interactive
     while true; do
         read -p "cmd: " cmd
-        $"$cmd"
+        echo "$cmd"
+        $cmd
     done
 fi
 
