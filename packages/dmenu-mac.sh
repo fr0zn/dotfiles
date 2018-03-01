@@ -1,4 +1,4 @@
-install_dmenu-mac_macos(){
+install_dmenumac_macos(){
     if ! is_app_installed "dmenu-mac"; then
         mkdir -p "$DOTFILE_SRC/dmenu-mac"
         curl -L "https://github.com/fr0zn/dmenu-mac/releases/download/0.5/dmenu-mac.zip" > "$DOTFILE_SRC/dmenu-mac/dmenu-mac.zip"

@@ -24,7 +24,6 @@ install_macos(){
     install chunkwm
     install nimble
 
-    install ubersicht
 
     install_package python2
     install_package node
@@ -34,6 +33,9 @@ install_macos(){
 
     install_cask hopper-disassembler
     install_cask font-awesome-terminal-fonts
+    install_cask basictex
+
+    install ubersicht
     install dmenumac
 
     pip2 install pync # notification_center
