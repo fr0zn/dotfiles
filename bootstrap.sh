@@ -243,6 +243,9 @@ is_package_installed(){
     case "${OS_TYPE}" in
         "macos")
             brew ls --versions ${1} > /dev/null 2>&1
+            if [[ "$?" == "1" ]]; then
+                brew cask ls --versions ${1} > /dev/null 2>&1
+            fi
             ;;
         "ubuntu" | "debian" | "rpi")
             dpkg -l | grep ${1} > /dev/null 2>&1
