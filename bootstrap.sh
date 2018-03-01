@@ -276,6 +276,17 @@ is_app_installed() {
     fi
 }
 
+open_app(){
+    if [[ "$OS_TYPE" == "macos" ]]; then
+        if [ -d "/Applications/${1}.app" ]; then
+            /usr/bin/open -a "${1}"
+        fi
+    else
+        msg_info "Not a macOS, can't run app ${1}.app" "in"
+        return 1
+    fi
+}
+
 add_line(){
     local file="${1}"
     local line="${2}"
