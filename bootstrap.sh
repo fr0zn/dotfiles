@@ -280,7 +280,7 @@ is_app_installed() {
 open_app(){
     if [[ "$OS_TYPE" == "macos" ]]; then
         if [ -d "/Applications/${1}.app" ]; then
-            bundle=mdls -name kMDItemCFBundleIdentifier -r /Applications/${1}.app
+            bundle=$(mdls -name kMDItemCFBundleIdentifier -r /Applications/${1}.app)
             /usr/bin/open -b "${bundle}"
         else
             msg_error "Application ${1}.app does not exist" "in"
