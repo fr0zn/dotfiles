@@ -65,6 +65,14 @@ install_arch(){
     install_package python2
     install_package python2-pip
 
+    install_package pulseaudio
+    install_package pulseaudio-alsa
+    install_package alsa-utils
+    install_package pavucontrol
+
+    install_package firefox-developer-edition
+    install_package virtualbox
+
 # end arch
 }
 
