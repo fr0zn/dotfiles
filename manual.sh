@@ -1,1 +1,1 @@
-. bootstrap.sh "SOURCED"
+./bootstrap.sh "SOURCED"
