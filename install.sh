@@ -57,6 +57,8 @@ install_arch(){
     install_package ttf-hack # monospaced font
     # i3 end
 
+    install xorg
+
     install kitty
 
     install_package python
