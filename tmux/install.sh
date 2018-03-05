@@ -12,6 +12,7 @@ install_tmux(){
 
 install_tmux_ubuntu(){
     install_package "autotools-dev"
+    install_package "automake"
     clone https://github.com/tmux/tmux $DOTFILE_SRC/tmux
     cd $DOTFILE_SRC/tmux
     ./autogen.sh
