@@ -11,11 +11,11 @@ install_tmux(){
 }
 
 install_tmux_ubuntu(){
-    install_package "autotools-dev"
-    install_package "automake"
-    clone https://github.com/tmux/tmux $DOTFILE_SRC/tmux
-    cd $DOTFILE_SRC/tmux
-    ./autogen.sh
+    install_package "libevent-dev"
+    install_package "libncurses-dev"
+
+    VERSION=2.6 && wget -qO- https://github.com/tmux/tmux/releases/download/${VERSION}/tmux-${VERSION}.tar.gz | tar xvz -C $DOTFILE_SRC
+    cd $DOTFILE_SRC/tmux*
     ./configure && make
     sudo_run make install
 }
