@@ -11,12 +11,15 @@ install_tmux(){
 }
 
 install_tmux_ubuntu(){
-    install_package "libevent-dev"
-    install_package "libncurses-dev"
+    program_exists "tmux"
+    if [[ "$?" != "0"  ]]; then
+        install_package "libevent-dev"
+        install_package "libncurses-dev"
 
-    VERSION=2.6 && wget -qO- https://github.com/tmux/tmux/releases/download/${VERSION}/tmux-${VERSION}.tar.gz | tar xvz -C $DOTFILE_SRC
-    cd $DOTFILE_SRC/tmux*
-    ./configure && make
-    sudo_run make install
+        VERSION=2.6 && wget -qO- https://github.com/tmux/tmux/releases/download/${VERSION}/tmux-${VERSION}.tar.gz | tar xvz -C $DOTFILE_SRC
+        cd $DOTFILE_SRC/tmux*
+        ./configure && make
+        sudo_run make install
+    fi
 }
 
