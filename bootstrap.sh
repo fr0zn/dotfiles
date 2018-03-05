@@ -246,7 +246,7 @@ is_package_installed(){
             fi
             ;;
         "ubuntu" | "debian" | "rpi")
-            dpkg -l | grep ${1} > /dev/null 2>&1
+            dpkg -l | grep -w ${1} > /dev/null 2>&1
             ;;
         "arch")
             pacman -Qi ${1} > /dev/null 2>&1
