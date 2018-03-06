@@ -4,15 +4,14 @@
 
     call plug#begin('~/.vim/plugged')
 
-    Plug 'morhetz/gruvbox'                  " Colorscheme
+    Plug 'joshdick/onedark.vim'             " Colorscheme
 
     Plug 'easymotion/vim-easymotion'        " Easy move inside vim
     Plug 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits
     Plug 'terryma/vim-multiple-cursors'     " True Sublime Text style multiple selections for Vim
 
     Plug 'jiangmiao/auto-pairs'             " Auto-completion for quotes, parens, brackets, etc
-    " Plug 'scrooloose/nerdcommenter'         " Comment functions so powerful—no comment necessary.
-    Plug 'tpope/vim-commentary'             " Comment functions so powerful—no comment necessary.
+    Plug 'scrooloose/nerdcommenter'         " Comment functions so powerful—no comment necessary.
     Plug 'tpope/vim-surround'               " Easy mapping to change brakets, parentheses, etc.
     Plug 'junegunn/vim-easy-align'          " A simple, easy-to-use Vim alignment plugin.
 
@@ -23,20 +22,12 @@
     Plug 'majutsushi/tagbar'                " Displays tags in right sidebar
     Plug 'scrooloose/nerdtree'
 
-    Plug 'SirVer/ultisnips'                 " Snippets engine
-    Plug 'honza/vim-snippets'               " Snippets catalog
-    Plug 'ervandew/supertab'                " Tab completion
-
     Plug 'ctrlpvim/ctrlp.vim'               " File fuzzy finding
     Plug '~/.fzf'
 
     Plug 'vim-scripts/DrawIt'               " Vim draw draw lines left, right, up, down, boxes, etc
     Plug 'e0d1n/markersyntax'
     Plug 'w0rp/ale'
-    Plug 'tomasiser/vim-code-dark'
-    Plug 'dracula/vim'
-    Plug 'tomlion/vim-solidity'
-    Plug 'joshdick/onedark.vim'
 
     call plug#end()
 
