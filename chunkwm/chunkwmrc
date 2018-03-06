@@ -70,5 +70,4 @@ chunkc core::load ffm.so
 
 chunkc tiling::rule --owner qemu --name qemu --state float
 chunkc tiling::rule --owner Telegram --name Telegram --state float
-
-#dock-inject
+chunkc tiling::rule --owner Calculator --state float
