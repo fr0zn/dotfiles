@@ -4,6 +4,7 @@ DOTFILE_REPO="https://github.com/fr0zn/dotfiles.git"
 DOTFILE_PATH="$HOME/.dotfiles"
 DOTFILE_BACKUP="$HOME/.dotfiles-backup"
 DOTFILE_SRC="$DOTFILE_PATH/src"
+DOTFILE_BIN="$DOTFILE_PATH/bin"
 DB_SYNC=0
 OS_TYPE=""
 
