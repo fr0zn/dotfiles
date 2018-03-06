@@ -8,7 +8,7 @@ install_chwm_macos(){
         fi
     fi
 
-    cd $DOFTILE_SRC/chwm/inject_test
+    cd $DOTFILE_SRC/chwm/inject_test
     ./build.sh
     cp -f bin/inject $DOTFILE_BIN/inject
 }
