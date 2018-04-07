@@ -1,5 +1,5 @@
 install_iterm2_macos(){
-    brew cask install iterm2-beta
+    brew cask install iterm2
 }
 
 symlink_iterm2_macos(){
