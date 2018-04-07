@@ -4,6 +4,8 @@
 
     call plug#begin('~/.vim/plugged')
 
+    Plug 'w0ng/vim-hybrid'
+    Plug 'cocopon/iceberg.vim'
     Plug 'joshdick/onedark.vim'             " Colorscheme
 
     Plug 'easymotion/vim-easymotion'        " Easy move inside vim
@@ -88,9 +90,10 @@
 
 " Vim UI {
 
+    colorscheme hybrid
     " set termguicolors                   " Enable true color support
     if filereadable(expand("$HOME/.vim/plugged/onedark.vim/autoload/onedark.vim"))
-        colorscheme onedark
+        "colorscheme onedark
     endif
 
     " vim hardcodes background color erase even if the terminfo file does

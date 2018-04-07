@@ -47,16 +47,25 @@ chunkc set window_float_next             0
 chunkc set window_float_center           1
 chunkc set window_region_locked          1
 
+chunkc set window_float_topmost          0
+chunkc set window_fade_inactive          0
+chunkc set window_fade_alpha             0.75
+chunkc set window_fade_duration          0.25
+chunkc set window_use_cgs_move           0
+
 chunkc set mouse_modifier                fn
 
 chunkc set preselect_border_color        0xffd75f5f
 chunkc set preselect_border_width        5
 chunkc set preselect_border_radius       0
 
-chunkc set focused_border_color          0xff775759
+chunkc set focused_border_color          0x776699ff
 chunkc set focused_border_width          5
 chunkc set focused_border_radius         0
 chunkc set focused_border_skip_floating  0
+
+#chunkc set wallpaper $HOME/Pictures/wall.jpg
+#chunkc set wallpaper_blur 100
 
 #
 # NOTE: specify plugins to load when chunkwm starts.
@@ -66,8 +75,17 @@ chunkc set focused_border_skip_floating  0
 chunkc core::load border.so
 chunkc core::load tiling.so
 chunkc core::load ffm.so
-#chunkc core::load purify.so
 
 chunkc tiling::rule --owner qemu --name qemu --state float
 chunkc tiling::rule --owner Telegram --name Telegram --state float
 chunkc tiling::rule --owner Calculator --state float
+chunkc tiling::rule --owner Finder --state float
+chunkc tiling::rule --owner Finder --name Copy --state float
+#chunkc tiling::rule --owner kitty --state float
+#chunkc tiling::rule --owner iTerm2
+chunkc tiling::rule --owner TextEdit --state float
+chunkc tiling::rule --owner Mumble --state float
+chunkc tiling::rule --owner Stickies --state float
+
+
+$HOME/.dotfiles/bin/inject

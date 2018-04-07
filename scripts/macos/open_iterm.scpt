@@ -12,6 +12,7 @@ on run argv
                 keystroke "t" using command down
                 keystroke argv_s
                 key code 52
+                #keystroke "clear\n"
             end tell
         end tell
     end tell
