@@ -7,4 +7,8 @@ post_sublime_macos(){
     mkdir -p "$conf_path"
     symlink_file "sublime/Preferences.sublime-settings" "$conf_path/Preferences.sublime-settings"
     symlink_file "sublime/Package Control.sublime-settings" "$conf_path/Package Control.sublime-settings"
+
+    # Enable key-repeat in vim mode
+    defaults write com.sublimetext.3 ApplePressAndHoldEnabled -bool false
+
 }

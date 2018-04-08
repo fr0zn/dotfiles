@@ -12,9 +12,6 @@ install_macdefaults_macos(){
     #Only active apps
     defaults write com.apple.dock static-only -bool FALSE
 
-    # Enable key-repeat in vim mode
-    defaults write com.sublimetext.3 ApplePressAndHoldEnabled -bool false
-
     # Hide desktop icons
     defaults write com.apple.finder CreateDesktop false
 
