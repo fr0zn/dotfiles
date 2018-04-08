@@ -18,6 +18,10 @@ install_macdefaults_macos(){
     # Hide desktop icons
     defaults write com.apple.finder CreateDesktop false
 
+    # Disable automatic spaces rearrange
+    defaults write com.apple.dock mru-spaces -bool false
+
+
     killall Dock
     killall Finder
 }
