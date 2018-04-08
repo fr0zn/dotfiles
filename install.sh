@@ -26,10 +26,8 @@ install_macos(){
     install chunkwm
     install nimble
 
-
     install_package python2
     install_package node
-    install_package gdb
 
     install_package reattach-to-user-namespace
     install_package trash
@@ -37,6 +35,10 @@ install_macos(){
     install_cask hopper-disassembler
     install_cask font-awesome-terminal-fonts
     install_cask basictex
+    install_cask appcleaner
+
+    install_cask virtualbox
+    install_cask virtualbox-extension-pack
 
     install ubersicht
     install dmenumac
