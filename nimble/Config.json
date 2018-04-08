@@ -38,6 +38,27 @@
                 "parameters": "%r",
                 "shortcut": "",
                 "startup": 2
+            },
+            {
+                "title": "Binary Ninja",
+                "path": "/Applications/Binary Ninja.app",
+                "parameters": "%p",
+                "shortcut": "",
+                "startup": 0
+            },
+            {
+                "title": "ida64",
+                "path": "/Applications/IDA Pro 7.0/ida64.app",
+                "parameters": "%p",
+                "shortcut": "",
+                "startup": 0
+            },
+            {
+                "title": "ida",
+                "path": "/Applications/IDA Pro 7.0/ida.app",
+                "parameters": "%p",
+                "shortcut": "",
+                "startup": 0
             }
         ]
     },
