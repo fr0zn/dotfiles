@@ -32,6 +32,7 @@ install_macos(){
     install_package gdb
 
     install_package reattach-to-user-namespace
+    install_package trash
 
     install_cask hopper-disassembler
     install_cask font-awesome-terminal-fonts
