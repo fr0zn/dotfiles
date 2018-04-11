@@ -33,3 +33,6 @@ fi
 
 # FZF config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# pyenv PATH
+eval "$(pyenv init -)"
