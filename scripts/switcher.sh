@@ -36,11 +36,11 @@ _set_version(){
 
 _get_current(){
     version=$(pyenv version | awk '{print $1}')
-    bits=$(python -c 'import struct; print struct.calcsize("P") * 8')
+    bits=$(python -c 'import struct; print(struct.calcsize("P") * 8)')
     msg_info "Current: Python ${version} (${bits} bits)"
 }
 
-switch(){
+_switch(){
     if [ -z ${1} ]; then
         _get_versions
         return 0
