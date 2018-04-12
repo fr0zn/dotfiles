@@ -34,5 +34,7 @@ fi
 # FZF config
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# pyenv PATH
+# pyenv PATH and virtualenv PATH
 eval "$(pyenv init -)"
+#eval "$(pyenv virtualenv-init -)"
+. $SCRIPTS_PATH/switcher.sh
