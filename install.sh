@@ -26,11 +26,17 @@ install_macos(){
     install chunkwm
     install nimble
 
-    install_package python2
+    install_package pyenv
+    install_package pyenv-virtualenv
     install_package node
+
 
     install_package reattach-to-user-namespace
     install_package trash
+
+    install_package unzip
+    install_package unrar
+    install_package atool
 
     install_cask hopper-disassembler
     install_cask font-awesome-terminal-fonts
@@ -44,7 +50,7 @@ install_macos(){
     install dmenumac
     install macdefaults
 
-    pip2 install pync # notification_center
+    #pip2 install pync # notification_center
 
 # end macos
 }

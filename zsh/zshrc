@@ -8,7 +8,7 @@ source ~/.antigen/antigen.zsh
 antigen use oh-my-zsh
 antigen theme fr0zn/simplezsh
 # Plugins
-antigen bundle z
+antigen bundle rupa/z
 antigen bundle colored-man-pages
 antigen bundle encode64
 antigen apply
@@ -37,4 +37,4 @@ fi
 # pyenv PATH and virtualenv PATH
 eval "$(pyenv init -)"
 #eval "$(pyenv virtualenv-init -)"
-. $SCRIPTS_PATH/switcher.sh
+. $SCRIPTS_PATH/pyenv_version.sh
