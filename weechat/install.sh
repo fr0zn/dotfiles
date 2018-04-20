@@ -3,7 +3,7 @@ symlink_weechat(){
 }
 
 install_weechat_macos(){
-    install_package weechat --with-perl --with-python
+    brew install weechat --with-perl --with-python
 }
 
 install_weechat_arch(){
