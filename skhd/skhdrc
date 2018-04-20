@@ -1,7 +1,7 @@
 # open terminal, blazingly fast compared to iTerm/Hyper
 #cmd - return : /usr/bin/osascript ~/Scripts/open_kitty.script
-cmd - return : /usr/bin/osascript ~/.dotfiles/scripts/macos/open_iterm.scpt
-#alt - space : open -na /Applications/Kitty.app
+cmd - return : /usr/bin/osascript ~/.dotfiles/scripts/macos/open_iterm_window.scpt
+cmd + shift - return : /usr/bin/osascript ~/.dotfiles/scripts/macos/open_iterm_tab.scpt
 
 # enter fullscreen mode for the focused container
 alt - f : chunkc tiling::window --toggle fullscreen
@@ -47,7 +47,7 @@ shift + alt - 4 : chunkc tiling::window --send-to-desktop 4
 shift + alt - 5 : chunkc tiling::window --send-to-desktop 5
 shift + alt - 6 : chunkc tiling::window --send-to-desktop 6
 
-shift + cmd - h : chunkc tiling::window --use-temporary-ratio 0.05 --adjust-window-edge west; chunkc tiling::window --use-temporary-ratio -0.05 --adjust-window-edge east
-shift + cmd - j : chunkc tiling::window --use-temporary-ratio 0.05 --adjust-window-edge south; chunkc tiling::window --use-temporary-ratio -0.05 --adjust-window-edge north
-shift + cmd - k : chunkc tiling::window --use-temporary-ratio 0.05 --adjust-window-edge north; chunkc tiling::window --use-temporary-ratio -0.05 --adjust-window-edge south
-shift + cmd - l : chunkc tiling::window --use-temporary-ratio 0.05 --adjust-window-edge east; chunkc tiling::window --use-temporary-ratio -0.05 --adjust-window-edge west
+alt + ctrl - h : chunkc tiling::window --use-temporary-ratio 0.05 --adjust-window-edge west; chunkc tiling::window --use-temporary-ratio -0.05 --adjust-window-edge east
+alt + ctrl - j : chunkc tiling::window --use-temporary-ratio 0.05 --adjust-window-edge south; chunkc tiling::window --use-temporary-ratio -0.05 --adjust-window-edge north
+alt + ctrl - k : chunkc tiling::window --use-temporary-ratio 0.05 --adjust-window-edge north; chunkc tiling::window --use-temporary-ratio -0.05 --adjust-window-edge south
+alt + ctrl - l : chunkc tiling::window --use-temporary-ratio 0.05 --adjust-window-edge east; chunkc tiling::window --use-temporary-ratio -0.05 --adjust-window-edge west
