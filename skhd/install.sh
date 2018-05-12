@@ -3,7 +3,7 @@ backup_skhd_macos(){
 }
 
 install_skhd_macos(){
-    install_package skhd
+    install_package koekeishiya/formulae/skhd
 }
 
 symlink_skhd_macos(){

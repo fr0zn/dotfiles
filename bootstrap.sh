@@ -169,7 +169,7 @@ _get_packages_not_installed(){
     local already_installed=()
 
     for i in "${packages[*]}"; do
-        out=$(is_package_installed ${i})
+        out=$(is_package_installed "${i}")
         is_installed="$?"
         if [[ "$is_installed" == "1" ]]; then
             to_install+=("${packages[$i]}")

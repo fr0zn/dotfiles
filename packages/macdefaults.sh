@@ -18,6 +18,9 @@ install_macdefaults_macos(){
     # Disable automatic spaces rearrange
     defaults write com.apple.dock mru-spaces -bool false
 
+    # Set Nimble Commander as the default viewer
+    defaults write -g NSFileViewer -string info.filesmanager.Files
+
 
     killall Dock
     killall Finder

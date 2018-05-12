@@ -10,28 +10,28 @@ install_all(){
     install_package wget
     install_package ssh
 
-    install gef
+    #install gef
     install radare2
 
-    install tmate
+    #install tmate
 
 # end all
 }
 
 install_macos(){
 
-    install kitty
-    # install iterm2
+    #install kitty
+    install iterm2
     install skhd
     install chunkwm
-    install nimble
+    #install nimble
 
     install_package pyenv
     install_package pyenv-virtualenv
-    install_package node
+    #install_package node
 
 
-    install_package reattach-to-user-namespace
+    #install_package reattach-to-user-namespace
     install_package trash
 
     install_package unzip
@@ -39,7 +39,7 @@ install_macos(){
     install_package atool
 
     install_cask hopper-disassembler
-    install_cask font-awesome-terminal-fonts
+    #install_cask font-awesome-terminal-fonts
     install_cask basictex
     install_cask appcleaner
 
@@ -48,7 +48,7 @@ install_macos(){
 
     install ubersicht
     install dmenumac
-    install macdefaults
+    #install macdefaults
 
     #pip2 install pync # notification_center
 

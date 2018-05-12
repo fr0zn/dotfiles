@@ -6,14 +6,14 @@ on run argv
     set text item delimiters to saveTID
 
     tell application "iTerm"
-        activate
-        tell application "System Events"
-            tell process "iTerm"
-                keystroke "t" using command down
-                keystroke argv_s
-                key code 52
-                #keystroke "clear\n"
-            end tell
-        end tell
+      activate
+      tell current window
+            create tab with default profile
+            if (count of argv) > 0 then
+                tell current session
+                    write text argv_s
+                end tell
+            end if
+      end tell
     end tell
 end run
