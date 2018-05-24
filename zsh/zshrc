@@ -36,5 +36,6 @@ fi
 
 # pyenv PATH and virtualenv PATH
 eval "$(pyenv init -)"
-#eval "$(pyenv virtualenv-init -)"
-. $SCRIPTS_PATH/pyenv_version.sh
+eval "$(rbenv init -)"
+
+. $SCRIPTS_PATH/pyenv_rbenv_version.sh
