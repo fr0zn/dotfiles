@@ -20,5 +20,12 @@ _get_current_rb(){
     _msg_info "Current Ruby: ${version}" #(${bits} bits)"
 }
 
+_get_current_node(){
+    version=$(nodenv version | awk '{print $1}' ORS=', ' | sed '$s/..$//')
+    #bits=$(python -c 'import struct; print(struct.calcsize("P") * 8)')
+    _msg_info "Current Node: ${version}" #(${bits} bits)"
+}
+
 _get_current_py
 _get_current_rb
+_get_current_node
