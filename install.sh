@@ -46,6 +46,15 @@ install_macos(){
     install_cask virtualbox
     install_cask virtualbox-extension-pack
 
+    # Android
+    install_package ant
+    install_package maven
+    install_package gradle
+    install_cask android-sdk
+    install_cask android-ndk
+    install_cask intel-haxm
+    # end Android
+
     install ubersicht
     install dmenumac
     #install macdefaults
