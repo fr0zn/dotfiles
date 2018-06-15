@@ -3,6 +3,7 @@ install_all(){
     # Packages
     install python
     install node
+    install_package cmake
 
     # Tools
     install vim
@@ -77,8 +78,11 @@ install_ubuntu(){
 
     # Packages
     install_package build-essential
-    install_package libc6-dev:i386 gcc:i386 gcc-multilib # 32 bits on 64 system
-    install_package libc6:i386 libc6-dbg:i386 libc6-dbg # Debug symbols 32/64
+    sudo dpkg --add-architecture i386
+    install_package libc6:i386 libncurses5:i386 libstdc++6:i386 # libraries (32 bits)
+    install_package gcc-multilib # compile 32 bits
+    install_package libc6-dbg:i386 # libc symbols 32
+    install_package libc6-dbg # libc symbols 64
 
     # Tools
     install_package gdb gdb-multiarch
