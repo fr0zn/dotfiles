@@ -182,8 +182,12 @@ _get_packages_not_installed(){
     already_installed_str=$(IFS=":" echo "${already_installed[*]}")
     if [[ -z "${to_install_str}" ]]; then
         # Everything installed
-        msg_info "Already installed '${already_installed_str}', skipping" "in"
+        msg_ok "All packages already installed, skipping" "in"
         echo "0"
+    else
+        if [[ ! -z "${already_installed_str}" ]]; then
+            msg_ok "Packages already installed '${already_installed_str}'" "in"
+        fi
     fi
 
     echo "$to_install_str"
