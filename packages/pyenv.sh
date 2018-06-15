@@ -7,6 +7,7 @@ install_pyenv_ubuntu(){
 }
 
 post_pyenv(){
+    msg_debug "Post pyenv"
     #pyenv install 2.7.15
     #pyenv install 3.6.5
 }
