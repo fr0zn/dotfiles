@@ -1,0 +1,24 @@
+# Path to dotfiles
+DOTFILE_PATH=$HOME/.dotfiles
+SCRIPTS_PATH=$DOTFILE_PATH/scripts
+BASH_CONFIG_PATH=$DOTFILE_PATH/bash
+
+unamestr=`uname`
+
+# Load BASHRC config
+source $BASH_CONFIG_PATH/all_bashrc
+
+out=$(cat /proc/cpuinfo | grep hypervisor)
+if [[ "$?" -eq "0" ]];then # inside hypervisor
+    source $BASH_CONFIG_PATH/vm_bashrc
+fi
+
+# pyenv PATH and virtualenv PATH
+eval "$(pyenv init -)"
+eval "$(rbenv init -)"
+eval "$(nodenv init -)"
+
+. $SCRIPTS_PATH/pyenv_rbenv_version.sh
+
+# FZF config
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
