@@ -24,7 +24,7 @@ install_all(){
     # Pwn
     #install peda
     #install pwndbg
-    install gef
+    install gef # will install ropper on python3
     install radare2
     install ropper
 
