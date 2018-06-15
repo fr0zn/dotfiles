@@ -19,3 +19,4 @@ logs/
 *.log
 src/*
 bin/*
+gdb/inits/*
