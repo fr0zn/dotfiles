@@ -10,8 +10,8 @@ install_ropper_macos(){
 }
 
 install_ropper_ubuntu(){
-    sudo pip install capstone
-    sudo pip install filebytes
-    sudo pip install keystone-engine
-    sudo pip install ropper
+    sudo -H pip install capstone
+    sudo -H pip install filebytes
+    sudo -H pip install keystone-engine
+    sudo -H pip install ropper
 }
