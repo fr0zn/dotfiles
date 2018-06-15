@@ -1,4 +1,4 @@
-install_arduino(){
+install_arduino_macos(){
     install_cask arduino
 }
 
