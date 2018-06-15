@@ -90,10 +90,9 @@
 
 " Vim UI {
 
-    colorscheme hybrid
     " set termguicolors                   " Enable true color support
-    if filereadable(expand("$HOME/.vim/plugged/onedark.vim/autoload/onedark.vim"))
-        "colorscheme onedark
+    if filereadable(expand("$HOME/.vim/plugged/vim-hybrid/colors/hybrid.vim"))
+        colorscheme hybrid
     endif
 
     " vim hardcodes background color erase even if the terminfo file does
