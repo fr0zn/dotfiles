@@ -13,7 +13,7 @@ function gdbs(){
     possible=()
     paths=()
 
-    list=$(find "$DOTFILE_PATH/gdb/inits" -name "*.gdbinit" -type f  -maxdepth 2)
+    list=$(find "$DOTFILE_PATH/gdb/inits" -name "*.gdbinit" -type f)
     for filepath in $list; do
         filename=$(basename $filepath)
         name="${filename%.*}"
