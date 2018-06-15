@@ -356,7 +356,7 @@ symlink_file(){
 }
 
 function clone(){
-    msg_ok "Retrieving sources..."
+    msg_info "Retrieving sources..."
 
     FROM=$1
     WHERE=$2

@@ -1,50 +1,64 @@
 install_all(){
 
+    # Packages
+    install python
+    install node
+
+    # Tools
     install vim
     install tmux
-    install fzf
-    install zsh
-    install weechat
 
+    # Utils
+    install zsh
+    install fzf
     install_package unzip
     install_package wget
     install_package ssh
+    install pyenv
 
-    #install gef
+    # Extras
+    install weechat
+    install tmate
+
+    # Pwn
+    #install peda
+    #install pwndbg
+    install gef
     install radare2
-
-    #install tmate
 
 # end all
 }
 
 install_macos(){
 
-    #install kitty
-    install iterm2
-    install skhd
-    install chunkwm
-    #install nimble
-
-    install_package pyenv
-    install_package pyenv-virtualenv
-    #install_package node
-
-
-    #install_package reattach-to-user-namespace
+    # Packages
     install_package trash
-
-    install_package unzip
     install_package unrar
     install_package atool
+    install_cask font-awesome-terminal-fonts
 
-    install_cask hopper-disassembler
-    #install_cask font-awesome-terminal-fonts
+    # Tools
     install_cask basictex
-    install_cask appcleaner
 
+    # Utils
+    install_package reattach-to-user-namespace
+
+    # Programs
+    install iterm2
+    install nimble
+    install ubersicht
+    install dmenumac
+    install_cask appcleaner
     install_cask virtualbox
     install_cask virtualbox-extension-pack
+
+    # Extras
+    install skhd
+    install chunkwm
+    install macdefaults
+
+    # Pwn
+    install_cask hopper-disassembler
 
     # Android
     install_package ant
@@ -55,53 +69,16 @@ install_macos(){
     install_cask intel-haxm
     # end Android
 
-    install ubersicht
-    install dmenumac
-    #install macdefaults
-
-    #pip2 install pync # notification_center
-
 # end macos
-}
-
-install_arch(){
-
-    install_package base-devel
-
-    # i3
-    #install_aur i3-gaps-next-git
-    install_package i3-gaps i3blocks i3status i3lock xterm dmenu
-    install_package xorg-server xorg-xinit xorg-apps xorg-fonts
-    install_package ttf-hack # monospaced font
-    # i3 end
-
-    install xorg
-
-    install kitty
-
-    install_package python
-    install_package python-pip
-
-    install_package python2
-    install_package python2-pip
-
-    install_package pulseaudio
-    install_package pulseaudio-alsa
-    install_package alsa-utils
-    install_package pavucontrol
-
-    install_package firefox-developer-edition
-    install_package virtualbox
-
-# end arch
 }
 
 install_ubuntu(){
 
     install_package build-essential
 
-    install_package python
-    install_package python-pip
+    install_package gdb gdb-multiarch
 
+    install_package libc6-dev:i386 gcc:i386 # 32 bits on 64 system
+    install_package libc6-dbg libc6:i386 libc6-dbg:i386 # Debug symbols
 # end ubuntu
 }
