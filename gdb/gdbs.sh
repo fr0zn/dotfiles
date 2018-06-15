@@ -10,6 +10,8 @@ _msg_info() {
 
 function gdbs(){
 
+    DOTFILE_PATH="$HOME/.dotfiles"
+
     possible=()
     paths=()
 
