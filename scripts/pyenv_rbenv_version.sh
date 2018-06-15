@@ -9,7 +9,7 @@ _msg_info() {
 }
 
 _exists(){
-    command -v ${1} >/dev/null
+    command -v ${1} >/dev/null 2>&1
     return $?
 }
 
