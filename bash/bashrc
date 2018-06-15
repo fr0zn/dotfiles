@@ -19,3 +19,6 @@ source $SCRIPTS_PATH/env.sh
 
 # FZF config
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# GDB switch
+source $DOTFILE_PATH/gdb/gdbs.sh
