@@ -386,7 +386,7 @@ function clone(){
 }
 
 function clone_src(){
-    clone ${1} "$DOTFILE_SRC/"
+    clone ${1} "$DOTFILE_SRC/${2}"
 }
 
 _function_exists() {
