@@ -9,14 +9,13 @@ _msg_info() {
 }
 
 _exists(){
-    if [ -x "$(command -v ${1})" ]; then
-        return 1
-    fi
-    return 0
+    out=$(command -v ${1})
+    return $?
 }
 
 _get_current_py(){
     if _exists pyenv; then
+        eval "$(pyenv init -)"
         version=$(pyenv version | awk '{print $1}' ORS=', ' | sed '$s/..$//')
         #bits=$(python -c 'import struct; print(struct.calcsize("P") * 8)')
         _msg_info "Current Python: ${version}" #(${bits} bits)"
@@ -25,6 +24,7 @@ _get_current_py(){
 
 _get_current_rb(){
     if _exists rbenv; then
+        eval "$(rbenv init -)"
         version=$(rbenv version | awk '{print $1}' ORS=', ' | sed '$s/..$//')
         #bits=$(python -c 'import struct; print(struct.calcsize("P") * 8)')
         _msg_info "Current Ruby: ${version}" #(${bits} bits)"
@@ -33,6 +33,7 @@ _get_current_rb(){
 
 _get_current_node(){
     if _exists nodenv; then
+        eval "$(nodenv init -)"
         version=$(nodenv version | awk '{print $1}' ORS=', ' | sed '$s/..$//')
         #bits=$(python -c 'import struct; print(struct.calcsize("P") * 8)')
         _msg_info "Current Node: ${version}" #(${bits} bits)"

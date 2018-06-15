@@ -13,30 +13,24 @@ antigen bundle colored-man-pages
 antigen bundle encode64
 antigen apply
 
-
 unamestr=`uname`
 
 # Load ZSHRC config
-source $ZSH_CONFIG_PATH/all_zshrc.conf
+. $ZSH_CONFIG_PATH/all_zshrc.conf
 
 # MacOS configs
 if [[ "$unamestr" == "Darwin" ]]; then
-    source $ZSH_CONFIG_PATH/macos_zshrc.conf
+    . $ZSH_CONFIG_PATH/macos_zshrc.conf
 else
 # Linux configs
-    source $ZSH_CONFIG_PATH/linux_zshrc.conf
+    . $ZSH_CONFIG_PATH/linux_zshrc.conf
     # Docker configs
     if [ -f /.dockerenv ]; then
-        source $ZSH_CONFIG_PATH/docker_zshrc.conf
+        . $ZSH_CONFIG_PATH/docker_zshrc.conf
     fi
 fi
 
 # FZF config
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && . ~/.fzf.zsh
 
-# pyenv PATH and virtualenv PATH
-eval "$(pyenv init -)"
-eval "$(rbenv init -)"
-eval "$(nodenv init -)"
-
-. $SCRIPTS_PATH/pyenv_rbenv_version.sh
+. $SCRIPTS_PATH/env.sh
