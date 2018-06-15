@@ -25,6 +25,7 @@ install_all(){
     #install pwndbg
     install gef
     install radare2
+    install ropper
 
 # end all
 }
