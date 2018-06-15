@@ -13,6 +13,8 @@ if [[ "$?" -eq "0" ]];then # inside hypervisor
     source $BASH_CONFIG_PATH/vm_bashrc
 fi
 
+source $BASH_CONFIG_PATH/z.sh
+
 # pyenv PATH and virtualenv PATH
 eval "$(pyenv init -)"
 eval "$(rbenv init -)"
