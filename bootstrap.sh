@@ -138,7 +138,7 @@ install_cask() {
 
     msg_info "Installing cask ${*} (${OS_TYPE})"
 
-    to_install_str="`_get_packages_not_installed "$@"`"
+    to_install_str=$(_get_packages_not_installed "${*}")
 
     if [[ "$to_install_str" == "0" ]]; then
         # All installed
@@ -149,7 +149,7 @@ install_cask() {
 
     case "${OS_TYPE}" in
         "macos")
-            clean brew cask install "${@}"
+            clean brew cask install "${*}"
             ;;
         *)
             msg_error "brew cask not supported ${OS_TYPE}" "in"
@@ -168,8 +168,8 @@ _get_packages_not_installed(){
     local to_install=()
     local already_installed=()
 
-    for i in "${packages[*]}"; do
-        out=$(is_package_installed "${i}")
+    for i in "${!packages[@]}"; do
+        out=$(is_package_installed "${packages[$i]}")
         is_installed="$?"
         if [[ "$is_installed" == "1" ]]; then
             to_install+=("${packages[$i]}")
@@ -182,7 +182,7 @@ _get_packages_not_installed(){
     already_installed_str=$(IFS=":" echo "${already_installed[*]}")
     if [[ -z "${to_install_str}" ]]; then
         # Everything installed
-        msg_info "Already installed ${already_installed_str}, skipping" "in"
+        msg_info "Already installed '${already_installed_str}', skipping" "in"
         echo "0"
     fi
 
@@ -193,9 +193,9 @@ install_package() {
 
     sync_database
 
-    msg_info "Installing packages '${@}' (${OS_TYPE})"
+    msg_info "Installing packages '$*' (${OS_TYPE})"
 
-    to_install_str="`_get_packages_not_installed "$@"`"
+    to_install_str=$(_get_packages_not_installed "$*")
 
     if [[ "$to_install_str" == "0" ]]; then
         # All installed
@@ -381,6 +381,10 @@ function clone(){
 
 }
 
+function clone_src(){
+    clone ${1} "$DOTFILE_SRC/"
+}
+
 _function_exists() {
     declare -f -F $1 > /dev/null
     return $?
@@ -458,7 +462,7 @@ install_aur(){
 
     msg_info "Installing AUR package ${1} (${OS_TYPE})"
 
-    to_install_str="`_get_packages_not_installed "$@"`"
+    to_install_str=$(_get_packages_not_installed "$*")
 
     if [[ "$to_install_str" == "0" ]]; then
         # All installed
