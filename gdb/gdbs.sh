@@ -32,6 +32,7 @@ function gdbs(){
                 echo "" > $HOME/.gdbinit
                 break ;;
           exit) echo "Exiting"
+                return
                 break ;;
              *)
                 _msg_info "Starting gdb with $op"
@@ -41,5 +42,6 @@ function gdbs(){
        esac
     done
 
+    echo
     gdb "$@"
 }
