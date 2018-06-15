@@ -9,8 +9,10 @@ _msg_info() {
 }
 
 _exists(){
-    command -v ${1} >/dev/null 2>&1
-    return $?
+    if [ -x "$(command -v ${1})" ]; then
+        return 1
+    fi
+    return 0
 }
 
 _get_current_py(){
