@@ -74,11 +74,13 @@ install_macos(){
 
 install_ubuntu(){
 
+    # Packages
     install_package build-essential
+    install_package libc6-dev:i386 gcc:i386 gcc-multilib # 32 bits on 64 system
+    install_package libc6:i386 libc6-dbg:i386 libc6-dbg # Debug symbols 32/64
 
+    # Tools
     install_package gdb gdb-multiarch
 
-    install_package libc6-dev:i386 gcc:i386 # 32 bits on 64 system
-    install_package libc6-dbg libc6:i386 libc6-dbg:i386 # Debug symbols
 # end ubuntu
 }
