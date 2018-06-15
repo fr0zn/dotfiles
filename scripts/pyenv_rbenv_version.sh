@@ -9,21 +9,27 @@ _msg_info() {
 }
 
 _get_current_py(){
-    version=$(pyenv version | awk '{print $1}' ORS=', ' | sed '$s/..$//')
-    #bits=$(python -c 'import struct; print(struct.calcsize("P") * 8)')
-    _msg_info "Current Python: ${version}" #(${bits} bits)"
+    if [ -x "$(command -v pyenv)" ]; then
+        version=$(pyenv version | awk '{print $1}' ORS=', ' | sed '$s/..$//')
+        #bits=$(python -c 'import struct; print(struct.calcsize("P") * 8)')
+        _msg_info "Current Python: ${version}" #(${bits} bits)"
+    fi
 }
 
 _get_current_rb(){
-    version=$(rbenv version | awk '{print $1}' ORS=', ' | sed '$s/..$//')
-    #bits=$(python -c 'import struct; print(struct.calcsize("P") * 8)')
-    _msg_info "Current Ruby: ${version}" #(${bits} bits)"
+    if [ -x "$(command -v rbenv)" ]; then
+        version=$(rbenv version | awk '{print $1}' ORS=', ' | sed '$s/..$//')
+        #bits=$(python -c 'import struct; print(struct.calcsize("P") * 8)')
+        _msg_info "Current Ruby: ${version}" #(${bits} bits)"
+    fi
 }
 
 _get_current_node(){
-    version=$(nodenv version | awk '{print $1}' ORS=', ' | sed '$s/..$//')
-    #bits=$(python -c 'import struct; print(struct.calcsize("P") * 8)')
-    _msg_info "Current Node: ${version}" #(${bits} bits)"
+    if [ -x "$(command -v nodenv)" ]; then
+        version=$(nodenv version | awk '{print $1}' ORS=', ' | sed '$s/..$//')
+        #bits=$(python -c 'import struct; print(struct.calcsize("P") * 8)')
+        _msg_info "Current Node: ${version}" #(${bits} bits)"
+    fi
 }
 
 _get_current_py
