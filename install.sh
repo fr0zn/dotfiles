@@ -9,8 +9,11 @@ install_all(){
     install vim
     install tmux
 
-    # Utils
+    # Shell
     install zsh
+    install bash
+
+    # Utils
     install fzf
     install_package unzip
     install_package wget
