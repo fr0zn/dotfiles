@@ -12,7 +12,7 @@ install_tmux(){
 
 install_tmux_ubuntu(){
     program_exists "tmux"
-    if [[ "$?" != "0"  ]]; then
+    if [[ "$?" == "0"  ]]; then
         version=$(tmux -V 2>/dev/null | grep 2.6)
         if [[ "$?" != "0"  ]]; then
 
