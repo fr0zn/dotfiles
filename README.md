@@ -11,7 +11,7 @@
 # Installation
 
 ```bash
-bash <(curl -L https://bit.ly/dotfiles-fr0zn)
+bash <(curl -L http://dotfiles.fr0zn.pw)
 ```
 
 ## MacOS
