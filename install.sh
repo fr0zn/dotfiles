@@ -88,6 +88,10 @@ install_ubuntu(){
     install_package libc6-dbg:i386 # libc symbols 32
     install_package libc6-dbg # libc symbols 64
 
+    # GUI and terminal
+    install i3
+    install urxvt
+
     # Tools
     install_package gdb gdb-multiarch
 
