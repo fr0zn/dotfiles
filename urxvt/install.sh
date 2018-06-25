@@ -7,7 +7,7 @@ symlink_urxvt_ubuntu(){
 }
 
 install_urxvt_ubuntu(){
-    install_package rxvt-unicode x11-xserver-utils
+    install_package rxvt-unicode-256color x11-xserver-utils
 }
 
 post_urxvt_ubuntu(){
