@@ -28,4 +28,9 @@ post_sublime_ubuntu(){
     symlink_file "sublime/Preferences.sublime-settings" "$conf_path/Preferences.sublime-settings"
     symlink_file "sublime/Package Control.sublime-settings" "$conf_path/Package Control.sublime-settings"
 
+    # Package control
+    conf_path="$HOME/.config/sublime-text-3/Installed Packages/"
+    mkdir -p "$conf_path"
+    wget -O "$conf_path/Package Control.sublime-package" https://packagecontrol.io/Package%20Control.sublime-package
+
 }
