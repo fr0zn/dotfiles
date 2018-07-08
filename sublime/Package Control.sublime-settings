@@ -5,6 +5,7 @@
 	],
 	"installed_packages":
 	[
+		"DoxyDoxygen",
 		"Package Control",
 		"Theme - Spacegray"
 	]
