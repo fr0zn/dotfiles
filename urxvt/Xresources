@@ -3,6 +3,9 @@ URxvt.perl-lib: .dotfiles/urxvt/perl
 ! Load perl modules
 URxvt.perl-ext-common: keyboard-select,font-size
 
+URxvt.iso14755:        false
+URxvt.iso14755_52:     false
+
 ! keyboard-select, with alt+i
 URxvt.keysym.M-i: perl:keyboard-select:activate
 ! selection also to clipboard
