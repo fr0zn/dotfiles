@@ -1,3 +1,16 @@
+! Relative from $HOME
+URxvt.perl-lib: .dotfiles/urxvt/perl
+! Load perl modules
+URxvt.perl-ext-common: keyboard-select,font-size
+
+! keyboard-select, with alt+i
+URxvt.keysym.M-i: perl:keyboard-select:activate
+! selection also to clipboard
+URxvt.keyboard-select.clipboard: true
+
+URxvt.keysym.C-minus: perl:font-size:decrease
+URxvt.keysym.C-equal: perl:font-size:increase
+
 URxvt.scrollBar: false
 URxvt.font: xft:monospace:size=8
 
