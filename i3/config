@@ -9,6 +9,11 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec urxvt
+# start a flaoting terminal
+exec --no-startup-id urxvt -name floating
+bindsym $mod+Shift+Return exec urxvt -name floating
+for_window [class="URxvt" instance="floating"] floating enable, move scratchpad, scratchpad show;
+bindsym $mod+space [class="URxvt" instance="floating"] scratchpad show
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -60,7 +65,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+#bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
