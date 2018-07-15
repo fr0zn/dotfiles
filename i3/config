@@ -12,7 +12,7 @@ bindsym $mod+Return exec urxvt
 # start a flaoting terminal
 exec --no-startup-id urxvt -name floating
 bindsym $mod+Shift+Return exec urxvt -name floating
-for_window [class="URxvt" instance="floating"] floating enable, move scratchpad, scratchpad show;
+for_window [class="URxvt" instance="floating"] floating enable, move scratchpad;
 bindsym $mod+space [class="URxvt" instance="floating"] scratchpad show
 
 # kill focused window
