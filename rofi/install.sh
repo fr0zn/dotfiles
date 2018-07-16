@@ -1,7 +1,7 @@
 pre_rofi_ubuntu(){
     sudo add-apt-repository -y ppa:aguignard/ppa
     DB_SYNC=0
-    install_package libxcb-xrm-dev bison flex pkg-config libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf librsvg2-dev
+    install_package libxcb-xrm-dev bison flex pkg-config libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf librsvg2-dev libxcb-ewmh-dev check
 }
 
 install_rofi_ubuntu(){
@@ -12,7 +12,7 @@ install_rofi_ubuntu(){
     pushd rofi-${version}
     # check
     wget https://github.com/libcheck/check/releases/download/0.12.0/check-0.12.0.tar.gz
-    tar -xvf check-0.12.0
+    tar -xvf check-0.12.0.tar.gz
     pushd check-0.12.0
     ./configure
     make
