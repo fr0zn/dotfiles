@@ -1,5 +1,5 @@
 ! Relative from $HOME
-URxvt.perl-lib: .dotfiles/urxvt/perl
+URxvt.perl-lib: .dotfiles/urxvt/perl/
 ! Load perl modules
 URxvt.perl-ext-common: keyboard-select,font-size
 
