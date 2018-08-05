@@ -91,7 +91,10 @@
 
 " Vim UI {
 
-    " set termguicolors                   " Enable true color support
+    if has("termguicolors")
+        set termguicolors               " Enable true color support
+    endif
+
     if filereadable(expand("$HOME/.vim/plugged/iceberg.vim/colors/iceberg.vim"))
         colorscheme iceberg
     endif
