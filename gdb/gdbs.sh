@@ -5,7 +5,7 @@ _msg() {
 }
 
 _msg_info() {
-    _msg "\e[1;94m==>\e[1;0m ${1}"
+    _msg "\e[1;94m==>\e[1;0m ${1}\n"
 }
 
 DOTFILE_PATH="$HOME/.dotfiles"
@@ -42,4 +42,3 @@ do
    esac
 done
 
-echo
