@@ -1,3 +1,19 @@
+! Relative from $HOME
+URxvt.perl-lib: .dotfiles/urxvt/perl/
+! Load perl modules
+URxvt.perl-ext-common: keyboard-select,font-size
+
+URxvt.iso14755:        false
+URxvt.iso14755_52:     false
+
+! keyboard-select, with alt+i
+URxvt.keysym.M-i: perl:keyboard-select:activate
+! selection also to clipboard
+URxvt.keyboard-select.clipboard: true
+
+URxvt.keysym.C-minus: perl:font-size:decrease
+URxvt.keysym.C-equal: perl:font-size:increase
+
 URxvt.scrollBar: false
 URxvt.font: xft:monospace:size=8
 
@@ -29,3 +45,12 @@ URxvt.font: xft:monospace:size=8
 ! white
 *.color7:  #707880
 *.color15: #C5C8C6
+
+rofi.color-enabled: true
+rofi.color-window: #222222, #000000, #1e2529
+rofi.color-normal: #222222, #979797, #222222, #044a4a, #ffffff
+rofi.color-active: #222222, #ffffff, #222222, #044a4a, #ffffff
+rofi.color-urgent: #e65c00, #ffffff, #e65c00, #e65c00, #ffffff
+
+! URxvt.transparent:   true
+! URxvt.shading:       15

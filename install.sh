@@ -1,36 +1,36 @@
 install_all(){
 
     # Packages
-    install python
-    install node
+    #install python
+    #install node
     install_package cmake
 
     # Tools
     install vim
-    install tmux
+    #install tmux
 
     # Shell
     install zsh
-    install bash
+    #install bash
 
     # Utils
     install fzf
     install_package unzip
     install_package wget
     install_package ssh
-    install pyenv
+    #install pyenv
 
     # Extras
-    install weechat
-    install tmate
+    #install weechat
+    #install tmate
 
     # Pwn
-    install peda
-    install pwndbg
-    install gef # will install ropper on python3
-    install radare2
-    install ropper
-    install pwntools
+    #install peda
+    #install pwndbg
+    #install gef # will install ropper on python3
+    #install radare2
+    #install ropper
+    #install pwntools
 
 # end all
 }
@@ -93,7 +93,7 @@ install_ubuntu(){
     install urxvt
 
     # Tools
-    install_package gdb gdb-multiarch
+    #install_package gdb gdb-multiarch
 
 # end ubuntu
 }
