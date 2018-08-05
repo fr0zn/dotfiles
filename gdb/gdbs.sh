@@ -29,17 +29,17 @@ do
       legacy)
             _msg_info "Starting gdb (legacy)"
             echo "" > $HOME/.gdbinit
+            gdb "$@"
             break ;;
       exit) echo "Exiting"
-            return
             break ;;
          *)
             _msg_info "Starting gdb with $op"
             path=$(IFS=$'\n'; echo "${paths[*]}" | grep $op)
             cat $path > $HOME/.gdbinit
+            gdb "$@"
             break ;;
    esac
 done
 
 echo
-gdb "$@"
