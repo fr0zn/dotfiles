@@ -10,7 +10,8 @@
     Plug 'tyrannicaltoucan/vim-quantum'
     Plug 'chriskempson/base16-vim'
     Plug 'morhetz/gruvbox'
-    Plug 'dracula/vim'
+    Plug 'sonph/onehalf', {'rtp': 'vim/'}
+    Plug 'NLKNguyen/papercolor-theme'
 
     Plug 'easymotion/vim-easymotion'        " Easy move inside vim
     Plug 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits
@@ -101,9 +102,27 @@
         set termguicolors               " Enable true color support
     endif
 
+    " PaperColor {
+
+    let g:PaperColor_Theme_Options = {
+  \   'language': {
+  \     'python': {
+  \       'highlight_builtins' : 1
+  \     },
+  \     'cpp': {
+  \       'highlight_standard_library': 1
+  \     },
+  \     'c': {
+  \       'highlight_builtins' : 1
+  \     }
+  \   }
+  \ }
+    " }
+
     let g:quantum_black=1
+    "let g:hybrid_reduced_contrast = 1
     if filereadable(expand("$HOME/.vim/plugged/iceberg.vim/colors/iceberg.vim"))
-        colorscheme iceberg
+        colorscheme hybrid
     endif
 
     " vim hardcodes background color erase even if the terminfo file does
@@ -413,4 +432,5 @@
         \ 'colorscheme': 'iceberg',
         \ }
     " }
+
 " }
