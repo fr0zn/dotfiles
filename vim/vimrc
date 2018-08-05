@@ -16,6 +16,7 @@
     Plug 'easymotion/vim-easymotion'        " Easy move inside vim
     Plug 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits
     Plug 'terryma/vim-multiple-cursors'     " True Sublime Text style multiple selections for Vim
+    Plug 'brooth/far.vim'                   " Find And Replace Vim plugin
 
     Plug 'jiangmiao/auto-pairs'             " Auto-completion for quotes, parens, brackets, etc
     Plug 'scrooloose/nerdcommenter'         " Comment functions so powerful—no comment necessary.
@@ -25,14 +26,15 @@
     Plug 'tpope/vim-fugitive'               " Git wrapper so awesome, it should be illegal
     Plug 'airblade/vim-gitgutter'           " Git diff on left sidebar
 
-    Plug 'justinmk/vim-syntax-extra'
+    Plug 'justinmk/vim-syntax-extra'        " Vim syntax highlighting for c, bison, flex
 
     Plug 'mbbill/undotree'                  " Left bar with undo tree
     Plug 'majutsushi/tagbar'                " Displays tags in right sidebar
-    Plug 'scrooloose/nerdtree'
+    Plug 'scrooloose/nerdtree'              " A tree explorer plugin for vim.
 
     Plug 'ctrlpvim/ctrlp.vim'               " File fuzzy finding
     Plug '~/.fzf'
+
     Plug 'itchyny/lightline.vim'
 
     Plug 'vim-scripts/DrawIt'               " Vim draw draw lines left, right, up, down, boxes, etc
@@ -265,9 +267,9 @@
     " For when you forget to sudo.. Really Write the file.
     cmap w!! w !sudo tee % >/dev/null
 
-    " Map <Leader>ff to display all lines with keyword under cursor
+    " Map <Leader>tt to display all lines with keyword under cursor
     " and ask which one to jump to
-    nmap <leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+    nmap <leader>tt [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
 
     " Easier horizontal scrolling
     map zl zL
@@ -418,6 +420,13 @@
 
         " Start interactive EasyAlign for a motion/text object (e.g. gaip)
         nmap <Leader>a <Plug>(EasyAlign)
+    " }
+
+    " EasyMotion {
+        map <Leader>j <Plug>(easymotion-j)
+        map <Leader>k <Plug>(easymotion-k)
+        map  / <Plug>(easymotion-sn)
+        omap / <Plug>(easymotion-tn)
     " }
 
     " ALE {

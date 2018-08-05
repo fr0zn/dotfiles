@@ -1,12 +1,14 @@
 {
 	"color_scheme": "Packages/Theme - Spacegray/base16-eighties.dark.tmTheme",
+	"ensure_newline_at_eof_on_save": true,
 	"ignored_packages":
 	[
 	],
+	"rulers":
+	[
+		80
+	],
 	"theme": "Spacegray Eighties.sublime-theme",
 	"translate_tabs_to_spaces": true,
-	"ensure_newline_at_eof_on_save": true,
-	"trim_trailing_white_space_on_save": true,
-	"translate_tabs_to_spaces": true,
-	"rulers": [80]
+	"trim_trailing_white_space_on_save": true
 }
