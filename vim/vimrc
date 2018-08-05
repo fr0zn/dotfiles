@@ -26,6 +26,7 @@
 
     Plug 'ctrlpvim/ctrlp.vim'               " File fuzzy finding
     Plug '~/.fzf'
+    Plug 'itchyny/lightline.vim'
 
     Plug 'vim-scripts/DrawIt'               " Vim draw draw lines left, right, up, down, boxes, etc
     Plug 'e0d1n/markersyntax'
@@ -48,7 +49,7 @@
     " set clipboard=unnamed               " System clipboard
 
     " Always switch to the current file directory
-    autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
+    "autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
 
     " Go last file cursor position
     function! ResCur()
@@ -91,8 +92,8 @@
 " Vim UI {
 
     " set termguicolors                   " Enable true color support
-    if filereadable(expand("$HOME/.vim/plugged/vim-hybrid/colors/hybrid.vim"))
-        colorscheme hybrid
+    if filereadable(expand("$HOME/.vim/plugged/iceberg.vim/colors/iceberg.vim"))
+        colorscheme iceberg
     endif
 
     " vim hardcodes background color erase even if the terminfo file does
@@ -107,8 +108,8 @@
 
     set cursorline                      " Highlight current line
 
-    highlight clear SignColumn          " SignColumn (left) should match background
-    highlight clear LineNr              " Current line number row will have same background color in relative mode
+    "highlight clear SignColumn          " SignColumn (left) should match background
+    "highlight clear LineNr              " Current line number row will have same background color in relative mode
 
     set ruler                           " Show the ruler
     set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
@@ -395,5 +396,11 @@
         let g:ale_lint_on_text_changed = 'never'
         " if you don't want linters to run on opening a file
         let g:ale_lint_on_enter = 0
+    " }
+
+    " LightLine {
+        let g:lightline = {
+        \ 'colorscheme': 'iceberg',
+        \ }
     " }
 " }
