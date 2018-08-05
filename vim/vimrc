@@ -7,6 +7,10 @@
     Plug 'w0ng/vim-hybrid'
     Plug 'cocopon/iceberg.vim'
     Plug 'joshdick/onedark.vim'             " Colorscheme
+    Plug 'tyrannicaltoucan/vim-quantum'
+    Plug 'chriskempson/base16-vim'
+    Plug 'morhetz/gruvbox'
+    Plug 'dracula/vim'
 
     Plug 'easymotion/vim-easymotion'        " Easy move inside vim
     Plug 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits
@@ -19,6 +23,8 @@
 
     Plug 'tpope/vim-fugitive'               " Git wrapper so awesome, it should be illegal
     Plug 'airblade/vim-gitgutter'           " Git diff on left sidebar
+
+    Plug 'justinmk/vim-syntax-extra'
 
     Plug 'mbbill/undotree'                  " Left bar with undo tree
     Plug 'majutsushi/tagbar'                " Displays tags in right sidebar
@@ -95,6 +101,7 @@
         set termguicolors               " Enable true color support
     endif
 
+    let g:quantum_black=1
     if filereadable(expand("$HOME/.vim/plugged/iceberg.vim/colors/iceberg.vim"))
         colorscheme iceberg
     endif
