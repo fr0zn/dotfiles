@@ -429,8 +429,14 @@
 
     " LightLine {
         let g:lightline = {
-        \ 'colorscheme': 'iceberg',
+        \ 'colorscheme': 'jellybeans',
         \ }
+    " }
+
+    " GitGutter {
+        nmap ]h <Plug>GitGutterNextHunk
+        nmap [h <Plug>GitGutterPrevHunk
+        autocmd BufWritePost * GitGutter
     " }
 
 " }
