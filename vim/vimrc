@@ -429,7 +429,7 @@
 
     " LightLine {
         let g:lightline = {
-        \ 'colorscheme': 'iceberg',
+        \ 'colorscheme': 'jellybeans',
         \ }
     " }
 
