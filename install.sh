@@ -41,7 +41,8 @@ install_macos(){
     install_package trash
     install_package unrar
     install_package atool
-    install_cask font-awesome-terminal-fonts
+    #install_cask font-awesome-terminal-fonts
+    install_cask font-hack
 
     # Tools
     install_cask basictex
@@ -87,6 +88,8 @@ install_ubuntu(){
     install_package gcc-multilib # compile 32 bits
     install_package libc6-dbg:i386 # libc symbols 32
     install_package libc6-dbg # libc symbols 64
+
+    install_package fonts-hack-ttf
 
     # GUI and terminal
     install i3
