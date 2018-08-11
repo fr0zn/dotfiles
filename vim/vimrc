@@ -6,12 +6,9 @@
 
     Plug 'w0ng/vim-hybrid'
     Plug 'cocopon/iceberg.vim'
-    Plug 'joshdick/onedark.vim'             " Colorscheme
-    Plug 'tyrannicaltoucan/vim-quantum'
-    Plug 'chriskempson/base16-vim'
-    Plug 'morhetz/gruvbox'
-    Plug 'sonph/onehalf', {'rtp': 'vim/'}
+    "Plug 'chriskempson/base16-vim'
     Plug 'NLKNguyen/papercolor-theme'
+    Plug 'ayu-theme/ayu-vim'                " Colorscheme
 
     Plug 'easymotion/vim-easymotion'        " Easy move inside vim
     Plug 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits
@@ -38,7 +35,7 @@
     Plug 'itchyny/lightline.vim'
 
     Plug 'vim-scripts/DrawIt'               " Vim draw draw lines left, right, up, down, boxes, etc
-    Plug 'e0d1n/markersyntax'
+    Plug 'fr0zn/markersyntax'
     Plug 'w0rp/ale'
 
     call plug#end()
@@ -104,27 +101,9 @@
         set termguicolors               " Enable true color support
     endif
 
-    " PaperColor {
-
-    let g:PaperColor_Theme_Options = {
-  \   'language': {
-  \     'python': {
-  \       'highlight_builtins' : 1
-  \     },
-  \     'cpp': {
-  \       'highlight_standard_library': 1
-  \     },
-  \     'c': {
-  \       'highlight_builtins' : 1
-  \     }
-  \   }
-  \ }
-    " }
-
-    let g:quantum_black=1
-    "let g:hybrid_reduced_contrast = 1
-    if filereadable(expand("$HOME/.vim/plugged/iceberg.vim/colors/iceberg.vim"))
-        colorscheme hybrid
+    let ayucolor="dark"
+    if filereadable(expand("$HOME/.vim/plugged/ayu-vim/colors/ayu.vim"))
+        colorscheme ayu
     endif
 
     " vim hardcodes background color erase even if the terminfo file does
@@ -182,14 +161,6 @@
 " }
 
 " Formatting {
-
-    " if has("autocmd")
-    "   " Highlight TODO, FIXME, NOTE, etc.
-    "   if v:version > 701
-    "     autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|XXX\|BUG\|HACK\)')
-    "     autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\)')
-    "   endif
-    " endif
 
     " Strip whitespace {
         " http://stackoverflow.com/questions/356126/how-can-you-automatically-remove-trailing-whitespace-in-vim
@@ -438,7 +409,7 @@
 
     " LightLine {
         let g:lightline = {
-        \ 'colorscheme': 'jellybeans',
+        \ 'colorscheme': 'one',
         \ }
     " }
 
@@ -446,6 +417,11 @@
         nmap ]h <Plug>GitGutterNextHunk
         nmap [h <Plug>GitGutterPrevHunk
         autocmd BufWritePost * GitGutter
+    " }
+
+    " markersyntax {
+        let g:markersyntaxWords      = ['TODO', 'FIXME', 'BUG', 'NOTE', 'INFO']
+        let g:markersyntaxColors     = ['#fabd2f', '#fe8019', '#fb4934', '#b8bb26', '#68a2ff']
     " }
 
 " }
