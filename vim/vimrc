@@ -420,8 +420,8 @@
     " }
 
     " markersyntax {
-        let g:markersyntaxWords      = ['TODO', 'FIXME', 'BUG', 'NOTE', 'INFO']
-        let g:markersyntaxColors     = ['#fabd2f', '#fe8019', '#fb4934', '#b8bb26', '#68a2ff']
+        let g:markersyntaxWords      = ['TODO', 'FIXME', 'BUG', 'NOTE']
+        let g:markersyntaxColors     = ['#fabd2f', '#fe8019', '#fb4934', '#b8bb26']
     " }
 
 " }
