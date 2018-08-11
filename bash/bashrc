@@ -3,6 +3,8 @@ DOTFILE_PATH=$HOME/.dotfiles
 SCRIPTS_PATH=$DOTFILE_PATH/scripts
 BASH_CONFIG_PATH=$DOTFILE_PATH/bash
 
+. $SCRIPTS_PATH/path.sh
+
 unamestr=`uname`
 
 parse_git_branch() {
