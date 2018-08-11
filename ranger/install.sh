@@ -2,8 +2,15 @@ install_ranger_ubuntu(){
     install_package ranger caca-utils highlight atool w3m poppler-utils mediainfo
 }
 
-symlink_ranger_ubuntu(){
-    msg_debug "Symlink ranger"
+install_ranger_macos(){
+    install_package ranger
+}
+
+symlink_ranger(){
+    mkdir -p $HOME/.config/ranger
+    symlink_file "ranger/rc.conf" "$HOME/.config/ranger"
+    symlink_file "ranger/rifle.conf" "$HOME/.config/ranger"
+    symlink_file "ranger/scope.sh" "$HOME/.config/ranger"
 }
 
 post_ranger_ubuntu(){
