@@ -8,7 +8,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec termite
 # start a flaoting terminal
 exec --no-startup-id urxvt -name floating
 bindsym $mod+Shift+Return exec urxvt -name floating
