@@ -11,6 +11,7 @@ symlink_ranger(){
     symlink_file "ranger/rc.conf" "$HOME/.config/ranger"
     symlink_file "ranger/rifle.conf" "$HOME/.config/ranger"
     symlink_file "ranger/scope.sh" "$HOME/.config/ranger"
+    symlink_file "ranger/commands.py" "$HOME/.config/ranger"
 }
 
 post_ranger_ubuntu(){
