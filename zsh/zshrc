@@ -3,17 +3,13 @@ DOTFILE_PATH=$HOME/.dotfiles
 SCRIPTS_PATH=$DOTFILE_PATH/scripts
 ZSH_CONFIG_PATH=$DOTFILE_PATH/zsh
 
-# Antigen
-source ~/.antigen/antigen.zsh
-antigen use oh-my-zsh
-antigen theme fr0zn/simplezsh
-# Plugins
-antigen bundle rupa/z
-antigen bundle colored-man-pages
-antigen bundle encode64
-antigen apply
-
 unamestr=`uname`
+
+# Function to add to path
+. $SCRIPTS_PATH/path.sh
+
+# Antigen
+. $ZSH_CONFIG_PATH/antigen.sh
 
 # Load ZSHRC config
 . $ZSH_CONFIG_PATH/all_zshrc.conf
