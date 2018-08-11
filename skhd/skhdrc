@@ -1,6 +1,5 @@
-# open terminal, blazingly fast compared to iTerm/Hyper
 #cmd - return : /usr/bin/osascript ~/Scripts/open_kitty.script
-cmd - return : ~/.dotfiles/scripts/macos/open_iterm.sh window
+alt - return : ~/.dotfiles/scripts/macos/open_iterm.sh window
 cmd + shift - return : ~/.dotfiles/scripts/macos/open_iterm.sh tab
 ctrl - space : /usr/bin/osascript ~/.dotfiles/scripts/macos/show-and-hide-nimble.applescript
 
