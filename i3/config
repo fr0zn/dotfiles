@@ -8,7 +8,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec termite
 # start a flaoting terminal
 exec --no-startup-id urxvt -name floating
 bindsym $mod+Shift+Return exec urxvt -name floating
@@ -157,4 +157,5 @@ client.unfocused        #4A4A4A #222222 #aaaaaa #222222
 client.focused_inactive #4A4A4A #222222 #a9a9a9 #222222
 client.urgent           #4A4A4A #4A4A4A #f7f7f7 #4A4A4A
 
+# exec vmware-user
 exec --no-startup-id /usr/bin/feh --bg-scale ~/.dotfiles/i3/wallpaper.jpg

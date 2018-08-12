@@ -1,0 +1,18 @@
+#!/bin/bash
+
+case $BLOCK_BUTTON in
+	1) termite -e alsamixer & disown ;;
+	3) amixer set Master toggle &> /dev/null && amixer set PCM toggle &>/dev/null ;;
+	4) amixer set Master 5- &>/dev/null ;;
+	5) amixer set Master 5+ &>/dev/null ;;
+esac
+
+amixer sget Master | grep "\[on\]" >/dev/null
+muted=$?
+
+# Not muted
+if [ "$muted" -eq 0 ]; then
+    echo 🔊 $(awk -F"[][]" '/dB/ { print $2 }' <(amixer sget Master) | head -n1)
+else
+    echo -n 🔇
+fi
