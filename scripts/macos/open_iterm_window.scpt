@@ -11,6 +11,7 @@ on run argv
         if (count of argv) > 0 then
             tell current session
                 write text argv_s
+                write text "clear"
             end tell
         end if
       end tell
