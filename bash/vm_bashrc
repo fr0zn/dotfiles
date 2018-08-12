@@ -41,3 +41,4 @@ function color_prompt {
 }
 
 color_prompt
+mount_host
