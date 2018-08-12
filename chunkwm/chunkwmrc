@@ -90,8 +90,8 @@ chunkc tiling::rule --owner TextEdit --state float
 chunkc tiling::rule --owner Mumble --state float
 chunkc tiling::rule --owner Stickies --state float
 
-chunkc tiling::rule --owner iTerm2 --name "guake" --state float
-chunkc tiling::rule --owner iTerm2 --name "ranger" --state float
+chunkc tiling::rule --owner iTerm2 --name "^guake" --state float
+chunkc tiling::rule --owner iTerm2 --name "^ranger" --state float
 
 chunkc tiling::rule --owner Nimble Commander --state float
 

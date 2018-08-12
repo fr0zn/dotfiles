@@ -1,6 +1,5 @@
 #cmd - return : /usr/bin/osascript ~/Scripts/open_kitty.script
-alt - return : ~/.dotfiles/scripts/macos/open_iterm.sh window
-cmd + shift - return : ~/.dotfiles/scripts/macos/open_iterm.sh tab
+alt - return : ~/.dotfiles/scripts/open_term.sh
 #ctrl - space : /usr/bin/osascript ~/.dotfiles/scripts/macos/show-and-hide-nimble.applescript
 
 # enter fullscreen mode for the focused container
