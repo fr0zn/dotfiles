@@ -25,6 +25,8 @@
 
     Plug 'justinmk/vim-syntax-extra'        " Vim syntax highlighting for c, bison, flex
 
+    Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+
     Plug 'mbbill/undotree'                  " Left bar with undo tree
     Plug 'majutsushi/tagbar'                " Displays tags in right sidebar
     Plug 'scrooloose/nerdtree'              " A tree explorer plugin for vim.
@@ -422,6 +424,11 @@
     " markersyntax {
         let g:markersyntaxWords      = ['TODO', 'FIXME', 'BUG', 'NOTE']
         let g:markersyntaxColors     = ['#fabd2f', '#fe8019', '#fb4934', '#b8bb26']
+    " }
+
+    " vim-latex-preview {
+        "let g:livepreview_previewer = 'open -a Skim'
+        let g:livepreview_previewer = 'xpdf'
     " }
 
 " }
