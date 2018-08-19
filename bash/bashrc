@@ -30,6 +30,6 @@ source $SCRIPTS_PATH/env.sh
 
 # GDB switch
 function gdbs() {
-    $DOTFILE_PATH/gdb/gdbs.sh
+    $DOTFILE_PATH/gdb/gdbs.sh ${@}
 }
 
