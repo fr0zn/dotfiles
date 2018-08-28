@@ -13,7 +13,7 @@ install_qutebrowser_ubuntu(){
 }
 
 post_qutebrowser_ubuntu(){
-    echo '#!/bin/bash' > $DOTFILE_PATH/bin/qutebrowser
-    echo "$DOTFILE_SRC/qutebrowser/.venv/bin/python3 -m qutebrowser \"\$@\"" >> $DOTFILE_PATH/bin/qutebrowser
-    chmod +x $DOTFILE_PATH/bin/qutebrowser
+    sudo_run echo "'#!/bin/bash'" '>' /usr/local/bin/qutebrowser
+    sudo_run echo "'$DOTFILE_SRC/qutebrowser/.venv/bin/python3 -m qutebrowser \"\$@\"'" '>>' /usr/local/bin/qutebrowser
+    sudo_run chmod +x /usr/local/bin/qutebrowser
 }
