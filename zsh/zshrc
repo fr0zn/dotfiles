@@ -8,6 +8,8 @@ unamestr=`uname`
 # Function to add to path
 . $SCRIPTS_PATH/path.sh
 
+pathadd "$HOME/.dotfiles/bin" after
+
 # Antigen
 . $ZSH_CONFIG_PATH/antigen.sh
 
