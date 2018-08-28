@@ -1,3 +1,5 @@
+#!/bin/bash
+
 DOTFILE_PATH="$HOME/.dotfiles"
 TEMPLATES_PATH="$HOME/.dotfiles/templates"
 PACKAGES_PATH="$HOME/.dotfiles/packages"
@@ -37,12 +39,13 @@ echo
 
 if [[ ! -z $distro ]]; then
     distro="_${distro}"
+else
+    distro=""
 fi
 
 if [[ "$action" == "1" ]];then
     msg_debug "New package"
-    cp "${TEMPLATES_PATH}/install.sh" "${PACKAGES_PATH}/${pname}.sh"
-    sed -i '' -e "s/program/${pname}${distro}/g" "${PACKAGES_PATH}/${pname}.sh"
+    sed "s/program/${pname}${distro}/g" "${TEMPLATES_PATH}/install.sh" > "${PACKAGES_PATH}/${pname}.sh"
     if [[ $? -eq 0 ]]; then
         msg_ok "Created template configuration for '${pname}' in '${PACKAGES_PATH}/${pname}.sh'"
     else
@@ -53,8 +56,7 @@ elif [[ "$action" == "2" ]];then
     mkdir -p "${DOTFILE_PATH}/${pname}"
     if [[ $? -eq 0 ]]; then
         msg_ok "Created folder ${DOTFILE_PATH}/${pname}"
-        cp "${TEMPLATES_PATH}/install.sh" "${DOTFILE_PATH}/${pname}"
-        sed -i '' -e "s/program/${pname}${distro}/g" "${DOTFILE_PATH}/${pname}/install.sh"
+        sed "s/program/${pname}${distro}/g" "${TEMPLATES_PATH}/install.sh" > "${DOTFILE_PATH}/${pname}/install.sh"
         if [[ $? -eq 0 ]]; then
             msg_ok "Created template configuration for '${pname}' in '${DOTFILE_PATH}/${pname}/install.sh'"
         else
