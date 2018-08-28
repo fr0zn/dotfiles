@@ -85,25 +85,22 @@ clean(){
 }
 
 sudo_run(){
+    str="$@"
     if [[ "$UID" == "0" ]]; then
-        ${@}
+        sudo sh -c "${str}"
     else
         HAS_SUDO=$(has_sudo)
         case "$HAS_SUDO" in
         has_sudo__pass_set)
-            sudo bash <<EOF
-            $@
-EOF
+            sudo sh -c "${str}"
             ;;
         has_sudo__needs_pass)
-            msg_info "Please supply your user password for the following command: \"${*}\"" "in"
-            sudo bash <<EOF
-            $@
-EOF
+            msg_info "Please supply your user password for the following command: \"${str}\"" "in"
+            sudo sh -c "${str}"
             ;;
         *)
-            msg_info "Please supply root password for the following command: \"${*}\"" "in"
-            su -c "${@}"
+            msg_info "Please supply root password for the following command: \"${str}\"" "in"
+            su -c "${str}"
             ;;
         esac
     fi
