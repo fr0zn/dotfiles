@@ -9,11 +9,16 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec termite
+
 # start a flaoting terminal
-exec --no-startup-id urxvt -name floating
-bindsym $mod+Shift+Return exec urxvt -name floating
-for_window [class="URxvt" instance="floating"] floating enable, move scratchpad;
-bindsym $mod+space [class="URxvt" instance="floating"] scratchpad show
+exec --no-startup-id termite -t ranger -e $HOME/.dotfiles/scripts/ranger_restart.sh
+exec --no-startup-id termite -t floating
+bindsym $mod+Shift+Return exec termite -t ranger -e $HOME/.dotfiles/scripts/ranger_restart.sh
+bindsym $mod+Ctrl+Return exec termite -t floating
+for_window [class="Termite" title="ranger"] floating enable, move scratchpad;
+for_window [class="Termite" title="floating"] floating enable, move scratchpad;
+bindsym $mod+space [class="Termite" title="ranger"] scratchpad show
+bindsym Ctrl+space [class="Termite" title="floating"] scratchpad show
 
 # kill focused window
 bindsym $mod+Shift+q kill
