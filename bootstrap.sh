@@ -352,6 +352,15 @@ symlink_file(){
     return $?
 }
 
+symlink_path(){
+    local path="${2}"
+    if [ -d "$path" ]; then
+        rm -rf "$path" 2> /dev/null
+    fi
+    lnif "$DOTFILE_PATH/$1" "$2"
+    return $?
+}
+
 function clone(){
     msg_info "Retrieving sources..."
 
@@ -391,13 +400,17 @@ _function_exists() {
     return $?
 }
 
+_remove_hidden() {
+    echo "${1}" | sed 's/^\.//g'
+}
+
 backup_file() {
     msg_ok "Backing up files" "in"
     mkdir -p $DOTFILE_BACKUP 2> /dev/null
     local file_name
     today=`date +%Y%m%d_%s`
     for i in "$@"; do
-        file_name=$(basename $i)
+        file_name=$(_remove_hidden $(basename ${1}))
         if [[ -e "$i" ]]; then
             cp "$i" "${DOTFILE_BACKUP}/${file_name}.${today}" 2>/dev/null 2>&1;
             if [[ ! -f "${DOTFILE_BACKUP}/${file_name}.${today}" ]]; then
@@ -406,6 +419,20 @@ backup_file() {
             fi
         fi
     done
+    return 0
+}
+
+backup_path() {
+    msg_ok "Backing up folder" "in"
+    mkdir -p $DOTFILE_BACKUP 2> /dev/null
+    local file_name
+    file_name=$(_remove_hidden $(basename ${1}))
+    today=`date +%Y%m%d_%s`
+    cp -r "${1}" "${DOTFILE_BACKUP}/${file_name}.${today}" 2>/dev/null 2>&1;
+    if [[ ! -d "${DOTFILE_BACKUP}/${file_name}.${today}" ]]; then
+        msg_error "Backup path ${i}" "in"
+        exit 1
+    fi
     return 0
 }
 
