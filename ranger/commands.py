@@ -66,3 +66,36 @@ class extracthere(Command):
 
         obj.signal_bind('after', refresh)
         self.fm.loader.add(obj)
+
+
+class umount(Command):
+    def execute(self):
+        cwd = self.fm.thisdir
+        marked_files = cwd.get_selection()
+
+        if not marked_files:
+            return
+
+        self.fm.run(["sudo","umount"] + [f.path for f in marked_files])
+
+class mount(Command):
+    def execute(self):
+        cwd = self.fm.thisdir
+
+        device = self.arg(1)
+        if not device:
+            self.fm.notify("Error: no device specified", bad=True)
+            return
+
+        marked_files = cwd.get_selection()
+
+        if len(marked_files) == 1:
+            to_mount = marked_files[0].path
+        else:
+            to_mount = cwd.path
+
+        self.fm.run(["sudo","mount"] + [device, to_mount])
+
+    def tab(self):
+         return self._tab_directory_content()
+
