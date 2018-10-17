@@ -1,3 +1,4 @@
+#!/bin/bash
 uname_out=`uname`
 
 if [[ "$uname_out" == "Darwin" ]]; then
