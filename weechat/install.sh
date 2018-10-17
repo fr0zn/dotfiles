@@ -1,5 +1,9 @@
+backup_weechat(){
+    backup_path "$HOME/.weechat"
+}
+
 symlink_weechat(){
-    symlink_file "weechat/config" "$HOME/.weechat"
+    symlink_path "weechat/config" "$HOME/.weechat"
 }
 
 install_weechat_macos(){
