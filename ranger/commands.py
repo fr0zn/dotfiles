@@ -1,4 +1,5 @@
 import os
+import subprocess
 from ranger.core.loader import CommandLoader
 from ranger.api.commands import Command
 
@@ -99,3 +100,13 @@ class mount(Command):
     def tab(self):
          return self._tab_directory_content()
 
+class z(Command):
+    def execute(self):
+        if not self.arg(1):
+            return
+        _dir = self.arg(1)
+        process = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+        command = 'source $HOME/.antigen/bundles/rupa/z/z.sh; _z -e {}'.format(_dir)
+        out, err = process.communicate(command)
+        if out and out != "":
+            self.fm.cd(out.strip())
