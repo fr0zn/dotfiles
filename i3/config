@@ -13,12 +13,12 @@ bindsym $mod+Return exec termite
 # start a flaoting terminal
 exec --no-startup-id termite -t FLOATING_RANGER -e $HOME/.dotfiles/scripts/ranger_restart.sh
 exec --no-startup-id termite -t FLOATING_TERM
-bindsym $mod+Shift+Return exec termite -t FLOATING_RANGER -e $HOME/.dotfiles/scripts/ranger_restart.sh
-bindsym $mod+Ctrl+Return exec termite -t FLOATING_TERM
+bindsym $mod+Ctrl+Return exec termite -t FLOATING_RANGER -e $HOME/.dotfiles/scripts/ranger_restart.sh
+bindsym $mod+Shift+Return exec termite -t FLOATING_TERM
 for_window [class="Termite" title="FLOATING_RANGER"] floating enable, move scratchpad;
 for_window [class="Termite" title="FLOATING_TERM"] floating enable, move scratchpad;
-bindsym $mod+space [class="Termite" title="FLOATING_RANGER"] scratchpad show
-bindsym Ctrl+space [class="Termite" title="FLOATING_TERM"] scratchpad show
+bindsym Ctrl+space [class="Termite" title="FLOATING_RANGER"] scratchpad show
+bindsym $mod+space [class="Termite" title="FLOATING_TERM"] scratchpad show
 
 # kill focused window
 bindsym $mod+Shift+q kill
