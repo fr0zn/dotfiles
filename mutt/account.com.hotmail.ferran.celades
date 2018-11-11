@@ -1,0 +1,16 @@
+set status_format = "[ferran.celades@hotmail.com]───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+set folder          = imaps://ferran.celades@hotmail.com@imap-mail.outlook.com/
+
+mailboxes     = +INBOX +Drafts +Sent +Junk +Deleted
+set spoolfile = +INBOX
+
+set spoolfile     = +INBOX
+set postponed     = +Drafts
+set record        = +Sent
+set from          = 'Ferran Celades <ferran.celades@hotmail.com>'
+set realname      = 'Ferran Celades'
+set smtp_url      = smtp://ferran.celades@hotmail.com@smtp.live.com:587
+set ssl_starttls  = yes
+
+# Set the status bar color
+color status green default

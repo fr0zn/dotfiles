@@ -1,0 +1,36 @@
+# Folder hooks
+folder-hook 'account.com.hotmail.ferran.celades' 'source ~/.dotfiles/mutt/account.com.ferran.celades'
+
+# Settings -------------------------------------------
+set new_mail_command="terminal-notifier -title 'Terminal' -message 'New Email in %f %n new messages, %u unread.'"
+
+set mail_check = 120
+set timeout = 300
+set imap_keepalive = 300
+
+# Side Bar -------------------------------------------
+set sidebar_visible = yes
+
+# Pager Key Bindings ---------------------------------
+bind pager k  previous-line
+bind pager j  next-line
+bind pager gg top
+bind pager G  bottom
+bind pager R  group-reply
+
+# Status Bar -----------------------------------------
+set status_on_top = yes
+set status_chars  = " *%A"
+set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+
+# Default account ------------------------------------
+source ~/.dotfiles/mutt/account.com.hotmail.ferran.celades
+
+# Shortcuts ------------------------------------------
+
+# Macros for switching accounts
+macro index <f2> '<sync-mailbox><enter-command>source ~/.dotfiles/mutt/account.com.ferran.celades<enter><change-folder>!<enter>'
+
+# Fetch mail shortcut
+bind index <f5> imap-fetch-mail
+
