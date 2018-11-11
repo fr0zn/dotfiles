@@ -26,6 +26,8 @@ set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)
 # Default account ------------------------------------
 source ~/.dotfiles/mutt/account.com.hotmail.ferran.celades
 
+source ~/.dotfiles/mutt/colors
+
 # Shortcuts ------------------------------------------
 
 # Macros for switching accounts
