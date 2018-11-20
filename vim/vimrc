@@ -31,6 +31,8 @@
     Plug 'majutsushi/tagbar'                " Displays tags in right sidebar
     Plug 'scrooloose/nerdtree'              " A tree explorer plugin for vim.
 
+    Plug 'wesleyche/SrcExpl'
+
     Plug 'ctrlpvim/ctrlp.vim'               " File fuzzy finding
     Plug '~/.fzf'
 
@@ -264,6 +266,10 @@
     nnoremap <C-a> _
     nnoremap <C-e> <End>
 
+    " Ctags with ENTER/Space
+    nnoremap <ENTER> <c-]>
+    nnoremap <space> <c-t>
+
 " }
 
 " Plugins {
@@ -379,6 +385,13 @@
         let g:surround_indent = 1
     " }
 
+    " Source Explorer {
+        " The switch of the Source Explorer
+        nmap <silent> <leader>r :SrcExplToggle<CR>
+        " Set "Enter" key to jump into the exact definition context
+        let g:SrcExpl_jumpKey = "<ENTER>"
+    " }
+
     " Ctrl-p {
         nnoremap <silent> <leader>b :CtrlPBuffer<cr>
     " }
@@ -398,8 +411,8 @@
     " EasyMotion {
         map <Leader>j <Plug>(easymotion-j)
         map <Leader>k <Plug>(easymotion-k)
-        map  / <Plug>(easymotion-sn)
-        omap / <Plug>(easymotion-tn)
+        "map  / <Plug>(easymotion-sn)
+        "omap / <Plug>(easymotion-tn)
     " }
 
     " ALE {
@@ -411,8 +424,11 @@
 
     " LightLine {
         let g:lightline = {
-        \ 'colorscheme': 'one',
-        \ }
+          \ 'colorscheme': 'one',
+          \ 'component': {
+          \   'lineinfo': "%{line('.')}/%{line('$')} (%2v)",
+          \ },
+          \ }
     " }
 
     " GitGutter {
