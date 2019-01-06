@@ -6,7 +6,7 @@ symlink_termite_ubuntu(){
 
 install_termite_ubuntu(){
     msg_debug "Install termite"
-    install_package g++ libgtk-3-dev gtk-doc-tools gnutls-bin valac intltool libpcre2-dev libglib3.0-cil-dev libgnutls28-dev libgirepository1.0-dev libxml2-utils gperf
+    install_package g++ libgtk-3-dev gtk-doc-tools gnutls-bin valac intltool libpcre2-dev libglib3.0-cil-dev libgnutls28-dev libgirepository1.0-dev libxml2-utils gperf libgtk2.0-dev
     pushd $DOTFILE_SRC
     git clone --recursive https://github.com/thestinger/termite.git
     git clone https://github.com/thestinger/vte-ng.git
