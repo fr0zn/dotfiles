@@ -1,5 +1,5 @@
 install_i3_ubuntu(){
-    install_package i3 i3blocks xinit feh
+    install_package i3 i3blocks xinit feh x11-xserver-utils
 }
 
 symlink_i3_ubuntu(){
