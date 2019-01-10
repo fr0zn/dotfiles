@@ -1,6 +1,10 @@
 set status_format = "[ferran.celades@hotmail.com]───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
 set folder          = imaps://ferran.celades@hotmail.com@imap-mail.outlook.com/
 
+set header_cache = ~/.dotfiles/mutt/com.hotmail.ferran.celades/cache/headers
+set message_cachedir = ~/.dotfiles/mutt/com.hotmail.ferran.celades/cache/bodies
+set certificate_file = ~/.dotfiles/mutt/com.hotmail.ferran.celades/certificates
+
 #set imap_check_subscribed = yes
 mailboxes     = +INBOX +Drafts +Junk +Deleted
 set spoolfile = +INBOX

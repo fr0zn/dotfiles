@@ -40,10 +40,10 @@ set pgp_replyencrypt=yes
 # Set this to something comfortable
 set pgp_timeout=1800
 
-# Folder hooks --------------------------------------
-folder-hook 'account.com.hotmail.ferran.celades' 'source ~/.dotfiles/mutt/account.com.ferran.celades'
 
 # Settings -------------------------------------------
+source ~/.dotfiles/mutt/colors
+
 # Don't store vim data
 set editor="vim +13 -c 'set nobackup' -c 'set noswapfile' -c 'set nowritebackup' -c 'set tw=72 ft=mail'"
 
@@ -63,13 +63,18 @@ set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)
 
 set new_mail_command="terminal-notifier -title 'Terminal' -message 'New Email in %f %n new messages, %u unread.'"
 
+
 # Default account ------------------------------------
 source ~/.dotfiles/mutt/account.com.hotmail.ferran.celades
-source ~/.dotfiles/mutt/colors
+
+# Folder hooks --------------------------------------
+folder-hook 'account.com.hotmail.ferran.celades' 'source ~/.dotfiles/mutt/account.com.ferran.celades'
+folder-hook 'account.com.gmail.fr0zn' 'source ~/.dotfiles/mutt/account.com.gmail.fr0zn'
 
 # Shortcuts ------------------------------------------
 # Macros for switching accounts
-macro index <f2> '<sync-mailbox><enter-command>source ~/.dotfiles/mutt/account.com.ferran.celades<enter><change-folder>!<enter>'
+macro index <f2> '<sync-mailbox><enter-command>source ~/.dotfiles/mutt/account.com.hotmail.ferran.celades<enter><change-folder>!<enter>'
+macro index <f3> '<sync-mailbox><enter-command>source ~/.dotfiles/mutt/account.com.gmail.fr0zn<enter><change-folder>!<enter>'
 
 # Fetch mail shortcut
 bind index <f5> imap-fetch-mail

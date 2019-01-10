@@ -1,0 +1,25 @@
+set status_format = "[GMAIL - fr0zn]───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+set folder = imaps://imap.gmail.com:993
+
+set header_cache = ~/.dotfiles/mutt/com.gmail.fr0zn/cache/headers
+set message_cachedir = ~/.dotfiles/mutt/com.gmail.fr0zn/cache/bodies
+set certificate_file = ~/.dotfiles/mutt/com.gmail.fr0zn/certificates
+
+#set imap_check_subscribed = yes
+mailboxes     = +INBOX +Drafts +Junk +Deleted
+set spoolfile = +INBOX
+
+set ssl_starttls=yes
+set ssl_force_tls=yes
+
+set spoolfile     = +INBOX
+set postponed = "+[Gmail]/Drafts"
+set record = "+[Gmail]/Sent Mail"
+
+source "gpg -d ~/.dotfiles/mutt/account.com.gmail.fr0zn.gpg |"
+
+set spoolfile = +INBOX
+
+# Set the status bar color
+color status yellow default
+
