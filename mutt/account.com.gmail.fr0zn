@@ -6,20 +6,15 @@ set message_cachedir = ~/.dotfiles/mutt/com.gmail.fr0zn/cache/bodies
 set certificate_file = ~/.dotfiles/mutt/com.gmail.fr0zn/certificates
 
 #set imap_check_subscribed = yes
+
 unmailboxes *
-mailboxes     = +INBOX +Drafts +Junk +Deleted
+mailboxes     = "+INBOX" "+[Gmail]/Spam" "+[Gmail]/Sent Mail" "+[Gmail]/Drafts"
+
 set spoolfile = +INBOX
-
-set ssl_starttls=yes
-set ssl_force_tls=yes
-
-set spoolfile     = +INBOX
 set postponed = "+[Gmail]/Drafts"
-set record = "+[Gmail]/Sent Mail"
+set record    = "+[Gmail]/Sent Mail"
 
 source "gpg -d ~/.dotfiles/mutt/account.com.gmail.fr0zn.gpg |"
-
-set spoolfile = +INBOX
 
 # Set the status bar color
 color status yellow default
