@@ -1,5 +1,7 @@
 set $mod Mod1
 
+for_window [class="^.*"] border pixel 3
+
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 font pango:monospace 8
@@ -19,6 +21,8 @@ for_window [class="Termite" title="FLOATING_RANGER"] floating enable, move scrat
 for_window [class="Termite" title="FLOATING_TERM"] floating enable, move scratchpad;
 bindsym Ctrl+space [class="Termite" title="FLOATING_RANGER"] scratchpad show
 bindsym $mod+space [class="Termite" title="FLOATING_TERM"] scratchpad show
+
+for_window [title="^Android Emulator -"] floating enable
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -138,7 +142,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        position top
+        position bottom
         status_command i3blocks
         tray_output primary
         colors {
@@ -155,12 +159,12 @@ bar {
 }
 
 
-client.placeholder      #242424 #242424 #242424
-client.background       #242424 #242424 #242424
-client.focused          #4A4A4A #4A4A4A #e5e5e5 #044A4A
-client.unfocused        #4A4A4A #222222 #aaaaaa #222222
-client.focused_inactive #4A4A4A #222222 #a9a9a9 #222222
-client.urgent           #4A4A4A #4A4A4A #f7f7f7 #4A4A4A
+#client.placeholder      #242424 #242424 #242424
+#client.background       #242424 #242424 #242424
+#client.focused          #4A4A4A #4A4A4A #e5e5e5 #044A4A
+#client.unfocused        #4A4A4A #222222 #aaaaaa #222222
+#client.focused_inactive #4A4A4A #222222 #a9a9a9 #222222
+#client.urgent           #4A4A4A #4A4A4A #f7f7f7 #4A4A4A
 
 # exec vmware-user
 exec --no-startup-id /usr/bin/feh --bg-scale ~/.dotfiles/i3/wallpaper.jpg
