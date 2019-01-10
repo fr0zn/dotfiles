@@ -11,7 +11,11 @@ set record        = +Sent
 set from          = 'Ferran Celades <ferran.celades@hotmail.com>'
 set realname      = 'Ferran Celades'
 set smtp_url      = smtp://ferran.celades@hotmail.com@smtp.live.com:587
-set ssl_starttls  = yes
 
 # Set the status bar color
 color status green default
+
+# PGP
+set pgp_sign_as="0xB29990C2"
+
+source "gpg -d ~/.dotfiles/mutt/account.com.hotmail.ferran.celades.gpg |"

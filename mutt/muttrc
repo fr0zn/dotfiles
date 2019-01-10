@@ -1,38 +1,81 @@
-# Folder hooks
+# Security ------------------------------------------
+# SSL hardening
+set ssl_force_tls=yes
+set ssl_starttls=yes
+set ssl_use_sslv2=no
+set ssl_use_sslv3=no
+set ssl_use_tlsv1=no
+set ssl_use_tlsv1_1=no
+set ssl_use_tlsv1_2=yes
+set ssl_verify_dates=yes
+set ssl_verify_host=yes
+
+# PGP -----------------------------------------------
+set pgp_decode_command="gpg --status-fd=2 %?p?--passphrase-fd 0? --no-verbose --quiet --batch --output - %f"
+set pgp_verify_command="gpg --status-fd=2 --no-verbose --quiet --batch --output - --verify %s %f"
+set pgp_decrypt_command="gpg --status-fd=2 %?p?--passphrase-fd 0? --no-verbose --quiet --batch --output - %f"
+set pgp_sign_command="gpg --no-verbose --batch --quiet --output - %?p?--passphrase-fd 0? --armor --detach-sign --textmode %?a?-u %a? %f"
+set pgp_clearsign_command="gpg --no-verbose --batch --quiet --output - %?p?--passphrase-fd 0? --armor --textmode --clearsign %?a?-u %a? %f"
+set pgp_encrypt_only_command="pgpewrap gpg --batch --quiet --no-verbose --output - --encrypt --textmode --armor --always-trust -- -r %r -- %f"
+set pgp_encrypt_sign_command="pgpewrap gpg %?p?--passphrase-fd 0? --batch --quiet --no-verbose --textmode --output - --encrypt --sign %?a?-u %a? --armor --always-trust -- -r %r -- %f"
+set pgp_import_command="gpg --no-verbose --import %f"
+set pgp_export_command="gpg --no-verbose --export --armor %r"
+set pgp_verify_key_command="gpg --verbose --batch --fingerprint --check-sigs %r"
+set pgp_list_pubring_command="gpg --no-verbose --batch --quiet --with-colons --with-fingerprint --with-fingerprint --list-keys %r"
+set pgp_list_secring_command="gpg --no-verbose --batch --quiet --with-colons --with-fingerprint --with-fingerprint --list-secret-keys %r"
+set pgp_good_sign="^\\[GNUPG:\\] GOODSIG"
+
+set pgp_check_gpg_decrypt_status_fd
+set pgp_use_gpg_agent
+
+# Automatic gpg on inline enc messages
+message-hook '!(~g|~G) ~b"^-----BEGIN\ PGP\ (SIGNED\ )?MESSAGE"' "exec check-traditional-pgp"
+
+# set crypt_use_gpgme
+
+# set pgp_autosign=yes
+
+# Encrypt replies to PGP mails by default
+set pgp_replyencrypt=yes
+# Set this to something comfortable
+set pgp_timeout=1800
+
+# Folder hooks --------------------------------------
 folder-hook 'account.com.hotmail.ferran.celades' 'source ~/.dotfiles/mutt/account.com.ferran.celades'
 
 # Settings -------------------------------------------
-set new_mail_command="terminal-notifier -title 'Terminal' -message 'New Email in %f %n new messages, %u unread.'"
+# Don't store vim data
+set editor="vim +13 -c 'set nobackup' -c 'set noswapfile' -c 'set nowritebackup' -c 'set tw=72 ft=mail'"
 
 set mail_check = 120
 set timeout = 300
 set imap_keepalive = 300
+set include                               # Include the message in replies.
+# set edit_headers                          # I want to edit the message headers.
 
 # Side Bar -------------------------------------------
 set sidebar_visible = yes
-
-# Pager Key Bindings ---------------------------------
-bind pager k  previous-line
-bind pager j  next-line
-bind pager gg top
-bind pager G  bottom
-bind pager R  group-reply
 
 # Status Bar -----------------------------------------
 set status_on_top = yes
 set status_chars  = " *%A"
 set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
 
+set new_mail_command="terminal-notifier -title 'Terminal' -message 'New Email in %f %n new messages, %u unread.'"
+
 # Default account ------------------------------------
 source ~/.dotfiles/mutt/account.com.hotmail.ferran.celades
-
 source ~/.dotfiles/mutt/colors
 
 # Shortcuts ------------------------------------------
-
 # Macros for switching accounts
 macro index <f2> '<sync-mailbox><enter-command>source ~/.dotfiles/mutt/account.com.ferran.celades<enter><change-folder>!<enter>'
 
 # Fetch mail shortcut
 bind index <f5> imap-fetch-mail
 
+bind pager k  previous-line
+bind pager j  next-line
+bind pager gg top
+bind pager G  bottom
+bind pager R  group-reply
