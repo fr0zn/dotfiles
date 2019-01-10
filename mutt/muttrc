@@ -76,6 +76,12 @@ folder-hook 'account.com.gmail.fr0zn' 'source ~/.dotfiles/mutt/account.com.gmail
 macro index <f2> '<sync-mailbox><enter-command>source ~/.dotfiles/mutt/account.com.hotmail.ferran.celades<enter><change-folder>!<enter>'
 macro index <f3> '<sync-mailbox><enter-command>source ~/.dotfiles/mutt/account.com.gmail.fr0zn<enter><change-folder>!<enter>'
 
+bind index,pager K sidebar-prev
+bind index,pager J sidebar-next
+bind index,pager L sidebar-open
+
+macro index b '<enter-command>toggle sidebar_visible<enter>'
+
 # Fetch mail shortcut
 bind index <f5> imap-fetch-mail
 
