@@ -49,6 +49,7 @@ set editor="vim +13 -c 'set nobackup' -c 'set noswapfile' -c 'set nowritebackup'
 
 set mail_check = 120
 set timeout = 300
+set sleep_time = 0 # Faster
 set imap_keepalive = 300
 set include                               # Include the message in replies.
 # set edit_headers                          # I want to edit the message headers.
