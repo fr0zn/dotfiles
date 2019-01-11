@@ -1,1 +1,3 @@
-./bootstrap.sh "SOURCED"
+#!/bin/bash
+
+$HOME/.dotfiles/bootstrap.sh "SOURCED"
