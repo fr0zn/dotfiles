@@ -35,3 +35,6 @@ function gdbs() {
     $DOTFILE_PATH/gdb/gdbs.sh ${@}
 }
 
+function bootstrap() {
+    $DOTFILE_PATH/manual.sh
+}
