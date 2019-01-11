@@ -14,6 +14,8 @@ set spoolfile = +INBOX
 set postponed = "+[Gmail]/Drafts"
 set record    = "+[Gmail]/Sent Mail"
 
+source '~/.dotfiles/mutt/gen_aliases.sh ~/.dotfiles/mutt/com.gmail.fr0zn |'
+
 source "gpg -d ~/.dotfiles/mutt/account.com.gmail.fr0zn.gpg |"
 
 # Set the status bar color

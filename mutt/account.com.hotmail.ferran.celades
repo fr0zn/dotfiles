@@ -17,6 +17,8 @@ set from          = 'Ferran Celades <ferran.celades@hotmail.com>'
 set realname      = 'Ferran Celades'
 set smtp_url      = smtp://ferran.celades@hotmail.com@smtp.live.com:587
 
+source '~/.dotfiles/mutt/gen_aliases.sh ~/.dotfiles/mutt/com.hotmail.ferran.celades |'
+
 # Set the status bar color
 color status green default
 
