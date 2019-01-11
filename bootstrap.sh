@@ -465,23 +465,25 @@ _template() {
 install() {
     local steps
     steps=$STEPS
-    msg_info "Installing: '$1'"
-    if [[ ! -z "$2" ]]; then
-        msg_info "$1: Custom steps installation, steps: ${@:2}"
-        steps="${@:2}"
-    fi
-
-    for step in $steps; do
-        _template "$step" "$1"
-        cd $HOME
-        if [[ $? -ne 0 ]]; then
-            msg_error "Error installing '$1' in step: $step"
-            return 1
+    if [[ ! -z "$1" ]]; then
+        msg_info "Installing: '$1'"
+        if [[ ! -z "$2" ]]; then
+            msg_info "$1: Custom steps installation, steps: ${@:2}"
+            steps="${@:2}"
         fi
-    done
 
-    msg_ok "Done: '$1'" "in"
-    return 0
+        for step in $steps; do
+            _template "$step" "$1"
+            cd $HOME
+            if [[ $? -ne 0 ]]; then
+                msg_error "Error installing '$1' in step: $step"
+                return 1
+            fi
+        done
+
+        msg_ok "Done: '$1'" "in"
+        return 0
+    fi
 }
 
 install_aur(){
@@ -626,7 +628,6 @@ else
     # Interactive
     while true; do
         read -p "cmd: " cmd
-        echo "$cmd"
         $cmd
     done
 fi
