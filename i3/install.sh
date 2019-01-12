@@ -2,6 +2,42 @@ install_i3_ubuntu(){
     install_package i3 i3blocks xinit feh x11-xserver-utils
 }
 
+gaps_i3_ubuntu(){
+    install_package libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev \
+    libxcb-util0-dev libxcb-icccm4-dev libyajl-dev \
+    libstartup-notification0-dev libxcb-randr0-dev \
+    libev-dev libxcb-cursor-dev libxcb-xinerama0-dev \
+    libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev \
+    autoconf libxcb-xrm-dev i3blocks xinit feh x11-xserver-utils
+
+    clone_src https://www.github.com/Airblader/i3 i3-gaps
+    pushd $DOTFILE_SRC/i3-gaps
+    autoreconf --force --install
+    rm -rf build/
+    mkdir -p build && cd build/
+    ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
+    make
+    sudo make install
+    popd
+}
+
+lock_i3_ubuntu(){
+
+    install_package imagemagick libxcb-composite0-dev libjpeg-turbo8-dev
+
+    clone_src https://github.com/meskarune/i3lock-fancy i3lock-fancy
+    pushd $DOTFILE_SRC/i3lock-fancy
+    sudo make install
+    popd
+
+    clone_src https://github.com/PandorasFox/i3lock-color.git i3lock-color
+    pushd $DOTFILE_SRC/i3lock-color
+    autoreconf -i
+    ./configure
+    make
+    popd
+}
+
 symlink_i3_ubuntu(){
     mkdir -p $HOME/.config/i3
     symlink_file "i3/config" "$HOME/.config/i3"
