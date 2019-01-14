@@ -1,4 +1,4 @@
 configuration {
-    combi-modi: "window,drun,ssh";
+    combi-modi: "drun,run,ssh";
     theme: "~/.dotfiles/rofi/theme";
 }
