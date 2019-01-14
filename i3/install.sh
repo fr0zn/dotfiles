@@ -23,7 +23,7 @@ gaps_i3_ubuntu(){
 
 lock_i3_ubuntu(){
 
-    install_package imagemagick libxcb-composite0-dev libjpeg-turbo8-dev
+    install_package imagemagick libxcb-composite0-dev libjpeg-turbo8-dev libpam0g-dev
 
     clone_src https://github.com/meskarune/i3lock-fancy i3lock-fancy
     pushd $DOTFILE_SRC/i3lock-fancy
