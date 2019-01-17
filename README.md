@@ -22,7 +22,7 @@ There exist two types of program folders:
 
 This is valid for both, programs with and without configuration.
 
-Inside packages there exist one file called `install.sh` . This file contains a template that can be understood by the bootstrap system (`bootstrap.sh`) and let you specify some steps to be run on that specific program. This template are functions for each step of the package and each distro. The default steps are defined in `bootstrap.sh` as `STEPS="pre backup symlink install post"`. Once the installation process begins, the installation for that binary will follow the steps specified in the `STEPS` variable (This can be customized and manually specified per program later, see [Custom Steps](#custom-steps)).
+Inside packages there exist one file called `install.sh` . This file contains a template that can be understood by the bootstrap system (`bootstrap.sh`) and let you specify some steps to be run on that specific program. The default steps are defined in `bootstrap.sh` as `STEPS="pre backup symlink install post"`. Once the installation process begins, the installation for that binary, initialized with the `install` command, will follow the steps specified in the `STEPS` variable (This can be customized and manually specified for each program, see [Custom Steps](#custom-steps)).
 
 An example of such file is shown below, note the steps name:
 
