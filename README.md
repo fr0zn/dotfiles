@@ -190,10 +190,10 @@ sudo_run make install
 
 # Custom steps
 
-Add the wanted step inside the `install.sh` of the package name. It can then be used as seen in the `install` command [Commands](#commands).
+Add the wanted step inside the `install.sh` of the package name.
 
 ```
-# install.sh
+# fancy/install.sh
 nicestep_fancy_ubuntu() {
   # This will be executed only on ubuntu
 }
@@ -202,7 +202,7 @@ nicestep_fancy_macos() {
 }
 ```
 
-In order to use it, it can be manually runned with the `manual.sh` script or inside the `bootstrap` file as:
+In order to use it, it can be manually executed though the `manual.sh` script or inside the `bootstrap` file as:
 
 ```
 install fancy nicestep
