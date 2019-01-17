@@ -17,6 +17,8 @@ There exist two types of program folders:
 - Programs **with** configuration files. (Can be found inside the root directory of the dotfiles)
 - Programs **without** configuration files. (Can be found inside the `packages` directory)
 
+> The structure can be changed as you like with custom hierarchies.
+
 
 ### Install sh
 
