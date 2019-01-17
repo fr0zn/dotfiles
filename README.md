@@ -73,6 +73,8 @@ This programs are stored inside a folder with the same name, see `vim` as an exa
 
 # Commands
 
+They can be executed anywhere during the bootstrap process. In order to execute manual command without the order specified in the `bootstrap` file run the `manual.sh` script. It contains a prompt inside the bootstrap process that will let you run the following commands:
+
 - `add_app_login` (macOs only): Adds the application on login
 
 ```
@@ -186,7 +188,25 @@ sudo_run make install
 
 - `sync_database`: It can be called directly previously setting the variable `$DB_SYNC` to `0`. This function will get called automatically on the `install_package` command, and if the variable is set as `DB_SYNC=0` the package manager will perform a repo update (`apt-get update`, `brew update` ...)
 
-## Custom steps
+# Custom steps
+
+Add the wanted step inside the `install.sh` of the package name. It can then be used as seen in the `install` command [Commands](#commands).
+
+```
+# install.sh
+nicestep_fancy_ubuntu() {
+  # This will be executed only on ubuntu
+}
+nicestep_fancy_macos() {
+  # This will be executed only on macos
+}
+```
+
+In order to use it, it can be manually runned with the `manual.sh` script or inside the `bootstrap` file as:
+
+```
+install fancy nicestep
+```
 
 ## Adding distros
 
