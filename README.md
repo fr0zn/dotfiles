@@ -10,6 +10,8 @@ The process is very simple, it reads all the `install.sh` files found under the 
 
 The most used one is the `install` command, which will execute the `install.sh` steps for the specified package as argument (See [install.sh](#install-sh))
 
+A custom command name `bootstrap` will be configured that will let you run commands (see [Commands](#commands)).
+
 ## Structure
 
 There exist two types of program folders:
