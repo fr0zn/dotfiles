@@ -591,7 +591,7 @@ _run(){
 
     sync_database
 
-    . "$DOTFILE_PATH/install.sh"
+    . "$DOTFILE_PATH/bootstrap"
 
     if _function_exists "install_$OS_TYPE"; then
         $"install_$OS_TYPE"
@@ -607,7 +607,7 @@ _run(){
 }
 
 _edit(){
-    vi "$DOTFILE_PATH/install.sh"
+    vi "$DOTFILE_PATH/bootstrap"
     y_n "Run installation now" _run return
 }
 
