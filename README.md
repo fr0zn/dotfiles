@@ -65,11 +65,7 @@ As seen, `install.sh` can perform different functions depending on the `step` an
 
 In order to create an `install` package you can run the `helper.sh` script. It will prompt you for the type of package (with/without configuration files) and the name of it. It will also ask if this package is going to be available for only one specific OS/distro or will be a common package.
 
-This will create the `install.sh` with the package name and the apropiate distro details on the correct folder, under packages in case of no configuration or with a folder named the same as the package name if `with configuration` was specified.
-
-### With configuration
-
-This programs are stored inside a folder with the same name, see `vim` as an example. Inside `vim` there exist 2 main files. One called `install.sh` and the other called `vimrc`. The file with the name `install.sh` contains a template that can be understood by the bootsrap system and let you specify
+This will create the `install.sh` with the package name and the appropriate distro details. This file will be stored under packages in case of `without configuration` or with a folder named the same as the package name if `with configuration` was specified.
 
 # Commands
 
