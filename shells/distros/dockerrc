@@ -6,3 +6,4 @@ PROMPT='%{$fg_bold[green]%}%M: %{$reset_color%}%{$PROMPT_SUCCESS_COLOR%}%~%{$res
 # Alias
 
 # Functions
+

@@ -14,17 +14,21 @@ pathadd "$HOME/.dotfiles/bin" after
 pathadd "$HOME/ida-7.1"
 
 # Load all config (depending on bash or zshrc)
-. $CONFIG_PATH/all
+. $CONFIG_PATH/all 2>/dev/null
 
 # MacOS configs
 if [[ "$unamestr" == "Darwin" ]]; then
-    . $CONFIG_PATH/macos
+    . $CONFIG_PATH/macos 2>/dev/null
+    . $SHELLS_PATH/distros/macosrc 2>/dev/null
 else
-# Linux configs
-    . $CONFIG_PATH/linux
-    # Docker configs
+    # Linux configs
+    . $CONFIG_PATH/linux 2>/dev/null
+    . $SHELLS_PATH/distros/linuxrc 2>/dev/null
+
     if [ -f /.dockerenv ]; then
-        . $CONFIG_PATH/docker
+        # Docker configs
+        . $CONFIG_PATH/docker 2>/dev/null
+        . $SHELLS_PATH/distros/dockerrc 2>/dev/null
     fi
 fi
 

@@ -1,9 +1,3 @@
-# Exports
-
 pathadd "$HOME/.pyenv/bin" "after"
 
-# Alias
-
 alias rm="rm -i"
-
-# Functions

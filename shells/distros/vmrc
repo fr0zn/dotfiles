@@ -1,4 +1,4 @@
-function mount_host {
+mount_host {
 	out=$(mount | grep host_home)
 	# Mount shared folder
 	if [ "$?" -eq "1" ]; then
@@ -8,7 +8,7 @@ function mount_host {
 	fi
 }
 
-function umount_host {
+umount_host {
 	out=$(mount | grep host_home)
 	# Mount shared folder
 	if [ "$?" -eq "1" ]; then
@@ -18,17 +18,17 @@ function umount_host {
 	fi
 }
 
-function cd {
+cd {
 
 	builtin cd $@
 	color_prompt
 }
 
-function cdh {
+cdh {
 	cd "/mnt/host_home"
 }
 
-function color_prompt {
+color_prompt {
     pwd=$(pwd)
     if [[ "$pwd/" =~ ^/mnt/host_home ]] ; then
 	prefix="/mnt/host_home"
