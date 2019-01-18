@@ -1,35 +1,13 @@
 # Path to dotfiles
 DOTFILE_PATH=$HOME/.dotfiles
 SCRIPTS_PATH=$DOTFILE_PATH/scripts
-ZSH_CONFIG_PATH=$DOTFILE_PATH/zsh
-
-unamestr=`uname`
-
-# Function to add to path
-. $SCRIPTS_PATH/path.sh
-
-pathadd "$HOME/.dotfiles/bin" after
-pathadd "$HOME/ida-7.1"
+SHELLS_PATH=$DOTFILE_PATH/shells
+CONFIG_PATH=$DOTFILE_PATH/zsh
 
 # Antigen
-. $ZSH_CONFIG_PATH/antigen.sh
+. $CONFIG_PATH/antigen
 
-# Load ZSHRC config
-. $ZSH_CONFIG_PATH/all_zshrc.conf
-
-# MacOS configs
-if [[ "$unamestr" == "Darwin" ]]; then
-    . $ZSH_CONFIG_PATH/macos_zshrc.conf
-else
-# Linux configs
-    . $ZSH_CONFIG_PATH/linux_zshrc.conf
-    # Docker configs
-    if [ -f /.dockerenv ]; then
-        . $ZSH_CONFIG_PATH/docker_zshrc.conf
-    fi
-fi
+. $SHELLS_PATH/allrc
 
 # FZF config
 [ -f ~/.fzf.zsh ] && . ~/.fzf.zsh
-
-. $SCRIPTS_PATH/env.sh

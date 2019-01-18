@@ -1,0 +1,31 @@
+# Exports
+
+export COPYFILE_DISABLE=true
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+export EDITOR='vim'
+export PYTHONSTARTUP=~/.pythonrc
+
+export TERM="xterm-256color"
+
+# Alias
+
+alias c="clear"
+
+# https://unix.stackexchange.com/questions/1045/getting-256-colors-to-work-in-tmux
+#alias tmux='tmux -2'
+
+alias gs='git status '
+alias ga='git add '
+alias gb='git branch '
+alias gc='git commit'
+alias gd='git diff'
+# alias go='git checkout '
+alias gk='gitk --all&'
+alias gx='gitx --all'
+
+alias server='python -m SimpleHTTPServer'
+
+# Functions
+
