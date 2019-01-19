@@ -21,7 +21,7 @@ install python dev
 install vim backup install symlink post
 install tmux
 
-install zsh
+install bash
 
 install fzf
 
