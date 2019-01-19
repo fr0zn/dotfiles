@@ -593,11 +593,13 @@ _run(){
 
     . "$DOTFILE_PATH/bootstrap"
 
-    if _function_exists "install_$OS_TYPE"; then
-        $"install_$OS_TYPE"
+    if [ -f "$DOTFILE_PATH/bootstrap/$OS_TYPE.sh" ]; then
+        msg_info "Executing installation file of '$OS_TYPE'"
+        . "$DOTFILE_PATH/bootstrap/$OS_TYPE.sh"
     fi
 
-    $"install_all"
+    msg_info "Executing common installation file"
+    . "$DOTFILE_PATH/bootstrap/all.sh"
 
     if [[ $? -eq 0 ]]; then
         msg_ok "Done installing dotfiles!"
