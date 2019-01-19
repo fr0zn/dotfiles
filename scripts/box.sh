@@ -1,5 +1,5 @@
 #!/bin/sh
-vagrant_path=~/.dotfiles/vagrant
+vagrant_path=$HOME/.dotfiles/vagrant
 
 ProgName=$(basename $0)
 
@@ -18,7 +18,7 @@ box_sub_status(){
 }
 
 box_sub_ls(){
-    valid_vagrants=`find $vagrant_path -maxdepth 1 -mindepth 1 -type d -printf "%f\n"`
+    valid_vagrants=`find $vagrant_path -type d -maxdepth 1 -mindepth 1 -exec basename {} \;`
     echo $valid_vagrants
 }
 
@@ -30,7 +30,7 @@ box_sub_edit(){
         if [ $? = 0 ]; then
             box_path=`echo $matched | awk '{print $5}'`
         else
-            valid_vagrants=`find $vagrant_path -maxdepth 1 -mindepth 1 -type d -printf "%f\n"`
+            valid_vagrants=`find $vagrant_path -type d -maxdepth 1 -mindepth 1 -exec basename {} \;`
             matched=`echo $valid_vagrants | grep -w $machine_name`
             if [ $? = 0 ]; then
                 box_path="$vagrant_path/$machine_name"
@@ -54,7 +54,7 @@ box_sub_others(){
     if [ $? = 0 ]; then
         box_path=`echo $matched | awk '{print $5}'`
     else
-        valid_vagrants=`find $vagrant_path -maxdepth 1 -mindepth 1 -type d -printf "%f\n"`
+        valid_vagrants=`find $vagrant_path -type d -maxdepth 1 -mindepth 1 -exec basename {} \;`
         matched=`echo $valid_vagrants | grep -w $machine_name`
         if [ $? = 0 ]; then
             box_path="$vagrant_path/$machine_name"
