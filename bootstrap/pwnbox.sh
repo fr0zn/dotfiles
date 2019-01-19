@@ -18,7 +18,7 @@ install_package qemu qemu-user qemu-user-static
 install python
 install python dev
 
-install vim
+install vim backup install symlink post
 install tmux
 
 install zsh
