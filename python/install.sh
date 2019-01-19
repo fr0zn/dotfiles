@@ -13,3 +13,8 @@ install_python_ubuntu(){
     install_package python3
     install_package python3-pip
 }
+
+dev_python_ubuntu(){
+    install_package python-dev
+    install_package python3-dev
+}
