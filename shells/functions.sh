@@ -36,7 +36,8 @@ extract_shellcode(){
     fi
 }
 
-# Load the box function
+# Load the box and dbox function
+. $SCRIPTS_PATH/dbox.sh
 . $SCRIPTS_PATH/box.sh
 
 # GDB switch

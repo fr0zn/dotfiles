@@ -1,89 +1,152 @@
-function box(){
-    ESC="\x1B["
-    RESET=$ESC"39m"
-    RED=$ESC"31m"
-    GREEN=$ESC"32m"
-    BLUE=$ESC"34m"
+#!/bin/sh
+vagrant_path=~/.dotfiles/vagrant
 
-    if [[ -z ${1} ]]; then
-        echo -e "${RED}Missing argument box name.${RESET}"
-        echo -e "Usage: $0 name [-r][-v path]."
-    else
+ProgName=$(basename $0)
 
-        box_name=${1}
-        case $box_name in
-            [^a-zA-Z0-9]* ) echo "Name not ok : should start with [a-zA-Z0-9], got $box_name"
-            echo -e "Usage: $0 name [-r][-v path]."
-            return
-            ;;
-            *[^a-zA-Z0-9_.-]* ) echo "Name not ok : special character not allowed, only [a-zA-Z0-9_.-] got $box_name"
-            echo -e "Usage: $0 name [-r][-v path]."
-            return
-            ;;
-        esac
+box_sub_help(){
+    echo "Usage: $ProgName <subcommand> [options]\n"
+    echo "Subcommands:"
+    echo "    status   Lists running boxes"
+    echo "    ls       Lists available boxes"
+    echo "    up       Starts a box"
+    echo "    ssh      SSH to a running box"
+    echo "    destroy  Destroys a box"
+    echo "    suspend  Stops a box"
+    echo "    resume   Starts an stopped box"
+    echo ""
+}
 
-        # start docker env
-        eval $(docker-machine env default)
-        # Check if container is already running
-        is_present=`docker ps -aqf "name=${box_name}"`
-        if [[ ! -z $is_present ]]; then
-            # If container exists, then start it
-            echo -e "${BLUE}${box_name} is already present, starting it${RESET}"
-            docker start ${box_name} &> /dev/null
+box_sub_status(){
+    vagrant global-status | sed '/^\s$/,$d'
+}
+
+box_sub_ls(){
+    valid_vagrants=`find $vagrant_path -maxdepth 1 -mindepth 1 -type d -printf "%f\n"`
+    echo $valid_vagrants
+}
+
+box_sub_suspend(){
+    if [ ! -z $1 ]; then
+        machines_running=`vagrant global-status | tail -n +3 | sed '/^\s$/,$d'`
+        matched=`echo $machines_running | grep -w $1`
+        if [ $? = 0 ]; then
+            id=`echo $matched | awk '{print $1}'`
+            stat=`echo $matched | awk '{print $4}'`
+            if [ $stat = "running" ]; then
+                vagrant suspend $id
+            else
+                echo "Machine already suspended"
+            fi
         else
-
-            RM=""
-            SHARE_PATH=""
-            OPTIND=2
-            while getopts ":r :v:" opt; do
-              case $opt in
-                r)
-                  RM="--rm"
-                  ;;
-                v)
-                  SHARE_PATH=$(cd ${OPTARG} && pwd)
-                  if [[ $? != 0 ]]; then
-                    return
-                  fi
-                  ;;
-                \?)
-                  echo "Invalid option: -$OPTARG" >&2
-                  ;;
-              esac
-            done
-
-            echo -e "${BLUE}Creating container: $box_name${RESET}"
-            SHARE_CMD=""
-            if [[ ! -z $SHARE_PATH ]]; then
-                echo -e "${BLUE}Sharing path: $SHARE_PATH${RESET}"
-                SHARE_CMD=$(echo -e "-v$SHARE_PATH:/root/files")
-            fi
-            if [[ ! -z $RM ]]; then
-                echo -e "${RED}This container will be removed after exiting${RESET}"
-            fi
-
-            # Create docker container and run in the background
-            docker run --privileged -it \
-                $RM\
-                $SHARE_CMD\
-                -d \
-                -h ${box_name} \
-                --name ${box_name} \
-                fr0zn/pwnbox
-
-            # Create a workdir for this box
-            # Already created by the container
-            # docker exec ${box_name} mkdir /root/files
-
-            # Get a shell
-            # echo -e "${GREEN}                         ______               ${RESET}"
-            # echo -e "${GREEN}___________      ___________  /___________  __${RESET}"
-            # echo -e "${GREEN}___  __ \\_ | /| / /_  __ \\_  __ \\  __ \\_  |/_/${RESET}"
-            # echo -e "${GREEN}__  /_/ /_ |/ |/ /_  / / /  /_/ / /_/ /_>  <  ${RESET}"
-            # echo -e "${GREEN}_  .___/____/|__/ /_/ /_//_.___/\\____//_/|_|  ${RESET}"
-            # echo -e "${GREEN}/_/                           by fr0zn  ${RESET}"
-            # echo ""
+            echo "Machine '$1' is not on, start it with '$ProgName up $1'"
         fi
-        docker attach ${box_name}
+    else
+        echo "Usage: suspend <box-name>"
     fi
+}
+
+box_sub_resume(){
+    if [ ! -z $1 ]; then
+        machines_running=`vagrant global-status | tail -n +3 | sed '/^\s$/,$d'`
+        matched=`echo $machines_running | grep -w $1`
+        if [ $? = 0 ]; then
+            id=`echo $matched | awk '{print $1}'`
+            stat=`echo $matched | awk '{print $4}'`
+            if [ $stat = "running" ]; then
+                echo "Machine already running"
+            else
+                vagrant resume $id
+            fi
+        else
+            echo "Machine '$1' is not on, start it with '$ProgName up $1'"
+        fi
+    else
+        echo "Usage: resume <$ProgName-name>"
+    fi
+}
+
+
+box_sub_ssh(){
+    if [ ! -z $1 ]; then
+        machines_running=`vagrant global-status | tail -n +3 | sed '/^\s$/,$d'`
+        matched=`echo $machines_running | grep -w $1`
+        if [ $? = 0 ]; then
+            id=`echo $matched | awk '{print $1}'`
+            stat=`echo $matched | awk '{print $4}'`
+            if [ $stat = "running" ]; then
+                vagrant ssh $id
+            else
+                echo "Machine '$1' is not running, use '$ProgName resume $1' to start it"
+            fi
+        else
+            echo "Machine '$1' does not exist"
+        fi
+    else
+        echo "Usage: ssh <box-name>"
+    fi
+}
+
+box_sub_up(){
+    valid_vagrants=`find $vagrant_path -maxdepth 1 -mindepth 1 -type d -printf "%f\n"`
+    if [ ! -z $1 ]; then
+        machines_running=`vagrant global-status | tail -n +3 | sed '/^\s$/,$d'`
+        matched=`echo $machines_running | grep -w $1`
+        if [ $? = 0 ]; then
+            id=`echo $matched | awk '{print $1}'`
+            stat=`echo $matched | awk '{print $4}'`
+            if [ $stat = "running" ]; then
+                echo "Already running"
+            else
+                echo "Machine is not running, starting it"
+                vagrant resume $id
+            fi
+        else
+            matched=`echo $valid_vagrants | grep -w $1`
+            if [ $? = 0 ]; then
+                echo "Starting box '$1'"
+                pushd $vagrant_path/$1 >/dev/null
+                vagrant up
+                popd >/dev/null
+            else
+                echo "Machine '$1' does not exist"
+            fi
+
+        fi
+    else
+        echo "Usage: up <box-name>"
+    fi
+}
+
+box_sub_destroy(){
+    valid_vagrants=`find $vagrant_path -maxdepth 1 -mindepth 1 -type d -printf "%f\n"`
+    if [ ! -z $1 ]; then
+        machines_running=`vagrant global-status | tail -n +3 | sed '/^\s$/,$d'`
+        matched=`echo $machines_running | grep -w $1`
+        if [ $? = 0 ]; then
+            id=`echo $matched | awk '{print $1}'`
+            stat=`echo $matched | awk '{print $4}'`
+            vagrant destroy $id
+        else
+            echo "Machine '$1' does not exist"
+        fi
+    else
+        echo "Usage: destroy <box-name>"
+    fi
+}
+
+box () {
+    subcommand=$1
+    case $subcommand in
+        "" | "-h" | "--help")
+            box_sub_help
+            ;;
+        *)
+            shift
+            box_sub_${subcommand} $@ 2>/dev/null
+            if [ $? = 127 ]; then
+                echo "Error: '$subcommand' is not a known subcommand." >&2
+                echo "       Run '$ProgName --help' for a list of known subcommands." >&2
+            fi
+            ;;
+    esac
 }
