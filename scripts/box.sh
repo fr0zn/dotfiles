@@ -69,7 +69,7 @@ function box(){
                 -d \
                 -h ${box_name} \
                 --name ${box_name} \
-                e0d1n/pwnbox
+                fr0zn/pwnbox
 
             # Create a workdir for this box
             # Already created by the container
@@ -81,7 +81,7 @@ function box(){
             # echo -e "${GREEN}___  __ \\_ | /| / /_  __ \\_  __ \\  __ \\_  |/_/${RESET}"
             # echo -e "${GREEN}__  /_/ /_ |/ |/ /_  / / /  /_/ / /_/ /_>  <  ${RESET}"
             # echo -e "${GREEN}_  .___/____/|__/ /_/ /_//_.___/\\____//_/|_|  ${RESET}"
-            # echo -e "${GREEN}/_/                           by e0d1n  ${RESET}"
+            # echo -e "${GREEN}/_/                           by fr0zn  ${RESET}"
             # echo ""
         fi
         docker attach ${box_name}
