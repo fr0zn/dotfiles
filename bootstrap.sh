@@ -620,16 +620,26 @@ trap ctrl_c INT
 
 _get_os
 _pre_run
-_load # Load all installation files
+_load
 
-if [[ "$1" != "SOURCED" ]]; then
-    y_n "Run installation" _run _run_no
-else
+if [ "$1" = "SOURCED" ]; then
+    msg_info "Interactive shell"
     # Interactive
     while true; do
         read -p "cmd: " cmd
         $cmd
     done
+elif [ ! -z "$1" ]; then
+    # User is giving an install file
+    if [ ! -f "$1" ]; then
+        msg_error "File not found"
+        exit
+    fi
+    cmd_path=`realpath $1`
+    msg_info "Running commands from file '$cmd_path'"
+    . $cmd_path
+else
+    y_n "Run installation" _run _run_no
 fi
 
 # vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker :
