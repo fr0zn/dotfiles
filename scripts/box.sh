@@ -7,13 +7,10 @@ box_sub_help(){
     echo "Usage: $ProgName <subcommand> [options]\n"
     echo "Subcommands:"
     echo "    status   Lists running boxes"
+    echo "    edit     Edits Vagrantfile"
     echo "    ls       Lists available boxes"
-    echo "    up       Starts a box"
-    echo "    ssh      SSH to a running box"
-    echo "    destroy  Destroys a box"
-    echo "    suspend  Stops a box"
-    echo "    resume   Starts an stopped box"
     echo ""
+    vagrant --help
 }
 
 box_sub_status(){
@@ -25,113 +22,52 @@ box_sub_ls(){
     echo $valid_vagrants
 }
 
-box_sub_suspend(){
-    if [ ! -z $1 ]; then
+box_sub_edit(){
+    if [ ! -z "$1" ]; then
+        machine_name="${@: -1}"
         machines_running=`vagrant global-status | tail -n +3 | sed '/^\s$/,$d'`
-        matched=`echo $machines_running | grep -w $1`
+        matched=`echo $machines_running | grep -w $machine_name`
         if [ $? = 0 ]; then
-            id=`echo $matched | awk '{print $1}'`
-            stat=`echo $matched | awk '{print $4}'`
-            if [ $stat = "running" ]; then
-                vagrant suspend $id
-            else
-                echo "Machine already suspended"
-            fi
+            box_path=`echo $matched | awk '{print $5}'`
         else
-            echo "Machine '$1' is not on, start it with '$ProgName up $1'"
-        fi
-    else
-        echo "Usage: suspend <box-name>"
-    fi
-}
-
-box_sub_resume(){
-    if [ ! -z $1 ]; then
-        machines_running=`vagrant global-status | tail -n +3 | sed '/^\s$/,$d'`
-        matched=`echo $machines_running | grep -w $1`
-        if [ $? = 0 ]; then
-            id=`echo $matched | awk '{print $1}'`
-            stat=`echo $matched | awk '{print $4}'`
-            if [ $stat = "running" ]; then
-                echo "Machine already running"
-            else
-                vagrant resume $id
-            fi
-        else
-            echo "Machine '$1' is not on, start it with '$ProgName up $1'"
-        fi
-    else
-        echo "Usage: resume <$ProgName-name>"
-    fi
-}
-
-
-box_sub_ssh(){
-    if [ ! -z $1 ]; then
-        machines_running=`vagrant global-status | tail -n +3 | sed '/^\s$/,$d'`
-        matched=`echo $machines_running | grep -w $1`
-        if [ $? = 0 ]; then
-            id=`echo $matched | awk '{print $1}'`
-            stat=`echo $matched | awk '{print $4}'`
-            if [ $stat = "running" ]; then
-                vagrant ssh $id
-            else
-                echo "Machine '$1' is not running, use '$ProgName resume $1' to start it"
-            fi
-        else
-            echo "Machine '$1' does not exist"
-        fi
-    else
-        echo "Usage: ssh <box-name>"
-    fi
-}
-
-box_sub_up(){
-    valid_vagrants=`find $vagrant_path -maxdepth 1 -mindepth 1 -type d -printf "%f\n"`
-    if [ ! -z $1 ]; then
-        machines_running=`vagrant global-status | tail -n +3 | sed '/^\s$/,$d'`
-        matched=`echo $machines_running | grep -w $1`
-        if [ $? = 0 ]; then
-            id=`echo $matched | awk '{print $1}'`
-            stat=`echo $matched | awk '{print $4}'`
-            if [ $stat = "running" ]; then
-                echo "Already running"
-            else
-                echo "Machine is not running, starting it"
-                vagrant resume $id
-            fi
-        else
-            matched=`echo $valid_vagrants | grep -w $1`
+            valid_vagrants=`find $vagrant_path -maxdepth 1 -mindepth 1 -type d -printf "%f\n"`
+            matched=`echo $valid_vagrants | grep -w $machine_name`
             if [ $? = 0 ]; then
-                echo "Starting box '$1'"
-                pushd $vagrant_path/$1 >/dev/null
-                vagrant up
-                popd >/dev/null
+                box_path="$vagrant_path/$machine_name"
             else
-                echo "Machine '$1' does not exist"
+                echo "No valid box name, use 'ls' or 'status'"
+                return
             fi
-
         fi
     else
-        echo "Usage: up <box-name>"
+        echo "Usage: $ProgName edit <box-name>"
+        return
     fi
+
+    $EDITOR $box_path/Vagrantfile
 }
 
-box_sub_destroy(){
-    valid_vagrants=`find $vagrant_path -maxdepth 1 -mindepth 1 -type d -printf "%f\n"`
-    if [ ! -z $1 ]; then
-        machines_running=`vagrant global-status | tail -n +3 | sed '/^\s$/,$d'`
-        matched=`echo $machines_running | grep -w $1`
-        if [ $? = 0 ]; then
-            id=`echo $matched | awk '{print $1}'`
-            stat=`echo $matched | awk '{print $4}'`
-            vagrant destroy $id
-        else
-            echo "Machine '$1' does not exist"
-        fi
+box_sub_others(){
+    machine_name="${@: -1}"
+    machines_running=`vagrant global-status | tail -n +3 | sed '/^\s$/,$d'`
+    matched=`echo $machines_running | grep -w $machine_name`
+    if [ $? = 0 ]; then
+        box_path=`echo $matched | awk '{print $5}'`
     else
-        echo "Usage: destroy <box-name>"
+        valid_vagrants=`find $vagrant_path -maxdepth 1 -mindepth 1 -type d -printf "%f\n"`
+        matched=`echo $valid_vagrants | grep -w $machine_name`
+        if [ $? = 0 ]; then
+            box_path="$vagrant_path/$machine_name"
+        else
+            echo "No valid box name, use 'ls' or 'status'"
+            return
+        fi
     fi
+
+    pushd $box_path >/dev/null
+    vagrant ${@:1:$#-1}
+    popd >/dev/null
+
 }
 
 box () {
@@ -144,8 +80,7 @@ box () {
             shift
             box_sub_${subcommand} $@ 2>/dev/null
             if [ $? = 127 ]; then
-                echo "Error: '$subcommand' is not a known subcommand." >&2
-                echo "       Run '$ProgName --help' for a list of known subcommands." >&2
+                box_sub_others $subcommand $@
             fi
             ;;
     esac
