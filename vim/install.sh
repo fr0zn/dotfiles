@@ -7,6 +7,7 @@ symlink_vim(){
 }
 
 install_vim_ubuntu(){
+    install_package software-properties-common
     sudo add-apt-repository -y ppa:jonathonf/vim
     DB_SYNC=0
     install_package vim
