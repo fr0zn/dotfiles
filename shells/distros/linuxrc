@@ -1,5 +1,6 @@
 pathadd "$HOME/.pyenv/bin" "after"
 
+alias ls="ls --color=auto"
 export VAGRANT_HOME="/mnt/VMNet/vagrant_home"
 export MACHINE_STORAGE_PATH="/mnt/VMNet/docker_home"
 
