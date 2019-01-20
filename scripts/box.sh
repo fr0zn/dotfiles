@@ -18,7 +18,7 @@ box_sub_status(){
 }
 
 box_sub_ls(){
-    valid_vagrants=`find $vagrant_path -type d -maxdepth 1 -mindepth 1 -exec basename {} \;`
+    valid_vagrants=`find $vagrant_path -maxdepth 1 -mindepth 1 -type d -exec basename {} \;`
     echo $valid_vagrants
 }
 
@@ -30,7 +30,7 @@ box_sub_edit(){
         if [ $? = 0 ]; then
             box_path=`echo $matched | awk '{print $5}'`
         else
-            valid_vagrants=`find $vagrant_path -type d -maxdepth 1 -mindepth 1 -exec basename {} \;`
+            valid_vagrants=`find $vagrant_path -maxdepth 1 -mindepth 1 -type d -exec basename {} \;`
             matched=`echo $valid_vagrants | grep -w $machine_name`
             if [ $? = 0 ]; then
                 box_path="$vagrant_path/$machine_name"
@@ -54,7 +54,7 @@ box_sub_others(){
     if [ $? = 0 ]; then
         box_path=`echo $matched | awk '{print $5}'`
     else
-        valid_vagrants=`find $vagrant_path -type d -maxdepth 1 -mindepth 1 -exec basename {} \;`
+        valid_vagrants=`find $vagrant_path -maxdepth 1 -mindepth 1 -type d -exec basename {} \;`
         matched=`echo $valid_vagrants | grep -w $machine_name`
         if [ $? = 0 ]; then
             box_path="$vagrant_path/$machine_name"
@@ -65,7 +65,8 @@ box_sub_others(){
     fi
 
     pushd $box_path >/dev/null
-    vagrant ${@:1:$#-1}
+    full_cmd=`echo "vagrant $@" | sed '$s/\w*$//'`
+    eval $full_cmd
     popd >/dev/null
 
 }
