@@ -12,7 +12,7 @@ install_tmux(){
 
 install_tmux_ubuntu(){
 
-    sudo_run apt-get remove tmux # Uninstall repo tmux
+    sudo_run apt-get -y remove tmux # Uninstall repo tmux
 
     install_package "libevent-dev"
     install_package "libncurses-dev"
