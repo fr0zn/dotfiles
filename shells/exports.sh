@@ -8,3 +8,5 @@ export PYTHONSTARTUP=~/.pythonrc
 export TERM="xterm-256color"
 
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+export FZF_DEFAULT_OPTS='--height 40%'
