@@ -25,7 +25,12 @@ install_rofi_ubuntu(){
     popd
 }
 
-symlink_rofi_ubuntu() {
+install_rofi_arch() {
+    install_package rofi
+
+}
+
+symlink_rofi() {
     mkdir -p $HOME/.config/rofi/
     symlink_file "rofi/config.rasi" "$HOME/.config/rofi/config.rasi"
 
