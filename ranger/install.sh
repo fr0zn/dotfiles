@@ -6,6 +6,10 @@ install_ranger_macos(){
     install_package ranger
 }
 
+install_ranger_arch(){
+    install_package ranger
+}
+
 symlink_ranger(){
     mkdir -p $HOME/.config/ranger
     symlink_file "ranger/rc.conf" "$HOME/.config/ranger"
