@@ -1,7 +1,11 @@
-symlink_termite_ubuntu(){
+symlink_termite(){
     msg_debug "Symlink termite"
     mkdir -p $HOME/.config/termite
     symlink_file "termite/config" "$HOME/.config/termite"
+}
+
+install_termite_arch(){
+    install_package termite
 }
 
 install_termite_ubuntu(){
