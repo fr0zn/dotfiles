@@ -26,9 +26,8 @@ install bash
 install fzf
 
 install peda
-install gef # will install ropper on python3
+install gef # will install piputils for python3
 install radare2
 install fixenv
 install libcdb
-install ropper
 install pwntools
