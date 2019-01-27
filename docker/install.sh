@@ -1,3 +1,9 @@
+install_docker_arch(){
+    msg_debug "Install docker"
+    install_package docker
+    sudo systemctl enable docker
+}
+
 install_docker_ubuntu(){
     msg_debug "Install docker"
     install_package install apt-transport-https ca-certificates curl gnupg2 software-properties-common curl
