@@ -158,8 +158,9 @@
     set list
     set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 
-    set guioptions-=r                   " gui scrollbar
-    set guioptions-=L                   " gui left scrollbar
+    set guioptions -=T                   " gui scrollbar
+    set guioptions -=r                   " gui scrollbar
+    set guioptions -=m                   " gui titlebar
 
 
 " }
