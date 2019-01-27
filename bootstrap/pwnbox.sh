@@ -1,6 +1,6 @@
 # Packages
-dpkg --add-architecture i386
-DB_SYNC=0
+sudo dpkg --add-architecture i386
+sudo apt-get update
 
 install_package build-essential cmake
 install_package libc6:i386 libc6-dev-i386 libncurses5:i386 libstdc++6:i386 # libraries (32 bits)
