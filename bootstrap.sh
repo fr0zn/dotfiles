@@ -423,15 +423,17 @@ backup_file() {
 }
 
 backup_path() {
-    msg_ok "Backing up folder" "in"
-    mkdir -p $DOTFILE_BACKUP 2> /dev/null
-    local file_name
-    file_name=$(_remove_hidden $(basename ${1}))
-    today=`date +%Y%m%d_%s`
-    cp -r "${1}" "${DOTFILE_BACKUP}/${file_name}.${today}" 2>/dev/null 2>&1;
-    if [[ ! -d "${DOTFILE_BACKUP}/${file_name}.${today}" ]]; then
-        msg_error "Backup path ${i}" "in"
-        exit 1
+    if [ -d "$1" ]; then
+        msg_ok "Backing up folder" "in"
+        mkdir -p $DOTFILE_BACKUP 2> /dev/null
+        local file_name
+        file_name=$(_remove_hidden $(basename ${1}))
+        today=`date +%Y%m%d_%s`
+        cp -r "${1}" "${DOTFILE_BACKUP}/${file_name}.${today}" 2>/dev/null 2>&1;
+        if [[ ! -d "${DOTFILE_BACKUP}/${file_name}.${today}" ]]; then
+            msg_error "Backup path ${i}" "in"
+            exit 1
+        fi
     fi
     return 0
 }
