@@ -8,6 +8,12 @@ install_qutebrowser_arch(){
 
 }
 
+symlink_qutebrowser(){
+    mkdir -p "$HOME/.config/qutebrowser" 2>/dev/null
+    symlink_file "qutebrowser/config.py" "$HOME/.config/qutebrowser"
+
+}
+
 install_qutebrowser_ubuntu(){
     msg_debug "Install qutebrowser"
     clone_src https://github.com/qutebrowser/qutebrowser.git qutebrowser
