@@ -1,0 +1,3 @@
+[submodule "pass/password-store"]
+	path = pass/password-store
+	url = git@github.com:fr0zn/pass.git
