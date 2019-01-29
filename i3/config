@@ -1,6 +1,17 @@
 set $mod Mod1
+set $sup Mod4
+
+# The middle button and a modifer over any part of the window toggles floating
+
+bindsym --whole-window $mod+button2 floating toggle
+
+# The side buttons move the window around
+
+bindsym $sup+l exec i3lock-fancy
 
 for_window [class="^.*"] border pixel 3
+
+gaps inner 15
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -23,6 +34,7 @@ bindsym Ctrl+space [class="Termite" title="FLOATING_RANGER"] scratchpad show
 bindsym $mod+space [class="Termite" title="FLOATING_TERM"] scratchpad show
 
 for_window [title="^Android Emulator -"] floating enable
+for_window [title="^VirtualBox -"] floating enable
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -167,4 +179,4 @@ bar {
 #client.urgent           #4A4A4A #4A4A4A #f7f7f7 #4A4A4A
 
 # exec vmware-user
-exec --no-startup-id /usr/bin/feh --bg-scale ~/.dotfiles/i3/wallpaper.jpg
+exec --no-startup-id /usr/bin/feh --randomize --bg-scale ~/.dotfiles/i3/wallpapers
