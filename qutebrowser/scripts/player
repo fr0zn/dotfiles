@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ ! -z "$1" ]; then
+    uname_out=`uname`
+    if [ "$uname_out" = "Darwin" ]; then
+        /Applications/IINA.app/Contents/MacOS/IINA "$1"
+    elif [ "$uname_out" = "Linux" ]; then
+        mpv "$1"
+    fi
+fi
