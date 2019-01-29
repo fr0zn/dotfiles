@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ -z $1 ]; then
+    exit
+fi
+
+buku -a "$1"
+
+if [ "$?" -eq "0" ]; then
+    echo "message-info 'Bookmark stored!'" >> "$QUTE_FIFO"
+else
+    echo "message-error 'Bookmark failed to store!'" >> "$QUTE_FIFO"
+fi

@@ -11,6 +11,8 @@ install_qutebrowser_arch(){
 symlink_qutebrowser(){
     mkdir -p "$HOME/.config/qutebrowser" 2>/dev/null
     symlink_file "qutebrowser/config.py" "$HOME/.config/qutebrowser"
+    mkdir -p $HOME/.local/share/qutebrowser
+    symlink_path "qutebrowser/scripts" "$HOME/.local/share/qutebrowser/userscripts"
 
 }
 
