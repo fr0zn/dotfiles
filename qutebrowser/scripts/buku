@@ -4,7 +4,7 @@ if [ -z $1 ]; then
     exit
 fi
 
-buku -a "$1"
+/usr/local/bin/buku -a "$1"
 
 if [ "$?" -eq "0" ]; then
     echo "message-info 'Bookmark stored!'" >> "$QUTE_FIFO"

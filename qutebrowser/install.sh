@@ -16,6 +16,14 @@ symlink_qutebrowser(){
 
 }
 
+symlink_qutebrowser_macos(){
+    mkdir -p "$HOME/.config/qutebrowser" 2>/dev/null
+    symlink_file "qutebrowser/config.py" "$HOME/.config/qutebrowser"
+    mkdir -p "$HOME/Library/Application Support/qutebrowser/userscripts"
+    symlink_path "qutebrowser/scripts" "$HOME/Library/Application Support/qutebrowser/userscripts"
+
+}
+
 install_qutebrowser_ubuntu(){
     msg_debug "Install qutebrowser"
     clone_src https://github.com/qutebrowser/qutebrowser.git qutebrowser
