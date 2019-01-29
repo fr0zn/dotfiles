@@ -35,3 +35,22 @@ symlink_rofi() {
     symlink_file "rofi/config.rasi" "$HOME/.config/rofi/config.rasi"
 
 }
+
+pass_rofi() {
+    clone_src https://github.com/carnager/rofi-pass rofi-pass
+    pushd $DOTFILE_SRC/rofi-pass
+    sudo make install
+    popd
+}
+
+buku_rofi() {
+    clone_src https://github.com/carnager/buku_run buku_run
+    pushd $DOTFILE_SRC/buku_run
+    sudo make install
+    popd
+}
+
+post_rofi() {
+    pass_rofi
+    buku_rofi
+}
