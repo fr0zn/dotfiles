@@ -5,12 +5,13 @@ set header_cache = ~/.dotfiles/mutt/com.hotmail.ferran.celades/cache/headers
 set message_cachedir = ~/.dotfiles/mutt/com.hotmail.ferran.celades/cache/bodies
 set certificate_file = ~/.dotfiles/mutt/com.hotmail.ferran.celades/certificates
 
-#set imap_check_subscribed = yes
-
 unmailboxes *
-mailboxes     = +INBOX +Junk +Sent +Drafts +Deleted
 
-set spoolfile     = +INBOX
+set imap_check_subscribed = yes
+
+mailboxes     = +Inbox +Junk +Sent +Drafts +Deleted
+
+set spoolfile     = +Inbox
 set postponed     = +Drafts
 set record        = +Sent
 set from          = 'Ferran Celades <ferran.celades@hotmail.com>'

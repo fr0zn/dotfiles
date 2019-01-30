@@ -5,9 +5,10 @@ set header_cache = ~/.dotfiles/mutt/com.gmail.fr0zn/cache/headers
 set message_cachedir = ~/.dotfiles/mutt/com.gmail.fr0zn/cache/bodies
 set certificate_file = ~/.dotfiles/mutt/com.gmail.fr0zn/certificates
 
-#set imap_check_subscribed = yes
-
 unmailboxes *
+
+set imap_check_subscribed = yes
+
 mailboxes     = "+INBOX" "+[Gmail]/Spam" "+[Gmail]/Sent Mail" "+[Gmail]/Drafts"
 
 set spoolfile = +INBOX
@@ -20,4 +21,3 @@ source "gpg -d ~/.dotfiles/mutt/account.com.gmail.fr0zn.gpg |"
 
 # Set the status bar color
 color status yellow default
-
