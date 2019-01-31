@@ -44,6 +44,8 @@ set pgp_timeout=1800
 # Settings -------------------------------------------
 source ~/.dotfiles/mutt/colors
 
+set sort=reverse-date
+
 # Don't store vim data
 set editor="vim +13 -c 'set nobackup' -c 'set noswapfile' -c 'set nowritebackup' -c 'set tw=72 ft=mail'"
 
@@ -69,7 +71,7 @@ set new_mail_command="terminal-notifier -title 'Terminal' -message 'New Email in
 source ~/.dotfiles/mutt/account.com.hotmail.ferran.celades
 
 # Folder hooks --------------------------------------
-folder-hook 'account.com.hotmail.ferran.celades' 'source ~/.dotfiles/mutt/account.com.ferran.celades'
+folder-hook 'account.com.hotmail.ferran.celades' 'source ~/.dotfiles/mutt/account.com.hotmail.ferran.celades'
 folder-hook 'account.com.gmail.fr0zn' 'source ~/.dotfiles/mutt/account.com.gmail.fr0zn'
 
 # Shortcuts ------------------------------------------

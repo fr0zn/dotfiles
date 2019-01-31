@@ -41,6 +41,8 @@ pass_rofi() {
     pushd $DOTFILE_SRC/rofi-pass
     sudo make install
     popd
+    mkdir -p $HOME/.config/rofi-pass
+    symlink_file "rofi/config/rofi-pass" "$HOME/.config/rofi-pass/config"
 }
 
 buku_rofi() {
