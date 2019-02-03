@@ -1,5 +1,5 @@
 #!/bin/sh
-vagrant_path=$HOME/.dotfiles/vagrant
+vagrant_path=/Volumes/VMNet/vagrant/
 
 ProgName=$(basename $0)
 
