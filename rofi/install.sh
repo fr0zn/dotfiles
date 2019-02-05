@@ -45,6 +45,13 @@ pass_rofi() {
     symlink_file "rofi/config/rofi-pass" "$HOME/.config/rofi-pass/config"
 }
 
+bw_rofi(){
+    clone_src https://github.com/mattydebie/bitwarden-rofi.git bitwarden-rofi
+    pushd $DOTFILE_SRC/bitwarden-rofi
+    sudo install -D --mode=755 --group=root --owner=root bwmenu /usr/local/bin/bwmenu
+    popd
+}
+
 buku_rofi() {
     clone_src https://github.com/carnager/buku_run buku_run
     pushd $DOTFILE_SRC/buku_run
@@ -53,6 +60,7 @@ buku_rofi() {
 }
 
 post_rofi() {
-    pass_rofi
-    buku_rofi
+    bw_rofi
+    #pass_rofi
+    #buku_rofi
 }
