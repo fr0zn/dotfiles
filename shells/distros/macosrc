@@ -29,9 +29,6 @@ pathadd "$ANDROID_HOME/build-tools/25.0.0" after
 export TERM="xterm-256color"
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
-export VAGRANT_HOME="/Volumes/VMNet/vagrant_home"
-export MACHINE_STORAGE_PATH="/Volumes/VMNet/docker_home"
-
 # Alias
 
 alias rm="trash"
