@@ -1,0 +1,3 @@
+vmtype="vmware"
+vmpath="/Volumes/VMNet/.vmware/u64.vmwarevm/u64.vmx"
+vmport="22"

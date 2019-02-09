@@ -1,0 +1,3 @@
+vmtype="qemu"
+vmpath="/Volumes/VMNet/qemu/ubuntu_16.04.5_arm/run.sh"
+vmport="2232"
