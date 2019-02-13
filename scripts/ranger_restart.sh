@@ -1,6 +1,6 @@
 
 while true; do
-    function ranger_cd {
+    ranger_cd () {
         tempfile="$(mktemp -t tmp.XXXXXX)"
         ranger --choosedir="$tempfile" "${@:-$(pwd)}"
         test -f "$tempfile" &&
