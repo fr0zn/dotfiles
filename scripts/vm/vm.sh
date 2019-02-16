@@ -1,10 +1,10 @@
 #!/bin/bash
 
-vm_path="$DOTFILE_PATH/scripts/vm"
+vm_path="$HOME/.dotfiles/scripts/vm"
 
 prog_name="vm"
 
-_valid_commands="start stop suspend pause unpause ssh"
+_valid_commands="start stop ssh mount umount"
 _valid_vmtypes="vmware qemu virtualbox"
 
 vm_list (){
@@ -35,54 +35,58 @@ _vm_load (){
 }
 
 vm_qemu_start (){
+    echo "Starting vm $vmname"
     $vmpath
 }
 
 vm_qemu_stop (){
-    echo 'TODO'
+    echo "Stopping vm $vmname"
     pkill qemu-system-aarch64
     pkill qemu-system-arm
 }
 
-vm_qemu_suspend (){
-    echo 'TODO'
+vm_qemu_mount (){
+    echo "Mounting vm $vmname"
+    sudo sshfs -o allow_other,defer_permissions -p $vmport fr0zn@localhost:/home/fr0zn/shared /Volumes/VMNet/SHARED/$vmname
 }
 
-vm_qemu_pause (){
-    echo 'TODO'
-}
-
-vm_qemu_unpause (){
-    echo 'TODO'
+vm_qemu_umount (){
+    echo "Umounting vm $vmname"
+    vm_qemu_umount $@
+    umount /Volumes/VMNet/SHARED/$vmname
 }
 
 vm_qemu_ssh (){
-    ssh localhost -p $vmport
+    vm_qemu_mount $@
+    ssh -t localhost -p $vmport "cd \$HOME/shared; exec \$SHELL -l"
 }
 
 vm_vmware_start (){
+    echo "Starting vm $vmname"
     vmrun start "$vmpath" nogui
 }
 
 vm_vmware_stop (){
+    echo "Stopping vm $vmname"
+    vm_vmware_umount $@
     vmrun stop "$vmpath" nogui
 }
 
-vm_vmware_suspend (){
-    vmrun suspend "$vmpath" nogui
+vm_vmware_mount (){
+    echo "Mounting vm $vmname"
+    ip=`vmrun getGuestIPAddress $vmpath`
+    sudo sshfs -o allow_other,defer_permissions -p $vmport fr0zn@$ip:/home/fr0zn/shared /Volumes/VMNet/SHARED/$vmname
 }
 
-vm_vmware_pause (){
-    vmrun pause "$vmpath" nogui
-}
-
-vm_vmware_unpause (){
-    vmrun unpause "$vmpath" nogui
+vm_vmware_umount (){
+    echo "Umounting vm $vmname"
+    umount /Volumes/VMNet/SHARED/$vmname
 }
 
 vm_vmware_ssh (){
+    vm_vmware_mount $@
     ip=`vmrun getGuestIPAddress $vmpath`
-    ssh -p $vmport $ip
+    ssh -t -p $vmport $ip "cd \$HOME/shared; exec \$SHELL -l"
 }
 
 vm () {
@@ -104,9 +108,9 @@ vm () {
                 echo $_valid_vmtypes | grep $vmtype 2>&1 >/dev/null
                 if [ "$?" = "0" ]
                 then
-                    vm_${vmtype}_${subcommand} $@ 2> /dev/null
+                    vm_${vmtype}_${subcommand} $@
                 else
-                    echo "Invalid vmtype, valids are '$_valid_vmtypes'"
+                    echo "Invalid vmtype, valids are ':$_valid_vmtypes'"
                 fi
             else
                 vm_sub_help
@@ -119,10 +123,13 @@ vm_sub_help () {
     echo "Subcommands:"
     echo "    list     Lists available vms"
     echo "    start    Starts the vm"
+    echo "    mount    Mount the shared folder"
+    echo "    umount   Umount the shared folder"
     echo "    stop     Stops the vm"
-    echo "    suspend  Suspends the vm"
-    echo "    pause    Pauses the vm"
-    echo "    unpause  Unpauses the vm"
     echo "    ssh      SSH shell to the vm"
     echo ""
 }
+
+if [ ! -z $1 ]; then
+    vm $@
+fi
