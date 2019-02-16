@@ -57,7 +57,7 @@ vm_qemu_umount (){
 }
 
 vm_qemu_ssh (){
-    vm_qemu_mount $@
+    # vm_qemu_mount $@
     ssh -t localhost -p $vmport "cd \$HOME/shared; exec \$SHELL -l"
 }
 
@@ -84,7 +84,7 @@ vm_vmware_umount (){
 }
 
 vm_vmware_ssh (){
-    vm_vmware_mount $@
+    # vm_vmware_mount $@
     ip=`vmrun getGuestIPAddress $vmpath`
     ssh -t -p $vmport $ip "cd \$HOME/shared; exec \$SHELL -l"
 }
