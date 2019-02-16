@@ -41,6 +41,7 @@ vm_qemu_start (){
 
 vm_qemu_stop (){
     echo "Stopping vm $vmname"
+    vm_qemu_umount $@
     pkill qemu-system-aarch64
     pkill qemu-system-arm
 }
@@ -52,7 +53,6 @@ vm_qemu_mount (){
 
 vm_qemu_umount (){
     echo "Umounting vm $vmname"
-    vm_qemu_umount $@
     umount /Volumes/VMNet/SHARED/$vmname
 }
 
