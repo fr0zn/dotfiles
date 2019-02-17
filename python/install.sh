@@ -17,9 +17,11 @@ install_python_arch(){
 install_python_ubuntu(){
     install_package python
     install_package python-pip
+    sudo python -m pip install --force-reinstall pip
 
     install_package python3
     install_package python3-pip
+    sudo python3 -m pip install --force-reinstall pip
 }
 
 dev_python_ubuntu(){
