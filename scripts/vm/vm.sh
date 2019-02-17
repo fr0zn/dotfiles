@@ -4,7 +4,7 @@ vm_path="$HOME/.dotfiles/scripts/vm"
 
 prog_name="vm"
 
-_valid_commands="start stop ssh mount umount"
+_valid_commands="start stop ssh mount umount ip"
 _valid_vmtypes="vmware qemu virtualbox"
 
 vm_list (){
@@ -61,6 +61,10 @@ vm_qemu_ssh (){
     ssh -t localhost -p $vmport "cd \$HOME/shared; exec \$SHELL -l"
 }
 
+vm_qemu_ip (){
+    echo "localhost"
+}
+
 vm_vmware_start (){
     echo "Starting vm $vmname"
     vmrun start "$vmpath" nogui
@@ -68,7 +72,7 @@ vm_vmware_start (){
 
 vm_vmware_stop (){
     echo "Stopping vm $vmname"
-    vm_vmware_umount $@
+    # vm_vmware_umount $@
     vmrun stop "$vmpath" nogui
 }
 
@@ -78,13 +82,17 @@ vm_vmware_mount (){
     sudo sshfs -o allow_other,defer_permissions -p $vmport fr0zn@$ip:/home/fr0zn/shared /Volumes/VMNet/SHARED/$vmname
 }
 
+vm_vmware_ip() {
+    ip=`vmrun getGuestIPAddress $vmpath`
+    echo "$ip"
+}
+
 vm_vmware_umount (){
     echo "Umounting vm $vmname"
     umount /Volumes/VMNet/SHARED/$vmname
 }
 
 vm_vmware_ssh (){
-    # vm_vmware_mount $@
     ip=`vmrun getGuestIPAddress $vmpath`
     ssh -t -p $vmport $ip "cd \$HOME/shared; exec \$SHELL -l"
 }
@@ -125,6 +133,7 @@ vm_sub_help () {
     echo "    start    Starts the vm"
     echo "    mount    Mount the shared folder"
     echo "    umount   Umount the shared folder"
+    echo "    ip       Get VM ip"
     echo "    stop     Stops the vm"
     echo "    ssh      SSH shell to the vm"
     echo ""
