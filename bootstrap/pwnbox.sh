@@ -6,7 +6,7 @@ sudo apt-get update
 install_package build-essential cmake
 install_package libc6:i386 libc6-dev-i386 libncurses5:i386 libstdc++6:i386 # libraries (32 bits)
 install_package libc6-dbg:i386 libc6-dbg
-install_package gcc-multilib g++-multilib gcc-arm-none-eabi
+install_package gcc-multilib g++-multilib
 install_package gdb gdb-multiarch
 install_package socat netcat nmap net-tools wget ssh curl
 install_package nasm
@@ -16,7 +16,7 @@ install_package strace ltrace
 install_package unzip
 
 # ARM
-install_package gcc-arm-linux-gnueabihf gcc-arm-none-eabi gcc-aarch64-linux-gnu
+install_package gcc-arm-linux-gnueabihf gcc-aarch64-linux-gnu
 # arm 32
 install_package libc6-dbg-armhf-cross libc6-dev-armhf-cross
 # arm 64
