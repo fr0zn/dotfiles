@@ -49,6 +49,8 @@ class Skeleton(GenericCommand):
             err("Invalid number of arguments")
             return
 
-        print template.format(HOST=argv[0], PORT=argv[1], BINARY=get_filename())
+        tmp_dir = os.path.dirname(get_filepath())
+        tmp = template.format(HOST=argv[0], PORT=argv[1], BINARY=get_filename())
+        open(tmp_dir + '/exploit.py','w').write(tmp)
 
 register_external_command(Skeleton())
