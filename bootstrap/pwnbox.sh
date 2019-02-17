@@ -16,7 +16,7 @@ install_package strace ltrace
 install_package unzip
 
 # ARM
-install_package gcc-arm-none-eabi
+install_package gcc-arm-linux-gnueabihf gcc-arm-none-eabi gcc-aarch64-linux-gnu
 # arm 32
 install_package libc6-dbg-armhf-cross libc6-dev-armhf-cross
 # arm 64
