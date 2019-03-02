@@ -5,7 +5,7 @@ on run argv
     set argv_s to argv as text
     set text item delimiters to saveTID
     tell application "iTerm2"
-      create window with profile "default"
+      create window with profile "dark"
       activate
       tell current window
         if (count of argv) > 0 then
