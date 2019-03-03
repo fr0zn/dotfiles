@@ -114,7 +114,8 @@
         let iterm_profile = $ITERM_PROFILE
         if iterm_profile == "dark"
             let g:ayucolor="dark"
-        else
+        endif
+        if iterm_profile == "light"
             let g:ayucolor="light"
         endif
 
@@ -184,6 +185,9 @@
         set guioptions -=T                   " gui scrollbar
         set guioptions -=r                   " gui scrollbar
         set guioptions -=m                   " gui titlebar
+        set guifont=Monospace\ 9
+        map <C-V> "+gP
+        imap <C-V> <ESC><C-V>i
     endif
 
 
