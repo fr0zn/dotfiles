@@ -105,9 +105,31 @@
         set termguicolors               " Enable true color support
     endif
 
+    set background=dark                 " Assume a dark background
     let ayucolor="dark"
+
     if filereadable(expand("$HOME/.vim/plugged/ayu-vim/colors/ayu.vim"))
+
+        " iTerm check
+        let iterm_profile = $ITERM_PROFILE
+        if iterm_profile == "dark"
+            let g:ayucolor="dark"
+        else
+            let g:ayucolor="light"
+        endif
+
         colorscheme ayu
+
+        function! g:ToggleBackground()
+          if g:ayucolor == 'dark'
+            let g:ayucolor="light"
+            colorscheme ayu
+          else
+            let g:ayucolor="dark"
+            colorscheme ayu
+          endif
+        endfunction
+        nnoremap <silent> <F3> :call g:ToggleBackground()<CR>
     endif
 
     " vim hardcodes background color erase even if the terminfo file does

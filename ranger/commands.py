@@ -2,6 +2,7 @@ import os
 import subprocess
 from ranger.core.loader import CommandLoader
 from ranger.api.commands import Command
+import platform
 
 class compress(Command):
     def execute(self):
@@ -33,7 +34,7 @@ class compress(Command):
         extension = ['.zip', '.tar.gz', '.rar', '.7z']
         return ['compress ' + os.path.basename(self.fm.thisdir.path) + ext for ext in extension]
 
-class extracthere(Command):
+class extract(Command):
     def execute(self):
         """ Extract copied files to current directory """
         copied_files = tuple(self.fm.copy_buffer)
@@ -77,7 +78,10 @@ class umount(Command):
         if not marked_files:
             return
 
-        self.fm.run(["sudo","umount"] + [f.path for f in marked_files])
+        if platform.system() == 'Darwin':
+            self.fm.run(["sudo","diskutil","umountDisk"] + [f.path for f in marked_files])
+        else:
+            self.fm.run(["sudo","umount"] + [f.path for f in marked_files])
 
 class mount(Command):
     def execute(self):
