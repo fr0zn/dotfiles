@@ -114,7 +114,8 @@
         let iterm_profile = $ITERM_PROFILE
         if iterm_profile == "dark"
             let g:ayucolor="dark"
-        else
+        endif
+        if iterm_profile == "light"
             let g:ayucolor="light"
         endif
 
