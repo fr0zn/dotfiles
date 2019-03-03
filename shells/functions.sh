@@ -41,6 +41,8 @@ extract_shellcode(){
 . $SCRIPTS_PATH/vm/vm.sh
 . $SCRIPTS_PATH/box.sh
 
+. $SCRIPTS_PATH/theme_switch.sh
+
 # GDB switch
 gdbs() {
     $DOTFILE_PATH/gdb/gdbs.sh ${@}
