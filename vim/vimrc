@@ -162,6 +162,9 @@
         set guioptions -=T                   " gui scrollbar
         set guioptions -=r                   " gui scrollbar
         set guioptions -=m                   " gui titlebar
+        set guifont=Monospace\ 9
+        map <C-V> "+gP
+        imap <C-V> <ESC><C-V>i
     endif
 
 
