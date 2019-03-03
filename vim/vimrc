@@ -110,13 +110,10 @@
 
     if filereadable(expand("$HOME/.vim/plugged/ayu-vim/colors/ayu.vim"))
 
-        " iTerm check
-        let iterm_profile = $ITERM_PROFILE
-        if iterm_profile == "dark"
-            let g:ayucolor="dark"
-        endif
-        if iterm_profile == "light"
+        if match(readfile(expand("$HOME/.dotfiles/theme")),"light")!=-1
             let g:ayucolor="light"
+        else
+            let g:ayucolor="dark"
         endif
 
         colorscheme ayu
