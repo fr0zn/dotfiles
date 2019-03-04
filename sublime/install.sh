@@ -11,6 +11,12 @@ install_sublime_ubuntu(){
 
 }
 
+install_sublime_arch(){
+    curl -O https://download.sublimetext.com/sublimehq-pub.gpg && sudo pacman-key --add sublimehq-pub.gpg && sudo pacman-key --lsign-key 8A8F901A && rm sublimehq-pub.gpg
+    echo -e "\n[sublime-text]\nServer = https://download.sublimetext.com/arch/stable/x86_64" | sudo tee -a /etc/pacman.conf
+    install_package sublime-text
+}
+
 post_sublime_macos(){
     local conf_path="$HOME/Library/Application Support/Sublime Text 3/Packages/User/"
     mkdir -p "$conf_path"
@@ -31,6 +37,10 @@ post_sublime_ubuntu(){
     # Package control
     conf_path="$HOME/.config/sublime-text-3/Installed Packages/"
     mkdir -p "$conf_path"
-    wget -O "$conf_path/Package Control.sublime-package" https://packagecontrol.io/Package%20Control.sublime-package
+    curl https://packagecontrol.io/Package%20Control.sublime-package > "$conf_path/Package Control.sublime-package"
 
+}
+
+post_sublime_arch(){
+    post_sublime_ubuntu
 }

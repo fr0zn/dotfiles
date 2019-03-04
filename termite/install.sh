@@ -1,6 +1,8 @@
 symlink_termite(){
     msg_debug "Symlink termite"
     mkdir -p $HOME/.config/termite
+    # default dark
+    symlink_file "termite/themes/dark" "$DOTFILE_PATH/termite/config"
     symlink_file "termite/config" "$HOME/.config/termite"
 }
 

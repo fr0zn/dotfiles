@@ -1,5 +1,5 @@
 {
-	"color_scheme": "Packages/Theme - Spacegray/base16-eighties.dark.tmTheme",
+	"color_scheme": "Packages/ayu/ayu-dark.tmTheme",
 	"ensure_newline_at_eof_on_save": true,
 	"ignored_packages":
 	[
@@ -8,7 +8,7 @@
 	[
 		80
 	],
-	"theme": "Spacegray Eighties.sublime-theme",
+	"theme": "ayu-dark.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true
 }

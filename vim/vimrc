@@ -105,9 +105,29 @@
         set termguicolors               " Enable true color support
     endif
 
+    set background=dark                 " Assume a dark background
     let ayucolor="dark"
+
     if filereadable(expand("$HOME/.vim/plugged/ayu-vim/colors/ayu.vim"))
+
+        if match(readfile(expand("$HOME/.dotfiles/theme")),"light")!=-1
+            let g:ayucolor="light"
+        else
+            let g:ayucolor="dark"
+        endif
+
         colorscheme ayu
+
+        function! g:ToggleBackground()
+          if g:ayucolor == 'dark'
+            let g:ayucolor="light"
+            colorscheme ayu
+          else
+            let g:ayucolor="dark"
+            colorscheme ayu
+          endif
+        endfunction
+        nnoremap <silent> <F3> :call g:ToggleBackground()<CR>
     endif
 
     " vim hardcodes background color erase even if the terminfo file does
@@ -162,6 +182,9 @@
         set guioptions -=T                   " gui scrollbar
         set guioptions -=r                   " gui scrollbar
         set guioptions -=m                   " gui titlebar
+        set guifont=Monospace\ 9
+        map <C-V> "+gP
+        imap <C-V> <ESC><C-V>i
     endif
 
 

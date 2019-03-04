@@ -1,3 +1,6 @@
 [submodule "pass/password-store"]
 	path = pass/password-store
 	url = git@github.com:fr0zn/pass.git
+[submodule "wallpapers"]
+	path = wallpapers
+	url = git@github.com:fr0zn/wallpapers.git
