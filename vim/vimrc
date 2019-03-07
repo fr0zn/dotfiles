@@ -39,6 +39,8 @@
     Plug 'ctrlpvim/ctrlp.vim'               " File fuzzy finding
     Plug '~/.fzf'
 
+    Plug 'elentok/plaintasks.vim'           " Todo like plugin
+
     Plug 'itchyny/lightline.vim'
 
     Plug 'vim-scripts/DrawIt'               " Vim draw draw lines left, right, up, down, boxes, etc
@@ -296,10 +298,6 @@
 
     nnoremap <C-a> _
     nnoremap <C-e> <End>
-
-    " Ctags with ENTER/Space
-    nnoremap <ENTER> <c-]>
-    nnoremap <space> <c-t>
 
 " }
 
