@@ -4,8 +4,7 @@ font = Hack 9
 [colors]
 
 foreground = #5c6773
-#background = #fafafa
-background = rgba(250, 250, 250, 0.9)
+background = #fafafa
 cursorColor= #ff6a00
 
 color0     = #000000
