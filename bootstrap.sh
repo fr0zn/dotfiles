@@ -629,9 +629,9 @@ _load
 if [ "$1" = "SOURCED" ]; then
     msg_info "Interactive shell"
     # Interactive
-    while true; do
-        read -p "cmd: " cmd
-        $cmd
+    while IFS= read -e -p "cmd: " cmd; do
+      history -s "$cmd"
+      $cmd
     done
 elif [ ! -z "$1" ]; then
     # User is giving an install file
