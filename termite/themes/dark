@@ -2,7 +2,8 @@
 font = Hack 9
 
 [colors]
-background = #0f1419
+#background = #0f1419
+background = rgba(15, 20, 25, 0.9)
 foreground = #e6e1cf
 foreground_bold = #e6e1cf
 
