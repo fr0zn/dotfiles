@@ -63,11 +63,10 @@ class extract(Command):
             descr = "extracting: " + os.path.basename(one_file.path)
         else:
             descr = "extracting files from: " + os.path.basename(one_file.dirname)
-        obj = CommandLoader(args=['aunpack'] + au_flags \
-                + [f.path for f in copied_files], descr=descr)
+        obj = self.fm.run(['aunpack'] + au_flags \
+                + [f.path for f in copied_files])
 
-        obj.signal_bind('after', refresh)
-        self.fm.loader.add(obj)
+        # self.fm.loader.add(obj)
 
 
 class umount(Command):

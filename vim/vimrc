@@ -31,10 +31,15 @@
     Plug 'majutsushi/tagbar'                " Displays tags in right sidebar
     Plug 'scrooloose/nerdtree'              " A tree explorer plugin for vim.
 
+    Plug 'SirVer/ultisnips'                 " Snippet engine
+    Plug 'honza/vim-snippets'               " list of snippets
+
     Plug 'wesleyche/SrcExpl'
 
     Plug 'ctrlpvim/ctrlp.vim'               " File fuzzy finding
     Plug '~/.fzf'
+
+    Plug 'elentok/plaintasks.vim'           " Todo like plugin
 
     Plug 'itchyny/lightline.vim'
 
@@ -55,6 +60,8 @@
     set mousehide                       " Hide the mouse cursor while typing
     autocmd VimEnter * set nospell      " No spell check
     scriptencoding utf-8                " UTF-8 as default encoding
+
+    set rtp+=~/.dotfiles/vim
 
     " set clipboard=unnamed               " System clipboard
 
@@ -292,10 +299,6 @@
     nnoremap <C-a> _
     nnoremap <C-e> <End>
 
-    " Ctags with ENTER/Space
-    nnoremap <ENTER> <c-]>
-    nnoremap <space> <c-t>
-
 " }
 
 " Plugins {
@@ -471,6 +474,12 @@
     " vim-latex-preview {
         "let g:livepreview_previewer = 'open -a Skim'
         let g:livepreview_previewer = 'xpdf'
+    " }
+
+    " UltiSnips {
+        let g:UltiSnipsEditSplit="vertical"
+        let g:UltiSnipsSnippetsDir = "~/.dotfiles/vim/snips"
+        let g:UltiSnipsSnippetDirectories=["UltiSnips", "snips"]
     " }
 
 " }
