@@ -18,7 +18,8 @@ symlink_ranger(){
     symlink_file "ranger/commands.py" "$HOME/.config/ranger"
 }
 
-post_ranger_ubuntu(){
+post_ranger(){
     # File viewers
-    install_package sxiv zathura
+    install_package sxiv
+    install zathura
 }

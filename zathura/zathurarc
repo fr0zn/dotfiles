@@ -1,0 +1,23 @@
+#open document in fit-width mode by default
+set adjust-open "best-fit"
+
+set font "Hack 10"
+
+map <C-i> recolor
+
+#set recolor "true"
+set recolor-lightcolor "#000000" #00
+set recolor-darkcolor "#A6A6A6" #06
+set recolor-reverse-video "true"
+set recolor-keephue "true"
+
+# ~ instead of /home/...
+set window-title-home-tilde "true"
+set statusbar-home-tilde "true"
+
+# no status-bar
+set guioptions ""
+
+set render-loading "false"
+
+map p print
