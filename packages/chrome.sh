@@ -3,6 +3,7 @@ install_chrome_ubuntu(){
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     sudo_run dpkg -i google-chrome-stable_current_amd64.deb
     rm google-chrome-stable_current_amd64.deb
+    sudo_run apt-get -f install
 }
 
 install_chrome_arch(){
