@@ -1,0 +1,26 @@
+# i3blocks config file
+#
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+#command=/usr/share/i3blocks/$BLOCK_NAME
+command=$HOME/.dotfiles/i3/i3blocks/$BLOCK_NAME
+separator_block_width=15
+markup=none
+
+# CPU usage
+#
+# The script may be called with -w and -c switches to specify thresholds,
+# see the script for details.
+[cpu_usage]
+label=CPU
+interval=10
+min_width=CPU: 100.00%
+#separator=false
+
+# Date Time
+#
+[time]
+command=date '+%Y-%m-%d %H:%M:%S'
+interval=5
