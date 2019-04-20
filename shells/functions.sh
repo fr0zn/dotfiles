@@ -50,7 +50,7 @@ gdbs() {
 }
 
 bootstrap() {
-    $DOTFILE_PATH/manual.sh
+    $DOTFILE_PATH/bootstrap.sh INTERACTIVE
 }
 
 # Inspect git log with fzf, ctrl + d to see diff

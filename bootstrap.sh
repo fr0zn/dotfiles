@@ -672,7 +672,7 @@ _get_os
 _pre_run
 _load
 
-if [ "$1" = "SOURCED" ]; then
+if [ "$1" = "INTERACTIVE" ]; then
     msg_info "Interactive shell"
     # Interactive
     while IFS= read -e -p "cmd: " cmd; do
