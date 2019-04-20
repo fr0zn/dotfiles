@@ -606,7 +606,7 @@ _bootsrap_ask (){
     string+=")"
 
     ## Show the menu. This will list all files and the string "quit"
-    select file in $files "all"
+    select file in $files
     do
         case $file in
         ## If the choice is one of the files (if it matches $string)
@@ -618,11 +618,6 @@ _bootsrap_ask (){
             break;
             ;;
 
-        "all")
-            ## Exit
-            echo "all"
-            break;
-            ;;
         *)
             file=""
             echo "Please choose a number from 1 to $((${#files[@]}+1))";;
@@ -645,8 +640,8 @@ _run(){
         . "$DOTFILE_PATH/bootstrap/$bootstrap_file.sh"
     fi
 
-    msg_info "Executing common installation file"
-    . "$DOTFILE_PATH/bootstrap/all.sh"
+    #msg_info "Executing common installation file"
+    #. "$DOTFILE_PATH/bootstrap/all.sh"
 
     if [[ $? -eq 0 ]]; then
         msg_ok "Done installing dotfiles!"

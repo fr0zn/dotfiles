@@ -27,7 +27,7 @@ install python
 install python dev
 
 install vim backup install symlink post
-install tmux
+gnstall tmux
 
 install bash
 
