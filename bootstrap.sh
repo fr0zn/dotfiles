@@ -589,15 +589,60 @@ _get_os(){
     msg_info "Running installation for OS: ${OS_TYPE}"
 }
 
+_bootsrap_ask (){
+    ## Collect the files in the array $files
+    files=$(find $DOTFILE_PATH/bootstrap -type f -not -name 'all*' | sed 's=.*/==;s/\.[^.]*$//')
+    ## Enable extended globbing. This lets us use @(foo|bar) to
+    ## match either 'foo' or 'bar'.
+    shopt -s extglob
+
+    ## Start building the string to match against.
+    string="@("
+    ## Add the rest of the files to the string
+    for file in $files; do
+        string+="|${file}"
+    done
+    ## Close the parenthesis. $string is now @(file1|file2|...|fileN)
+    string+=")"
+
+    ## Show the menu. This will list all files and the string "quit"
+    select file in $files "all"
+    do
+        case $file in
+        ## If the choice is one of the files (if it matches $string)
+        $string)
+            ## Do something here
+            echo "$file"
+            ## Uncomment this line if you don't want the menu to
+            ## be shown again
+            break;
+            ;;
+
+        "all")
+            ## Exit
+            echo "all"
+            break;
+            ;;
+        *)
+            file=""
+            echo "Please choose a number from 1 to $((${#files[@]}+1))";;
+        esac
+    done
+
+}
+
 _run(){
+
+
+    # . "$DOTFILE_PATH/bootstrap"
+
+    bootstrap_file=$(_bootsrap_ask)
 
     sync_database
 
-    . "$DOTFILE_PATH/bootstrap"
-
-    if [ -f "$DOTFILE_PATH/bootstrap/$OS_TYPE.sh" ]; then
-        msg_info "Executing installation file of '$OS_TYPE'"
-        . "$DOTFILE_PATH/bootstrap/$OS_TYPE.sh"
+    if [ -f "$DOTFILE_PATH/bootstrap/$bootstrap_file.sh" ]; then
+        msg_info "Executing installation file of '$bootstrap_file'"
+        . "$DOTFILE_PATH/bootstrap/$bootstrap_file.sh"
     fi
 
     msg_info "Executing common installation file"
@@ -611,7 +656,8 @@ _run(){
 }
 
 _edit(){
-    vi "$DOTFILE_PATH/bootstrap"
+    bootstrap_file=$(_bootsrap_ask)
+    vi "$DOTFILE_PATH/bootstrap/${bootstrap_file}.sh"
     y_n "Run installation now" _run return
 }
 
