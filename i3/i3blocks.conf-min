@@ -8,19 +8,3 @@
 command=$HOME/.dotfiles/i3/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=none
-
-# CPU usage
-#
-# The script may be called with -w and -c switches to specify thresholds,
-# see the script for details.
-[cpu_usage]
-label=CPU
-interval=10
-min_width=CPU: 100.00%
-#separator=false
-
-# Date Time
-#
-[time]
-command=date '+%Y-%m-%d %H:%M:%S'
-interval=5
