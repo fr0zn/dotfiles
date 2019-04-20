@@ -151,7 +151,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         position bottom
-        status_command i3block
+        status_command i3blocks
         tray_output primary
         colors {
             background  #212121
