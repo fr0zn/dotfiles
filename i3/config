@@ -4,6 +4,10 @@ set $sup Mod4
 # Compton config start
 exec_always --no-startup-id "killall -q compton; compton --config ~/.dotfiles/i3/compton.conf"
 
+# With the mouse_warping option, you can control when the mouse cursor should be warped.
+# none disables warping entirely, whereas output is the default behavior described above.
+# mouse_warping none
+
 # The middle button and a modifer over any part of the window toggles floating
 
 bindsym --whole-window $mod+button2 floating toggle
@@ -74,7 +78,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+Control+o split h
+bindsym $mod+Control+l split h
 
 # split in vertical orientation
 bindsym $mod+Control+j split v
@@ -186,4 +190,3 @@ bar {
 # exec vmware-user
 #exec --no-startup-id /usr/bin/feh --bg-scale ~/.dotfiles/i3/wallpaper.jpg
 exec --no-startup-id /usr/bin/feh --randomize --bg-scale ~/.dotfiles/wallpapers
-
