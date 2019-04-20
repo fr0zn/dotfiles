@@ -591,7 +591,8 @@ _get_os(){
 
 _bootsrap_ask (){
     ## Collect the files in the array $files
-    files=$(find $DOTFILE_PATH/bootstrap -type f -not -name 'all*' | sed 's=.*/==;s/\.[^.]*$//')
+    echo "$OS_TYPE"
+    files=$(find $DOTFILE_PATH/bootstrap -type f -name "${OS_TYPE}*" -not -name "common" | sed 's=.*/==;s/\.[^.]*$//')
     ## Enable extended globbing. This lets us use @(foo|bar) to
     ## match either 'foo' or 'bar'.
     shopt -s extglob
@@ -606,15 +607,16 @@ _bootsrap_ask (){
     string+=")"
 
     ## Show the menu. This will list all files and the string "quit"
-    select file in $files
+    select file in $files "common"
     do
         case $file in
         ## If the choice is one of the files (if it matches $string)
         $string)
-            ## Do something here
             echo "$file"
-            ## Uncomment this line if you don't want the menu to
-            ## be shown again
+            break;
+            ;;
+        common)
+            echo "common"
             break;
             ;;
 
