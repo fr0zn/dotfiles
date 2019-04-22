@@ -1,3 +1,3 @@
 install_pwntools(){
-    pip install --upgrade pwntools
+    pip install pwntools
 }
