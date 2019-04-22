@@ -78,7 +78,7 @@ has_sudo() {
 
 clean(){
     if [[ "$DEBUG" != "1" ]]; then
-        $@ > /dev/null
+        $@ > /dev/null 2>&1
     else
         $@
     fi
@@ -453,10 +453,10 @@ _load() {
 _template() {
     if _function_exists "${1}_${2}_$OS_TYPE"; then
         msg_debug "${2}: ${1} ($OS_TYPE)" "in"
-        $"${1}_${2}_$OS_TYPE"
+        clean $"${1}_${2}_$OS_TYPE"
     elif _function_exists "${1}_${2}"; then
         msg_debug "${2}: ${1} (generic)" "in"
-        $"${1}_${2}"
+        clean $"${1}_${2}"
     else
         msg_debug "${2}: Tried to run ${1}_${2}, but it doesn't exist" "in"
         return 0
