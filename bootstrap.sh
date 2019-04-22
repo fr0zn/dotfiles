@@ -591,7 +591,6 @@ _get_os(){
 
 _bootsrap_ask (){
     ## Collect the files in the array $files
-    echo "$OS_TYPE"
     files=$(find $DOTFILE_PATH/bootstrap -type f -name "${OS_TYPE}*" -not -name "common" | sed 's=.*/==;s/\.[^.]*$//')
     ## Enable extended globbing. This lets us use @(foo|bar) to
     ## match either 'foo' or 'bar'.
