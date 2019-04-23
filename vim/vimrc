@@ -188,8 +188,11 @@
     if has("gui_running")
         set guioptions -=T                   " gui scrollbar
         set guioptions -=r                   " gui scrollbar
+        set guioptions -=L                   "remove left-hand scroll bar
         set guioptions -=m                   " gui titlebar
         set guifont=Monospace\ 9
+        set titlestring=%f
+        set nuw=6
         map <C-V> "+gP
         imap <C-V> <ESC><C-V>i
     endif
