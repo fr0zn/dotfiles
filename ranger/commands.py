@@ -113,3 +113,59 @@ class z(Command):
         out, err = process.communicate(command)
         if out and out != "":
             self.fm.cd(out.strip())
+
+class pwn(Command):
+    def execute(self):
+        cwd = self.fm.thisdir
+        marked_files = cwd.get_selection()
+        binary = marked_files[0]
+
+        action = self.arg(1)
+        if not action:
+            self.fm.notify("Error: no action specified", bad=True)
+            return
+        if action == 'skel' or action == 'templ' or action == 'template':
+            host = self.arg(2)
+            port = self.arg(3)
+            if not host or not port:
+                self.fm.notify("Error: no host or port specified", bad=True)
+                return
+            if "x-" in binary.filetype:
+                selected_type = subprocess.check_output(["file",binary.path])
+                # 64
+                if "x86-64" in selected_type or "x86_64" in selected_type:
+                    ARCH = 'amd64'
+                # 32
+                else:
+                    ARCH = 'i386'
+                #TODO: ARM
+
+                pwn_template = open(os.path.expanduser("~/.dotfiles/ranger/pwn_template.py")).read()
+
+                fmt_template = pwn_template.format(
+                        ARCH=ARCH,
+                        BINARY="./" + binary.basename,
+                        HOST=host,
+                        PORT=port,
+                        )
+                sol_file = os.path.join(str(cwd),'exploit.py')
+                open(sol_file,'w').write(fmt_template)
+
+            else:
+                self.fm.notify("Error: no executable selected", bad=True)
+                return
+
+        # if not device:
+            # self.fm.notify("Error: no device specified", bad=True)
+            # return
+
+
+        # if len(marked_files) == 1:
+            # to_mount =
+        # else:
+            # to_mount = cwd.path
+
+        # self.fm.run(["sudo","mount"] + [device, to_mount])
+
+    def tab(self):
+         return self._tab_directory_content()
