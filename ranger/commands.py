@@ -28,6 +28,8 @@ class compress(Command):
         obj.signal_bind('after', refresh)
         self.fm.loader.add(obj)
 
+        self.fm.execute_console("unmark")
+
     def tab(self):
         """ Complete with current folder name """
 
@@ -66,8 +68,7 @@ class extract(Command):
         obj = self.fm.run(['aunpack'] + au_flags \
                 + [f.path for f in copied_files])
 
-        # self.fm.loader.add(obj)
-
+        self.fm.execute_console("unmark")
 
 class umount(Command):
     def execute(self):
