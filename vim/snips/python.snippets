@@ -1,0 +1,41 @@
+snippet pwn "pwn"
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+from pwn import *
+import sys
+import distutils.spawn
+
+if distutils.spawn.find_executable('termite'):
+    context.terminal = ['termite', '-e']
+else:
+    context.terminal = ['tmux', 'splitw', '-h']
+
+context.arch = "${3}"
+
+HOST = "${1}"
+PORT = ${2}
+
+GDB_CMD = '''
+'''
+
+def exploit(p):
+    ${5}
+    p.interactive()
+
+if __name__ == "__main__":
+
+    e = ELF("${4}")
+
+    context.binary = "$4"
+
+    if '1' in sys.argv:
+        p = remote(HOST, PORT)
+    else:
+        p = process("$4")
+
+        if 'gdb' in sys.argv:
+            gdb.attach(p, GDB_CMD)
+        else:
+
+    exploit(p)
+endsnippet
