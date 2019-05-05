@@ -11,11 +11,11 @@ else:
 
 context.arch = "{ARCH}"
 
-GDB_CMD = '''
-'''
-
 HOST = "{HOST}"
 PORT = {PORT}
+
+GDB_CMD = '''
+'''
 
 def exploit(p):
     p.interactive()
@@ -29,9 +29,10 @@ if __name__ == "__main__":
     if '1' in sys.argv:
         p = remote(HOST, PORT)
     else:
+        p = process("{BINARY}")
+
         if 'gdb' in sys.argv:
-            p = gdb.debug("{BINARY}", GDB_CMD)
+            gdb.attach(p, GDB_CMD)
         else:
-            p = process("{BINARY}")
 
     exploit(p)
