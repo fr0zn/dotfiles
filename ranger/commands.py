@@ -105,15 +105,17 @@ class mount(Command):
          return self._tab_directory_content()
 
 class z(Command):
+    """
+    :fasd
+
+    Jump to directory using fasd
+    """
     def execute(self):
-        if not self.arg(1):
-            return
-        _dir = self.arg(1)
-        process = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-        command = 'source $HOME/.antigen/bundles/rupa/z/z.sh; _z -e {}'.format(_dir)
-        out, err = process.communicate(command)
-        if out and out != "":
-            self.fm.cd(out.strip())
+        import subprocess
+        arg = self.rest(1)
+        if arg:
+            directory = subprocess.check_output(["fasd", "-d"]+arg.split(), universal_newlines=True).strip()
+            self.fm.cd(directory)
 
 class pwn(Command):
     def execute(self):
