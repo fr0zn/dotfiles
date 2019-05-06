@@ -2,6 +2,7 @@ import os
 import subprocess
 from ranger.core.loader import CommandLoader
 from ranger.api.commands import Command
+import ranger.api
 import platform
 
 class compress(Command):
@@ -103,6 +104,16 @@ class mount(Command):
 
     def tab(self):
          return self._tab_directory_content()
+
+old_hook_init = ranger.api.hook_init
+
+def hook_init(fm):
+    def fasd_add():
+        fm.execute_console("shell fasd --add '" + fm.thisfile.path + "'")
+    fm.signal_bind('execute.before', fasd_add)
+    return old_hook_init(fm)
+
+ranger.api.hook_init = hook_init
 
 class z(Command):
     """
