@@ -3,7 +3,7 @@ backup_zsh(){
 }
 
 install_zsh(){
-    install_package "zsh"
+    install_package "zsh" "fasd"
     install "antigen"
 }
 
@@ -13,7 +13,6 @@ symlink_zsh(){
 
 post_zsh(){
     program_must_exist "zsh"
-    touch $HOME/.z
     chsh -s /bin/zsh
 }
 

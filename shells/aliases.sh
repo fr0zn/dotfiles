@@ -20,3 +20,5 @@ alias gk='gitk --all&'
 alias gx='gitx --all'
 
 alias server='python -m SimpleHTTPServer'
+
+alias z='fasd_cd -d'

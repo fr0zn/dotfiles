@@ -14,7 +14,7 @@ pathadd "$HOME/.dotfiles/bin" after
 pathadd "$HOME/ida-7.1"
 
 # Load all config (depending on bash or zshrc)
-. $CONFIG_PATH/all 2>/dev/null
+. $CONFIG_PATH/allrc 2>/dev/null
 
 # MacOS configs
 if [[ "$unamestr" == "Darwin" ]]; then
