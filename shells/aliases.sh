@@ -22,3 +22,4 @@ alias gx='gitx --all'
 alias server='python -m SimpleHTTPServer'
 
 alias z='fasd_cd -d'
+alias v='f -e vim' # quick opening files with vim
