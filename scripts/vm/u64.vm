@@ -1,4 +1,4 @@
 vmname="u64"
 vmtype="vmware"
-vmpath="/Volumes/VMNet/.vmware/u64.vmwarevm/u64.vmx"
+vmpath="/Volumes/VMNet/vms/vmware/u64.vmwarevm/u64.vmx"
 vmport="22"
