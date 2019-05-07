@@ -145,7 +145,7 @@ class pwn(Command):
                 self.fm.notify("Error: no host or port specified", bad=True)
                 return
             if "x-" in binary.filetype:
-                selected_type = subprocess.check_output(["file",binary.path])
+                selected_type = str(subprocess.check_output(["file",binary.path]))
                 # 64
                 if "x86-64" in selected_type or "x86_64" in selected_type:
                     ARCH = 'amd64'
