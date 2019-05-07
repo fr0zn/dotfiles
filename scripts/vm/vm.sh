@@ -8,7 +8,7 @@ _valid_commands="start stop ssh mount umount ip"
 _valid_vmtypes="vmware qemu virtualbox"
 
 vm_list (){
-    find "$vm_path" -maxdepth 2 -name "*.vm" -execdir sh -c 'printf "%s\n" "${0%.*}"' {} ';'
+    find "$vm_path" -maxdepth 2 -name "*.vm" -execdir sh -c 'printf "%s\n" "${0%.*}" | sed "s/.\///g"' {} ';'
 }
 
 _vm_valid (){
