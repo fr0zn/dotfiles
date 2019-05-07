@@ -42,9 +42,9 @@ vm_general_mount() {
     ssh -t fr0zn@$ip -p $vmport "mkdir -p \$HOME/shared"
     mkdir -p /Volumes/VMNet/SHARED/$vmname 2>/dev/null
     if [ "$os" = "Darwin" ]; then
-        sudo sshfs -o allow_other,defer_permissions -p $vmport fr0zn@localhost:/home/fr0zn/shared /Volumes/VMNet/SHARED/$vmname
+        sudo sshfs -o allow_other,defer_permissions -p $vmport fr0zn@$ip:/home/fr0zn/shared /Volumes/VMNet/SHARED/$vmname
     else
-        sudo sshfs -o allow_other -p $vmport fr0zn@localhost:/home/fr0zn/shared /Volumes/VMNet/SHARED/$vmname
+        sudo sshfs -o allow_other -p $vmport fr0zn@$ip:/home/fr0zn/shared /Volumes/VMNet/SHARED/$vmname
     fi
 }
 
