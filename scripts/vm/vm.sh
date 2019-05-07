@@ -3,9 +3,12 @@
 vm_path="$HOME/.dotfiles/scripts/vm"
 
 prog_name="vm"
+os=`uname -s`
 
 _valid_commands="start stop ssh mount umount ip"
 _valid_vmtypes="vmware qemu virtualbox"
+
+ip=""
 
 vm_list (){
     find "$vm_path" -maxdepth 2 -name "*.vm" -execdir sh -c 'printf "%s\n" "${0%.*}" | sed "s/.\///g"' {} ';'
@@ -34,6 +37,22 @@ _vm_load (){
     return 1
 }
 
+vm_general_mount() {
+    echo "Mounting vm $vmname"
+    ssh -t fr0zn@$ip -p $vmport "mkdir -p \$HOME/shared"
+    mkdir -p /Volumes/VMNet/SHARED/$vmname 2>/dev/null
+    if [ "$os" = "Darwin" ]; then
+        sudo sshfs -o allow_other,defer_permissions -p $vmport fr0zn@localhost:/home/fr0zn/shared /Volumes/VMNet/SHARED/$vmname
+    else
+        sudo sshfs -o allow_other -p $vmport fr0zn@localhost:/home/fr0zn/shared /Volumes/VMNet/SHARED/$vmname
+    fi
+}
+
+vm_general_umount() {
+    echo "Umounting vm $vmname"
+    sudo umount /Volumes/VMNet/SHARED/$vmname
+}
+
 vm_qemu_start (){
     echo "Starting vm $vmname"
     $vmpath
@@ -44,18 +63,16 @@ vm_qemu_stop (){
     vm_qemu_umount $@
     pkill qemu-system-aarch64
     pkill qemu-system-arm
+    pkill qemu-system-aar
 }
 
 vm_qemu_mount (){
-    echo "Mounting vm $vmname"
-    ssh -t localhost -p $vmport "mkdir -p \$HOME/shared"
-    mkdir -p /Volumes/VMNet/SHARED/$vmname 2>/dev/null
-    sudo sshfs -o allow_other,defer_permissions -p $vmport fr0zn@localhost:/home/fr0zn/shared /Volumes/VMNet/SHARED/$vmname
+    ip="localhost"
+    vm_general_mount
 }
 
 vm_qemu_umount (){
-    echo "Umounting vm $vmname"
-    umount /Volumes/VMNet/SHARED/$vmname
+    vm_general_umount
 }
 
 vm_qemu_ssh (){
@@ -79,11 +96,8 @@ vm_vmware_stop (){
 }
 
 vm_vmware_mount (){
-    echo "Mounting vm $vmname"
     ip=`vmrun getGuestIPAddress $vmpath`
-    ssh -t fr0zn@$ip -p $vmport "mkdir -p \$HOME/shared"
-    mkdir -p /Volumes/VMNet/SHARED/$vmname 2>/dev/null
-    sudo sshfs -o allow_other,defer_permissions -p $vmport fr0zn@$ip:/home/fr0zn/shared /Volumes/VMNet/SHARED/$vmname
+    vm_general_mount
 }
 
 vm_vmware_ip() {
@@ -92,8 +106,7 @@ vm_vmware_ip() {
 }
 
 vm_vmware_umount (){
-    echo "Umounting vm $vmname"
-    umount /Volumes/VMNet/SHARED/$vmname
+    vm_general_umount
 }
 
 vm_vmware_ssh (){
