@@ -138,7 +138,7 @@ class pwn(Command):
         if not action:
             self.fm.notify("Error: no action specified", bad=True)
             return
-        if action == 'skel' or action == 'templ' or action == 'template':
+        if action == 'skel' or action == 'templ' or action == 'template' or action == 't':
             host = self.arg(2)
             port = self.arg(3)
             if not host or not port:
