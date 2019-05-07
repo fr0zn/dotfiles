@@ -22,17 +22,18 @@ def exploit(p):
 
 if __name__ == "__main__":
 
-    e = ELF("{BINARY}")
+    bin_name = "{BINARY}"
 
-    context.binary = "{BINARY}"
+    e = ELF(bin_name)
+
+    context.binary = bin_name
 
     if '1' in sys.argv:
         p = remote(HOST, PORT)
     else:
-        p = process("{BINARY}")
+        p = process(bin_name)
 
         if 'gdb' in sys.argv:
             gdb.attach(p, GDB_CMD)
-        else:
 
-    exploit(p)
+        exploit(p)
