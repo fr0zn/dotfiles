@@ -49,6 +49,7 @@ vm_qemu_stop (){
 vm_qemu_mount (){
     echo "Mounting vm $vmname"
     ssh -t localhost -p $vmport "mkdir -p \$HOME/shared"
+    mkdir -p /Volumes/VMNet/SHARED/$vmname 2>/dev/null
     sudo sshfs -o allow_other,defer_permissions -p $vmport fr0zn@localhost:/home/fr0zn/shared /Volumes/VMNet/SHARED/$vmname
 }
 
@@ -81,6 +82,7 @@ vm_vmware_mount (){
     echo "Mounting vm $vmname"
     ip=`vmrun getGuestIPAddress $vmpath`
     ssh -t fr0zn@$ip -p $vmport "mkdir -p \$HOME/shared"
+    mkdir -p /Volumes/VMNet/SHARED/$vmname 2>/dev/null
     sudo sshfs -o allow_other,defer_permissions -p $vmport fr0zn@$ip:/home/fr0zn/shared /Volumes/VMNet/SHARED/$vmname
 }
 
