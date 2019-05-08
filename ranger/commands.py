@@ -5,6 +5,8 @@ from ranger.api.commands import Command
 import ranger.api
 import platform
 
+import lief
+
 class compress(Command):
     def execute(self):
         """ Compress marked files to current directory """
@@ -138,26 +140,64 @@ class pwn(Command):
         if not action:
             self.fm.notify("Error: no action specified", bad=True)
             return
-        if action == 'skel' or action == 'templ' or action == 'template' or action == 't':
+        if action in ['skel', 'templ', 'template', 't']:
             host = self.arg(2)
             port = self.arg(3)
             if not host or not port:
-                self.fm.notify("Error: no host or port specified", bad=True)
-                return
-            if "x-" in binary.filetype:
-                selected_type = str(subprocess.check_output(["file",binary.path]))
-                # 64
-                if "x86-64" in selected_type or "x86_64" in selected_type:
-                    ARCH = 'amd64'
-                # 32
+                host = ""
+                port = 0
+                self.fm.notify("Info: no host or port specified")
+
+            VM_PORT = None
+            IS_VM   = False
+            b = lief.parse(binary.path)
+            if 'EXE_FORMATS' in str(b.format):
+                if str(b.format) == 'EXE_FORMATS.ELF':
+                    OS = 'linux'
+                    arch = str(b.header.machine_type)
+                    IS_VM = True
+                    if arch == 'ARCH.x86_64':
+                        ARCH = 'amd64'
+                        VM_PORT = 2264
+                    elif arch == 'ARCH.i386':
+                        ARCH = 'i386'
+                        VM_PORT = 2232
+                    elif arch == 'ARCH.ARM':
+                        ARCH = 'arm'
+                        VM_PORT = 4432
+                    elif arch == 'ARCH.AARCH64':
+                        ARCH = 'aarch64'
+                        VM_PORT = 4464
+                    else:
+                        self.fm.notify("Error: No supported elf architecture", bad=True)
+                elif str(b.format) == 'EXE_FORMATS.MACHO':
+                    OS = 'freebsd'
+                    cpu = str(b.header.cpu_type)
+                    if cpu == 'CPU_TYPES.x86_64':
+                        ARCH = 'amd64'
+                    elif cpu == 'CPU_TYPES.x86':
+                        ARCH = 'i386'
+                    else:
+                        self.fm.notify("Error: No supported macho cpu", bad=True)
+                elif str(b.format) == 'EXE_FORMATS.PE':
+                    OS = 'windows'
+                    machine = str(b.header.machine)
+                    if machine == 'MACHINE_TYPES.AMD64':
+                        ARCH = 'amd64'
+                    elif machine == 'MACHINE_TYPES.I386':
+                        ARCH = 'i386'
+                    else:
+                        self.fm.notify("Error: No supported PE machine", bad=True)
                 else:
-                    ARCH = 'i386'
-                #TODO: ARM
+                    self.fm.notify("Error: No supported format", bad=True)
 
                 pwn_template = open(os.path.expanduser("~/.dotfiles/ranger/pwn_template.py")).read()
 
                 fmt_template = pwn_template.format(
                         ARCH=ARCH,
+                        OS=OS,
+                        IS_VM=IS_VM,
+                        VM_PORT=VM_PORT,
                         BINARY="./" + binary.basename,
                         HOST=host,
                         PORT=port,
@@ -176,7 +216,7 @@ class pwn(Command):
 
         # if len(marked_files) == 1:
             # to_mount =
-        # else:
+        # else:AARCH64
             # to_mount = cwd.path
 
         # self.fm.run(["sudo","mount"] + [device, to_mount])

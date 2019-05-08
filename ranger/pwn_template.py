@@ -2,17 +2,20 @@
 # -*- coding: utf-8 -*-
 from pwn import *
 import sys
-import distutils.spawn
+import os
 
-if distutils.spawn.find_executable('termite'):
-    context.terminal = ['termite', '-e']
-else:
-    context.terminal = ['tmux', 'splitw', '-h']
+#context.terminal = ['tmux', 'splitw', '-h']
+context.terminal = [ os.path.join(os.path.expanduser("~"),
+                   '.dotfiles/scripts/open_term.sh') ]
 
 context.arch = "{ARCH}"
+context.os   = "{OS}"
 
-HOST = "{HOST}"
-PORT = {PORT}
+BIN_NAME     = "{BINARY}"
+IS_VM        = {IS_VM}
+
+HOST         = "{HOST}"
+PORT         = {PORT}
 
 GDB_CMD = '''
 '''
@@ -22,18 +25,22 @@ def exploit(p):
 
 if __name__ == "__main__":
 
-    bin_name = "{BINARY}"
-
-    e = ELF(bin_name)
-
-    context.binary = bin_name
+    e = ELF(BIN_NAME)
 
     if '1' in sys.argv:
         p = remote(HOST, PORT)
     else:
-        p = process(bin_name)
-
-        if 'gdb' in sys.argv:
-            gdb.attach(p, GDB_CMD)
+        if IS_VM:
+            _ssh = ssh('fr0zn', 'localhost', {VM_PORT})
+            if 'debug' in sys.argv:
+                p = gdb.debug(BIN_NAME, GDB_CMD, ssh=_ssh)
+            else:
+                p = _ssh.process(BIN_NAME)
+                if 'attach' in sys.argv:
+                    gdb.attach(p, GDB_CMD)
+        else:
+            p = process(BIN_NAME)
+            if 'attach' in sys.argv:
+                gdb.attach(p, GDB_CMD)
 
         exploit(p)
