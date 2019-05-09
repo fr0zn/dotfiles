@@ -33,8 +33,6 @@ if __name__ == "__main__":
     else:
         if IS_VM:
             _ssh = ssh('fr0zn', VM_NAME)
-            _ssh.upload(BIN_NAME)
-            _ssh.shell('chmod +x ' + BIN_NAME)
 
             if 'debug' in sys.argv:
                 p = gdb.debug(BIN_NAME, GDB_CMD, ssh=_ssh)
