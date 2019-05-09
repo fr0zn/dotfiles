@@ -253,3 +253,28 @@ class up(Command):
         # remove any wildcard host settings since they're not real servers
         hosts.discard("*")
         return (self.start(1) + host + ":" for host in hosts)
+
+class ssh(Command):
+    def execute(self):
+        if self.arg(1):
+            self.fm.execute_console("shell $HOME/.dotfiles/scripts/open_term.sh ssh " + self.arg(1))
+    def tab(self):
+        import os.path
+        try:
+            import paramiko
+        except ImportError:
+            """paramiko not installed"""
+            return
+
+        try:
+            with open(os.path.expanduser("~/.ssh/config")) as file:
+                paraconf = paramiko.SSHConfig()
+                paraconf.parse(file)
+        except IOError:
+            """cant open ssh config"""
+            return
+
+        hosts = paraconf.get_hostnames()
+        # remove any wildcard host settings since they're not real servers
+        hosts.discard("*")
+        return (self.start(1) + host + ":" for host in hosts)
