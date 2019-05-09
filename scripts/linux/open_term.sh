@@ -1,2 +1,6 @@
 #!/bin/bash
-termite -d ${@} &>/dev/null &
+if [[ -d ${1} ]]; then
+    termite -d "${@}" &>/dev/null &
+else
+    termite -e "${@}" &>/dev/null &
+fi
