@@ -17,11 +17,12 @@ install_package unzip
 
 # ARM
 install_package gcc-arm-linux-gnueabihf gcc-5-aarch64-linux-gnu gcc-aarch64-linux-gnu
-# arm 32
 install_package libc6-dbg-armhf-cross libc6-dev-armhf-cross
-# arm 64
 install_package libc6-dbg-arm64-cross libc6-dev-arm64-cross
 install_package qemu qemu-user qemu-user-static
+sudo_run mkdir /etc/qemu-binfmt
+sudo_run ln -s /usr/arm-linux-gnueabihf/ /etc/qemu-binfmt/arm
+sudo_run ln -s /usr/aarch64-linux-gnu /etc/qemu-binfmt/aarch64
 
 install python
 install python dev
