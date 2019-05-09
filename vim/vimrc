@@ -9,6 +9,7 @@
     "Plug 'chriskempson/base16-vim'
     Plug 'NLKNguyen/papercolor-theme'
     Plug 'ayu-theme/ayu-vim'                " Colorscheme
+    Plug 'Yggdroot/indentLine'              " Indent lines
 
     Plug 'easymotion/vim-easymotion'        " Easy move inside vim
     Plug 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits
@@ -483,6 +484,12 @@
         let g:UltiSnipsEditSplit="vertical"
         let g:UltiSnipsSnippetsDir = "~/.dotfiles/vim/snips"
         let g:UltiSnipsSnippetDirectories=["UltiSnips", "snips"]
+    " }
+
+    " IndentLine {
+        let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+        let g:indentLine_showFirstIndentLevel = 1
+        let g:indentLine_setColors = 0
     " }
 
 " }
