@@ -148,26 +148,23 @@ class pwn(Command):
                 port = 0
                 self.fm.notify("Info: no host or port specified")
 
-            VM_PORT = None
+            VM_NAME = ""
             IS_VM   = False
             b = lief.parse(binary.path)
             if 'EXE_FORMATS' in str(b.format):
                 if str(b.format) == 'EXE_FORMATS.ELF':
+                    VM_NAME = "u16"
                     OS = 'linux'
                     arch = str(b.header.machine_type)
                     IS_VM = True
                     if arch == 'ARCH.x86_64':
                         ARCH = 'amd64'
-                        VM_PORT = 2264
                     elif arch == 'ARCH.i386':
                         ARCH = 'i386'
-                        VM_PORT = 2232
                     elif arch == 'ARCH.ARM':
                         ARCH = 'arm'
-                        VM_PORT = 4432
                     elif arch == 'ARCH.AARCH64':
                         ARCH = 'aarch64'
-                        VM_PORT = 4464
                     else:
                         self.fm.notify("Error: No supported elf architecture", bad=True)
                 elif str(b.format) == 'EXE_FORMATS.MACHO':
@@ -197,7 +194,7 @@ class pwn(Command):
                         ARCH=ARCH,
                         OS=OS,
                         IS_VM=IS_VM,
-                        VM_PORT=VM_PORT,
+                        VM_NAME=VM_NAME,
                         BINARY="./" + binary.basename,
                         HOST=host,
                         PORT=port,

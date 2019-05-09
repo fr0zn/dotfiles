@@ -13,6 +13,7 @@ context.os   = "{OS}"
 
 BIN_NAME     = "{BINARY}"
 IS_VM        = {IS_VM}
+VM_NAME      = "{VM_NAME}"
 
 HOST         = "{HOST}"
 PORT         = {PORT}
@@ -31,7 +32,7 @@ if __name__ == "__main__":
         p = remote(HOST, PORT)
     else:
         if IS_VM:
-            _ssh = ssh('fr0zn', 'localhost', {VM_PORT})
+            _ssh = ssh('fr0zn', VM_NAME)
             if 'debug' in sys.argv:
                 p = gdb.debug(BIN_NAME, GDB_CMD, ssh=_ssh)
             else:
@@ -39,8 +40,11 @@ if __name__ == "__main__":
                 if 'attach' in sys.argv:
                     gdb.attach(p, GDB_CMD)
         else:
-            p = process(BIN_NAME)
-            if 'attach' in sys.argv:
-                gdb.attach(p, GDB_CMD)
+            if 'debug' in sys.argv:
+                p = gdb.debug(BIN_NAME, GDB_CMD)
+            else:
+                p = process(BIN_NAME)
+                if 'attach' in sys.argv:
+                    gdb.attach(p, GDB_CMD)
 
         exploit(p)
