@@ -257,7 +257,7 @@ class up(Command):
 class ssh(Command):
     def execute(self):
         if self.arg(1):
-            self.fm.execute_console("shell $HOME/.dotfiles/scripts/open_term.sh ssh " + self.arg(1))
+            self.fm.execute_console('shell $HOME/.dotfiles/scripts/open_term.sh "ssh ' + self.arg(1) + '"')
     def tab(self):
         import os.path
         try:
