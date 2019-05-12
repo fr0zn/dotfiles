@@ -11,9 +11,11 @@ context.terminal = [ os.path.join(os.path.expanduser("~"),
 context.arch = "{ARCH}"
 context.os   = "{OS}"
 
-BIN_NAME     = "{BINARY}"
 IS_VM        = {IS_VM}
 VM_NAME      = "{VM_NAME}"
+
+BIN_NAME     = "{BINARY}"
+LIBC_NAME    = "./libc.so.6"
 
 HOST         = "{HOST}"
 PORT         = {PORT}
@@ -28,6 +30,13 @@ if __name__ == "__main__":
 
     e = ELF(BIN_NAME)
 
+    if (os.path.isfile(LIBC_NAME)):
+        libc = ELF(LIBC_NAME)
+        env  = {'LD_PRELOAD': LIBC_NAME}
+    else:
+        libc = None
+        env  = {}
+
     if '1' in sys.argv:
         p = remote(HOST, PORT)
     else:
@@ -35,16 +44,16 @@ if __name__ == "__main__":
             _ssh = ssh('fr0zn', VM_NAME)
 
             if 'debug' in sys.argv:
-                p = gdb.debug(BIN_NAME, GDB_CMD, ssh=_ssh)
+                p = gdb.debug(BIN_NAME, GDB_CMD, ssh=_ssh, env=env)
             else:
-                p = _ssh.process(BIN_NAME)
+                p = _ssh.process(BIN_NAME, env=env)
                 if 'attach' in sys.argv:
                     gdb.attach(p, GDB_CMD)
         else:
             if 'debug' in sys.argv:
-                p = gdb.debug(BIN_NAME, GDB_CMD)
+                p = gdb.debug(BIN_NAME, GDB_CMD, env=env)
             else:
-                p = process(BIN_NAME)
+                p = process(BIN_NAME, env=env)
                 if 'attach' in sys.argv:
                     gdb.attach(p, GDB_CMD)
 
