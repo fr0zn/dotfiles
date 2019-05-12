@@ -4,6 +4,7 @@ from ranger.core.loader import CommandLoader
 from ranger.api.commands import Command
 import ranger.api
 import platform
+import argparse
 
 import lief
 
@@ -141,19 +142,19 @@ class pwn(Command):
             self.fm.notify("Error: no action specified", bad=True)
             return
         if action in ['skel', 'templ', 'template', 't']:
-            host = self.arg(2)
-            port = self.arg(3)
-            if not host or not port:
-                host = ""
-                port = 0
+            parser = argparse.ArgumentParser()
+            parser.add_argument('host', nargs='?', default="")
+            parser.add_argument('port', nargs='?', default=0)
+            parser.add_argument("--vm", help="Sets the vm to use", default="u16")
+            parser.add_argument("--libc", help="Sets the libc to use", default="libc.so.6")
+            _args = parser.parse_args(self.args[2:])
+            if not _args.host or _args.port == 0:
                 self.fm.notify("Info: no host or port specified")
 
-            VM_NAME = ""
             IS_VM   = False
             b = lief.parse(binary.path)
             if 'EXE_FORMATS' in str(b.format):
                 if str(b.format) == 'EXE_FORMATS.ELF':
-                    VM_NAME = "u16"
                     OS = 'linux'
                     arch = str(b.header.machine_type)
                     IS_VM = True
@@ -194,10 +195,11 @@ class pwn(Command):
                         ARCH=ARCH,
                         OS=OS,
                         IS_VM=IS_VM,
-                        VM_NAME=VM_NAME,
+                        VM_NAME=_args.vm,
                         BINARY="./" + binary.basename,
-                        HOST=host,
-                        PORT=port,
+                        LIBC_NAME="./"+_args.libc,
+                        HOST=_args.host,
+                        PORT=_args.port,
                         )
                 sol_file = os.path.join(str(cwd),'exploit.py')
                 open(sol_file,'w').write(fmt_template)

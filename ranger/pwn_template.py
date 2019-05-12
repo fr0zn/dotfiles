@@ -15,7 +15,7 @@ IS_VM        = {IS_VM}
 VM_NAME      = "{VM_NAME}"
 
 BIN_NAME     = "{BINARY}"
-LIBC_NAME    = "./libc.so.6"
+LIBC_NAME    = "{LIBC_NAME}"
 
 HOST         = "{HOST}"
 PORT         = {PORT}
