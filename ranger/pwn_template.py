@@ -29,13 +29,12 @@ def exploit(p):
 if __name__ == "__main__":
 
     e = ELF(BIN_NAME)
+    libc = None
+    env  = dict()
 
     if (os.path.isfile(LIBC_NAME)):
         libc = ELF(LIBC_NAME)
         env  = dict(LD_PRELOAD = LIBC_NAME)
-    else:
-        libc = None
-        env  = dict()
 
     if '1' in sys.argv:
         p = remote(HOST, PORT)
