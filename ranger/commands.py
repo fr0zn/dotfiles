@@ -205,6 +205,33 @@ class pwn(Command):
             else:
                 self.fm.notify("Error: no executable selected", bad=True)
                 return
+        elif action == 'vm':
+            subaction = self.arg(2)
+            if subaction:
+                if subaction in ['s', 'start']:
+                    vm = self.arg(3)
+                    if vm:
+                        cmd = "VBoxManage startvm {} --type headless".format(vm).split(' ')
+                        self.fm.execute_command(cmd)
+                elif subaction in ['stop']:
+                    vm = self.arg(3)
+                    if vm:
+                        cmd = "VBoxManage controlvm {} poweroff".format(vm).split(' ')
+                        self.fm.execute_command(cmd)
+                elif subaction in ['p','pause']:
+                    vm = self.arg(3)
+                    if vm:
+                        cmd = "VBoxManage controlvm {} pause".format(vm).split(' ')
+                        self.fm.execute_command(cmd)
+                elif subaction in ['r','resume']:
+                    vm = self.arg(3)
+                    if vm:
+                        cmd = "VBoxManage controlvm {} resume".format(vm).split(' ')
+                        self.fm.execute_command(cmd)
+                else:
+                    self.fm.notify("Error: unknown command", bad=True)
+            else:
+                self.fm.notify("Error: no subaction specified", bad=True)
 
         # if not device:
             # self.fm.notify("Error: no device specified", bad=True)
