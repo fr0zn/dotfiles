@@ -48,4 +48,4 @@ if __name__ == "__main__":
                 if 'attach' in sys.argv:
                     gdb.attach(p, GDB_CMD)
 
-        exploit(p)
+    exploit(p)
