@@ -32,10 +32,10 @@ if __name__ == "__main__":
 
     if (os.path.isfile(LIBC_NAME)):
         libc = ELF(LIBC_NAME)
-        env  = {'LD_PRELOAD': LIBC_NAME}
+        env  = dict(LD_PRELOAD = LIBC_NAME)
     else:
         libc = None
-        env  = {}
+        env  = dict()
 
     if '1' in sys.argv:
         p = remote(HOST, PORT)
