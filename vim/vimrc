@@ -194,8 +194,7 @@
         set guifont=Monospace\ 9
         set titlestring=%f
         set nuw=6
-        map <C-V> "+gP
-        imap <C-V> <ESC><C-V>i
+        imap <C-V> <ESC>l"+gPi
     endif
 
 
