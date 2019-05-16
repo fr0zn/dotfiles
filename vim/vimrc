@@ -64,7 +64,7 @@
 
     set rtp+=~/.dotfiles/vim
 
-    " set clipboard=unnamed               " System clipboard
+    " set clipboard=unnamedplus           " System clipboard
 
     " Always switch to the current file directory
     "autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
@@ -194,7 +194,9 @@
         set guifont=Monospace\ 9
         set titlestring=%f
         set nuw=6
+        set clipboard=unnamedplus            " System clipboard
         imap <C-V> <ESC>l"+gPi
+        map <C-c> "+y
     endif
 
 
