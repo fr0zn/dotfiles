@@ -146,7 +146,7 @@ class pwn(Command):
             parser.add_argument('host', nargs='?', default="")
             parser.add_argument('port', nargs='?', default=0)
             parser.add_argument("--vm", help="Sets the vm to use", default="u16")
-            parser.add_argument("--libc", help="Sets the libc to use", default="libc-vm.so")
+            parser.add_argument("--libc", help="Sets the libc to use")
             _args = parser.parse_args(self.args[2:])
             if not _args.host or _args.port == 0:
                 self.fm.notify("Info: no host or port specified")
@@ -194,27 +194,32 @@ class pwn(Command):
 
                 pwn_template = open(os.path.expanduser("~/.dotfiles/ranger/pwn_template.py")).read()
 
+                libc_to_use = 'libc-vm.so'
+
+                if IS_VM:
+                    _bin_upload = [binary.basename]
+                    if os.path.isfile(_args.libc):
+                        _bin_upload.append(_args.libc)
+                        libc_to_use = _args.libc
+                    elif VM_LIBC and _args.libc == 'vm':
+                        self.fm.execute_console('down {} {} {}'.format(_args.vm, VM_LIBC, 'libc-vm.so'))
+                        _bin_upload.append('libc-vm.so')
+                    _bin_upload = ' '.join(_bin_upload)
+                    self.fm.execute_console('up {} {}'.format(_args.vm, _bin_upload))
+
                 fmt_template = pwn_template.format(
                         ARCH=ARCH,
                         OS=OS,
                         IS_VM=IS_VM,
                         VM_NAME=_args.vm,
                         BINARY="./" + binary.basename,
-                        LIBC_NAME="./"+_args.libc,
+                        LIBC_NAME="./"+libc_to_use,
                         HOST=_args.host,
                         PORT=_args.port,
                         )
                 sol_file = os.path.join(str(cwd),'exploit.py')
-                open(sol_file,'w').write(fmt_template)
-
-                if IS_VM:
-                    _bin_upload = [binary.basename]
-                    if os.path.isfile(_args.libc):
-                        _bin_upload.append(_args.libc)
-                    elif VM_LIBC:
-                        self.fm.execute_console('down {} {} {}'.format(_args.vm, VM_LIBC, 'libc-vm.so'))
-                    _bin_upload = ' '.join(_bin_upload)
-                    self.fm.execute_console('up {} {}'.format(_args.vm, _bin_upload))
+                if not os.path.isfile(sol_file):
+                    open(sol_file,'w').write(fmt_template)
             else:
                 self.fm.notify("Error: no executable selected", bad=True)
                 return
