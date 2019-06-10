@@ -203,7 +203,8 @@ class pwn(Command):
                         )
                 sol_file = os.path.join(str(cwd),'exploit.py')
                 open(sol_file,'w').write(fmt_template)
-
+                if IS_VM:
+                    self.fm.execute_console('up {}'.format(_args.vm))
             else:
                 self.fm.notify("Error: no executable selected", bad=True)
                 return
