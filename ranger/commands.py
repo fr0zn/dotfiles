@@ -146,7 +146,7 @@ class pwn(Command):
             parser.add_argument('host', nargs='?', default="")
             parser.add_argument('port', nargs='?', default=0)
             parser.add_argument("--vm", help="Sets the vm to use", default="u16")
-            parser.add_argument("--libc", help="Sets the libc to use")
+            parser.add_argument("--libc", help="Sets the libc to use", default="")
             _args = parser.parse_args(self.args[2:])
             if not _args.host or _args.port == 0:
                 self.fm.notify("Info: no host or port specified")
