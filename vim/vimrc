@@ -32,6 +32,8 @@
     Plug 'majutsushi/tagbar'                " Displays tags in right sidebar
     Plug 'scrooloose/nerdtree'              " A tree explorer plugin for vim.
 
+    Plug 'chazy/cscope_maps'
+
     Plug 'SirVer/ultisnips'                 " Snippet engine
     Plug 'honza/vim-snippets'               " list of snippets
 
@@ -102,6 +104,8 @@
     set undofile                        " So is persistent undo ...
     set undolevels=1000                 " Maximum number of changes that can be undone
     set undoreload=10000                " Maximum number lines to save for undo on a buffer reload
+
+    set colorcolumn=80
 
     set ttyfast                         " Increase vim speed on a tty screen
     set lazyredraw                      " Buffer screen update, speedup scrolling and macro usage
