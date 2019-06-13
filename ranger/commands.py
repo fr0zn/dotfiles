@@ -146,12 +146,13 @@ class pwn(Command):
             parser.add_argument('host', nargs='?', default="")
             parser.add_argument('port', nargs='?', default=0)
             parser.add_argument("--vm", help="Sets the vm to use", default="u16")
-            parser.add_argument("--libc", help="Sets the libc to use", default="libc.so.6")
+            parser.add_argument("--libc", help="Sets the libc to use", default="")
             _args = parser.parse_args(self.args[2:])
             if not _args.host or _args.port == 0:
                 self.fm.notify("Info: no host or port specified")
 
             IS_VM   = False
+            VM_LIBC = None
             b = lief.parse(binary.path)
             if 'EXE_FORMATS' in str(b.format):
                 if str(b.format) == 'EXE_FORMATS.ELF':
@@ -160,8 +161,10 @@ class pwn(Command):
                     IS_VM = True
                     if arch == 'ARCH.x86_64':
                         ARCH = 'amd64'
+                        VM_LIBC = "/lib/x86_64-linux-gnu/libc.so.6"
                     elif arch == 'ARCH.i386':
                         ARCH = 'i386'
+                        VM_LIBC = "/lib/i386-linux-gnu/libc.so.6"
                     elif arch == 'ARCH.ARM':
                         ARCH = 'arm'
                     elif arch == 'ARCH.AARCH64':
@@ -191,19 +194,32 @@ class pwn(Command):
 
                 pwn_template = open(os.path.expanduser("~/.dotfiles/ranger/pwn_template.py")).read()
 
+                libc_to_use = 'libc-vm.so'
+
+                if IS_VM:
+                    _bin_upload = [binary.basename]
+                    if os.path.isfile(_args.libc):
+                        _bin_upload.append(_args.libc)
+                        libc_to_use = _args.libc
+                    elif VM_LIBC and _args.libc == 'vm':
+                        self.fm.execute_console('down {} {} {}'.format(_args.vm, VM_LIBC, 'libc-vm.so'))
+                        _bin_upload.append('libc-vm.so')
+                    _bin_upload = ' '.join(_bin_upload)
+                    self.fm.execute_console('up {} {}'.format(_args.vm, _bin_upload))
+
                 fmt_template = pwn_template.format(
                         ARCH=ARCH,
                         OS=OS,
                         IS_VM=IS_VM,
                         VM_NAME=_args.vm,
                         BINARY="./" + binary.basename,
-                        LIBC_NAME="./"+_args.libc,
+                        LIBC_NAME="./"+libc_to_use,
                         HOST=_args.host,
                         PORT=_args.port,
                         )
                 sol_file = os.path.join(str(cwd),'exploit.py')
-                open(sol_file,'w').write(fmt_template)
-
+                if not os.path.isfile(sol_file):
+                    open(sol_file,'w').write(fmt_template)
             else:
                 self.fm.notify("Error: no executable selected", bad=True)
                 return
@@ -253,9 +269,11 @@ class pwn(Command):
 class down(Command):
     def execute(self):
         if self.arg(1):
-            scpcmd = ["scp"]
-            scpcmd.append(self.arg(1) + ':' + self.arg(2)) # vm file
-            scpcmd.append('.')
+            scpcmd = "scp"
+            _dst = self.arg(3)
+            if _dst == '':
+                _dst = '.'
+            scpcmd += " " + self.arg(1) + ':' + self.arg(2) + " " + _dst
             self.fm.execute_command(scpcmd)
             self.fm.notify("Downloaded!")
 
@@ -284,7 +302,10 @@ class up(Command):
     def execute(self):
         if self.arg(1):
             scpcmd = ["scp", "-r"]
-            scpcmd.extend([f.realpath for f in self.fm.thistab.get_selection()])
+            if not self.arg(2):
+                scpcmd.extend([f.realpath for f in self.fm.thistab.get_selection()])
+            else:
+                scpcmd.extend(self.args[2:])
             _vm_path = self.arg(1)
             if ":" not in self.arg(1):
                 _vm_path += ":"
