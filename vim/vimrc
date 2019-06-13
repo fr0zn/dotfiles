@@ -462,6 +462,9 @@
 
     " LightLine {
         let g:lightline = {
+          \ 'active' : {
+          \     'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ]
+          \ },
           \ 'colorscheme': 'one',
           \ 'component': {
           \   'lineinfo': "%{line('.')}/%{line('$')} (%2v)",
