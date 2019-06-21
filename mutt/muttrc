@@ -68,15 +68,15 @@ set new_mail_command="terminal-notifier -title 'Terminal' -message 'New Email in
 
 
 # Default account ------------------------------------
-source ~/.dotfiles/mutt/account.com.hotmail.ferran.celades
+source ~/.dotfiles/mutt/account.com.gmail.fr0zn
 
 # Folder hooks --------------------------------------
-folder-hook 'account.com.hotmail.ferran.celades' 'source ~/.dotfiles/mutt/account.com.hotmail.ferran.celades'
+#folder-hook 'account.com.hotmail.ferran.celades' 'source ~/.dotfiles/mutt/account.com.hotmail.ferran.celades'
 folder-hook 'account.com.gmail.fr0zn' 'source ~/.dotfiles/mutt/account.com.gmail.fr0zn'
 
 # Shortcuts ------------------------------------------
 # Macros for switching accounts
-macro index <f2> '<sync-mailbox><enter-command>source ~/.dotfiles/mutt/account.com.hotmail.ferran.celades<enter><change-folder>!<enter>'
+#macro index <f2> '<sync-mailbox><enter-command>source ~/.dotfiles/mutt/account.com.hotmail.ferran.celades<enter><change-folder>!<enter>'
 macro index <f3> '<sync-mailbox><enter-command>source ~/.dotfiles/mutt/account.com.gmail.fr0zn<enter><change-folder>!<enter>'
 
 bind index,pager K sidebar-prev
@@ -93,3 +93,8 @@ bind pager j  next-line
 bind pager gg top
 bind pager G  bottom
 bind pager R  group-reply
+
+auto_view text/html
+alternative_order text/plain text/enriched text/html
+
+bind attach <return> view-mailcap

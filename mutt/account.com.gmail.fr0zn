@@ -9,6 +9,10 @@ unmailboxes *
 
 set imap_check_subscribed = yes
 
+set edit_headers=yes
+
+set smtp_authenticators = 'login'
+
 mailboxes     = "+INBOX" "+[Gmail]/Spam" "+[Gmail]/Sent Mail" "+[Gmail]/Drafts"
 
 set spoolfile = +INBOX
