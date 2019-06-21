@@ -32,6 +32,7 @@
     Plug 'majutsushi/tagbar'                " Displays tags in right sidebar
     Plug 'scrooloose/nerdtree'              " A tree explorer plugin for vim.
 
+    Plug 'ronakg/quickr-cscope.vim'
     Plug 'chazy/cscope_maps'
 
     Plug 'SirVer/ultisnips'                 " Snippet engine
@@ -109,6 +110,8 @@
 
     set ttyfast                         " Increase vim speed on a tty screen
     set lazyredraw                      " Buffer screen update, speedup scrolling and macro usage
+
+    set csqf=s-,c-,d-,i-,t-,e-          " cscope quick fix
 " }
 
 " Vim UI {
@@ -203,6 +206,7 @@
         map <C-c> "+y
     endif
 
+    autocmd FileType qf 20wincmd_       " Quick fix height
 
 " }
 
@@ -307,6 +311,10 @@
 
     nnoremap <C-a> _
     nnoremap <C-e> <End>
+
+    unmap \p
+    command GREP :execute 'vimgrep! '.expand('<cword>').' '.expand('%') | :cw
+    map \ :GREP<cr>
 
 " }
 
