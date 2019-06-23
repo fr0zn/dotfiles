@@ -10,6 +10,10 @@ symlink_skhd_macos(){
     symlink_file "skhd/skhdrc" "$HOME/.skhdrc"
 }
 
+chunkwm_skhd_macos(){
+    symlink_file "skhd/skhdrc_chunkwm" "$HOME/.skhdrc"
+}
+
 post_skhd_macos(){
     brew services restart skhd
 }

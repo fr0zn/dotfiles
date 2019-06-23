@@ -1,89 +1,151 @@
-#cmd - return : /usr/bin/osascript ~/Scripts/open_kitty.script
+# open terminal
 alt - return : ~/.dotfiles/scripts/open_term.sh
-#ctrl - space : /usr/bin/osascript ~/.dotfiles/scripts/macos/show-and-hide-nimble.applescript
 
-# enter fullscreen mode for the focused container
-alt - f : chunkc tiling::window --toggle fullscreen
+# focus window
+alt - h : yabai -m window --focus west
+alt - j : yabai -m window --focus south
+alt - k : yabai -m window --focus north
+alt - l : yabai -m window --focus east
 
-# change focus between tiling / floating windows
-# shift + alt - space : chunkc tiling::window --toggle float
+# swap window
+shift + cmd - h : yabai -m window --swap west
+shift + cmd - j : yabai -m window --swap south
+shift + cmd - k : yabai -m window --swap north
+shift + cmd - l : yabai -m window --swap east
 
-# float the selected window and center it
-shift + alt - space : chunkc tiling::window --toggle float;\
-          chunkc tiling::window --grid-layout 4:4:1:1:2:2
+# move window
+shift + alt - h : yabai -m window --warp west
+shift + alt - j : yabai -m window --warp south
+shift + alt - k : yabai -m window --warp north
+shift + alt - l : yabai -m window --warp east
 
-# change layout of desktop
-alt - e : chunkc tiling::desktop --layout bsp
-alt - s : chunkc tiling::desktop --layout monocle
-
-# equalize size of windows
-shift + alt - 0 : chunkc tiling::desktop --equalize
+# balance size of windows
+shift + alt - 0 : yabai -m space --balance
 
 # make floating window fill screen
-shift + alt - up     : chunkc tiling::window --grid-layout 1:1:0:0:1:1
+shift + alt - up     : yabai -m window --grid 1:1:0:0:1:1
 
 # make floating window fill left-half of screen
-shift + alt - left   : chunkc tiling::window --grid-layout 1:2:0:0:1:1
+shift + alt - left   : yabai -m window --grid 1:2:0:0:1:1
 
 # make floating window fill right-half of screen
-shift + alt - right  : chunkc tiling::window --grid-layout 1:2:1:0:1:1
+shift + alt - right  : yabai -m window --grid 1:2:1:0:1:1
 
-# make floating window center
-shift + alt - c      : chunkc tiling::window --grid-layout 4:4:1:1:2:2
+# create desktop, move window and follow focus
+shift + cmd - n : yabai -m space --create;\
+                  id=$(yabai -m query --displays --display | grep "spaces");\
+                  yabai -m window --space $(echo ${id:10:${#id}-10});\
+                  yabai -m space --focus $(echo ${id:10:${#id}-10})
 
-# float next window to be tiled
-shift + alt - f : chunkc set window_float_next 1
+# create desktop and follow focus
+cmd + alt - n : yabai -m space --create;\
+                id=$(yabai -m query --displays --display | grep "spaces");\
+                yabai -m space --focus $(echo ${id:10:${#id}-10})
 
-# toggle window parent zoom
-#alt - d : chunkc tiling::window --toggle parent
+# destroy desktop
+cmd + alt - w : yabai -m space --destroy
+
+# fast focus desktop
+#cmd + alt - x : yabai -m space --focus last
+#cmd + alt - z : yabai -m space --focus prev
+#cmd + alt - c : yabai -m space --focus next
+alt - 1 : yabai -m space --focus 1
+alt - 2 : yabai -m space --focus 2
+alt - 3 : yabai -m space --focus 3
+alt - 4 : yabai -m space --focus 4
+alt - 5 : yabai -m space --focus 5
+alt - 6 : yabai -m space --focus 6
+alt - 7 : yabai -m space --focus 7
+alt - 8 : yabai -m space --focus 8
+alt - 9 : yabai -m space --focus 9
+alt - 0 : yabai -m space --focus 10
+
+# send window to desktop and follow focus
+#shift + cmd - x : yabai -m window --space last; yabai -m space --focus last
+#shift + cmd - z : yabai -m window --space prev; yabai -m space --focus prev
+#shift + cmd - c : yabai -m window --space next; yabai -m space --focus next
+shift + alt - 1 : yabai -m window --space  1; yabai -m space --focus 1
+shift + alt - 2 : yabai -m window --space  2; yabai -m space --focus 2
+shift + alt - 3 : yabai -m window --space  3; yabai -m space --focus 3
+shift + alt - 4 : yabai -m window --space  4; yabai -m space --focus 4
+shift + alt - 5 : yabai -m window --space  5; yabai -m space --focus 5
+shift + alt - 6 : yabai -m window --space  6; yabai -m space --focus 6
+shift + alt - 7 : yabai -m window --space  7; yabai -m space --focus 7
+shift + alt - 8 : yabai -m window --space  8; yabai -m space --focus 8
+shift + alt - 9 : yabai -m window --space  9; yabai -m space --focus 9
+shift + alt - 0 : yabai -m window --space 10; yabai -m space --focus 10
+
+# focus monitor
+ctrl + alt - x  : yabai -m display --focus last
+ctrl + alt - z  : yabai -m display --focus prev
+ctrl + alt - c  : yabai -m display --focus next
+ctrl + alt - 1  : yabai -m display --focus 1
+ctrl + alt - 2  : yabai -m display --focus 2
+ctrl + alt - 3  : yabai -m display --focus 3
+
+# send window to monitor and follow focus
+ctrl + cmd - x  : yabai -m window --display last; yabai -m display --focus last
+ctrl + cmd - z  : yabai -m window --display prev; yabai -m display --focus prev
+ctrl + cmd - c  : yabai -m window --display next; yabai -m display --focus next
+ctrl + cmd - 1  : yabai -m window --display 1; yabai -m display --focus 1
+ctrl + cmd - 2  : yabai -m window --display 2; yabai -m display --focus 2
+ctrl + cmd - 3  : yabai -m window --display 3; yabai -m display --focus 3
+
+# move window
+shift + ctrl - a : yabai -m window --move -20:0
+shift + ctrl - s : yabai -m window --move 0:20
+shift + ctrl - w : yabai -m window --move 0:-20
+shift + ctrl - d : yabai -m window --move 20:0
+
+# increase window size
+shift + alt - a : yabai -m window --resize left:-20:0
+shift + alt - s : yabai -m window --resize bottom:0:20
+shift + alt - w : yabai -m window --resize top:0:-20
+shift + alt - d : yabai -m window --resize right:20:0
+
+# decrease window size
+shift + cmd - a : yabai -m window --resize left:20:0
+shift + cmd - s : yabai -m window --resize bottom:0:-20
+shift + cmd - w : yabai -m window --resize top:0:20
+shift + cmd - d : yabai -m window --resize right:-20:0
+
+# set insertion point in focused container
+ctrl + alt - h : yabai -m window --insert west
+ctrl + alt - j : yabai -m window --insert south
+ctrl + alt - k : yabai -m window --insert north
+ctrl + alt - l : yabai -m window --insert east
+
+# rotate tree
+alt - r : yabai -m space --rotate 90
 
 # mirror tree y-axis
-alt - y : chunkc tiling::desktop --mirror vertical
+alt - y : yabai -m space --mirror y-axis
 
 # mirror tree x-axis
-alt - x : chunkc tiling::desktop --mirror horizontal
+alt - x : yabai -m space --mirror x-axis
 
-# kill focused window
-shift + alt - q : chunkc tiling::window --close
+# toggle desktop offset
+alt - a : yabai -m space --toggle padding; yabai -m space --toggle gap
 
-# change focus
-alt - h : chunkc tiling::window --focus west
-alt - j : chunkc tiling::window --focus south
-alt - k : chunkc tiling::window --focus north
-alt - l : chunkc tiling::window --focus east
+# toggle window parent zoom
+alt - d : yabai -m window --toggle zoom-parent
 
-alt - p : chunkc tiling::window --focus prev
-alt - n : chunkc tiling::window --focus next
+# toggle window fullscreen zoom
+alt - f : yabai -m window --toggle zoom-fullscreen
 
-# set insertion point for focused container
-ctrl + alt - f : chunkc tiling::window --use-insertion-point cancel
-ctrl + alt - h : chunkc tiling::window --use-insertion-point west
-ctrl + alt - j : chunkc tiling::window --use-insertion-point south
-ctrl + alt - k : chunkc tiling::window --use-insertion-point north
-ctrl + alt - l : chunkc tiling::window --use-insertion-point east
+# toggle window native fullscreen
+shift + alt - f : yabai -m window --toggle native-fullscreen
 
-# move focused window
-shift + alt - h : chunkc tiling::window --warp west
-shift + alt - j : chunkc tiling::window --warp south
-shift + alt - k : chunkc tiling::window --warp north
-shift + alt - l : chunkc tiling::window --warp east
+# toggle window border
+shift + alt - b : yabai -m window --toggle border
 
-alt - r : chunkc tiling::desktop --rotate 90
+# toggle window split type
+alt - e : yabai -m window --toggle split
 
-# move focused container to workspace
-shift + alt - m : chunkc tiling::window --send-to-desktop $(chunkc get _last_active_desktop)
-shift + alt - p : chunkc tiling::window --send-to-desktop prev
-shift + alt - n : chunkc tiling::window --send-to-desktop next
-shift + alt - 1 : chunkc tiling::window --send-to-desktop 1
-shift + alt - 2 : chunkc tiling::window --send-to-desktop 2
-shift + alt - 3 : chunkc tiling::window --send-to-desktop 3
-shift + alt - 4 : chunkc tiling::window --send-to-desktop 4
-shift + alt - 5 : chunkc tiling::window --send-to-desktop 5
-shift + alt - 6 : chunkc tiling::window --send-to-desktop 6
+# float / unfloat window and center on screen
+shift + alt - space : yabai -m window --toggle float;\
+          yabai -m window --grid 4:4:1:1:2:2
 
-shift + cmd - h : chunkc tiling::window --use-temporary-ratio 0.05 --adjust-window-edge west; chunkc tiling::window --use-temporary-ratio -0.05 --adjust-window-edge east
-shift + cmd - j : chunkc tiling::window --use-temporary-ratio 0.05 --adjust-window-edge south; chunkc tiling::window --use-temporary-ratio -0.05 --adjust-window-edge north
-shift + cmd - k : chunkc tiling::window --use-temporary-ratio 0.05 --adjust-window-edge north; chunkc tiling::window --use-temporary-ratio -0.05 --adjust-window-edge south
-shift + cmd - l : chunkc tiling::window --use-temporary-ratio 0.05 --adjust-window-edge east; chunkc tiling::window --use-temporary-ratio -0.05 --adjust-window-edge west
-
-cmd + shift - 4 -> : chunkc border::clear
+# change layout of desktop
+#ctrl + alt - a : yabai -m space --layout bsp
+#ctrl + alt - d : yabai -m space --layout float
