@@ -25,7 +25,7 @@ install_cask appcleaner
 install skhd
 install yabai
 # install chunkwm
-# install macdefaults
+install macdefaults
 
 # Pwn
 # install_cask hopper-disassembler
