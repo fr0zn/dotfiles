@@ -151,6 +151,7 @@
     " incorrect background rendering when using a color theme with a
     " background color.
     let &t_ut=''
+    set t_RV=
 
     set tabpagemax=15                   " Only show 15 tabs
     set showmode                        " Display the current mode
