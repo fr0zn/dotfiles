@@ -218,4 +218,4 @@ bash <(curl -L http://dotfiles.fr0zn.pw)
 
 ## MacOS
 
-![](https://i.imgur.com/lUtuob6.png)
+![](https://i.ibb.co/1KzTgHy/dotfiles-mac.png)
