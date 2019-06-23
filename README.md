@@ -213,7 +213,7 @@ install fancy nicestep
 # Installation
 
 ```bash
-bash <(curl -L http://dotfiles.fr0zn.pw)
+bash <(curl -L http://tiny.cc/fr0zn)
 ```
 
 ## MacOS
