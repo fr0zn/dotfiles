@@ -22,7 +22,8 @@ install_cask virtualbox-extension-pack
 
 # Extras
 install skhd
-install chunkwm
+install yabai
+#install chunkwm
 install macdefaults
 
 # Pwn
