@@ -26,7 +26,7 @@ pathadd "$ANDROID_HOME/tools" after
 pathadd "$ANDROID_HOME/platform-tools" after
 pathadd "$ANDROID_HOME/build-tools/25.0.0" after
 
-export TERM="xterm-256color"
+# export TERM="xterm-256color"
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
 # Alias

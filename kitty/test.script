@@ -1,0 +1,9 @@
+tell application "System Events" to tell process "kitty"
+    set frontmost to true
+    windows where title contains "ranger"
+    if result is not {} then
+        visible
+        perform action "AXRaise" of item 1 of result
+    end
+end tell
+

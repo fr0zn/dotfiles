@@ -1,15 +1,15 @@
 # Packages
-install python
-#install node
-install_package cmake
+# install python
+# install node
+# install_package cmake
 
 # Tools
 install vim
-#install tmux
+install tmux
 
 # Shell
+install bash
 install zsh
-#install bash
 
 # Utils
 install fzf

@@ -12,7 +12,7 @@ symlink_kitty(){
 }
 
 symlink_kitty_macos(){
-    local kitty_path="$HOME/Library/Preferences/kitty/kitty.conf"
+    local kitty_path="$HOME/.config/kitty/kitty.conf"
     symlink_file "kitty/kitty.conf" "$kitty_path"
 }
 
