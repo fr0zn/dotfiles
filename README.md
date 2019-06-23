@@ -213,9 +213,9 @@ install fancy nicestep
 # Installation
 
 ```bash
-bash <(curl -L http://dotfiles.fr0zn.pw)
+bash <(curl -L http://nullbyte.cat/dotfiles)
 ```
 
 ## MacOS
 
-![](https://i.imgur.com/auIhQvv.jpg)
+![](https://i.ibb.co/1KzTgHy/dotfiles-mac.png)
