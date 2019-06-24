@@ -53,6 +53,14 @@ vm_general_umount() {
     sudo umount /Volumes/VMNet/SHARED/$vmname
 }
 
+vm_virtualbox_start (){
+    VBoxManage startvm $vmname --type headless
+}
+
+vm_virtualbox_stop (){
+    VBoxManage controlvm $vmname poweroff
+}
+
 vm_qemu_start (){
     echo "Starting vm $vmname"
     $vmpath

@@ -1,0 +1,4 @@
+vmname="arch"
+vmtype="vmware"
+vmpath="/Users/fr0zn/Virtual Machines.localized/Arch.vmwarevm/Arch.vmx"
+vmport="22"

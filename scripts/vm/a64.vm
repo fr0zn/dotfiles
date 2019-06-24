@@ -1,4 +1,0 @@
-vmname="a64"
-vmtype="qemu"
-vmpath="/Volumes/VMNet/vms/qemu/ubuntu_16.04.5_arm64/run.sh"
-vmport="2264"
