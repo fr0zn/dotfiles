@@ -263,8 +263,94 @@ class pwn(Command):
 
         # self.fm.run(["sudo","mount"] + [device, to_mount])
 
-    def tab(self):
-         return self._tab_directory_content()
+    def tab(self, tabnum):
+        from os.path import sep
+
+        option =  self.arg(1)
+        suboption =  self.arg(2)
+
+        ret = ['pwn']
+        options = ['vm', 'template']
+
+        if option == 'vm':
+            import subprocess
+            ret = ' '.join(['pwn', 'vm', suboption])
+            out = subprocess.check_output('VBoxManage list vms'.split(' ')).split('\n')
+            vms = []
+            for line in out:
+                line = line.strip()
+                if line != '':
+                    vm = line.split('"')[1].strip()
+                    vms.append(vm)
+            ret = [' '.join([ret,vm]) for vm in vms]
+            # print ret
+        elif option in ['skel', 'templ', 'template', 't']:
+            from os.path import dirname, basename, expanduser, join
+
+            cwd = self.fm.thisdir.path
+
+            rel_dest = self.rest(len(self.args))
+
+            # expand the tilde into the user directory
+            if rel_dest.startswith('~'):
+                rel_dest = expanduser(rel_dest)
+
+            # define some shortcuts
+            abs_dest = join(cwd, rel_dest)
+            abs_dirname = dirname(abs_dest)
+            rel_basename = basename(rel_dest)
+            rel_dirname = dirname(rel_dest)
+
+            try:
+                directory = self.fm.get_directory(abs_dest)
+
+                # are we at the end of a directory?
+                if rel_dest.endswith('/') or rel_dest == '':
+                    if directory.content_loaded:
+                        # Take the order from the directory object
+                        names = [f.basename for f in directory.files]
+                        if self.fm.thisfile.basename in names:
+                            i = names.index(self.fm.thisfile.basename)
+                            names = names[i:] + names[:i]
+                    else:
+                        # Fall back to old method with "os.walk"
+                        _, dirnames, filenames = next(os.walk(abs_dest))
+                        names = sorted(dirnames + filenames)
+
+                # are we in the middle of the filename?
+                else:
+                    if directory.content_loaded:
+                        # Take the order from the directory object
+                        names = [f.basename for f in directory.files
+                                 if f.basename.startswith(rel_basename)]
+                        if self.fm.thisfile.basename in names:
+                            i = names.index(self.fm.thisfile.basename)
+                            names = names[i:] + names[:i]
+                    else:
+                        # Fall back to old method with "os.walk"
+                        _, dirnames, filenames = next(os.walk(abs_dirname))
+                        names = sorted([name for name in (dirnames + filenames)
+                                        if name.startswith(rel_basename)])
+            except (OSError, StopIteration):
+                # os.walk found nothing
+                pass
+            else:
+                # no results, return None
+                if not names:
+                    return None
+
+                # one result. append a slash if it's a directory
+                if len(names) == 1:
+                    path = join(rel_dirname, names[0])
+                    slash = '/' if os.path.isdir(path) else ''
+                    return self.start(len(self.args)) + path + slash
+
+                # more than one result. append no slash, so the user can
+                # manually type in the slash to advance into that directory
+            return (self.start(len(self.args)) + join(rel_dirname, name) for name in names)
+        elif option == None or option == '':
+            ret = [' '.join(['pwn',opt]) for opt in options]
+        return ret
 
 class down(Command):
     def execute(self):
