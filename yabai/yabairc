@@ -3,7 +3,7 @@
 # bar settings
 yabai -m config status_bar                   on
 yabai -m config status_bar_text_font         "Helvetica Neue:Bold:11.0"
-yabai -m config status_bar_icon_font         "RobotoMono Nerd Font:Regular:11.0"
+yabai -m config status_bar_icon_font         "DejaVuSansMono Nerd Font Mono:Book:11.0"
 yabai -m config status_bar_background_color  0xff202020
 yabai -m config status_bar_foreground_color  0xffa8a8a8
 yabai -m config status_bar_space_icon_strip  1 2 3 4 5 6 7 8 9 10
