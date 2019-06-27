@@ -115,6 +115,16 @@
     set lazyredraw                      " Buffer screen update, speedup scrolling and macro usage
 
     set csqf=s-,c-,d-,i-,t-,e-          " cscope quick fix
+
+    " use ripgrep
+    if executable("rg")
+        set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+    endif
+
+    " quickfix filter
+    packadd cfilter
+    " quickfix autoclose
+    autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 " }
 
 " Vim UI {
@@ -317,13 +327,16 @@
     nnoremap <C-e> <End>
 
     " quickfix
-    packadd cfilter
     unmap \p
     command GREP :execute 'vimgrep! '.expand('<cword>').' '.expand('%') | :cw
     map \ :GREP<cr>
     map # :GREP<cr>
-    autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
 
+    " Grep override with ripgrep
+    cnoreabbrev grep Rg
+
+    nnoremap <silent> [f :cprevious<CR>
+    nnoremap <silent> ]f :cnext<CR>
     nnoremap <leader>o :copen<cr>
 
 " }
@@ -460,9 +473,6 @@
     " }
 
     " vim-ripgrep {
-        set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
-        nnoremap <silent> [f :cprevious<CR>
-        nnoremap <silent> ]f :cnext<CR>
         nnoremap <silent> <leader>g :Rg<cr>
     " }
 
