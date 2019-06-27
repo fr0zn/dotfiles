@@ -14,7 +14,6 @@
     Plug 'easymotion/vim-easymotion'        " Easy move inside vim
     Plug 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits
     Plug 'terryma/vim-multiple-cursors'     " True Sublime Text style multiple selections for Vim
-    Plug 'brooth/far.vim'                   " Find And Replace Vim plugin
 
     Plug 'jiangmiao/auto-pairs'             " Auto-completion for quotes, parens, brackets, etc
     Plug 'scrooloose/nerdcommenter'         " Comment functions so powerful—no comment necessary.
@@ -43,6 +42,9 @@
     "Plug 'ctrlpvim/ctrlp.vim'               " File fuzzy finding
     Plug '~/.dotfiles/src/fzf'
     Plug 'junegunn/fzf.vim'
+
+    Plug 'jremmen/vim-ripgrep'
+    Plug 'brooth/far.vim'                   " Find And Replace Vim plugin
 
     Plug 'elentok/plaintasks.vim'           " Todo like plugin
 
@@ -314,9 +316,15 @@
     nnoremap <C-a> _
     nnoremap <C-e> <End>
 
+    " quickfix
+    packadd cfilter
     unmap \p
     command GREP :execute 'vimgrep! '.expand('<cword>').' '.expand('%') | :cw
     map \ :GREP<cr>
+    map # :GREP<cr>
+    autocmd FileType qf nnoremap <buffer> <CR> <CR>:cclose<CR>
+
+    nnoremap <leader>o :copen<cr>
 
 " }
 
@@ -435,9 +443,9 @@
 
     " Source Explorer {
         " The switch of the Source Explorer
-        nmap <silent> <leader>r :SrcExplToggle<CR>
+        "nmap <silent> <leader>r :SrcExplToggle<CR>
         " Set "Enter" key to jump into the exact definition context
-        let g:SrcExpl_jumpKey = "<ENTER>"
+        "let g:SrcExpl_jumpKey = "<ENTER>"
     " }
 
     " Ctrl-p {
@@ -449,6 +457,13 @@
         nnoremap <silent> <C-p> :FZF -m<cr>
         nnoremap <silent> <leader>b :Buffers<cr>
         imap <C-f> <plug>(fzf-complete-path)
+    " }
+
+    " vim-ripgrep {
+        set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+        nnoremap <silent> [f :cprevious<CR>
+        nnoremap <silent> ]f :cnext<CR>
+        nnoremap <silent> <leader>g :Rg<cr>
     " }
 
     " vim-easy-align {

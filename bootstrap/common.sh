@@ -16,6 +16,7 @@ install fzf
 install_package unzip
 install_package wget
 install_package ssh
+install_package ripgrep
 #install pyenv
 
 # Extras
