@@ -4,10 +4,10 @@
 
     call plug#begin('~/.vim/plugged')
 
-    Plug 'w0ng/vim-hybrid'
-    Plug 'cocopon/iceberg.vim'
+    "Plug 'w0ng/vim-hybrid'
+    "Plug 'cocopon/iceberg.vim'
     "Plug 'chriskempson/base16-vim'
-    Plug 'NLKNguyen/papercolor-theme'
+    "Plug 'NLKNguyen/papercolor-theme'
     Plug 'ayu-theme/ayu-vim'                " Colorscheme
     Plug 'Yggdroot/indentLine'              " Indent lines
 
@@ -38,10 +38,11 @@
     Plug 'SirVer/ultisnips'                 " Snippet engine
     Plug 'honza/vim-snippets'               " list of snippets
 
-    Plug 'wesleyche/SrcExpl'
+    "Plug 'wesleyche/SrcExpl'
 
-    Plug 'ctrlpvim/ctrlp.vim'               " File fuzzy finding
-    Plug '~/.fzf'
+    "Plug 'ctrlpvim/ctrlp.vim'               " File fuzzy finding
+    Plug '~/.dotfiles/src/fzf'
+    Plug 'junegunn/fzf.vim'
 
     Plug 'elentok/plaintasks.vim'           " Todo like plugin
 
@@ -440,11 +441,14 @@
     " }
 
     " Ctrl-p {
-        nnoremap <silent> <leader>b :CtrlPBuffer<cr>
+        "nnoremap <silent> <leader>b :CtrlPBuffer<cr>
     " }
 
     " FZF {
-        nnoremap <silent> <leader>f :FZF -m<cr>
+        let g:fzf_layout = { 'down': '~20%' }
+        nnoremap <silent> <C-p> :FZF -m<cr>
+        nnoremap <silent> <leader>b :Buffers<cr>
+        imap <C-f> <plug>(fzf-complete-path)
     " }
 
     " vim-easy-align {
