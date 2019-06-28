@@ -222,6 +222,10 @@
 
     autocmd FileType qf 20wincmd_       " Quick fix height
 
+    " Auto-clean fugitive buffers
+    autocmd BufReadPost fugitive://* set bufhidden=delete
+
+
 " }
 
 " Formatting {
@@ -335,8 +339,8 @@
     " Grep override with ripgrep
     cnoreabbrev grep Rg
 
-    nnoremap <silent> [f :cprevious<CR>
-    nnoremap <silent> ]f :cnext<CR>
+    nnoremap <silent> [q :cprevious<CR>
+    nnoremap <silent> ]q :cnext<CR>
     nnoremap <leader>o :copen<cr>
 
 " }
