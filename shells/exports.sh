@@ -11,3 +11,4 @@ export VAGRANT_HOME="/Volumes/VMNet/.vagrant_home"
 export MACHINE_STORAGE_PATH="/Volumes/VMNet/.docker_home"
 
 export FZF_DEFAULT_OPTS='--height 40%'
+export FZF_DEFAULT_COMMAND='fd --type f'
