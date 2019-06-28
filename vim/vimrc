@@ -467,6 +467,7 @@
 
     " FZF {
         let g:fzf_layout = { 'down': '~20%' }
+        let $FZF_DEFAULT_COMMAND ='fd --type f'
         nnoremap <silent> <C-p> :FZF -m<cr>
         nnoremap <silent> <leader>b :Buffers<cr>
         imap <C-f> <plug>(fzf-complete-path)
