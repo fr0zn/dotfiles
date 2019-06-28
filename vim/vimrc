@@ -266,6 +266,12 @@
 
 " Key Mappings {
 
+    fun! SetupCommandAlias(from, to)
+      exec 'cnoreabbrev <expr> '.a:from
+            \ .' ((getcmdtype() is# ":" && getcmdline() is# "'.a:from.'")'
+            \ .'? ("'.a:to.'") : ("'.a:from.'"))'
+    endfun
+
     " Remap our leader key
     let mapleader = ','
 
@@ -337,7 +343,7 @@
     map # :GREP<cr>
 
     " Grep override with ripgrep
-    cnoreabbrev grep Rg
+    call SetupCommandAlias("grep","Rg")
 
     nnoremap <silent> [q :cprevious<CR>
     nnoremap <silent> ]q :cnext<CR>
