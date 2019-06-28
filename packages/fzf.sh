@@ -4,3 +4,7 @@ install_fzf(){
     pushd $DOTFILE_SRC/fzf
     ./install --all > /dev/null 2>&1
 }
+
+post_fzf(){
+    install_package fd
+}
