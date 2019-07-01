@@ -4,10 +4,10 @@ mk() {
 }
 
 mkctf(){
-    mkdir exploiting
+    mkdir pwn
     mkdir crypto
     mkdir web
-    mkdir reversing
+    mkdir re
     mkdir forensic
     mkdir misc
 }
