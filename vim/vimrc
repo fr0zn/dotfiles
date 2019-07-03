@@ -1,4 +1,4 @@
-" vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker :
+
 
 " Plug {
 
@@ -9,7 +9,7 @@
     "Plug 'chriskempson/base16-vim'
     "Plug 'NLKNguyen/papercolor-theme'
     Plug 'ayu-theme/ayu-vim'                " Colorscheme
-    Plug 'Yggdroot/indentLine'              " Indent lines
+    Plug 'nanotech/jellybeans.vim'          " Colorscheme
 
     Plug 'easymotion/vim-easymotion'        " Easy move inside vim
     Plug 'christoomey/vim-tmux-navigator'   " Seamless navigation between tmux panes and vim splits
@@ -134,7 +134,11 @@
     endif
 
     set background=dark                 " Assume a dark background
-    let ayucolor="dark"
+    "let ayucolor="dark"
+
+    let g:jellybeans_overrides = {
+    \ 'NonText': {'guifg':'bg'},
+    \}
 
     if filereadable(expand("$HOME/.vim/plugged/ayu-vim/colors/ayu.vim"))
 
@@ -144,7 +148,7 @@
             let g:ayucolor="dark"
         endif
 
-        colorscheme ayu
+        colorscheme jellybeans
 
         function! g:ToggleBackground()
           if g:ayucolor == 'dark'
@@ -152,7 +156,7 @@
             colorscheme ayu
           else
             let g:ayucolor="dark"
-            colorscheme ayu
+            colorscheme jellybeans
           endif
         endfunction
         nnoremap <silent> <F3> :call g:ToggleBackground()<CR>
@@ -514,7 +518,7 @@
           \ 'active' : {
           \     'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ]
           \ },
-          \ 'colorscheme': 'one',
+          \ 'colorscheme': 'jellybeans',
           \ 'component': {
           \   'lineinfo': "%{line('.')}/%{line('$')} (%2v)",
           \ },
