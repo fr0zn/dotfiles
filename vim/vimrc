@@ -134,7 +134,6 @@
     endif
 
     set background=dark                 " Assume a dark background
-    "let ayucolor="dark"
 
     let g:jellybeans_overrides = {
     \ 'NonText': {'guifg':'bg'},
@@ -144,11 +143,10 @@
 
         if match(readfile(expand("$HOME/.dotfiles/theme")),"light")!=-1
             let g:ayucolor="light"
+            colorscheme ayu
         else
-            let g:ayucolor="dark"
+            colorscheme jellybeans
         endif
-
-        colorscheme jellybeans
 
         function! g:ToggleBackground()
           if g:ayucolor == 'dark'
