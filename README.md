@@ -218,4 +218,4 @@ bash <(curl -L http://nullbyte.cat/dotfiles)
 
 ## MacOS
 
-![](https://i.ibb.co/1KzTgHy/dotfiles-mac.png)
+![](https://i.ibb.co/BzLnHbc/Screenshot-2019-07-03-at-23-15-45.png)
