@@ -136,7 +136,7 @@
     set background=dark                 " Assume a dark background
 
     let g:jellybeans_overrides = {
-    \ 'NonText': {'guifg':'bg'},
+    \ 'NonText': {'guifg': "151515"},
     \}
 
     if filereadable(expand("$HOME/.vim/plugged/ayu-vim/colors/ayu.vim"))
@@ -145,6 +145,7 @@
             let g:ayucolor="light"
             colorscheme ayu
         else
+            let g:ayucolor="dark"
             colorscheme jellybeans
         endif
 
