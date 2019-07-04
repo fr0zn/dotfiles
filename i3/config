@@ -37,8 +37,8 @@ bindsym $mod+Ctrl+Return exec termite -t FLOATING_RANGER -e $HOME/.dotfiles/scri
 bindsym $mod+Shift+Return exec termite -t FLOATING_TERM
 for_window [class="Termite" title="FLOATING_RANGER"] floating enable, move scratchpad;
 for_window [class="Termite" title="FLOATING_TERM"] floating enable, move scratchpad;
-bindsym Ctrl+space [class="Termite" title="FLOATING_RANGER"] scratchpad show
-bindsym $mod+space [class="Termite" title="FLOATING_TERM"] scratchpad show
+bindsym Ctrl+space [class="Termite" title="FLOATING_RANGER"] scratchpad show, resize set 1200 600, move position center;
+bindsym $mod+space [class="Termite" title="FLOATING_TERM"] scratchpad show, resize set 1200 800, move position center;
 
 for_window [title="^Android Emulator -"] floating enable
 for_window [title="^VirtualBox -"] floating enable
@@ -162,22 +162,22 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        position bottom
-        status_command i3blocks
-        tray_output primary
-        colors {
-            background  #212121
-            statusline  #DDDDDD
-            separator   #777777
-            # class             border  backgr. text
-            focused_workspace  #777777 #044A4A #FFFFFF
-            active_workspace   #212121 #212121 #FFFFFF
-            inactive_workspace #212121 #212121 #86888C
-            urgent_workspace   #2F343A #e65c00 #FFFFFF
-        }
-
-}
+# bar {
+#         position bottom
+#         status_command polybar bar
+#         tray_output primary
+#         colors {
+#             background  #212121
+#             statusline  #DDDDDD
+#             separator   #777777
+#             # class             border  backgr. text
+#             focused_workspace  #777777 #044A4A #FFFFFF
+#             active_workspace   #212121 #212121 #FFFFFF
+#             inactive_workspace #212121 #212121 #86888C
+#             urgent_workspace   #2F343A #e65c00 #FFFFFF
+#         }
+#
+# }
 
 
 #client.placeholder      #242424 #242424 #242424
@@ -190,3 +190,8 @@ bar {
 # exec vmware-user
 #exec --no-startup-id /usr/bin/feh --bg-scale ~/.dotfiles/i3/wallpaper.jpg
 exec --no-startup-id /usr/bin/feh --randomize --bg-scale ~/.dotfiles/wallpapers
+exec_always --no-startup-id ~/.dotfiles/i3/polybar.sh &
+exec_always --no-startup-id dunst
+exec_always --no-startup-id gromit-mpx
+exec_always --no-startup-id blugon
+
