@@ -1,41 +1,43 @@
 [options]
-font = Hack 9
+font = Monospace 10
 
 [colors]
-background = #0f1419
-foreground = #e6e1cf
-foreground_bold = #e6e1cf
 
-# dark0 + gray
-color0 = #000000
-color8 = #323232
+background = #121212
+foreground = #adadad
 
-# neutral_red + bright_red
-color1 = #ff3333
-color9 = #ff6565
+cursor     = #d7d7d7
 
-# neutral_green + bright_green
-color2 = #b8bb26
-color10 = #eafe84
+#black
+color0     = #1c1c1c
+color8     = #3b3b3b
 
-# neutral_yellow + bright_yellow
-color3 = #e7c547
-color11 = #fff779
+#red
+color1     = #d75f5f
+color9     = #ffb964
 
-# neutral_blue + bright_blue
-color4 = #36a3d9
-color12 = #68d5ff
+#green
+color2     = #72a25a
+color10    = #99ad6a
 
-# neutral_purple + bright_purple
-color5 = #f07178
-color13 = #ffa3aa
+#yellow
+color3     = #d8ad4c
+color11    = #fad07a
 
-# neutral_aqua + faded_aqua
-color6 = #95e6cb
-color14 = #c7fffd
+#blue
+color4     = #597bc5
+color12    = #8197bf
 
-# light4 + light1
-color7 = #ffffff
-color15 = #ffffff
+#magenta
+color5     = #8787af
+color13    = #d7afff
+
+#cyan
+color6     = #4a8382
+color14    = #8fbfdc
+
+#white
+color7     = #adadad
+color15    = #e8e8de
 
 # vim: ft=dosini cms=#%s
