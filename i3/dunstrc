@@ -1,0 +1,59 @@
+[global]
+    font = "Hack 8"
+    allow_markup = yes
+    format = "<b>%s</b>\n%b"
+    sort = yes
+    indicate_hidden = yes
+    alignment = left
+    bounce_freq = 0
+    monitor = 0
+    show_age_threshold = 60
+    word_wrap = yes
+    ignore_newline = no
+    #geometry = "200x5-6+30"
+    geometry = "300x5-30+20"
+    transparency = 0
+    idle_threshold = 120
+    #follow = keyboard
+    sticky_history = yes
+    line_height = 0
+    separator_height = 2
+    padding = 8
+    horizontal_padding = 8
+    separator_color = "#585858"
+    startup_notification = false
+    # https://github.com/knopwob/dunst/issues/26#issuecomment-36159395
+    icon_position = left
+    max_icon_size = 40
+    #icon_folders = /usr/share/icons/elementary/actions/16/
+    icon_path = /home/nietz/.local/share/icons/Snowy/apps/scalable:/usr/share/icons/gnome/32x32/status/:/usr/share/icons/gnome/32x32/devices/:/usr/share/icons/gnome/32x32/apps/:/usr/share/icons/gnome/32x32/emblems/:/usr/share/icons/gnome/32x32/actions/:/usr/share/icons/hicolor/32x32/apps/
+    dmenu = /usr/bin/rofi -dmenu -p dunst:
+
+[frame]
+    width = 1
+    color = "#83a598"
+
+[shortcuts]
+    close = ctrl+space
+    close_all = ctrl+shift+space
+    history = ctrl+grave
+    context = ctrl+shift+period
+
+[urgency_low]
+    background = "#282828"
+    foreground = "#ebdbb2"
+    timeout = 5
+
+[urgency_normal]
+    background = "#282828"
+    foreground = "#ebdbb2"
+    timeout = 20
+
+[urgency_critical]
+    background = "#282828"
+    foreground = "#ebdbb2"
+    timeout = 0
+
+[spotify]
+    appname = *Spotify*
+    new_icon = spotify
