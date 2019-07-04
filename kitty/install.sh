@@ -3,7 +3,7 @@ install_kitty_macos(){
 }
 
 install_kitty_arch(){
-    install_aur "kitty-git"
+    install_package "kitty"
 }
 
 symlink_kitty(){
