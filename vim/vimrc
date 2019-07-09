@@ -341,7 +341,7 @@
 
     " quickfix
     unmap \p
-    command GREP :execute 'vimgrep! '.expand('<cword>').' '.expand('%') | :cw
+    command GREP :execute 'vimgrep! /'.expand('<cword>').'/j '.expand('%') | :cw
     map \ :GREP<cr>
     map # :GREP<cr>
 
