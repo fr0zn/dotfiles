@@ -30,7 +30,7 @@ if __name__ == "__main__":
 
     e = ELF(BIN_NAME)
     libc = None
-    env  = dict()
+    env  = None
 
     if (os.path.isfile(LIBC_NAME)):
         libc = ELF(LIBC_NAME)
