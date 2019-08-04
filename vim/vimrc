@@ -552,4 +552,22 @@
         let g:indentLine_setColors = 0
     " }
 
+    " Quickr_cscope {
+        let g:quickr_cscope_keymaps = 0
+        "vnoremap <leader>e            <Plug>(quickr_cscope_egrep)
+        vnoremap <leader>d            <Plug>(quickr_cscope_functions)
+        vnoremap <leader>t            <Plug>(quickr_cscope_text)
+        vnoremap <leader>i            <Plug>(quickr_cscope_includes)
+        vnoremap <leader>f            <Plug>(quickr_cscope_files)
+        vnoremap <leader>c            <Plug>(quickr_cscope_callers)
+        vnoremap <leader>s            <Plug>(quickr_cscope_symbols)
+        vnoremap <leader>g            <Plug>(quickr_cscope_global)
+        "nmap <leader>e            <Plug>(quickr_cscope_egrep)
+        nmap <leader>d            <Plug>(quickr_cscope_functions)
+        nmap <leader>i            <Plug>(quickr_cscope_includes)
+        nmap <leader>f            <Plug>(quickr_cscope_files)
+        nmap <leader>c            <Plug>(quickr_cscope_callers)
+        nmap <leader>s            <Plug>(quickr_cscope_symbols)
+    " }
+
 " }
