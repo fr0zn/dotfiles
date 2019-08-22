@@ -11,3 +11,6 @@ install_zathura_arch(){
     install_package zathura zathura-pdf-mupdf
 }
 
+install_zathura_ubuntu(){
+    install_package zathura
+}
