@@ -5,6 +5,7 @@ from ranger.api.commands import Command
 import ranger.api
 import platform
 import argparse
+from collections import deque
 
 import lief
 
