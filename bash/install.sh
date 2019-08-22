@@ -1,5 +1,6 @@
 backup_bash(){
     backup_file "$HOME/.bashrc"
+    backup_file "$HOME/.bash_profile"
 }
 
 install_bash() {
