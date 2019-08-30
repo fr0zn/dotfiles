@@ -55,6 +55,12 @@ symlink-min_i3(){
     symlink_file "i3/i3blocks.conf-min" "$HOME/.i3blocks.conf"
 }
 
+post_i3(){
+    install polybar
+    install rofi
+    install termite
+}
+
 min_i3_arch(){
     install_package i3 xorg-xinit xorg-server libglvnd i3blocks ttf-hack feh
     install i3 symlink-min
