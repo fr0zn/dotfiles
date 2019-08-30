@@ -176,4 +176,4 @@ bar {
 
 # exec vmware-user
 # exec --no-startup-id /usr/bin/feh --bg-scale ~/.dotfiles/i3/wallpaper.jpg
-#exec --no-startup-id /usr/bin/feh --randomize --bg-scale ~/.dotfiles/wallpapers
+# exec --no-startup-id /usr/bin/feh --randomize --bg-scale ~/.dotfiles/wallpapers
