@@ -9,7 +9,7 @@ install_package libc6-dbg # libc symbols 64
 install_package fonts-hack-ttf
 
 # GUI and terminal
-install i3 install symlink-min
+install i3 min
 install termite
 
 install bash

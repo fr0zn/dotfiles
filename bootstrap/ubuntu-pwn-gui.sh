@@ -38,7 +38,7 @@ install libcdb
 install pwntools
 
 # GUI and terminal
-install i3 install symlink-min
+install i3 min
 install termite
 install fzf
 install bash

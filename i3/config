@@ -170,7 +170,7 @@ bindsym $mod+r mode "resize"
 # exec vmware-user
 #exec --no-startup-id /usr/bin/feh --bg-scale ~/.dotfiles/i3/wallpaper.jpg
 exec --no-startup-id /usr/bin/feh --randomize --bg-scale ~/.dotfiles/wallpapers
-exec_always --no-startup-id ~/.dotfiles/i3/polybar.sh &
+exec_always --no-startup-id ~/.dotfiles/polybar/polybar.sh &
 exec_always --no-startup-id dunst
 exec_always --no-startup-id gromit-mpx
 exec_always --no-startup-id blugon
