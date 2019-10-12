@@ -18,6 +18,15 @@ fixed-center = false
 background = ${colors.background}
 foreground = ${colors.foreground}
 
+tray-position = right
+tray-detached = false
+tray-maxsize = 20
+tray-background = ${colors.background}
+tray-offset-x = 0
+tray-offset-y = 0
+tray-padding = 0
+tray-scale = 1.0
+
 line-size = 3
 line-color = #f00
 
