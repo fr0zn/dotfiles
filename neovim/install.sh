@@ -4,6 +4,7 @@ backup_neovim(){
 
 symlink_neovim(){
     msg_debug "Symlink neovim"
+    install vim symlink
     symlink_file "neovim/init.vim" "$HOME/.config/nvim/init.vim"
 }
 

@@ -20,6 +20,7 @@ alias gk='gitk --all&'
 alias gx='gitx --all'
 
 alias server='python -m SimpleHTTPServer'
+alias term=~/.dotfiles/scripts/open_term.sh
 
 alias z='fasd_cd -d'
 alias v='f -e vim' # quick opening files with vim

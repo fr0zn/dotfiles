@@ -2,10 +2,6 @@ install_i3_arch(){
     install_package i3-gaps xorg-xinit xorg-server libglvnd i3blocks ttf-hack feh compton
 }
 
-install_i3_ubuntu(){
-    install_package i3 i3blocks xinit feh x11-xserver-utils compton
-}
-
 gaps_i3_ubuntu(){
     install_package libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev \
     libxcb-util0-dev libxcb-icccm4-dev libyajl-dev \
@@ -23,6 +19,11 @@ gaps_i3_ubuntu(){
     make
     sudo make install
     popd
+}
+
+install_i3_ubuntu(){
+    install_package i3 i3blocks xinit feh x11-xserver-utils compton
+    install i3 gaps
 }
 
 lock_i3_ubuntu(){
@@ -58,3 +59,20 @@ symlink-min_i3(){
     symlink_file "i3/i3blocks.conf-min" "$HOME/.i3blocks.conf"
     symlink_file "i3/dunstrc" "$HOME/.config/dunst"
 }
+
+post_i3(){
+    install polybar
+    install rofi
+    install termite
+}
+
+min_i3_arch(){
+    install_package i3 xorg-xinit xorg-server libglvnd i3blocks ttf-hack feh
+    install i3 symlink-min
+}
+
+min_i3_ubuntu(){
+    install_package i3 i3blocks xinit feh x11-xserver-utils
+    install i3 symlink-min
+}
+
