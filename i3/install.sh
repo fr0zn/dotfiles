@@ -46,13 +46,18 @@ lock_i3_ubuntu(){
 
 symlink_i3(){
     mkdir -p $HOME/.config/i3
+    mkdir -p $HOME/.config/dunst
     symlink_file "i3/config" "$HOME/.config/i3"
+    symlink_file "i3/i3blocks.conf" "$HOME/.i3blocks.conf"
+    symlink_file "i3/dunstrc" "$HOME/.config/dunst"
 }
 
 symlink-min_i3(){
     mkdir -p $HOME/.config/i3
+    mkdir -p $HOME/.config/dunst
     symlink_file "i3/config-min" "$HOME/.config/i3/config"
     symlink_file "i3/i3blocks.conf-min" "$HOME/.i3blocks.conf"
+    symlink_file "i3/dunstrc" "$HOME/.config/dunst"
 }
 
 post_i3(){
