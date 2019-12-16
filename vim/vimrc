@@ -217,11 +217,11 @@
         set guioptions -=r                   " gui scrollbar
         set guioptions -=L                   "remove left-hand scroll bar
         set guioptions -=m                   " gui titlebar
-        set guifont=Monospace\ 9
+        set guifont=Monospace\ 10
         set titlestring=%f
         set nuw=6
         set clipboard=unnamedplus            " System clipboard
-        imap <C-V> <ESC>l"+gPi
+        imap <C-V> <ESC>"+gPi
         map <C-c> "+y
     endif
 
