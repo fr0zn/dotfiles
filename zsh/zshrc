@@ -11,3 +11,6 @@ CONFIG_PATH=$DOTFILE_PATH/zsh
 
 # FZF config
 [ -f ~/.fzf.zsh ] && . ~/.fzf.zsh
+
+pathadd "/usr/local/opt/binutils/bin" "after"
+pathadd "$HOME/go/bin" "after"
