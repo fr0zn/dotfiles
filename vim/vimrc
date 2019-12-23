@@ -51,6 +51,8 @@
     Plug 'elentok/plaintasks.vim'           " Todo like plugin
     Plug 'jceb/vim-orgmode'
 
+    Plug 'dhruvasagar/vim-table-mode'
+
     Plug 'itchyny/lightline.vim'
 
     Plug 'vim-scripts/DrawIt'               " Vim draw draw lines left, right, up, down, boxes, etc
