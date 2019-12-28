@@ -23,6 +23,8 @@
     Plug 'tpope/vim-fugitive'               " Git wrapper so awesome, it should be illegal
     Plug 'airblade/vim-gitgutter'           " Git diff on left sidebar
 
+    Plug 'will133/vim-dirdiff'              " Diff directories
+
     Plug 'justinmk/vim-syntax-extra'        " Vim syntax highlighting for c, bison, flex
 
     Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
@@ -47,6 +49,9 @@
     Plug 'brooth/far.vim'                   " Find And Replace Vim plugin
 
     Plug 'elentok/plaintasks.vim'           " Todo like plugin
+    Plug 'jceb/vim-orgmode'
+
+    Plug 'dhruvasagar/vim-table-mode'
 
     Plug 'itchyny/lightline.vim'
 
