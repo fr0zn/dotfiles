@@ -1,3 +1,5 @@
+set selection-clipboard clipboard
+
 #open document in fit-width mode by default
 set adjust-open "best-fit"
 
