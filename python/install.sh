@@ -27,4 +27,6 @@ install_python_ubuntu(){
 dev_python_ubuntu(){
     install_package python-dev
     install_package python3-dev
+    sudo python -m pip install --force-reinstall pip
+    sudo python3 -m pip install --force-reinstall pip
 }
