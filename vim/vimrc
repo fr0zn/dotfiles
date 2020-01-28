@@ -226,8 +226,10 @@
         set titlestring=%f
         set nuw=6
         set clipboard=unnamedplus            " System clipboard
-        imap <C-V> <ESC>"+gPi
-        map <C-c> "+y
+        vmap <C-c> "+y
+        vmap <C-x> "+c
+        vmap <C-v> c<ESC>"+p
+        imap <C-v> <ESC>"+pa
     endif
 
     autocmd FileType qf 20wincmd_       " Quick fix height
