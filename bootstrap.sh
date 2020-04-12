@@ -581,7 +581,8 @@ _get_os(){
             elif [[ "$distro" == "Raspbian" ]]; then
                 OS_TYPE="rpi"
             fi
-        elif [ -f "/etc/arch-release" ]; then
+        fi
+        if [ -f "/etc/arch-release" ]; then
             OS_TYPE="arch"
         fi
     fi
