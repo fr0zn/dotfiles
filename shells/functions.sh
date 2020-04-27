@@ -39,7 +39,7 @@ extract_shellcode(){
 # Load the box and dbox function
 . $SCRIPTS_PATH/dbox.sh
 . $SCRIPTS_PATH/vm/vm.sh
-. $SCRIPTS_PATH/box.sh
+#. $SCRIPTS_PATH/box.sh
 
 . $SCRIPTS_PATH/theme_switch.sh
 
