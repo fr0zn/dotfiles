@@ -57,9 +57,9 @@ lnif() {
     if [ -e "$1" ]; then
         ln -sf "$1" "$2"
         if [[ ! -L ${2} ]]; then
-            return 0
+            return 1
         fi
-        return 1
+        return 0
     fi
 }
 
