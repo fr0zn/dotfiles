@@ -6,5 +6,5 @@ install_fzf(){
 }
 
 post_fzf(){
-    install_package fd
+    install fd
 }
