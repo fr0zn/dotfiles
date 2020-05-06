@@ -1,0 +1,8 @@
+spacebar -m config text_font         "Helvetica Neue:Bold:11.0"
+spacebar -m config icon_font         "DejaVuSansMono Nerd Font Mono:Book:11.0"
+spacebar -m config background_color  0xff202020
+spacebar -m config foreground_color  0xffa8a8a8
+spacebar -m config space_icon_strip  1 2 3 4 5 6 7 8 9 10
+spacebar -m config power_icon_strip   
+spacebar -m config space_icon        
+spacebar -m config clock_icon        
