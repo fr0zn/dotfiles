@@ -50,6 +50,7 @@ symlink_i3(){
     symlink_file "i3/config" "$HOME/.config/i3"
     symlink_file "i3/i3blocks.conf" "$HOME/.i3blocks.conf"
     symlink_file "i3/dunstrc" "$HOME/.config/dunst"
+    symlink_file "i3/gromit-mpx.cfg" "$HOME/.config/"
 }
 
 symlink-min_i3(){
