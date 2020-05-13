@@ -1,5 +1,5 @@
 install_i3_arch(){
-    install_package i3-gaps xorg-xinit xorg-server libglvnd i3blocks ttf-hack feh compton
+    install_package i3-gaps xorg-xinit xorg-server libglvnd i3blocks ttf-hack feh picom
 }
 
 gaps_i3_ubuntu(){
