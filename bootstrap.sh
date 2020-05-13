@@ -506,7 +506,7 @@ install_aur(){
             local path="${DOTFILE_SRC}/${1}"
             clone https://aur.archlinux.org/${1}.git $path
             cd $path
-            makepkg -si --noconfirm
+            makepkg -sic --noconfirm
             ;;
         *)
             msg_error "AUR package not supported ${OS_TYPE}" "in"
