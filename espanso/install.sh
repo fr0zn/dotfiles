@@ -26,3 +26,13 @@ install_espanso_macos(){
 install_espanso_arch(){
     install_aur espanso-bin
 }
+
+post_espanso_macos(){
+    espanso register
+    espanso start
+}
+
+
+post_espanso_arch(){
+    espanso start
+}
