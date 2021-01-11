@@ -9,10 +9,15 @@ symlink_yabai_macos(){
 install_yabai_macos(){
     brew tap koekeishiya/formulae
     brew install yabai
+
+    echo "`whoami` ALL = (root) NOPASSWD: /usr/local/bin/yabai --load-sa" | sudo tee '/private/etc/sudoers.d/yabai'
+    sudo yabai --install-sa
 }
 
 post_yabai_macos(){
     brew services restart yabai
+    sudo yabai --load-sa
+    yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 }
 
 bar_yabai_macos(){

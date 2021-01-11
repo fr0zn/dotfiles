@@ -146,7 +146,7 @@ install_cask() {
 
     case "${OS_TYPE}" in
         "macos")
-            clean brew cask install "${*}"
+            clean brew install --cask "${*}"
             ;;
         *)
             msg_error "brew cask not supported ${OS_TYPE}" "in"
