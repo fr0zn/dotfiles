@@ -13,9 +13,9 @@ theme-switch () {
         fi
         /usr/bin/osascript -e "tell application \"System Events\" to tell appearance preferences to set dark mode to $set_dark"
         theme=$HOME/.dotfiles/kitty/themes/$1
-        if [ -f $theme ]; then
-            kitty @ set-colors --all --configured ~/.dotfiles/kitty/themes/$1
-        fi
+        #if [ -f $theme ]; then
+            #kitty @ set-colors --all --configured ~/.dotfiles/kitty/themes/$1
+        #fi
     elif [[ "$uname_out" == "Linux" ]]; then
         theme=$HOME/.dotfiles/termite/themes/$1
         if [ -f $theme ]; then
