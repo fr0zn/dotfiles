@@ -15,7 +15,11 @@ _exists(){
 
 _get_current_py(){
     if _exists pyenv; then
+        export PYENV_ROOT="$HOME/.pyenv"
+        export PATH="$PYENV_ROOT/bin:$PATH"
+        eval "$(pyenv init --path)"
         eval "$(pyenv init -)"
+        if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
         version=$(pyenv version | awk '{print $1}' ORS=', ' | sed '$s/..$//')
         #bits=$(python -c 'import struct; print(struct.calcsize("P") * 8)')
         _msg_info "Current Python: ${version}" #(${bits} bits)"
