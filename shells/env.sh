@@ -36,12 +36,11 @@ _get_current_rb(){
 }
 
 _get_current_node(){
-    if _exists nodenv; then
-        eval "$(nodenv init -)"
-        version=$(nodenv version | awk '{print $1}' ORS=', ' | sed '$s/..$//')
-        #bits=$(python -c 'import struct; print(struct.calcsize("P") * 8)')
-        _msg_info "Current Node: ${version}" #(${bits} bits)"
-    fi
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+    version=$(nvm version)
+    _msg_info "Current Node: ${version}" #(${bits} bits)"
 }
 
 _get_current_py
