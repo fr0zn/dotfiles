@@ -542,10 +542,6 @@ ctrl_c() {
 
 _pre_run() {
     if [[ "$OS_TYPE" == "macos" ]]; then
-        if ! is_app_installed "Xcode"; then
-          msg_error "Not Found: you must have Xcode installed to continue."
-          exit 1
-        fi
 
         if xcode-select --install 2>&1 | grep installed > /dev/null; then
           msg_ok "Xcode CLI tools installed";
