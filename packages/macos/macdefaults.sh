@@ -21,6 +21,10 @@ install_macdefaults_macos(){
     # Set Nimble Commander as the default viewer
     # defaults write -g NSFileViewer -string info.filesmanager.Files
 
+
+    # https://superuser.com/questions/56589/is-there-a-way-in-mac-os-x-to-stop-applications-from-stealing-focus-especially
+    defaults write com.apple.dock workspaces-auto-swoosh -bool false
+
     # Disable spotlight indexing
     sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
 

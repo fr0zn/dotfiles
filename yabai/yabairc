@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+
 # global settings
 yabai -m config mouse_follows_focus          off
 yabai -m config focus_follows_mouse          off
@@ -30,4 +32,5 @@ yabai -m config window_gap                   10
 echo "yabai configuration loaded.."
 
 yabai -m rule --add app="^Stickies" manage=off
-
+yabai -m rule --add app="^Loom" manage=off
+yabai -m rule --add app="^System Settings" manage=off

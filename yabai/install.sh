@@ -10,8 +10,8 @@ install_yabai_macos(){
     brew tap koekeishiya/formulae
     brew install yabai
 
-    echo "`whoami` ALL = (root) NOPASSWD: /usr/local/bin/yabai --load-sa" | sudo tee '/private/etc/sudoers.d/yabai'
-    sudo yabai --install-sa
+    echo "`whoami` ALL=(root) NOPASSWD: sha256:`shasum -a 256 $(which yabai)` --load-sa" | sudo tee '/private/etc/sudoers.d/yabai'
+    #sudo yabai --install-sa
 }
 
 post_yabai_macos(){
