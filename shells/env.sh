@@ -46,6 +46,8 @@ _get_current_node(){
 _get_current_go(){
     if _exists goenv; then
         eval "$(goenv init -)"
+        export PATH="$GOROOT/bin:$PATH"
+        export PATH="$PATH:$GOPATH/bin"
         version=$(goenv version | awk '{print $1}' ORS=', ' | sed '$s/..$//')
         _msg_info "Current Go: ${version}" #(${bits} bits)"
     fi
