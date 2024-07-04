@@ -43,6 +43,15 @@ _get_current_node(){
     _msg_info "Current Node: ${version}" #(${bits} bits)"
 }
 
+_get_current_go(){
+    if _exists goenv; then
+        eval "$(goenv init -)"
+        version=$(goenv version | awk '{print $1}' ORS=', ' | sed '$s/..$//')
+        _msg_info "Current Go: ${version}" #(${bits} bits)"
+    fi
+}
+
 _get_current_py
 _get_current_rb
 _get_current_node
+_get_current_go
