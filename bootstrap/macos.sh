@@ -9,15 +9,15 @@ install_package atool
 # install_cask basictex
 
 # Utils
-install_package reattach-to-user-namespace
+# install_package reattach-to-user-namespace
 
 # Programs
 install iterm2
-install kitty
+# install kitty
 # install nimble
 # install ubersicht
-install dmenumac
-install_cask appcleaner
+# install dmenumac
+# install_cask appcleaner
 # install_cask virtualbox
 # install_cask virtualbox-extension-pack
 
@@ -26,6 +26,9 @@ install skhd
 install yabai
 # install chunkwm
 install macdefaults
+
+# Terminal
+install sioyek
 
 # Pwn
 # install_cask hopper-disassembler

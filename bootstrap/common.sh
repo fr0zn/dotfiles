@@ -5,10 +5,10 @@
 
 # Tools
 install vim
-install tmux
+#install tmux
 
 # Shell
-install bash
+#install bash
 install zsh
 
 # Utils
