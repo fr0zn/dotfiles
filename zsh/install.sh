@@ -3,8 +3,8 @@ backup_zsh(){
 }
 
 install_zsh(){
+    install "oh-my-zsh"
     install_package "zsh" "zoxide"
-    install "antigen"
 }
 
 symlink_zsh(){
