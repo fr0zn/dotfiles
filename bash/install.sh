@@ -4,7 +4,7 @@ backup_bash(){
 }
 
 install_bash() {
-    install_package fasd
+    install_package zoxide
 }
 
 symlink_bash(){

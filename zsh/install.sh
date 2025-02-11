@@ -3,7 +3,7 @@ backup_zsh(){
 }
 
 install_zsh(){
-    install_package "zsh" "fasd"
+    install_package "zsh" "zoxide"
     install "antigen"
 }
 
