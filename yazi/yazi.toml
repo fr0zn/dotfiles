@@ -1,0 +1,4 @@
+[manager]
+#sort_by="btime"
+#sort_reverse=true
+sort_dir_first=false
