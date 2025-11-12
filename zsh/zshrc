@@ -55,7 +55,7 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="$FG[075])%{$reset_color%}"
 . $SHELLS_PATH/allrc
 
 # FZF config
-[ -f ~/.fzf.zsh ] && . ~/.fzf.zsh
+source <(fzf --zsh)
 
 pathadd "/usr/local/opt/binutils/bin" "after"
 pathadd "$HOME/go/bin" "after"

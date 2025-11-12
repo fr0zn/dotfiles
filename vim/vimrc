@@ -36,7 +36,7 @@
     Plug 'ronakg/quickr-cscope.vim'
     Plug 'chazy/cscope_maps'
 
-    Plug 'SirVer/ultisnips'                 " Snippet engine
+    "Plug 'SirVer/ultisnips'                 " Snippet engine
     Plug 'honza/vim-snippets'               " list of snippets
 
     "Plug 'wesleyche/SrcExpl'

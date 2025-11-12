@@ -22,13 +22,13 @@ install iterm2
 # install_cask virtualbox-extension-pack
 
 # Extras
-install skhd
-install yabai
+# install skhd
+# install yabai
 # install chunkwm
 install macdefaults
 
 # Terminal
-install sioyek
+# install sioyek
 
 # Pwn
 # install_cask hopper-disassembler

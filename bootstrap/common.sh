@@ -13,7 +13,7 @@ install zsh
 
 
 # Utils
-install fzf
+install_package fzf
 install_package fd
 install_package ripgrep
 install_package unzip
