@@ -1,4 +1,10 @@
-[manager]
-#sort_by="btime"
-#sort_reverse=true
+[mgr]
+sort_by="btime"
+sort_reverse=true
 sort_dir_first=false
+
+[opener]
+edit = [
+    { run = 'code "$@"',    orphan = true, desc = "VSCode"},
+	{ run = '${EDITOR:-vi} "$@"', desc = "$EDITOR", block = true},
+]

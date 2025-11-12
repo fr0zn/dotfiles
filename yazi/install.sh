@@ -7,5 +7,6 @@ install_yazi_arch(){
 }
 
 symlink_yazi(){
-    symlink_file "yazi/yazi.toml" "$HOME/.config/yazi"
+    mkdir -p "$HOME/.config/yazi/"
+    symlink_file "yazi/yazi.toml" "$HOME/.config/yazi/"
 }
