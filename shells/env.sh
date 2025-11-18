@@ -55,7 +55,16 @@ _get_current_go(){
     fi
 }
 
+_get_current_java(){
+    if _exists jenv; then
+        eval "$(jenv init -)"
+        version=$(jenv version | awk '{print $1}' ORS=', ' | sed '$s/..$//')
+        _msg_info "Current Java: ${version}" #(${bits} bits)"
+    fi
+}
+
 _get_current_py
 _get_current_rb
 _get_current_node
 _get_current_go
+_get_current_java

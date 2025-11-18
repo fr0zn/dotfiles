@@ -59,3 +59,10 @@ source <(fzf --zsh)
 
 pathadd "/usr/local/opt/binutils/bin" "after"
 pathadd "$HOME/go/bin" "after"
+
+
+export CARGO_HOME="$HOME/.cargo/"
+. "$HOME/.cargo/env"
+pathadd "$CARGO_HOME/bin" "after"
+
+
