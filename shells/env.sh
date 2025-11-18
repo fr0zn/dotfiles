@@ -58,6 +58,7 @@ _get_current_go(){
 _get_current_java(){
     if _exists jenv; then
         eval "$(jenv init -)"
+        jenv enable-plugin export &>/dev/null
         version=$(jenv version | awk '{print $1}' ORS=', ' | sed '$s/..$//')
         _msg_info "Current Java: ${version}" #(${bits} bits)"
     fi
