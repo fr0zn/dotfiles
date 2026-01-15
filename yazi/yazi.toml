@@ -5,7 +5,7 @@ sort_dir_first=false
 
 [opener]
 edit = [
-    { run = 'tmux new-window -a -t 0:0 -c "$PWD"',    orphan = true, desc = "Tmux"},
+    { run = 'tmux new-window -t main -c "$PWD"',    orphan = true, desc = "Tmux"},
     { run = 'code "$@"',    orphan = true, desc = "VSCode"},
 	{ run = '${EDITOR:-vi} "$@"', desc = "$EDITOR", block = true},
 ]
