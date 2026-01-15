@@ -3631,7 +3631,7 @@
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
-			<string>tmux attach -t main || tmux new -t main</string>
+			<string>tmux attach -t main || tmux new -s main</string>
 			<key>Initial Use Transparency</key>
 			<true/>
 			<key>Jobs to Ignore</key>
