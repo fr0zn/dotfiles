@@ -7,7 +7,7 @@ yabai -m config mouse_follows_focus          off
 yabai -m config focus_follows_mouse          off
 yabai -m config window_topmost               off
 yabai -m config window_opacity               off
-yabai -m config window_shadow                on
+yabai -m config window_shadow                off
 yabai -m config window_border                off
 yabai -m config window_border_width          1
 yabai -m config active_window_border_color   0xff775759
@@ -34,3 +34,5 @@ echo "yabai configuration loaded.."
 yabai -m rule --add app="^Stickies" manage=off
 yabai -m rule --add app="^Loom" manage=off
 yabai -m rule --add app="^System Settings" manage=off
+
+borders active_color=0xffc630f0 inactive_color=0xff494d64 width=5.0 &

@@ -1,5 +1,6 @@
 # open terminal
-alt - return : ~/.dotfiles/scripts/open_term.sh
+# kitty quick term access
+# alt - return : ~/.dotfiles/scripts/open_term.sh
 
 # focus window
 alt - h : yabai -m window --focus west
