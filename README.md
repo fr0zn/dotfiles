@@ -45,6 +45,9 @@ packages, deploys every config, and runs the one-time macOS setup.
   `chezmoi re-add ~/.config/iterm2/com.googlecode.iterm2.plist`.
 - **Theme**: `theme-switch light|dark` toggles macOS appearance and writes
   `~/.config/theme` (read by vim). This file is seeded once, not managed.
+  kitty follows the OS appearance automatically via its
+  `{dark,light,no-preference}-theme.auto.conf` files, which include the custom
+  themes in `~/.config/kitty/themes/`.
 - The previous hand-rolled bootstrap system (multi-distro `bootstrap.sh`,
   per-package `install.sh`, Linux/pwn profiles) lives in git history — tag
   [`pre-chezmoi`](../../tree/pre-chezmoi).
