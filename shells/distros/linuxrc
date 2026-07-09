@@ -1,5 +1,0 @@
-pathadd "$HOME/.pyenv/bin" "after"
-
-alias ls="ls --color=auto"
-
-alias rm="rm -i"

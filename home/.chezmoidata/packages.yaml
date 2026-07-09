@@ -1,7 +1,8 @@
 packages:
   darwin:
     taps:
-      - koekeishiya/formulae
+      # koekeishiya's GitHub account was renamed to asmvik (301 redirect)
+      - asmvik/formulae
       - felixkratz/formulae
     brews:
       - zsh
@@ -18,8 +19,8 @@ packages:
       - atool
       - unar
       - wget
-      - koekeishiya/formulae/skhd
-      - koekeishiya/formulae/yabai
+      - asmvik/formulae/skhd
+      - asmvik/formulae/yabai
       - felixkratz/formulae/borders
     casks:
       - iterm2

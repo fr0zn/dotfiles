@@ -2,7 +2,7 @@
 {{ if eq .chezmoi.os "darwin" -}}
 set -eu
 
-brew bundle --file=/dev/stdin <<EOF
+brew bundle --no-upgrade --file=/dev/stdin <<EOF
 {{ range .packages.darwin.taps -}}
 tap "{{ . }}"
 {{ end -}}
