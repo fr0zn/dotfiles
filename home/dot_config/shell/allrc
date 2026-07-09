@@ -1,0 +1,22 @@
+# Shared shell configuration, deployed by chezmoi
+SHELLS_PATH=$HOME/.config/shell
+
+unamestr=`uname`
+
+# Function to add to path
+. $SHELLS_PATH/path.sh
+
+pathadd "$HOME/.local/bin" after
+
+# Shell specific config (zoxide, etc.)
+. $SHELLS_PATH/zsh.sh 2>/dev/null
+
+# MacOS configs
+if [[ "$unamestr" == "Darwin" ]]; then
+    . $SHELLS_PATH/macosrc 2>/dev/null
+fi
+
+. $SHELLS_PATH/env.sh
+. $SHELLS_PATH/aliases.sh
+. $SHELLS_PATH/exports.sh
+. $SHELLS_PATH/functions.sh

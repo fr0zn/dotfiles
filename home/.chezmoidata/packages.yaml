@@ -1,0 +1,27 @@
+packages:
+  darwin:
+    taps:
+      - koekeishiya/formulae
+      - felixkratz/formulae
+    brews:
+      - zsh
+      - zoxide
+      - vim
+      - tmux
+      - yazi
+      - ffmpeg
+      - poppler
+      - fd
+      - ripgrep
+      - fzf
+      - trash
+      - atool
+      - unar
+      - wget
+      - koekeishiya/formulae/skhd
+      - koekeishiya/formulae/yabai
+      - felixkratz/formulae/borders
+    casks:
+      - iterm2
+      - kitty
+      - font-hack-nerd-font
