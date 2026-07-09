@@ -2,6 +2,9 @@
 {{ if eq .chezmoi.os "darwin" -}}
 set -eu
 
+# On a fresh machine brew is installed but not yet on PATH
+command -v brew >/dev/null 2>&1 || eval "$(/opt/homebrew/bin/brew shellenv)"
+
 brew bundle --no-upgrade --file=/dev/stdin <<EOF
 {{ range .packages.darwin.taps -}}
 tap "{{ . }}"
