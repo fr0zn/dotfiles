@@ -26,3 +26,5 @@ packages:
       - iterm2
       - kitty
       - font-hack-nerd-font
+      # kitty.conf font_family
+      - font-dejavu-sans-mono-nerd-font
