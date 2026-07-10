@@ -39,8 +39,10 @@ _get_current_node(){
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-    version=$(nvm version)
-    _msg_info "Current Node: ${version}" #(${bits} bits)"
+    if _exists nvm; then
+        version=$(nvm version)
+        _msg_info "Current Node: ${version}" #(${bits} bits)"
+    fi
 }
 
 _get_current_go(){
