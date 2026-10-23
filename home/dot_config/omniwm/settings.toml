@@ -80,9 +80,9 @@ windowMoveEnabled = false
 windowMoveFingerCount = 4
 windowResizeEnabled = false
 windowResizeFingerCount = 3
-workspaceSwipeAxis = "vertical"
-workspaceSwipeEnabled = false
-workspaceSwipeFingerCount = 3
+workspaceSwipeAxis = "horizontal"
+workspaceSwipeEnabled = true
+workspaceSwipeFingerCount = 4
 
 [hiddenBar]
 enabled = true
