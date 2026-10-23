@@ -70,7 +70,7 @@ invertDirection = true
 mouseMoveModifierKey = "option"
 mouseResizeModifierKey = "option"
 overviewGestureEnabled = true
-overviewGestureFingerCount = 3
+overviewGestureFingerCount = 4
 scrollEnabled = true
 scrollModifierKey = "optionShift"
 scrollSensitivity = 5.0
@@ -81,7 +81,7 @@ windowMoveFingerCount = 4
 windowResizeEnabled = false
 windowResizeFingerCount = 3
 workspaceSwipeAxis = "vertical"
-workspaceSwipeEnabled = true
+workspaceSwipeEnabled = false
 workspaceSwipeFingerCount = 4
 
 [hiddenBar]

@@ -19,7 +19,7 @@ defaults write com.apple.dock mru-spaces -bool false
 # Don't switch spaces when an app steals focus
 defaults write com.apple.dock workspaces-auto-swoosh -bool false
 
-# Free trackpad swipes for OmniWM (3-finger Overview, 4-finger workspace switch)
+# Free vertical trackpad swipes for OmniWM Overview (disable Mission Control gesture)
 defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerVertSwipeGesture -int 0
 defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerVertSwipeGesture -int 0
 defaults write com.apple.AppleMultitouchTrackpad TrackpadFourFingerHorizSwipeGesture -int 0
