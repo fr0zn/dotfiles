@@ -98,7 +98,6 @@ margin = 1
 alwaysCenterSingleColumn = false
 centerFocusedColumn = "never"
 containerPrimarySpanPresets = [0.3333333333333333, 0.5, 0.6666666666666666]
-defaultContainerPrimarySpan = 0.5
 edgeGaps = true
 infiniteLoop = false
 resizeStepPercent = 5
@@ -148,7 +147,7 @@ heightPercent = 50.0
 monitorMode = "focusedWindow"
 opacity = 1.0
 position = "center"
-widthPercent = 50.0
+widthPercent = 60.0
 
 [routing]
 arrangements = []
@@ -1024,7 +1023,7 @@ binding = "Unassigned"
 id = "toggleHiddenBarPanel"
 
 [[hotkeys]]
-binding = "Option+Grave"
+binding = "Control+Space"
 id = "toggleQuakeTerminal"
 
 [[hotkeys]]
