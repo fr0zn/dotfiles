@@ -11,13 +11,34 @@ tabRailAppIcons = false
 
 [borders]
 enabled = true
-width = 5.0
+width = 3.0
 
 [borders.color]
 alpha = 1.0
-blue = 0.979300037944676
+blue = 1.0
 green = 1.0
-red = 0.08458520228437894
+red = 0.04360733926296234
+
+[borders.glow]
+enabled = false
+opacity = 0.6
+radius = 6.0
+
+[borders.gradient]
+direction = "topLeftToBottomRight"
+enabled = true
+
+[borders.gradient.end]
+alpha = 1.0
+blue = 0.7
+green = 1.0
+red = 0.0
+
+[borders.gradient.start]
+alpha = 1.0
+blue = 1.0
+green = 0.4
+red = 0.0
 
 [clipboard]
 historyEnabled = false
@@ -102,7 +123,7 @@ edgeGaps = true
 infiniteLoop = false
 resizeStepPercent = 5
 singleWindowFit = "fill"
-visibleContainerCount = 2
+visibleContainerCount = 4
 
 [overview]
 enabled = true
@@ -707,7 +728,7 @@ binding = "Unassigned"
 id = "moveWindowToMonitor.down"
 
 [[hotkeys]]
-binding = "Option+Return"
+binding = "Option+F"
 id = "toggleFullscreen"
 
 [[hotkeys]]
@@ -927,11 +948,11 @@ binding = "Unassigned"
 id = "moveToRoot"
 
 [[hotkeys]]
-binding = "Unassigned"
+binding = "Option+E"
 id = "toggleSplit"
 
 [[hotkeys]]
-binding = "Unassigned"
+binding = "Option+Shift+E"
 id = "swapSplit"
 
 [[hotkeys]]
@@ -1072,7 +1093,7 @@ type = "main"
 
 [[workspaces]]
 id = "8B8C45D6-CE9E-41D9-BD50-BE4989D5E3DE"
-layoutType = "niri"
+layoutType = "dwindle"
 name = "5"
 
 [workspaces.monitorAssignment]
@@ -1081,7 +1102,7 @@ type = "main"
 [[workspaces]]
 displayName = "❤️"
 id = "5953F2BF-A378-4266-91B2-287174C4FA4D"
-layoutType = "niri"
+layoutType = "dwindle"
 name = "6"
 
 [workspaces.monitorAssignment]
